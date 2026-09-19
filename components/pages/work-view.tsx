@@ -1,202 +1,308 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
-import { useState, useRef } from "react";
 import { PROJECTS, type Project } from "@/lib/data/projects";
-import { ExternalLink, ArrowRight } from "lucide-react";
+import { ExternalLink, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-/* ─── DiffSlider (interactive before / after) ─────── */
-
-interface DiffSliderProps {
-  before: string[];
-  after: string[];
-  projectName: string;
-}
-
-function DiffSlider({ before, after, projectName }: DiffSliderProps) {
-  const [position, setPosition] = useState(50);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const handlePointer = (clientX: number) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const pos = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
-    setPosition(Math.round(pos));
-  };
+/* ─── Selective Simple → Different Toggle Pill ─── */
+function SimpleDifferentToggle({
+  simpleText,
+  differentText,
+}: {
+  simpleText: string;
+  differentText: string;
+}) {
+  const [active, setActive] = useState<"simple" | "different">("different");
 
   return (
-    <div
-      ref={containerRef}
-      role="region"
-      aria-label={`Interactive before and after comparison for ${projectName}`}
-      className="relative w-full aspect-video rounded-xl overflow-hidden cursor-ew-resize select-none border border-border bg-muted/10 group shadow-sm"
-      style={{ touchAction: "pan-y" }}
-      onPointerDown={(e) => {
-        e.currentTarget.setPointerCapture(e.pointerId);
-        handlePointer(e.clientX);
-      }}
-      onPointerMove={(e) => {
-        if (e.buttons === 1) handlePointer(e.clientX);
-      }}
-    >
-      <input
-        id={`slider-${projectName.toLowerCase().replace(/\s+/g, "-")}`}
-        type="range"
-        min={0}
-        max={100}
-        value={position}
-        onChange={(e) => setPosition(Number(e.target.value))}
-        aria-label={`Compare before and after for ${projectName}`}
-        aria-valuetext={`${position}% SimpleDiff build visible`}
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:p-2 focus:bg-background focus:text-foreground focus:rounded-md focus:ring-2 focus:ring-primary focus:outline-none"
-      />
-
-      {/* Before Pane */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-8 text-center text-muted-foreground bg-background">
-        <h3 className="text-lg sm:text-xl font-bold mb-1 text-destructive/80 font-mono">
+    <div className="inline-flex flex-col gap-2 p-4 rounded-xl border border-border bg-muted/20 my-4 max-w-lg">
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => setActive("simple")}
+          className={cn(
+            "text-xs px-3 py-1 rounded-full font-medium transition-all cursor-pointer",
+            active === "simple"
+              ? "bg-foreground text-background font-bold"
+              : "text-muted-foreground hover:text-foreground"
+          )}
+        >
           Typical Build
-        </h3>
-        <p className="font-mono text-xs text-muted-foreground/70 mb-5 max-w-sm">
-          Complex, slow to ship, heavy ongoing maintenance.
-        </p>
-        <div className="font-mono text-xs text-diff-remove space-y-1.5 text-left w-full max-w-xs">
-          {before.map((item, i) => (
-            <div key={i} className="flex gap-2 bg-diff-remove-bg/40 px-2 py-1 rounded-sm">
-              <span className="font-bold select-none shrink-0">-</span>
-              <span>{item}</span>
-            </div>
-          ))}
-        </div>
+        </button>
+        <span className="text-muted-foreground text-xs">&rarr;</span>
+        <button
+          type="button"
+          onClick={() => setActive("different")}
+          className={cn(
+            "text-xs px-3 py-1 rounded-full font-medium transition-all cursor-pointer flex items-center gap-1",
+            active === "different"
+              ? "bg-primary text-primary-foreground font-bold shadow-xs"
+              : "text-muted-foreground hover:text-primary"
+          )}
+        >
+          <Sparkles className="w-3 h-3" />
+          <span>SimpleDiff</span>
+        </button>
       </div>
+      <p className="text-xs text-foreground/80 leading-relaxed font-mono">
+        {active === "simple" ? simpleText : differentText}
+      </p>
+    </div>
+  );
+}
 
-      {/* After Pane */}
-      <div
-        className="absolute inset-0 bg-background"
-        style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
-      >
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-8 text-center text-foreground">
-          <h3 className="text-lg sm:text-xl font-bold mb-1 text-diff-add font-mono">
-            SimpleDiff Build
-          </h3>
-          <p className="font-mono text-xs text-muted-foreground mb-5 max-w-sm">
-            Fast, focused, stripped of unnecessary noise.
+/* ─── Stylized Visual Preview Canvas ─── */
+function ProjectVisualCanvas({ project }: { project: Project }) {
+  if (project.id === "proj-valparai") {
+    return (
+      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-950 via-teal-900 to-zinc-950 p-6 sm:p-8 flex flex-col justify-between border border-emerald-500/20 shadow-xl group-hover:border-emerald-500/40 transition-colors">
+        {/* Decorative Mountain Contour Lines */}
+        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_top,#10b981,transparent_70%)]" />
+        <div className="relative z-10 flex items-center justify-between">
+          <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-mono font-medium border border-emerald-500/30">
+            Valparai, Western Ghats
+          </span>
+          <span className="text-xs text-emerald-300/80 font-mono font-bold">
+            4.9★ Google Reviews
+          </span>
+        </div>
+
+        <div className="relative z-10 space-y-2">
+          <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Valparai Wanderer Tours
+          </h4>
+          <p className="text-xs sm:text-sm text-emerald-100/70 max-w-sm">
+            Immersive tea estate visuals, guided rainforest treks, and instant WhatsApp booking flow.
           </p>
-          <div className="font-mono text-xs text-diff-add space-y-1.5 text-left w-full max-w-xs">
-            {after.map((item, i) => (
-              <div key={i} className="flex gap-2 bg-diff-add-bg/40 px-2 py-1 rounded-sm">
-                <span className="font-bold select-none shrink-0">+</span>
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
+        </div>
+
+        {/* Floating Mini Mockup Card */}
+        <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
+          <span>WhatsApp Bookings:</span>
+          <span className="text-emerald-400 font-bold font-mono">+300% in Month 1</span>
         </div>
       </div>
+    );
+  }
 
-      {/* Slider Handle */}
-      <div
-        className="absolute top-0 bottom-0 w-0.5 bg-border/80 pointer-events-none group-hover:bg-primary/60 transition-colors"
-        style={{ left: `${position}%` }}
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background border-2 border-border shadow-xl flex items-center justify-center text-[10px] text-foreground font-bold select-none group-hover:border-primary/60 group-hover:shadow-primary/20 transition-all">
-          ⟨⟩
+  if (project.id === "proj-grn") {
+    return (
+      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-slate-950 via-cyan-950 to-neutral-900 p-6 sm:p-8 flex flex-col justify-between border border-cyan-500/20 shadow-xl group-hover:border-cyan-500/40 transition-colors">
+        <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#06b6d4_1px,transparent_1px),linear-gradient(to_bottom,#06b6d4_1px,transparent_1px)] bg-[size:24px_24px]" />
+        
+        <div className="relative z-10 flex items-center justify-between">
+          <span className="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-mono font-medium border border-cyan-500/30">
+            Construction & Architecture
+          </span>
+          <span className="text-xs text-cyan-300/80 font-mono font-bold">
+            10+ Years Authority
+          </span>
+        </div>
+
+        <div className="relative z-10 space-y-2">
+          <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+            GRN Construction
+          </h4>
+          <p className="text-xs sm:text-sm text-cyan-100/70 max-w-sm">
+            Glassmorphism portfolio, structured project categories, and regional SEO authority.
+          </p>
+        </div>
+
+        <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
+          <span>Search Ranking:</span>
+          <span className="text-cyan-400 font-bold font-mono">Page 1 Local Builder</span>
         </div>
       </div>
+    );
+  }
 
-      {/* Position label */}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-background/80 backdrop-blur-sm text-[10px] font-mono text-muted-foreground border border-border/50">
-        drag to compare
+  if (project.id === "proj-fintech") {
+    return (
+      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-violet-950 via-purple-950 to-zinc-950 p-6 sm:p-8 flex flex-col justify-between border border-purple-500/20 shadow-xl group-hover:border-purple-500/40 transition-colors">
+        <div className="relative z-10 flex items-center justify-between">
+          <span className="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono font-medium border border-purple-500/30">
+            Concept Study &bull; Mobile
+          </span>
+          <span className="text-xs text-purple-300/80 font-mono">iOS & Android</span>
+        </div>
+
+        <div className="relative z-10 space-y-2">
+          <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Minimalist Banking Flow
+          </h4>
+          <p className="text-xs sm:text-sm text-purple-100/70 max-w-sm">
+            Stripped of marketing banners, promotional popups, and 6-step confirmation fatigue.
+          </p>
+        </div>
+
+        <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
+          <span>Transfer Steps:</span>
+          <span className="text-purple-300 font-bold font-mono">6 screens &rarr; 2 taps</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (project.id === "proj-retail") {
+    return (
+      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-amber-950 via-stone-900 to-zinc-950 p-6 sm:p-8 flex flex-col justify-between border border-amber-500/20 shadow-xl group-hover:border-amber-500/40 transition-colors">
+        <div className="relative z-10 flex items-center justify-between">
+          <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-mono font-medium border border-amber-500/30">
+            Headless E-Commerce
+          </span>
+          <span className="text-xs text-amber-300/80 font-mono font-bold">
+            Sub-500ms Loads
+          </span>
+        </div>
+
+        <div className="relative z-10 space-y-2">
+          <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Editorial Brand Commerce
+          </h4>
+          <p className="text-xs sm:text-sm text-amber-100/70 max-w-sm">
+            Curated typography and headless performance without heavy plugin bloat.
+          </p>
+        </div>
+
+        <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
+          <span>Checkout Speed:</span>
+          <span className="text-amber-400 font-bold font-mono">Instant One-Page Flow</span>
+        </div>
+      </div>
+    );
+  }
+
+  // Default / Operations Dashboard
+  return (
+    <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-rose-950 via-zinc-900 to-zinc-950 p-6 sm:p-8 flex flex-col justify-between border border-rose-500/20 shadow-xl group-hover:border-rose-500/40 transition-colors">
+      <div className="relative z-10 flex items-center justify-between">
+        <span className="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-mono font-medium border border-rose-500/30">
+          Internal Systems & Web App
+        </span>
+        <span className="text-xs text-rose-300/80 font-mono font-bold">
+          High-Signal UI
+        </span>
+      </div>
+
+      <div className="relative z-10 space-y-2">
+        <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Operations Dashboard
+        </h4>
+        <p className="text-xs sm:text-sm text-rose-100/70 max-w-sm">
+          Surfacing critical business exceptions rather than drowning teams in 50-column data tables.
+        </p>
+      </div>
+
+      <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
+        <span>Decision Clarity:</span>
+        <span className="text-rose-400 font-bold font-mono">Immediate Priorities</span>
       </div>
     </div>
   );
 }
 
-/* ─── Project card ────────────────────────────────── */
-
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const isClient = project.kind === "client";
+/* ─── Alternating Project Showcase Item ─── */
+function ProjectShowcaseItem({
+  project,
+  index,
+}: {
+  project: Project;
+  index: number;
+}) {
+  const isEven = index % 2 === 0;
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
-      className="flex flex-col gap-8 group"
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
     >
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-border pb-5">
-        <div>
-          <div className="flex items-center gap-3 mb-2.5">
-            <span className="font-mono text-xs text-muted-foreground">
-              {project.number} &mdash; {project.category}
-            </span>
-            {project.year && (
-              <span className="font-mono text-xs text-muted-foreground/60">{project.year}</span>
-            )}
-            {isClient ? (
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-primary/15 text-primary border border-primary/30">
-                Client project
-              </span>
-            ) : (
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono font-medium bg-muted text-muted-foreground border border-border">
-                Concept study
-              </span>
-            )}
-          </div>
-          <div className="flex items-center gap-3">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
-              {project.name}
-            </h2>
-            {project.url && (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Visit ${project.name}`}
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <ExternalLink className="h-5 w-5" />
-              </a>
-            )}
-          </div>
-        </div>
-        {project.outcome && (
-          <div className="text-xs sm:text-sm text-muted-foreground font-medium sm:text-right max-w-xs bg-muted/30 px-4 py-2.5 rounded-lg border border-border">
-            {project.outcome}
-          </div>
+      {/* Visual Area (Alternates left or right based on index) */}
+      <div
+        className={cn(
+          "lg:col-span-7",
+          isEven ? "lg:order-1" : "lg:order-2"
         )}
+      >
+        <ProjectVisualCanvas project={project} />
       </div>
 
-      {/* DiffSlider */}
-      <DiffSlider before={project.before} after={project.after} projectName={project.name} />
+      {/* Content Area */}
+      <div
+        className={cn(
+          "lg:col-span-5 space-y-6",
+          isEven ? "lg:order-2" : "lg:order-1"
+        )}
+      >
+        {/* Category & Year */}
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-mono text-primary font-bold uppercase tracking-widest">
+            {project.number} &mdash; {project.category}
+          </span>
+          {project.year && (
+            <span className="text-xs font-mono text-muted-foreground/60">
+              {project.year}
+            </span>
+          )}
+          {project.kind === "client" ? (
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-primary/10 text-primary border border-primary/25">
+              Client Project
+            </span>
+          ) : (
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-mono text-muted-foreground bg-muted border border-border">
+              Concept Study
+            </span>
+          )}
+        </div>
 
-      {/* Meta */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-2">
-          <p className="text-muted-foreground leading-relaxed mb-5">{project.description}</p>
-          {project.url && (
+        {/* Project Name */}
+        <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
+          {project.name}
+        </h2>
+
+        {/* Description */}
+        <p className="text-base text-muted-foreground leading-relaxed">
+          {project.description}
+        </p>
+
+        {/* Selective Simple → Different Toggle Pill */}
+        {project.before.length > 0 && project.after.length > 0 && (
+          <SimpleDifferentToggle
+            simpleText={project.before[0]}
+            differentText={project.after[0]}
+          />
+        )}
+
+        {/* Technologies / Stack tags */}
+        {project.stack && project.stack.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-2">
+            {project.stack.map((tech) => (
+              <span
+                key={tech}
+                className="px-2.5 py-1 rounded-md text-xs font-mono bg-muted/50 border border-border/60 text-foreground/80 font-medium"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Live Site Link if Available */}
+        {project.url && (
+          <div className="pt-2">
             <a
               href={project.url}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline group/link"
             >
-              Visit live site <ArrowRight className="h-4 w-4" />
+              <span>Visit live production website</span>
+              <ExternalLink className="h-4 w-4 transition-transform group-hover/link:translate-x-0.5" />
             </a>
-          )}
-        </div>
-        {project.stack && project.stack.length > 0 && (
-          <div className="font-mono text-sm flex flex-col gap-2">
-            <div className="text-muted-foreground uppercase tracking-widest text-[10px] mb-1">
-              Technologies
-            </div>
-            {project.stack.map((tech) => (
-              <div key={tech} className="text-foreground flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-primary" />
-                {tech}
-              </div>
-            ))}
           </div>
         )}
       </div>
@@ -204,79 +310,33 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
-/* ─── WorkView ────────────────────────────────────── */
-
 export function WorkView() {
-  const clientProjects = PROJECTS.filter((p) => p.kind === "client");
-  const conceptProjects = PROJECTS.filter((p) => p.kind === "concept");
-
   return (
-    <div className="max-w-5xl mx-auto px-6 py-20">
-      {/* Page header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="mb-20"
-      >
-        <span className="inline-flex items-center px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-[11px] font-bold uppercase tracking-wider mb-5">
-          Our Portfolio
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      {/* Header */}
+      <div className="max-w-4xl mb-20 sm:mb-28">
+        <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+          Featured Portfolio
         </span>
-        <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-4 text-foreground">
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground mb-6">
           Work.
         </h1>
-        <p className="text-muted-foreground text-xl max-w-lg">
-          Selected work and concept studies — showing how we strip complexity to build what actually matters.
+        <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed">
+          Selected client projects and digital experiments. We design and engineer products that strip unnecessary friction and stand out in their markets.
         </p>
-      </motion.div>
+      </div>
 
-      {/* Client Projects */}
-      {clientProjects.length > 0 && (
-        <div className="mb-24">
-          <motion.div
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-3 mb-12"
-          >
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary">
-              Client Projects
-            </span>
-            <div className="flex-1 h-px bg-border" />
-          </motion.div>
-
-          <div className="space-y-24">
-            {clientProjects.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Concept Studies */}
-      {conceptProjects.length > 0 && (
-        <div>
-          <motion.div
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-3 mb-12"
-          >
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground">
-              Concept Studies
-            </span>
-            <div className="flex-1 h-px bg-border" />
-          </motion.div>
-
-          <div className="space-y-24">
-            {conceptProjects.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} />
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Alternating Project Showcase Stack */}
+      <div className="space-y-28 sm:space-y-36">
+        {PROJECTS.map((project, index) => (
+          <ProjectShowcaseItem
+            key={project.id}
+            project={project}
+            index={index}
+          />
+        ))}
+      </div>
     </div>
   );
 }

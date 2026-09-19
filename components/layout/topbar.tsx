@@ -32,8 +32,9 @@ export function Topbar({ onStartProject }: TopbarProps) {
     >
       {/* Logo */}
       <div className="text-lg font-bold tracking-tight">
-        <Link href="/" className="hover:opacity-90 transition-opacity flex items-center gap-0.5">
+        <Link href="/" className="hover:opacity-90 transition-opacity flex items-center gap-0 group">
           <span>Simple</span>
+          <span className="font-mono text-diff-add text-[10px] font-bold select-none opacity-70 group-hover:opacity-100 transition-opacity mr-0.5">+</span>
           <span className="text-primary">Diff</span>
         </Link>
       </div>
@@ -61,7 +62,7 @@ export function Topbar({ onStartProject }: TopbarProps) {
                 <motion.div
                   layoutId="topbar-pill"
                   className="absolute inset-0 bg-primary rounded-full"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  transition={{ type: "spring", stiffness: 420, damping: 28 }}
                 />
               )}
               <span className="relative z-10">{item.label}</span>

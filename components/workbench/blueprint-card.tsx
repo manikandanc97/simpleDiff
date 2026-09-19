@@ -3,67 +3,92 @@
 import { motion } from "motion/react";
 import { type Blueprint } from "@/lib/idea-engine";
 import { Button } from "@/components/ui/button";
-import { Clock } from "lucide-react";
+import { Clock, ArrowRight, CheckCircle2, MinusCircle } from "lucide-react";
 
-export function BlueprintCard({
-  blueprint,
-  onContact,
-}: {
+interface BlueprintCardProps {
   blueprint: Blueprint;
   onContact: () => void;
-}) {
+}
+
+export function BlueprintCard({ blueprint, onContact }: BlueprintCardProps) {
   if (blueprint.stats.kept === 0 && blueprint.stats.cut === 0) return null;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full bg-muted/10 border border-border rounded-xl p-6 md:p-8 flex flex-col gap-8 shadow-xs"
+      exit={{ opacity: 0, y: -16 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="w-full bg-background border border-border/80 rounded-2xl shadow-xl overflow-hidden text-left"
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-6">
+      {/* Top Banner */}
+      <div className="px-6 py-5 bg-muted/20 border-b border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-1.5">
-            Project Type
+          <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-primary">
+            SimpleDiff Blueprint
+          </span>
+          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+            {blueprint.type}
           </h3>
-          <p className="text-2xl font-bold tracking-tight">{blueprint.type}</p>
         </div>
-        <div className="flex gap-3 text-xs font-mono">
-          <div className="bg-diff-remove-bg text-diff-remove px-2.5 py-1 rounded-sm font-medium">
+        <div className="flex items-center gap-3">
+          <span className="text-xs px-3 py-1 rounded-full font-medium bg-destructive/10 text-destructive border border-destructive/20 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-destructive" />
             {blueprint.stats.cut} cut
-          </div>
-          <div className="bg-diff-add-bg text-diff-add px-2.5 py-1 rounded-sm font-medium">
-            {blueprint.stats.kept} kept
-          </div>
+          </span>
+          <span className="text-xs px-3 py-1 rounded-full font-medium bg-primary/10 text-primary border border-primary/20 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            {blueprint.stats.kept} prioritized
+          </span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h4 className="text-sm font-bold flex items-center gap-2 mb-4 text-foreground">
-            <span className="w-2 h-2 rounded-full bg-diff-remove" aria-hidden="true" />
-            What We&apos;d Cut (Typical Build)
-          </h4>
-          <ul className="space-y-3 font-mono text-sm">
+      {/* Editorial Comparison: What typical agencies quote vs How SimpleDiff starts */}
+      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border/60">
+        {/* Left: What We Cut */}
+        <div className="p-6 sm:p-8 space-y-4 bg-muted/5">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 text-muted-foreground font-semibold text-xs tracking-wider uppercase">
+              <MinusCircle className="h-4 w-4 text-destructive/70" />
+              <span>Unnecessary Complexity Cut</span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Costly bloat that delays your launch without adding customer value.
+            </p>
+          </div>
+          <ul className="space-y-2.5 pt-2">
             {blueprint.complexityCut.map((item, i) => (
-              <li key={i} className="flex gap-3 text-diff-remove items-start">
-                <span className="select-none font-bold" aria-hidden="true">
-                  -
+              <li
+                key={i}
+                className="text-xs sm:text-sm text-muted-foreground flex items-start gap-2.5 leading-relaxed"
+              >
+                <span className="text-destructive font-mono font-bold select-none shrink-0 mt-0.5">
+                  &minus;
                 </span>
-                <span className="line-through">{item}</span>
+                <span className="line-through decoration-muted-foreground/50 opacity-80">{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <h4 className="text-sm font-bold flex items-center gap-2 mb-4 text-foreground">
-            <span className="w-2 h-2 rounded-full bg-diff-add" aria-hidden="true" />
-            The Simple Core (MVP Scope)
-          </h4>
-          <ul className="space-y-3 font-mono text-sm">
+        {/* Right: The Focused Core */}
+        <div className="p-6 sm:p-8 space-y-4 bg-primary/[0.02]">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 text-foreground font-semibold text-xs tracking-wider uppercase">
+              <CheckCircle2 className="h-4 w-4 text-primary" />
+              <span>The Focused MVP Scope</span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              The high-impact 20% that delivers 80% of the real business value.
+            </p>
+          </div>
+          <ul className="space-y-2.5 pt-2">
             {blueprint.mvpScope.map((item, i) => (
-              <li key={i} className="flex gap-3 text-diff-add items-start">
-                <span className="select-none font-bold" aria-hidden="true">
+              <li
+                key={i}
+                className="text-xs sm:text-sm text-foreground flex items-start gap-2.5 leading-relaxed font-medium"
+              >
+                <span className="text-primary font-mono font-bold select-none shrink-0 mt-0.5">
                   +
                 </span>
                 <span>{item}</span>
@@ -73,19 +98,22 @@ export function BlueprintCard({
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-6 border-t border-border pt-6 items-start md:items-center justify-between">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2 font-medium text-foreground">
-            <Clock className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
-            <span>{blueprint.indicativeTimeline}</span>
-          </div>
-          <span className="text-xs text-muted-foreground">
-            (Indicative &mdash; confirmed after a short call)
+      {/* Action Strip */}
+      <div className="px-6 py-5 bg-muted/30 border-t border-border/60 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <Clock className="w-4 h-4 text-primary shrink-0" />
+          <span className="font-semibold text-foreground">
+            {blueprint.indicativeTimeline}
           </span>
+          <span className="opacity-70">&bull; Indicative timeline to first release</span>
         </div>
 
-        <Button onClick={onContact} className="w-full md:w-auto font-medium cursor-pointer">
-          Send this to SimpleDiff &rarr;
+        <Button
+          onClick={onContact}
+          className="font-medium text-xs sm:text-sm h-10 px-5 rounded-xl cursor-pointer shadow-sm hover:shadow-primary/20 active:scale-[0.99] transition-all"
+        >
+          Discuss this blueprint with us
+          <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
         </Button>
       </div>
     </motion.div>

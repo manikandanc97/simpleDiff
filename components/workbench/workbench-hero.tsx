@@ -1,8 +1,15 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useInView } from "motion/react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "motion/react";
 import { Input } from "@/components/ui/input";
 import { generateBlueprint } from "@/lib/idea-engine";
 import { useDebouncedValue } from "@/lib/use-debounced-value";
@@ -10,12 +17,15 @@ import { BlueprintCard } from "./blueprint-card";
 import { BuildYourIdea } from "@/components/sections/build-your-idea/build-your-idea";
 import { cn } from "@/lib/utils";
 import { useLead } from "@/components/leads/lead-provider";
-import { ArrowRight, Sparkles, ChevronDown } from "lucide-react";
+import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { HeroGridAccents } from "./hero-grid-accents";
+import { Hero3DCoder } from "./hero-3d-coder";
 
 const EXAMPLES = [
   "A modern e-commerce store with headless Shopify",
-  "A bold brand identity and portfolio site for an agency",
   "A SaaS dashboard for managing subscription billing",
+  "A booking system for a multi-location services business",
 ];
 
 const SERVICE_CHIPS = [
@@ -29,17 +39,17 @@ const SERVICE_CHIPS = [
 
 const MARQUEE_ITEMS = [
   "React & Next.js",
-  "Motion Design",
-  "Brand Identity",
-  "SaaS Products",
-  "Mobile Apps",
+  "TypeScript",
+  "React Native",
   "Supabase",
   "Stripe Payments",
-  "AI Automation",
+  "AI / LLM Integration",
   "Tailwind CSS",
-  "TypeScript",
   "Vercel Edge",
-  "Framer Motion",
+  "PostgreSQL",
+  "REST & GraphQL APIs",
+  "CI/CD Pipelines",
+  "App Store Launch",
 ];
 
 interface WorkbenchHeroProps {
@@ -49,8 +59,8 @@ interface WorkbenchHeroProps {
 function AnimatedWord({ word, delay }: { word: string; delay: number }) {
   return (
     <motion.span
-      initial={{ opacity: 0, y: 32, filter: "blur(4px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y: 32 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
       className="inline-block"
     >
@@ -59,23 +69,24 @@ function AnimatedWord({ word, delay }: { word: string; delay: number }) {
   );
 }
 
+// Marquee strip — pauses on hover via .marquee-track CSS class
 function MarqueeStrip() {
   const doubled = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
   return (
     <div className="relative overflow-hidden py-3 border-y border-border/50 bg-muted/20">
       {/* fade edges */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 z-10 bg-gradient-to-r from-background to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 z-10 bg-gradient-to-l from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-20 z-10 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-20 z-10 bg-gradient-to-l from-background to-transparent" />
       <div
-        className="flex gap-8 whitespace-nowrap animate-marquee"
-        style={{ "--duration": "28s" } as React.CSSProperties}
+        className="marquee-track flex gap-10 whitespace-nowrap animate-marquee"
+        style={{ "--duration": "32s" } as React.CSSProperties}
       >
         {doubled.map((item, i) => (
           <span
             key={i}
-            className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground flex items-center gap-2"
+            className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground flex items-center gap-2.5"
           >
-            <span className="w-1 h-1 rounded-full bg-primary inline-block" />
+            <span className="w-1 h-1 rounded-full bg-primary/70 inline-block" />
             {item}
           </span>
         ))}
@@ -84,11 +95,68 @@ function MarqueeStrip() {
   );
 }
 
+// Magnetic tilt button wrapper
+function MagneticButton({
+  children,
+  className,
+  onClick,
+  id,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
+  id?: string;
+}) {
+  const ref = useRef<HTMLButtonElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useTransform(y, [-30, 30], [6, -6]), {
+    stiffness: 400,
+    damping: 30,
+  });
+  const rotateY = useSpring(useTransform(x, [-60, 60], [-6, 6]), {
+    stiffness: 400,
+    damping: 30,
+  });
+
+  const handleMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    x.set(e.clientX - rect.left - rect.width / 2);
+    y.set(e.clientY - rect.top - rect.height / 2);
+  };
+
+  const handleLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.button
+      ref={ref}
+      id={id}
+      onClick={onClick}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      className={className}
+    >
+      {children}
+    </motion.button>
+  );
+}
+
 export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
   const [activeTab, setActiveTab] = useState<"quick" | "guided">("quick");
   const [idea, setIdea] = useState("");
   const { openLead } = useLead();
   const heroRef = useRef<HTMLElement>(null);
+
+  // Scroll-linked parallax for glow orbs
+  const { scrollY } = useScroll();
+  const orbY1 = useTransform(scrollY, [0, 600], [0, -80]);
+  const orbY2 = useTransform(scrollY, [0, 600], [0, -50]);
+  const orbY3 = useTransform(scrollY, [0, 600], [0, -30]);
 
   const debouncedIdea = useDebouncedValue(idea, 400);
 
@@ -108,11 +176,10 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
     }
   };
 
-  const words = ["Keep It Simple."].flatMap((s) => s.split(" "));
-
   return (
     <>
       <section
+        id="hero"
         ref={heroRef}
         className="relative min-h-[calc(100svh-3.5rem)] flex flex-col items-center justify-center overflow-hidden"
       >
@@ -128,105 +195,141 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
           }}
         />
 
-        {/* ── Glowing orbs ── */}
-        <div className="pointer-events-none absolute top-1/4 -left-32 w-64 h-64 rounded-full bg-primary/20 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-primary/10 blur-3xl" />
-        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-primary/5 blur-3xl" />
+        {/* ── Parallax glowing orbs ── */}
+        <motion.div
+          style={{ y: orbY1 }}
+          className="pointer-events-none absolute top-1/4 -left-32 w-72 h-72 rounded-full bg-primary/25 blur-3xl"
+        />
+        <motion.div
+          style={{ y: orbY2 }}
+          className="pointer-events-none absolute bottom-1/4 -right-32 w-[28rem] h-[28rem] rounded-full bg-primary/15 blur-3xl"
+        />
+        <motion.div
+          style={{ y: orbY3 }}
+          className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[420px] rounded-full bg-primary/8 blur-3xl"
+        />
 
-        <div className="relative z-10 flex flex-col items-center text-center pt-12 pb-8 px-4 md:px-8 w-full max-w-6xl mx-auto">
-          {/* 1. Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mb-6"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold uppercase tracking-[0.15em]">
-              <Sparkles className="h-3 w-3" />
-              Digital product studio
-            </span>
-          </motion.div>
+        {/* ── Studio Architectural Grid Accents & Precision Coordinates (Unique, handcrafted) ── */}
+        <HeroGridAccents />
 
-          {/* 2. h1 — staggered words */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-3 flex flex-wrap items-center justify-center gap-x-4 leading-[1.05]">
-            <AnimatedWord word="Keep" delay={0.05} />
-            <AnimatedWord word="It" delay={0.12} />
-            <AnimatedWord word="Simple." delay={0.19} />
-          </h1>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 flex flex-wrap items-center justify-center gap-x-4 leading-[1.05]">
-            <AnimatedWord
-              word="Make"
-              delay={0.28}
-            />
-            <motion.span
-              initial={{ opacity: 0, y: 32, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.65, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-block text-gradient"
-            >
-              It Different.
-            </motion.span>
-          </h1>
-
-          {/* 3. Sub-line */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-            className="text-lg sm:text-xl text-muted-foreground max-w-2xl mb-8 leading-relaxed"
-          >
-            We design and build websites, web apps, mobile apps, SaaS products
-            and brands for businesses and founders.
-          </motion.p>
-
-          {/* 4. Service chips */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-            className="flex flex-wrap items-center justify-center gap-2 mb-8"
-          >
-            {SERVICE_CHIPS.map((chip, i) => (
-              <motion.span
-                key={chip}
+        <div className="relative z-10 flex flex-col items-center pt-8 pb-10 px-4 md:px-8 w-full max-w-7xl mx-auto">
+          {/* Top Hero: 2-Column Split with Cloudi5-inspired 3D Animated Coder */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full mb-14 pt-2 sm:pt-4">
+            {/* Left Column: Headlines, Pitch, Chips, and CTAs */}
+            <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+              {/* 1. Badge */}
+              <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.6 + i * 0.05 }}
-                className="px-3 py-1 rounded-full text-xs sm:text-sm bg-muted/40 border border-border text-foreground font-medium select-none hover:bg-primary/10 hover:border-primary/40 hover:text-primary-text transition-colors duration-200 cursor-default"
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="mb-5"
               >
-                {chip}
-              </motion.span>
-            ))}
-            <Link
-              href="/services"
-              className="text-xs sm:text-sm text-primary hover:underline font-medium ml-1 transition-colors flex items-center gap-1"
-            >
-              See all <ArrowRight className="h-3 w-3" />
-            </Link>
-          </motion.div>
+                <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  Digital Product Studio
+                </span>
+              </motion.div>
 
-          {/* 5. CTA buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.72, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row items-center gap-3 mb-12"
-          >
-            <button
-              onClick={() => openLead({ source: "cta" })}
-              className="group relative inline-flex items-center gap-2 h-12 px-7 rounded-xl bg-primary text-primary-foreground text-sm font-semibold shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer overflow-hidden"
+              {/* 2. h1 — refined typography */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground mb-2 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 leading-[1.1]">
+                <AnimatedWord word="Keep" delay={0.05} />
+                <AnimatedWord word="It" delay={0.12} />
+                <AnimatedWord word="Simple." delay={0.19} />
+              </h1>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 leading-[1.1]">
+                <AnimatedWord word="Make" delay={0.28} />
+                <AnimatedWord word="It" delay={0.33} />
+                <motion.span
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block"
+                >
+                  <span className="text-gradient">Different.</span>
+                </motion.span>
+              </h1>
+
+              {/* 3. Sub-line */}
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+                className="text-base sm:text-lg text-muted-foreground max-w-xl mb-6 leading-relaxed font-normal"
+              >
+                We design and build websites, web apps, mobile apps, SaaS products and digital experiences for businesses and founders.
+              </motion.p>
+
+              {/* 4. Service chips */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+                className="flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-8 max-w-xl"
+              >
+                {SERVICE_CHIPS.map((chip, i) => (
+                  <motion.span
+                    key={chip}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.6 + i * 0.05 }}
+                    className="px-3 py-1 rounded-full text-xs sm:text-sm bg-muted/40 border border-border text-foreground font-medium select-none hover:bg-primary/10 hover:border-primary/40 hover:text-primary-text transition-colors duration-200 cursor-default"
+                  >
+                    {chip}
+                  </motion.span>
+                ))}
+                <Link
+                  href="/services"
+                  className="text-xs sm:text-sm text-primary hover:underline font-medium ml-1 transition-colors flex items-center gap-1"
+                >
+                  See all <ArrowRight className="h-3 w-3" />
+                </Link>
+              </motion.div>
+
+              {/* 5. CTA buttons — primary uses magnetic tilt */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.72, ease: "easeOut" }}
+                className="flex flex-col sm:flex-row items-center gap-3 mb-7"
+              >
+                <MagneticButton
+                  id="hero-start-project"
+                  onClick={() => openLead({ source: "cta" })}
+                  className="group relative inline-flex items-center gap-2 h-12 px-7 rounded-xl bg-primary text-primary-foreground text-sm font-semibold shadow-lg hover:shadow-primary/30 active:translate-y-0 transition-shadow duration-200 cursor-pointer overflow-hidden"
+                >
+                  <span className="absolute inset-0 animate-shimmer pointer-events-none" />
+                  Start a project
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </MagneticButton>
+                <Link
+                  href="/work"
+                  className="inline-flex items-center gap-2 h-12 px-7 rounded-xl border border-border bg-background/60 backdrop-blur-sm text-sm font-semibold text-foreground hover:bg-muted/60 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                >
+                  See our work
+                </Link>
+              </motion.div>
+
+              {/* Dedicated Section Theme Dock Slot for Hero */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                className="mb-2"
+              >
+                <SectionDockSlot sectionId="hero" label="Hero" />
+              </motion.div>
+            </div>
+
+            {/* Right Column: 3D Coder Showcase with GIF-like float animation */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 flex justify-center items-center w-full"
             >
-              <span className="absolute inset-0 animate-shimmer pointer-events-none" />
-              Start a project
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-2 h-12 px-7 rounded-xl border border-border bg-background/60 backdrop-blur-sm text-sm font-semibold text-foreground hover:bg-muted/60 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
-            >
-              See our work
-            </Link>
-          </motion.div>
+              <Hero3DCoder />
+            </motion.div>
+          </div>
 
           {/* 6. Divider label */}
           <motion.div
@@ -308,7 +411,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                   />
                 </div>
 
-                <div className="flex flex-wrap gap-2 justify-center mb-12">
+                <div className="flex flex-wrap gap-2 justify-center mb-10">
                   {EXAMPLES.map((ex) => (
                     <button
                       key={ex}
@@ -323,60 +426,11 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
 
                 {blueprint && (
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                     className="w-full"
                   >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-border rounded-xl overflow-hidden mb-8 border border-border shadow-lg">
-                      {/* Left: Typical Build (Red) */}
-                      <div className="bg-background flex flex-col h-full">
-                        <div className="bg-muted/20 border-b border-border px-4 py-2 flex justify-between items-center text-xs font-mono">
-                          <span className="text-muted-foreground font-semibold">A typical build</span>
-                          <span className="text-diff-remove bg-diff-remove-bg px-2 py-0.5 rounded-sm font-medium">
-                            {blueprint.complexityCut.length} things cut
-                          </span>
-                        </div>
-                        <div className="p-4 font-mono text-sm space-y-2 flex-1">
-                          {blueprint.complexityCut.map((item, i) => (
-                            <motion.div
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: i * 0.05 }}
-                              key={i}
-                              className="bg-diff-remove-bg/50 px-2 py-1 rounded-sm text-diff-remove flex gap-3 line-through"
-                            >
-                              <span className="select-none font-bold">-</span>
-                              <span>{item}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Right: How we'd start (Green) */}
-                      <div className="bg-background flex flex-col h-full">
-                        <div className="bg-muted/20 border-b border-border px-4 py-2 flex justify-between items-center text-xs font-mono">
-                          <span className="text-muted-foreground font-semibold">How we&apos;d start</span>
-                          <span className="text-diff-add bg-diff-add-bg px-2 py-0.5 rounded-sm font-medium">
-                            {blueprint.mvpScope.length} things kept
-                          </span>
-                        </div>
-                        <div className="p-4 font-mono text-sm space-y-2 flex-1">
-                          {blueprint.mvpScope.map((item, i) => (
-                            <motion.div
-                              initial={{ opacity: 0, x: 10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: i * 0.05 + 0.1 }}
-                              key={i}
-                              className="bg-diff-add-bg/50 px-2 py-1 rounded-sm text-diff-add flex gap-3"
-                            >
-                              <span className="select-none font-bold">+</span>
-                              <span>{item}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
                     <BlueprintCard blueprint={blueprint} onContact={handleContact} />
                   </motion.div>
                 )}

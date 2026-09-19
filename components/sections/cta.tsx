@@ -1,24 +1,22 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "motion/react";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { useRef } from "react";
+import { motion, useInView } from "motion/react";
+import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
-import { ArrowRight, MessageSquare } from "lucide-react";
+import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+import { ArrowRight, Mail, MessageSquare } from "lucide-react";
+import { SITE } from "@/lib/site";
+import { LaunchIllustration } from "@/components/ui/clay-3d/clay-illustrations";
 
 interface CTAProps {
   onStartProject?: () => void;
 }
 
-const FLOATING_WORDS = [
-  "Websites", "Web Apps", "Mobile", "SaaS",
-  "Branding", "AI", "Next.js", "React",
-  "Motion", "Design", "Simple", "Different",
-];
-
 export function CTA({ onStartProject }: CTAProps) {
   const { openLead } = useLead();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   const handleStart = () => {
     if (onStartProject) onStartProject();
@@ -26,135 +24,120 @@ export function CTA({ onStartProject }: CTAProps) {
   };
 
   return (
-    <section className="py-32 bg-background border-t border-border relative overflow-hidden">
-      {/* ── Layered background effects ── */}
-      <div className="pointer-events-none absolute inset-0 mesh-bg" />
+    <section
+      id="cta"
+      ref={ref}
+      className="relative w-full py-24 sm:py-36 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden border-t border-border"
+    >
+      {/* Background ambient lighting */}
+      <div className="pointer-events-none absolute inset-0 mesh-bg opacity-70" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/10 rounded-full blur-[140px]" />
 
-      {/* Large central glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-primary/8 pointer-events-none blur-3xl transition-colors duration-700" />
-
-      {/* Pulse rings */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-        {[0, 0.5, 1].map((delay) => (
-          <motion.div
-            key={delay}
-            initial={{ scale: 0.6, opacity: 0.6 }}
-            animate={{ scale: 2.8, opacity: 0 }}
-            transition={{
-              duration: 3,
-              delay,
-              repeat: Infinity,
-              ease: "easeOut",
-            }}
-            className="absolute inset-0 w-48 h-48 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/20"
-          />
-        ))}
-      </div>
-
-      {/* Floating word cloud — decorative background text */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden select-none" aria-hidden="true">
-        {FLOATING_WORDS.map((word, i) => (
-          <motion.span
-            key={word}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.04 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05, duration: 0.8 }}
-            animate={{
-              y: [0, i % 2 === 0 ? -8 : 8, 0],
-            }}
-            style={{
-              position: "absolute",
-              left: `${(i * 13 + 5) % 90}%`,
-              top: `${(i * 17 + 8) % 85}%`,
-              fontSize: `${1.5 + (i % 3) * 0.8}rem`,
-              animationDelay: `${i * 0.3}s`,
-            }}
-            className="font-bold text-foreground whitespace-nowrap"
-          >
-            {word}
-          </motion.span>
-        ))}
-      </div>
-
-      {/* ── Main content ── */}
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10 flex flex-col items-center">
+      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
+        {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-6"
+          className="mb-4"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold uppercase tracking-[0.15em]">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            Ready to build?
+          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/10 text-primary text-xs font-semibold uppercase tracking-[0.2em]">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            Start Your Build
           </span>
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl md:text-7xl font-bold tracking-tighter text-foreground mb-4 leading-[1.05]"
-        >
-          Got something
-          <br />
-          <span className="text-gradient">in mind?</span>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-          className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-xl leading-relaxed"
-        >
-          Let&apos;s make it simple.
-          <br />
-          Let&apos;s make it different.
-        </motion.p>
-
+        {/* 3D Claymorphic Launch Illustration (Dynamic theme color) */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+          initial={{ opacity: 0, scale: 0.85, y: 15 }}
+          animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
+          className="w-48 sm:w-56 -mb-4 relative z-10"
         >
-          <button
-            onClick={handleStart}
-            id="cta-start-project"
-            className="group relative inline-flex items-center gap-2 w-full sm:w-auto px-8 h-14 text-lg rounded-xl bg-primary text-primary-foreground font-semibold shadow-xl shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-1 active:translate-y-0 transition-all duration-200 cursor-pointer overflow-hidden"
-          >
-            <span className="absolute inset-0 animate-shimmer pointer-events-none" />
-            Start a Project
-            <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </button>
-
-          <Link
-            href="/work"
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "w-full sm:w-auto px-8 h-14 text-lg transition-all hover:-translate-y-1 active:translate-y-0 duration-200"
-            )}
-          >
-            <MessageSquare className="h-5 w-5 mr-2" />
-            See Our Work
-          </Link>
+          <LaunchIllustration />
         </motion.div>
 
-        {/* Trust line */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-10 text-sm text-muted-foreground"
+        {/* Scaled-down Headline */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground mb-5 leading-[1.05] uppercase select-none"
         >
-          No sales pitch. Just a quick conversation to understand your project.
-        </motion.p>
+          Got Something
+          <br />
+          In Mind?
+        </motion.h2>
+
+        {/* Subtitle */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="text-lg sm:text-2xl font-medium tracking-tight text-muted-foreground mb-8 max-w-xl"
+        >
+          Let&apos;s make it <span className="text-foreground font-semibold">simple</span>.
+          <br />
+          Let&apos;s make it{" "}
+          <span className="text-gradient font-bold">different.</span>
+        </motion.div>
+
+        {/* Dedicated Section Theme Dock Slot for Final CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-10"
+        >
+          <SectionDockSlot sectionId="cta" label="Final CTA" />
+        </motion.div>
+
+        {/* Main Action Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="flex flex-col sm:flex-row items-center gap-4 mb-16"
+        >
+          <Button
+            size="lg"
+            onClick={handleStart}
+            id="cta-start-project"
+            className="group h-14 px-10 rounded-2xl text-base font-bold tracking-tight shadow-xl shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-1 active:translate-y-0 transition-all duration-300 cursor-pointer"
+          >
+            <span>Start a project</span>
+            <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1.5" />
+          </Button>
+        </motion.div>
+
+        {/* Direct Channels */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground pt-4 border-t border-border/50 w-full max-w-md"
+        >
+          {SITE.email && (
+            <a
+              href={`mailto:${SITE.email}`}
+              className="flex items-center gap-2 hover:text-primary transition-colors font-medium"
+            >
+              <Mail className="h-4 w-4" />
+              <span>{SITE.email}</span>
+            </a>
+          )}
+          {SITE.whatsapp && (
+            <a
+              href={`https://wa.me/${SITE.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-primary transition-colors font-medium"
+            >
+              <MessageSquare className="h-4 w-4" />
+              <span>WhatsApp Direct</span>
+            </a>
+          )}
+        </motion.div>
       </div>
     </section>
   );

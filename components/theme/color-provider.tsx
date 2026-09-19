@@ -1,11 +1,13 @@
 "use client";
 
 import React, { createContext, useContext, useSyncExternalStore } from "react";
-import { COLOR_THEMES, type ColorTheme } from "@/lib/colors";
+import { COLOR_THEMES, createCustomColorTheme, type ColorTheme } from "@/lib/colors";
 
 interface ThemeColorContextType {
   theme: ColorTheme;
   setTheme: (id: string) => void;
+  setCustomColor: (hex: string) => void;
+  customColor: string;
   mode: "light" | "dark";
   setMode: (mode: "light" | "dark") => void;
 }
@@ -29,6 +31,14 @@ function getThemeSnapshot(): string {
   }
 }
 
+function getCustomColorSnapshot(): string {
+  try {
+    return localStorage.getItem("simplediff-custom-color") || "#8B5CF6";
+  } catch {
+    return "#8B5CF6";
+  }
+}
+
 function getModeSnapshot(): "light" | "dark" {
   try {
     const stored = localStorage.getItem("simplediff-mode");
@@ -43,9 +53,22 @@ const ThemeColorContext = createContext<ThemeColorContextType | undefined>(undef
 
 export function ThemeColorProvider({ children }: { children: React.ReactNode }) {
   const themeId = useSyncExternalStore(subscribe, getThemeSnapshot, () => "violet");
+  const customColor = useSyncExternalStore(subscribe, getCustomColorSnapshot, () => "#8B5CF6");
   const mode = useSyncExternalStore<"light" | "dark">(subscribe, getModeSnapshot, () => "dark");
 
-  const theme = COLOR_THEMES.find((t) => t.id === themeId) || COLOR_THEMES[0];
+  const theme: ColorTheme =
+    themeId === "custom"
+      ? createCustomColorTheme(customColor)
+      : COLOR_THEMES.find((t) => t.id === themeId) || COLOR_THEMES[0];
+
+  const applyThemeToDOM = (t: ColorTheme) => {
+    const root = document.documentElement;
+    root.style.setProperty("--primary", t.primary);
+    root.style.setProperty("--primary-foreground", t.primaryForeground);
+    root.style.setProperty("--ring", t.ring);
+    const isDark = root.classList.contains("dark");
+    root.style.setProperty("--primary-text", isDark ? t.textOnDark : t.textOnLight);
+  };
 
   const setTheme = (id: string) => {
     const found = COLOR_THEMES.find((t) => t.id === id);
@@ -54,16 +77,25 @@ export function ThemeColorProvider({ children }: { children: React.ReactNode }) 
         localStorage.setItem("simplediff-theme", id);
       } catch {}
 
-      const root = document.documentElement;
-      root.style.setProperty("--primary", found.primary);
-      root.style.setProperty("--primary-foreground", found.primaryForeground);
-      root.style.setProperty("--ring", found.ring);
-      const isDark = root.classList.contains("dark");
-      root.style.setProperty("--primary-text", isDark ? found.textOnDark : found.textOnLight);
+      applyThemeToDOM(found);
 
       for (const listener of listeners) {
         listener();
       }
+    }
+  };
+
+  const setCustomColor = (hex: string) => {
+    try {
+      localStorage.setItem("simplediff-theme", "custom");
+      localStorage.setItem("simplediff-custom-color", hex);
+    } catch {}
+
+    const customTheme = createCustomColorTheme(hex);
+    applyThemeToDOM(customTheme);
+
+    for (const listener of listeners) {
+      listener();
     }
   };
 
@@ -89,7 +121,9 @@ export function ThemeColorProvider({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <ThemeColorContext.Provider value={{ theme, setTheme, mode, setMode }}>
+    <ThemeColorContext.Provider
+      value={{ theme, setTheme, setCustomColor, customColor, mode, setMode }}
+    >
       {children}
     </ThemeColorContext.Provider>
   );

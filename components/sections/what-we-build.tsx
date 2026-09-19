@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { cn } from "@/lib/utils";
+import { useRef } from "react";
+import Link from "next/link";
+import { motion, useInView } from "motion/react";
 import {
   Globe,
   LayoutDashboard,
@@ -12,257 +12,238 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react";
+import { useLead } from "@/components/leads/lead-provider";
+import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+
+import {
+  WebsitesIllustration,
+  WebAppsIllustration,
+  MobileAppsIllustration,
+  SaaSProductsIllustration,
+  BrandingIllustration,
+  AIAutomationIllustration,
+} from "@/components/ui/clay-3d/clay-illustrations";
 
 const SERVICES = [
   {
     id: "01",
     icon: Globe,
     title: "Websites",
-    tagline: "Convert visitors into customers",
-    description:
-      "Fast, clear websites designed to turn visitors into customers. Custom-built, not templated — because your brand deserves better than a drag-and-drop theme.",
-    highlights: ["Custom design systems", "Sub-second load times", "SEO-first architecture"],
-    color: "text-blue-500",
-    bg: "bg-blue-500/10",
-    border: "hover:border-blue-500/40",
+    tagline: "Digital experiences that make your business clear, credible and memorable.",
+    deliverables: ["Custom Design Systems", "High Conversion UX", "SEO & Sub-second Speed"],
+    Illustration: WebsitesIllustration,
   },
   {
     id: "02",
     icon: LayoutDashboard,
-    title: "Web apps",
-    tagline: "Tools your users will actually use",
-    description:
-      "Interactive tools and applications that feel fast and work reliably. We focus on the 20% of features that deliver 80% of the value.",
-    highlights: ["React & Next.js", "Real-time features", "Role-based access"],
-    color: "text-violet-500",
-    bg: "bg-violet-500/10",
-    border: "hover:border-violet-500/40",
+    title: "Web applications",
+    tagline: "Focused software built around how your business actually works.",
+    deliverables: ["Next.js & React", "Real-time Workflows", "Secure Role-based Auth"],
+    Illustration: WebAppsIllustration,
   },
   {
     id: "03",
     icon: Smartphone,
     title: "Mobile apps",
-    tagline: "Smooth iOS & Android experiences",
-    description:
-      "Smooth iOS and Android apps built for everyday use. React Native means one codebase, two platforms, and a native feel on both.",
-    highlights: ["React Native", "App Store ready", "Offline support"],
-    color: "text-emerald-500",
-    bg: "bg-emerald-500/10",
-    border: "hover:border-emerald-500/40",
+    tagline: "Useful mobile experiences built for real-world customers.",
+    deliverables: ["React Native Cross-Platform", "Offline Functionality", "App Store Release"],
+    Illustration: MobileAppsIllustration,
   },
   {
     id: "04",
     icon: Package2,
     title: "SaaS products",
-    tagline: "Ship. Iterate. Grow.",
-    description:
-      "Complete software platforms with user accounts, billing, and workflows. We strip the complexity so you can go to market faster.",
-    highlights: ["Stripe billing", "Auth & multi-tenancy", "Analytics built-in"],
-    color: "text-amber-500",
-    bg: "bg-amber-500/10",
-    border: "hover:border-amber-500/40",
+    tagline: "From first release to scalable product systems.",
+    deliverables: ["Stripe Subscriptions & Billing", "Multi-tenant Architecture", "Product Telemetry"],
+    Illustration: SaaSProductsIllustration,
   },
   {
     id: "05",
     icon: Palette,
-    title: "Branding",
-    tagline: "Identity that earns attention",
-    description:
-      "Logos, visual identity, typography, and design systems that stand out. Great branding isn't just how you look — it's how you make people feel.",
-    highlights: ["Logo design", "Design tokens", "Brand guidelines"],
-    color: "text-rose-500",
-    bg: "bg-rose-500/10",
-    border: "hover:border-rose-500/40",
+    title: "Branding & identity",
+    tagline: "A visual identity that makes the business recognizable.",
+    deliverables: ["Logo & Typography Systems", "Visual Identity Guidelines", "Digital Asset Kits"],
+    Illustration: BrandingIllustration,
   },
   {
     id: "06",
     icon: Sparkles,
     title: "AI automation",
-    tagline: "Work smarter, not harder",
-    description:
-      "Practical AI workflows and smart automations that save real hours. We build with LLMs, vector search, and agents that actually work in production.",
-    highlights: ["LLM integrations", "Document pipelines", "Workflow automation"],
-    color: "text-cyan-500",
-    bg: "bg-cyan-500/10",
-    border: "hover:border-cyan-500/40",
+    tagline: "Practical automation that removes repetitive work.",
+    deliverables: ["Custom LLM Workflows", "Intelligent Document Pipelines", "Automated Agents"],
+    Illustration: AIAutomationIllustration,
   },
 ];
 
-const FLAGSHIP = SERVICES[0];
-const GRID_SERVICES = SERVICES.slice(1);
-
-function FlagshipCard({ service }: { service: (typeof SERVICES)[0] }) {
-  const Icon = service.icon;
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={cn(
-        "relative rounded-2xl border border-border bg-card overflow-hidden mb-4 card-hover",
-        service.border
-      )}
-    >
-      {/* Background gradient */}
-      <div
-        className={cn(
-          "absolute inset-0 opacity-30 pointer-events-none",
-          "bg-[radial-gradient(ellipse_60%_60%_at_80%_50%,var(--tw-gradient-from),transparent)]"
-        )}
-      />
-
-      <div className="relative grid grid-cols-1 lg:grid-cols-12 items-stretch">
-        {/* Left: Visual */}
-        <div className={cn("lg:col-span-5 p-8 sm:p-10 flex items-center justify-center min-h-[200px]", service.bg)}>
-          <div className="relative flex items-center justify-center">
-            <div className={cn("absolute w-32 h-32 rounded-full blur-2xl opacity-40", service.bg)} />
-            <div
-              className={cn(
-                "relative z-10 w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg",
-                service.bg
-              )}
-            >
-              <Icon className={cn("h-10 w-10", service.color)} />
-            </div>
-          </div>
-        </div>
-
-        {/* Right: Content */}
-        <div className="lg:col-span-7 p-7 sm:p-9 flex flex-col justify-between gap-5">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className={cn("text-xs font-mono font-bold uppercase tracking-widest", service.color)}>
-                Flagship Service
-              </span>
-              <span className="text-xs font-mono text-muted-foreground">— {service.id}</span>
-            </div>
-            <h3 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-1">
-              {service.title}
-            </h3>
-            <p className={cn("text-sm font-semibold mb-4", service.color)}>{service.tagline}</p>
-            <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-4 border-t border-border">
-              {service.highlights.map((h) => (
-                <div key={h} className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-                  <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", service.bg.replace("bg-", "bg-").replace("/10", ""))} />
-                  {h}
-                </div>
-              ))}
-            </div>
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                className={cn(
-                  "inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer shadow-xs hover:shadow-sm text-white",
-                  service.bg.replace("bg-", "bg-").replace("/10", ""),
-                  service.color.replace("text-", "bg-").replace("-500", "-500")
-                )}
-              >
-                Get a Quote <ArrowRight className="h-4 w-4" />
-              </button>
-              <span className="text-xs text-muted-foreground">Full lifecycle from design to launch</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+const SPRING = { type: "spring" as const, stiffness: 280, damping: 24 };
 
 function ServiceCard({
   service,
   index,
+  onInquire,
 }: {
   service: (typeof SERVICES)[0];
   index: number;
+  onInquire: (name: string) => void;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   const Icon = service.icon;
+  const Illustration = service.Illustration;
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className={cn(
-        "group relative p-6 rounded-xl border border-border bg-card flex flex-col gap-4 card-hover",
-        service.border
-      )}
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ ...SPRING, delay: index * 0.07 }}
+      className="group relative rounded-3xl border border-border/80 bg-card p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1.5 overflow-hidden"
     >
-      <div className="flex items-start justify-between">
-        <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300 group-hover:scale-110", service.bg)}>
-          <Icon className={cn("h-5 w-5", service.color)} />
-        </div>
-        <span className="text-xs font-mono font-bold text-muted-foreground">{service.id}</span>
-      </div>
+      {/* Dynamic top accent highlight */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary transition-all duration-500" />
 
-      <div className="flex-1">
-        <h3 className="text-lg font-bold tracking-tight text-foreground mb-1 group-hover:text-primary-text transition-colors">
+      {/* Top row: Number and Icon */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-3xl sm:text-4xl font-extrabold tracking-tight text-muted-foreground/30 group-hover:text-primary transition-colors font-mono select-none">
+            {service.id}
+          </span>
+          <div className="w-10 h-10 rounded-xl bg-muted/50 border border-border/60 flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:border-primary/40 group-hover:bg-primary/10 transition-all duration-300">
+            <Icon className="h-5 w-5" />
+          </div>
+        </div>
+
+        {/* 3D Claymorphic Illustration Display (Cloudi5 style, reactive to theme color) */}
+        <div className="relative w-full rounded-2xl bg-gradient-to-b from-muted/30 to-muted/10 border border-border/60 group-hover:border-primary/30 p-2 sm:p-3 mb-6 transition-all duration-500 overflow-hidden">
+          {/* Subtle dynamic glow puddle */}
+          <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500" />
+          <div className="relative z-10 transform group-hover:scale-[1.03] transition-transform duration-500 ease-out">
+            <Illustration />
+          </div>
+        </div>
+
+        {/* Title and Tagline */}
+        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
           {service.title}
         </h3>
-        <p className={cn("text-xs font-semibold mb-3", service.color)}>{service.tagline}</p>
-        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-          {service.description}
+        <p className="text-muted-foreground text-sm leading-relaxed mb-5">
+          {service.tagline}
         </p>
+
+        {/* Deliverables list */}
+        <div className="space-y-2 pt-3 border-t border-border/50">
+          {service.deliverables.map((item, i) => (
+            <div
+              key={i}
+              className="text-xs text-muted-foreground/90 flex items-center gap-2 font-medium"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary/60 group-hover:bg-primary transition-colors" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="pt-3 border-t border-border flex items-center justify-between text-xs font-semibold text-muted-foreground group-hover:text-primary-text transition-colors">
-        <span>Learn more</span>
-        <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+      {/* Card Action Link */}
+      <div className="pt-6 mt-6 border-t border-border/40 flex items-center justify-between">
+        <Link
+          href="/services"
+          className="text-xs font-semibold text-foreground/80 hover:text-primary flex items-center gap-1.5 transition-colors group/link"
+        >
+          <span>Explore service</span>
+          <ArrowRight className="h-3 w-3 group-hover/link:translate-x-1 transition-transform" />
+        </Link>
+        <button
+          type="button"
+          onClick={() => onInquire(service.title)}
+          className="text-[11px] font-mono text-muted-foreground hover:text-primary cursor-pointer transition-colors"
+        >
+          Request scope &rarr;
+        </button>
       </div>
     </motion.div>
   );
 }
 
 export function WhatWeBuild() {
+  const { openLead } = useLead();
+  const headerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(headerRef, { once: true, margin: "-80px" });
+
+  const handleInquire = (serviceName: string) => {
+    openLead({
+      source: "what-we-build",
+      description: `Interested in: ${serviceName}.`,
+    });
+  };
+
   return (
-    <section className="py-24 px-6 bg-muted/20 border-t border-border">
-      <div className="max-w-6xl mx-auto">
-        {/* Section header */}
-        <div className="mb-12">
+    <section id="capabilities" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full overflow-hidden">
+      {/* Subtle ambient lighting */}
+      <div className="pointer-events-none absolute -top-12 right-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl opacity-60" />
+
+
+      {/* Editorial Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 relative z-10">
+        <div ref={headerRef} className="max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
+            initial={{ opacity: 0, y: 14 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="mb-4 flex items-center gap-3"
+            className="flex items-center gap-2 mb-3"
           >
-            <span className="inline-flex items-center px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-[11px] font-bold uppercase tracking-wider">
-              Our Services
+            <span className="w-2 h-2 rounded-full bg-primary" />
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary font-semibold">
+              Capabilities & Focus
             </span>
           </motion.div>
+
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-4"
-          >
-            What we build
-          </motion.h2>
-          <motion.p
             initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="text-xl text-muted-foreground max-w-2xl"
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-4"
           >
-            We turn ideas into clear, useful digital products for businesses and founders.
+            What We Build.
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base sm:text-lg text-muted-foreground leading-relaxed"
+          >
+            We engineer focused digital products without bloated agency overhead or sluggish development cycles.
           </motion.p>
         </div>
 
-        {/* Flagship featured card */}
-        <FlagshipCard service={FLAGSHIP} />
-
-        {/* 3-column service grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {GRID_SERVICES.map((service, i) => (
-            <ServiceCard key={service.id} service={service} index={i} />
-          ))}
+        {/* Dedicated Section Theme Dock Slot for Capabilities */}
+        <div className="shrink-0">
+          <SectionDockSlot sectionId="capabilities" label="Capabilities" />
         </div>
+      </div>
+
+      {/* 6-Card Editorial Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {SERVICES.map((service, index) => (
+          <ServiceCard
+            key={service.id}
+            service={service}
+            index={index}
+            onInquire={handleInquire}
+          />
+        ))}
+      </div>
+
+      {/* Bottom note */}
+      <div className="mt-12 text-center">
+        <Link
+          href="/services"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+        >
+          <span>Need custom scope or a multi-platform rollout? See all services</span>
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
     </section>
   );

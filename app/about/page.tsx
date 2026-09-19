@@ -1,95 +1,186 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { Mail, MessageSquare } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About SimpleDiff — A digital product studio built on the belief that digital products and software should be simple, focused, and different.",
+  description:
+    "About SimpleDiff — A digital product studio built on the belief that digital products and software should be simple, focused, and different.",
 };
+
+const PRINCIPLES = [
+  {
+    number: "01",
+    tag: "CLARITY",
+    title: "Clarity over cleverness",
+    description:
+      "Code should be easy to read. Interfaces should be effortless to use. We don't build things to show off technical trivia; we build them to solve real customer and business problems efficiently. If a concept cannot be explained plainly, it is too complex.",
+  },
+  {
+    number: "02",
+    tag: "PURPOSE",
+    title: "Purpose-driven scope",
+    description:
+      "Every feature must earn its place in the build. If it doesn't serve the primary reason someone uses the product, it gets cut. This discipline prevents scope bloat, accelerates time-to-market, and protects you from endless maintenance debt.",
+  },
+  {
+    number: "03",
+    tag: "DETAIL",
+    title: "Difference is in the details",
+    description:
+      "Simplicity never means generic or boring. By stripping away visual clutter and extraneous controls, we create space for refined typography, fluid motion, sub-second performance, and a distinctive identity that commands respect.",
+  },
+];
 
 export default function AboutPage() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-20">
-      <div className="max-w-none">
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-8">About.</h1>
-        
-        <p className="text-xl text-muted-foreground mb-12 font-medium leading-relaxed">
-          SimpleDiff is a digital product studio built on the belief that digital products and websites have become unnecessarily complex. We design and build clean, focused software that delivers results without the bloat.
-        </p>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      {/* Hero Header */}
+      <div className="max-w-5xl mb-24 sm:mb-32">
+        <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+          About SimpleDiff
+        </span>
 
-        {/* Who we are */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-4 border-b border-border pb-2">Who we are</h2>
-          <p className="text-muted-foreground leading-relaxed mb-4">
-            We are a hands-on design and engineering studio working directly with founders, business owners, and teams who need a dedicated partner to turn ideas into polished products.
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.08] mb-8">
+          We believe digital products don&apos;t need to be complicated to be powerful.
+        </h1>
+
+        <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
+          Modern web apps, software, and websites have become overloaded with bloat. We design and engineer clean, focused products that deliver outsized business impact.
+        </p>
+      </div>
+
+      {/* Section 1: Who We Are */}
+      <section className="py-16 sm:py-20 border-t border-border">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16">
+          <div className="lg:col-span-4">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary block mb-2">
+              Our Ethos
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
+              Who We Are
+            </h2>
+          </div>
+
+          <div className="lg:col-span-8 space-y-6 text-lg sm:text-xl text-muted-foreground leading-relaxed">
+            <p className="text-foreground font-medium text-xl sm:text-2xl leading-relaxed">
+              We are a dedicated design and engineering studio working directly with founders, business owners, and ambitious teams who value precision over bureaucratic overhead.
+            </p>
+            <p>
+              When you collaborate with SimpleDiff, you don&apos;t get handed off through account managers, junior coordinators, or outsourced layers. You work directly with the senior designers and engineers crafting your product.
+            </p>
+            <p>
+              Our methodology combines deep brand taste with modern fullstack engineering — ensuring that every website, web application, mobile app, and SaaS system we launch looks world-class and performs under pressure.
+            </p>
+            {SITE.location && (
+              <div className="pt-4 flex items-center gap-2 text-sm font-mono text-foreground font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+                <span>Operating from {SITE.location} &bull; Serving clients globally</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Section 2: Our Principles */}
+      <section className="py-20 sm:py-28 border-t border-border">
+        <div className="max-w-3xl mb-16">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary block mb-2">
+            Guiding Philosophy
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground mb-4">
+            Our Principles
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            The three core tenets that guide every architectural decision, layout, and line of code we write.
           </p>
-          {/* TODO(owner): add a real founder/team paragraph. */}
-          {SITE.location && (
-            <p className="text-sm font-medium text-foreground">
-              {SITE.location}
+        </div>
+
+        {/* 3 Large Horizontal Principle Rows */}
+        <div className="border-t border-border divide-y divide-border">
+          {PRINCIPLES.map((principle) => (
+            <div
+              key={principle.number}
+              className="py-14 sm:py-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-baseline group hover:bg-primary/[0.02] transition-colors -mx-4 px-4 rounded-xl"
+            >
+              {/* Index & Tag */}
+              <div className="lg:col-span-3 flex items-baseline gap-4">
+                <span className="text-4xl sm:text-5xl font-extrabold font-mono text-muted-foreground/30 group-hover:text-primary transition-colors select-none">
+                  {principle.number}
+                </span>
+                <span className="text-xs font-mono font-bold tracking-[0.2em] text-primary uppercase">
+                  {principle.tag}
+                </span>
+              </div>
+
+              {/* Title */}
+              <div className="lg:col-span-4">
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                  {principle.title}
+                </h3>
+              </div>
+
+              {/* Description */}
+              <div className="lg:col-span-5">
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                  {principle.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Section 3: Connect With The Studio */}
+      <section className="py-16 sm:py-24 border-t border-border bg-card/40 rounded-3xl p-8 sm:p-14 border border-border/80">
+        <div className="max-w-3xl space-y-6">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary">
+            Direct Studio Line
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
+            Let&apos;s build something exceptional together.
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+            Have an upcoming project, a product to revamp, or an idea to validate? We are available for select client engagements.
+          </p>
+          {SITE.responseTime && (
+            <p className="text-xs sm:text-sm font-mono text-muted-foreground">
+              Typical response time: {SITE.responseTime}
             </p>
           )}
-        </section>
 
-        {/* Core Principles */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-6 border-b border-border pb-2">Core Principles</h2>
-          
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xl font-bold mb-2">1. Clarity over cleverness</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Code should be easy to read. Interfaces should be easy to use. We don&apos;t build things to show off; we build them to solve problems efficiently. If it&apos;s hard to explain, it&apos;s too complex.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-2">2. Purpose-driven scope</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Every feature must justify its existence. If it doesn&apos;t serve the core purpose of the product, it gets cut. This approach saves time, money, and future maintenance headaches.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-2">3. The difference is in the details</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Simplicity doesn&apos;t mean boring. By removing the noise, we create room for thoughtful micro-interactions, robust performance, and a distinctive aesthetic that feels premium.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* How to reach us */}
-        {(SITE.email || SITE.whatsapp || SITE.responseTime) && (
-          <section className="pt-8 border-t border-border">
-            <h2 className="text-2xl font-bold mb-4">How to reach us</h2>
-            {SITE.responseTime && (
-              <p className="text-muted-foreground mb-4">
-                Typical response time: {SITE.responseTime}
-              </p>
+          <div className="flex flex-wrap gap-4 pt-4">
+            {SITE.email && (
+              <a
+                href={`mailto:${SITE.email}`}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-foreground text-background font-semibold text-sm hover:opacity-90 transition-opacity"
+              >
+                <Mail className="h-4 w-4" />
+                <span>Email {SITE.email}</span>
+              </a>
             )}
-            <div className="flex flex-wrap gap-4 text-sm font-medium">
-              {SITE.email && (
-                <a
-                  href={`mailto:${SITE.email}`}
-                  className="text-primary hover:underline"
-                >
-                  {SITE.email}
-                </a>
-              )}
-              {SITE.whatsapp && (
-                <a
-                  href={`https://wa.me/${SITE.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  Chat on WhatsApp
-                </a>
-              )}
-            </div>
-          </section>
-        )}
-      </div>
+            {SITE.whatsapp && (
+              <a
+                href={`https://wa.me/${SITE.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-background hover:border-primary/50 text-foreground font-semibold text-sm transition-all"
+              >
+                <MessageSquare className="h-4 w-4 text-primary" />
+                <span>Chat on WhatsApp</span>
+              </a>
+            )}
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-primary hover:underline font-semibold text-sm"
+            >
+              <span>Explore services &rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -15,6 +15,9 @@ export const LEAD_SOURCES = [
   "services",
   "cta",
   "topbar",
+  "navbar",
+  "footer",
+  "what-we-build",
 ] as const;
 
 export const leadSchema = z.object({

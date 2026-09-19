@@ -5,7 +5,7 @@ import { CTA } from "@/components/sections/cta";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 w-full max-w-[1600px] mx-auto">
+    <div className="flex flex-col flex-1 w-full">
       <WorkbenchHero />
       <WhatWeBuild />
       <Philosophy />

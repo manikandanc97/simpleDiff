@@ -1,0 +1,81 @@
+"use client";
+
+import React, { useRef, useEffect } from "react";
+import { motion } from "motion/react";
+import { useDock } from "@/components/theme/dock-context";
+import { ThemeDockContent } from "@/components/theme/floating-color-dock";
+import { cn } from "@/lib/utils";
+import { Plus } from "lucide-react";
+
+interface SectionDockSlotProps {
+  sectionId: string;
+  label: string;
+  className?: string;
+}
+
+export function SectionDockSlot({
+  sectionId,
+  label,
+  className,
+}: SectionDockSlotProps) {
+  const { activeSlot, registerSlot, unregisterSlot, scrollToSlot } = useDock();
+  const slotRef = useRef<HTMLDivElement>(null);
+  const isDocked = activeSlot === sectionId;
+
+  useEffect(() => {
+    if (slotRef.current) {
+      registerSlot(sectionId, label, slotRef.current);
+    }
+    return () => {
+      unregisterSlot(sectionId);
+    };
+  }, [sectionId, label, registerSlot, unregisterSlot]);
+
+  return (
+    <div
+      ref={slotRef}
+      id={`dock-slot-${sectionId}`}
+      className={cn(
+        "relative inline-flex items-center justify-center transition-all duration-300",
+        className
+      )}
+    >
+      {isDocked ? (
+        <div className="relative p-1 rounded-full border border-primary/30 bg-primary/5 shadow-sm shadow-primary/10 transition-colors duration-500">
+          <motion.div
+            layoutId="unified-theme-dock"
+            transition={{ type: "spring", stiffness: 320, damping: 28 }}
+            className="relative z-10"
+          >
+            <ThemeDockContent label={label} />
+          </motion.div>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => scrollToSlot(sectionId)}
+          title={`Click to snap theme dock to ${label}`}
+          className="group relative flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-full border border-dashed border-border/80 bg-muted/20 hover:bg-muted/40 hover:border-primary/40 backdrop-blur-xs transition-all duration-300 cursor-pointer select-none"
+        >
+          {/* Ghost section badge */}
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted/40 text-[11px] font-mono text-muted-foreground group-hover:text-foreground transition-colors">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:bg-primary transition-colors" />
+            <span>{label}</span>
+            <span className="text-border">&bull;</span>
+            <span className="text-muted-foreground/70">Theme Slot</span>
+          </div>
+
+          {/* 3 ghost dots + ghost plus */}
+          <div className="flex items-center gap-1.5 sm:gap-2 px-1 opacity-50 group-hover:opacity-85 transition-opacity">
+            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-dashed border-border/80 bg-muted/40" />
+            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-dashed border-border/80 bg-muted/40" />
+            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-dashed border-border/80 bg-muted/40" />
+            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-dashed border-border/80 bg-muted/40 flex items-center justify-center text-muted-foreground">
+              <Plus className="w-3 h-3 text-muted-foreground/60" />
+            </div>
+          </div>
+        </button>
+      )}
+    </div>
+  );
+}
