@@ -1,0 +1,97 @@
+"use client";
+
+import { motion } from "motion/react";
+import type { Experiment } from "@/lib/data/experiments";
+import { useThemeColor } from "@/components/theme/color-provider";
+
+interface ExperimentCardProps {
+  experiment: Experiment;
+}
+
+export function ExperimentCard({ experiment }: ExperimentCardProps) {
+  const { theme } = useThemeColor();
+
+  // A helper to generate abstract CSS patterns based on the experiment type
+  const renderPattern = () => {
+    switch (experiment.patternType) {
+      case "grid":
+        return (
+          <div className="absolute inset-0 flex flex-wrap opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+            {Array.from({ length: 40 }).map((_, i) => (
+              <div key={i} className="w-1/8 h-1/5 border border-foreground/10" />
+            ))}
+          </div>
+        );
+      case "geometric":
+        return (
+          <div className="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+            <div className="w-1/2 h-1/2 border border-foreground/30 rotate-45 transform group-hover:rotate-90 transition-transform duration-1000 ease-out" />
+            <div className="w-1/3 h-1/3 border border-foreground/30 absolute" />
+          </div>
+        );
+      case "dots":
+        return (
+          <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500 bg-[radial-gradient(var(--color-foreground)_1px,transparent_1px)] [background-size:16px_16px]" />
+        );
+      case "waves":
+        return (
+          <div className="absolute inset-0 overflow-hidden flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+            <div className="w-[150%] h-[150%] border border-foreground/20 rounded-full absolute translate-x-1/4 group-hover:translate-x-1/3 transition-transform duration-1000" />
+            <div className="w-[120%] h-[120%] border border-foreground/20 rounded-full absolute -translate-x-1/4 group-hover:-translate-x-1/3 transition-transform duration-1000" />
+          </div>
+        );
+      case "abstract":
+      default:
+        return (
+          <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500 flex items-end">
+            <div className="w-full h-1/2 bg-gradient-to-t from-foreground/10 to-transparent transform origin-bottom group-hover:scale-y-125 transition-transform duration-700 ease-out" />
+          </div>
+        );
+    }
+  };
+
+  return (
+    <motion.button
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className={`group flex flex-col text-left outline-none relative overflow-hidden bg-background border border-border shadow-xs focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${experiment.spanClass || ""}`}
+    >
+      {/* Visual Area */}
+      <div className="w-full h-48 sm:h-64 relative overflow-hidden bg-muted/20 border-b border-border">
+        {renderPattern()}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-10 mix-blend-overlay transition-opacity duration-500" 
+          style={{ backgroundColor: theme.primary }} 
+        />
+        {/* Dynamic Accent Highlight Line */}
+        <div 
+          className="absolute top-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-700 ease-out"
+          style={{ backgroundColor: theme.primary }}
+        />
+        <div className="absolute top-4 left-4">
+          <span className="text-xs font-mono font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+            {experiment.number}
+          </span>
+        </div>
+      </div>
+
+      {/* Content Area */}
+      <div className="p-6 flex flex-col gap-2 relative bg-background">
+        <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
+          {experiment.category}
+        </span>
+        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-foreground">
+          {experiment.title}
+        </h3>
+        <p className="text-sm sm:text-base text-muted-foreground mt-2 line-clamp-2">
+          {experiment.description}
+        </p>
+        
+        {/* Fake interactive arrow */}
+        <div className="absolute bottom-6 right-6 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+          <span className="text-xl" style={{ color: theme.primary }}>&rarr;</span>
+        </div>
+      </div>
+    </motion.button>
+  );
+}
