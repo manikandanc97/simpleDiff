@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import type { Project } from "@/lib/data/projects";
 
 interface ProjectPreviewProps {
@@ -19,10 +20,11 @@ export function ProjectPreview({ project, isActive }: ProjectPreviewProps) {
       {project.image ? (
         // Future-proof: if image exists, render it. 
         // Using an img tag here as a placeholder for next/image when real data arrives
-        <img
+        <Image
           src={project.image}
           alt={project.name}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
         />
       ) : (
         // Minimal abstract CSS preview when real image is unavailable

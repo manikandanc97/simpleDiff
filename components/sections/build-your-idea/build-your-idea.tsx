@@ -61,6 +61,7 @@ export function BuildYourIdea() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<ProjectIdea>(INITIAL_DATA);
   const [error, setError] = useState("");
+  const [isAdvancing, setIsAdvancing] = useState(false);
 
   const TOTAL_STEPS = 5;
 
@@ -91,10 +92,13 @@ export function BuildYourIdea() {
   };
 
   const handleOptionSelect = (key: keyof ProjectIdea, value: string) => {
+    if (isAdvancing) return;
+    setIsAdvancing(true);
     setData((prev) => ({ ...prev, [key]: value }));
     setError("");
     setTimeout(() => {
       setStep((s) => s + 1);
+      setIsAdvancing(false);
     }, 300); // Slight delay for visual feedback
   };
 

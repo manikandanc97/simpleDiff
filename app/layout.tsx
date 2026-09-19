@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeColorProvider } from "@/components/theme/color-provider";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+import { Sidebar } from "@/components/layout/sidebar";
+import { Topbar } from "@/components/layout/topbar";
+import { StatusBar } from "@/components/layout/status-bar";
+import { CommandPalette } from "@/components/ui/command-palette";
+import { cookies } from "next/headers";
+import { COLOR_THEMES } from "@/lib/colors";
+import { MotionProvider } from "@/components/providers/motion-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,21 +26,38 @@ export const metadata: Metadata = {
   description: "A modern digital development studio.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const themeId = cookieStore.get("simplediff-theme")?.value || "violet";
+  const mode = cookieStore.get("simplediff-mode")?.value || "dark";
+  
+  const foundTheme = COLOR_THEMES.find((t) => t.id === themeId) || COLOR_THEMES[0];
+
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
+      className={cn("h-full antialiased", geistSans.variable, geistMono.variable, "font-sans", mode)}
+      style={{
+        "--primary": foundTheme.primary,
+        "--primary-foreground": foundTheme.primaryForeground,
+        "--ring": foundTheme.ring,
+      } as React.CSSProperties}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
-        <ThemeColorProvider>
-          <Navbar />
-          <div className="flex-1 pt-20">
-            {children}
-          </div>
-          <Footer />
-        </ThemeColorProvider>
+      <body className="min-h-full flex flex-col overflow-x-hidden">
+        <MotionProvider>
+          <ThemeColorProvider initialThemeId={foundTheme.id} initialMode={mode as "light" | "dark"}>
+            <Sidebar />
+            <Topbar />
+            <CommandPalette />
+            
+            <div className="flex-1 md:pl-16 pt-14 pb-16 sm:pb-10">
+              {children}
+            </div>
+            
+            <StatusBar />
+          </ThemeColorProvider>
+        </MotionProvider>
       </body>
     </html>
   );

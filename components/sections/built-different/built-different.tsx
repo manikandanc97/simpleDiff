@@ -12,8 +12,6 @@ export function BuiltDifferent() {
   const [activeProjectId, setActiveProjectId] = useState(PROJECTS[0].id);
   const { theme } = useThemeColor();
 
-  const activeProject = PROJECTS.find(p => p.id === activeProjectId) || PROJECTS[0];
-
   return (
     <section className="py-24 bg-background border-t border-border">
       <div className="max-w-7xl mx-auto px-6">
