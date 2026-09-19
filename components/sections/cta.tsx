@@ -79,7 +79,7 @@ export function CTA({ onStartProject }: CTAProps) {
           Let&apos;s make it <span className="text-foreground font-semibold">simple</span>.
           <br />
           Let&apos;s make it{" "}
-          <span className="text-gradient font-bold">different.</span>
+          <span className="text-primary font-bold transition-colors duration-500">different.</span>
         </motion.div>
 
         {/* Dedicated Section Theme Dock Slot for Final CTA */}
@@ -103,7 +103,7 @@ export function CTA({ onStartProject }: CTAProps) {
             size="lg"
             onClick={handleStart}
             id="cta-start-project"
-            className="group h-14 px-10 rounded-2xl text-base font-bold tracking-tight shadow-xl shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-1 active:translate-y-0 transition-all duration-300 cursor-pointer"
+            className="group h-14 px-10 rounded-full text-base font-bold tracking-tight shadow-xl shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-1 active:translate-y-0 transition-all duration-300 cursor-pointer"
           >
             <span>Start a project</span>
             <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1.5" />

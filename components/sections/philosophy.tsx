@@ -73,7 +73,7 @@ export function Philosophy() {
               className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-[1.1]"
             >
               Remove what&apos;s{" "}
-              <span className="text-gradient">unnecessary.</span>
+              <span className="text-primary transition-colors duration-500">unnecessary.</span>
             </motion.h2>
           </div>
 

@@ -59,16 +59,13 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
         {/* Brand Logo */}
         <Link
           href="/"
-          className="group flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-ring rounded-lg outline-none"
+          className="group flex items-center focus-visible:ring-2 focus-visible:ring-ring rounded-lg outline-none"
           aria-label="SimpleDiff Home"
         >
           <span className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
-            Simple
+            Simple<span className="text-primary transition-transform inline-block group-hover:scale-105">Diff</span>
           </span>
-          <span className="text-primary text-xl sm:text-2xl font-bold tracking-tight transition-transform group-hover:scale-105">
-            Diff
-          </span>
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary ml-0.5 animate-pulse" />
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary ml-1 animate-pulse" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -154,7 +151,7 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? "Close menu" : "Open navigation menu"}
-            className="p-2 rounded-lg text-foreground hover:bg-muted/60 transition-colors focus-visible:ring-2 focus-visible:ring-ring outline-none cursor-pointer"
+            className="p-2 rounded-full text-foreground hover:bg-muted/60 transition-colors focus-visible:ring-2 focus-visible:ring-ring outline-none cursor-pointer"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -229,7 +226,7 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
               <Button
                 size="lg"
                 onClick={handleStart}
-                className="w-full font-semibold rounded-xl text-sm h-12 shadow-md cursor-pointer"
+                className="w-full font-semibold rounded-full text-sm h-12 shadow-md cursor-pointer"
               >
                 Start a project &rarr;
               </Button>

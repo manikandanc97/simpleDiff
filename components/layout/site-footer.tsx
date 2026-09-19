@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
 import { SITE } from "@/lib/site";
 import { NAV_ITEMS } from "@/lib/nav";
+import { FooterRevealWordmark } from "./footer-reveal-wordmark";
 
 interface SiteFooterProps {
   onStartProject?: () => void;
@@ -32,12 +33,13 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
             <div className="space-y-4">
               <Link
                 href="/"
-                className="inline-flex items-center gap-1 text-2xl font-bold tracking-tight text-foreground focus-visible:ring-2 focus-visible:ring-ring outline-none"
+                className="inline-flex items-center text-2xl font-bold tracking-tight text-foreground focus-visible:ring-2 focus-visible:ring-ring outline-none"
                 aria-label="SimpleDiff Home"
               >
-                <span>Simple</span>
-                <span className="text-primary font-bold">Diff</span>
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary ml-0.5" />
+                <span>
+                  Simple<span className="text-primary font-bold">Diff</span>
+                </span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary ml-1" />
               </Link>
               <p className="text-lg font-medium text-foreground/90 max-w-sm leading-snug">
                 Keep It Simple.
@@ -136,7 +138,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
             <div>
               <Button
                 onClick={handleStart}
-                className="w-full rounded-xl text-xs h-10 font-semibold cursor-pointer shadow-sm hover:shadow-primary/25 transition-all"
+                className="w-full rounded-full text-xs h-10 font-semibold cursor-pointer shadow-sm hover:shadow-primary/25 transition-all"
               >
                 Start a project &rarr;
               </Button>
@@ -144,20 +146,8 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
           </div>
         </div>
 
-        {/* Signature Wordmark */}
-        <div className="pt-10 pb-4 select-none overflow-hidden">
-          <div className="flex items-baseline justify-between tracking-tight font-extrabold leading-none text-[9vw] sm:text-[8vw] lg:text-[7vw]">
-            <span className="text-muted-foreground/20 hover:text-muted-foreground/30 transition-colors">
-              Simple
-            </span>
-            <span className="text-primary hover:opacity-90 transition-opacity">
-              Diff
-            </span>
-          </div>
-        </div>
-
         {/* Copyright & Bottom Bar */}
-        <div className="pt-6 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+        <div className="pt-8 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>
             &copy; {new Date().getFullYear()} SimpleDiff Studio. All rights reserved.
           </p>
@@ -166,6 +156,9 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
           </div>
         </div>
       </div>
+
+      {/* Standalone Edge-to-Edge Wordmark that reveals on scroll to the very bottom (Adobe style) */}
+      <FooterRevealWordmark />
     </footer>
   );
 }

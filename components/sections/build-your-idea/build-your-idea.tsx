@@ -254,7 +254,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                       aria-pressed={data.type === opt}
                       onClick={() => handleOptionSelect("type", opt)}
                       className={cn(
-                        "p-4 text-left border rounded-md transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer",
+                        "p-4 text-left border rounded-xl transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer",
                         data.type === opt
                           ? "bg-muted/30 border-primary"
                           : "hover:bg-muted/10 border-border"
@@ -292,7 +292,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                       aria-pressed={data.goal === opt}
                       onClick={() => handleOptionSelect("goal", opt)}
                       className={cn(
-                        "p-4 text-left border rounded-md transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer",
+                        "p-4 text-left border rounded-xl transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer",
                         data.goal === opt
                           ? "bg-muted/30 border-primary"
                           : "hover:bg-muted/10 border-border"
@@ -330,7 +330,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                       aria-pressed={data.stage === opt}
                       onClick={() => handleOptionSelect("stage", opt)}
                       className={cn(
-                        "p-4 text-left border rounded-md transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer",
+                        "p-4 text-left border rounded-xl transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer",
                         data.stage === opt
                           ? "bg-muted/30 border-primary"
                           : "hover:bg-muted/10 border-border"

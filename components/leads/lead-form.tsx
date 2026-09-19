@@ -212,7 +212,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
         <Button
           type="submit"
           disabled={isPending}
-          className="w-full h-11 text-base font-medium cursor-pointer"
+          className="w-full h-11 text-base font-medium rounded-full cursor-pointer shadow-md hover:shadow-primary/25"
         >
           {isPending ? "Sending request..." : "Send project request →"}
         </Button>

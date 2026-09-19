@@ -245,7 +245,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                   transition={{ duration: 0.6, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
                   className="inline-block"
                 >
-                  <span className="text-gradient">Different.</span>
+                  <span className="text-primary transition-colors duration-500">Different.</span>
                 </motion.span>
               </h1>
 
@@ -295,7 +295,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                 <MagneticButton
                   id="hero-start-project"
                   onClick={() => openLead({ source: "cta" })}
-                  className="group relative inline-flex items-center gap-2 h-12 px-7 rounded-xl bg-primary text-primary-foreground text-sm font-semibold shadow-lg hover:shadow-primary/30 active:translate-y-0 transition-shadow duration-200 cursor-pointer overflow-hidden"
+                  className="group relative inline-flex items-center gap-2 h-12 px-7 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-lg hover:shadow-primary/30 active:translate-y-0 transition-shadow duration-200 cursor-pointer overflow-hidden"
                 >
                   <span className="absolute inset-0 animate-shimmer pointer-events-none" />
                   Start a project
@@ -303,7 +303,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                 </MagneticButton>
                 <Link
                   href="/work"
-                  className="inline-flex items-center gap-2 h-12 px-7 rounded-xl border border-border bg-background/60 backdrop-blur-sm text-sm font-semibold text-foreground hover:bg-muted/60 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                  className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-border bg-background/60 backdrop-blur-sm text-sm font-semibold text-foreground hover:bg-muted/60 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
                 >
                   See our work
                 </Link>
@@ -348,7 +348,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
             transition={{ duration: 0.5, delay: 0.92 }}
             role="tablist"
             aria-label="Idea input mode"
-            className="flex glass p-1 rounded-xl mb-10"
+            className="flex glass p-1 rounded-full mb-10"
           >
             <button
               role="tab"
@@ -357,7 +357,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
               aria-selected={activeTab === "quick"}
               onClick={() => setActiveTab("quick")}
               className={cn(
-                "px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 activeTab === "quick"
                   ? "bg-background text-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground"
@@ -372,7 +372,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
               aria-selected={activeTab === "guided"}
               onClick={() => setActiveTab("guided")}
               className={cn(
-                "px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 activeTab === "guided"
                   ? "bg-background text-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground"

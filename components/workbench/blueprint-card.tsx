@@ -110,7 +110,7 @@ export function BlueprintCard({ blueprint, onContact }: BlueprintCardProps) {
 
         <Button
           onClick={onContact}
-          className="font-medium text-xs sm:text-sm h-10 px-5 rounded-xl cursor-pointer shadow-sm hover:shadow-primary/20 active:scale-[0.99] transition-all"
+          className="font-medium text-xs sm:text-sm h-10 px-5 rounded-full cursor-pointer shadow-sm hover:shadow-primary/20 active:scale-[0.99] transition-all"
         >
           Discuss this blueprint with us
           <ArrowRight className="h-3.5 w-3.5 ml-1.5" />

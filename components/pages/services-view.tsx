@@ -327,7 +327,7 @@ export function ServicesView() {
 
               <Button
                 onClick={handleStartProject}
-                className="font-semibold text-xs sm:text-sm h-11 px-5 rounded-xl shrink-0 cursor-pointer shadow-md hover:shadow-primary/30"
+                className="font-semibold text-xs sm:text-sm h-11 px-6 rounded-full shrink-0 cursor-pointer shadow-md hover:shadow-primary/30"
               >
                 Start your project &rarr;
               </Button>

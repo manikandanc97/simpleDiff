@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { COLOR_THEMES } from "@/lib/colors";
 import { useThemeColor } from "@/components/theme/color-provider";
@@ -121,9 +121,23 @@ export function ThemeDockContent({ label }: { label?: string }) {
 
 export function FloatingColorDock() {
   const { activeSlot, activeLabel } = useDock();
+  const [isNearBottom, setIsNearBottom] = useState(false);
 
-  // Only render the fixed floating dock when the dock is NOT currently docked in any section slot
-  if (activeSlot !== "floating") {
+  useEffect(() => {
+    const handleScroll = () => {
+      // Hide dock when user has scrolled near the bottom reveal wordmark
+      const scrollBottom = window.innerHeight + window.scrollY;
+      const threshold = document.documentElement.scrollHeight - 320;
+      setIsNearBottom(scrollBottom >= threshold);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Only render the fixed floating dock when the dock is NOT docked in any section slot and NOT near the bottom wordmark
+  if (activeSlot !== "floating" || isNearBottom) {
     return null;
   }
 
