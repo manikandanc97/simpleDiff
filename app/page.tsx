@@ -1,9 +1,15 @@
 import { WorkbenchHero } from "@/components/workbench/workbench-hero";
+import { WhatWeBuild } from "@/components/sections/what-we-build";
+import { Philosophy } from "@/components/sections/philosophy";
+import { CTA } from "@/components/sections/cta";
 
 export default function Home() {
   return (
-    <main className="flex flex-col flex-1 w-full max-w-[1600px] mx-auto">
+    <div className="flex flex-col flex-1 w-full max-w-[1600px] mx-auto">
       <WorkbenchHero />
-    </main>
+      <WhatWeBuild />
+      <Philosophy />
+      <CTA />
+    </div>
   );
 }

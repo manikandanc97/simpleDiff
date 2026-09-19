@@ -2,16 +2,13 @@
 
 import { motion } from "motion/react";
 import type { Experiment } from "@/lib/data/experiments";
-import { useThemeColor } from "@/components/theme/color-provider";
 
 interface ExperimentCardProps {
   experiment: Experiment;
 }
 
 export function ExperimentCard({ experiment }: ExperimentCardProps) {
-  const { theme } = useThemeColor();
-
-  // A helper to generate abstract CSS patterns based on the experiment type
+  // Abstract CSS patterns based on experiment patternType
   const renderPattern = () => {
     switch (experiment.patternType) {
       case "grid":
@@ -44,30 +41,28 @@ export function ExperimentCard({ experiment }: ExperimentCardProps) {
       default:
         return (
           <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500 flex items-end">
-            <div className="w-full h-1/2 bg-gradient-to-t from-foreground/10 to-transparent transform origin-bottom group-hover:scale-y-125 transition-transform duration-700 ease-out" />
+            <div className="w-full h-1/2 bg-linear-to-t from-foreground/10 to-transparent transform origin-bottom group-hover:scale-y-125 transition-transform duration-700 ease-out" />
           </div>
         );
     }
   };
 
   return (
-    <motion.button
+    <motion.article
       whileHover={{ y: -4 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`group flex flex-col text-left outline-none relative overflow-hidden bg-background border border-border shadow-xs focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${experiment.spanClass || ""}`}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className={`group flex flex-col text-left relative overflow-hidden bg-background border border-border rounded-xl shadow-xs ${
+        experiment.spanClass || ""
+      }`}
     >
       {/* Visual Area */}
-      <div className="w-full h-48 sm:h-64 relative overflow-hidden bg-muted/20 border-b border-border">
+      <div className="w-full h-48 sm:h-60 relative overflow-hidden bg-muted/20 border-b border-border">
         {renderPattern()}
-        <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-10 mix-blend-overlay transition-opacity duration-500" 
-          style={{ backgroundColor: theme.primary }} 
-        />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-primary mix-blend-overlay transition-opacity duration-500" />
+        
         {/* Dynamic Accent Highlight Line */}
-        <div 
-          className="absolute top-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-700 ease-out"
-          style={{ backgroundColor: theme.primary }}
-        />
+        <div className="absolute top-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-700 ease-out bg-primary" />
+        
         <div className="absolute top-4 left-4">
           <span className="text-xs font-mono font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">
             {experiment.number}
@@ -76,22 +71,17 @@ export function ExperimentCard({ experiment }: ExperimentCardProps) {
       </div>
 
       {/* Content Area */}
-      <div className="p-6 flex flex-col gap-2 relative bg-background">
+      <div className="p-6 flex flex-col gap-2 relative bg-background flex-1">
         <span className="text-xs font-medium tracking-widest uppercase text-muted-foreground">
           {experiment.category}
         </span>
-        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-foreground">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground transition-colors">
           {experiment.title}
-        </h3>
-        <p className="text-sm sm:text-base text-muted-foreground mt-2 line-clamp-2">
+        </h2>
+        <p className="text-sm sm:text-base text-muted-foreground mt-2 leading-relaxed">
           {experiment.description}
         </p>
-        
-        {/* Fake interactive arrow */}
-        <div className="absolute bottom-6 right-6 opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-          <span className="text-xl" style={{ color: theme.primary }}>&rarr;</span>
-        </div>
       </div>
-    </motion.button>
+    </motion.article>
   );
 }

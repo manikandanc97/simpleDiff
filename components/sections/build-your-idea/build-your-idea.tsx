@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { useThemeColor } from "@/components/theme/color-provider";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { submitLead } from "@/lib/leads/actions";
+import { SITE } from "@/lib/site";
+import { CheckCircle2 } from "lucide-react";
 
 type ProjectIdea = {
   type: string;
@@ -56,37 +58,46 @@ const OPTIONS_STAGE = [
   "Existing product",
 ];
 
-export function BuildYourIdea() {
-  const { theme } = useThemeColor();
+interface BuildYourIdeaProps {
+  initialDescription?: string;
+}
+
+export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
   const [step, setStep] = useState(1);
-  const [data, setData] = useState<ProjectIdea>(INITIAL_DATA);
+  const [data, setData] = useState<ProjectIdea>(() => ({
+    ...INITIAL_DATA,
+    description: initialDescription,
+  }));
+  const [prevInitialDesc, setPrevInitialDesc] = useState(initialDescription);
   const [error, setError] = useState("");
   const [isAdvancing, setIsAdvancing] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [mountTime] = useState(() => Date.now());
+
+  const advanceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // Sync initialDescription if user typed in quick mode (render-time pattern)
+  if (initialDescription !== prevInitialDesc) {
+    setPrevInitialDesc(initialDescription);
+    if (initialDescription && !data.description) {
+      setData((prev) => ({ ...prev, description: initialDescription }));
+    }
+  }
+
+  // Move focus to step heading on step change
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, [step]);
 
   const TOTAL_STEPS = 5;
 
-  const handleNext = () => {
-    // Validation
-    if (step === 4 && !data.description.trim()) {
-      setError("Please tell us a little about your idea.");
-      return;
-    }
-    if (step === 5) {
-      if (!data.name.trim() || !data.email.trim()) {
-        setError("Name and Email are required.");
-        return;
-      }
-      if (!/^\S+@\S+\.\S+$/.test(data.email)) {
-        setError("Please enter a valid email address.");
-        return;
-      }
-    }
-    
-    setError("");
-    setStep((s) => s + 1);
-  };
-
   const handleBack = () => {
+    if (advanceTimeoutRef.current) {
+      clearTimeout(advanceTimeoutRef.current);
+      advanceTimeoutRef.current = null;
+    }
+    setIsAdvancing(false);
     setError("");
     setStep((s) => Math.max(1, s - 1));
   };
@@ -96,10 +107,70 @@ export function BuildYourIdea() {
     setIsAdvancing(true);
     setData((prev) => ({ ...prev, [key]: value }));
     setError("");
-    setTimeout(() => {
+
+    advanceTimeoutRef.current = setTimeout(() => {
       setStep((s) => s + 1);
       setIsAdvancing(false);
-    }, 300); // Slight delay for visual feedback
+      advanceTimeoutRef.current = null;
+    }, 300);
+  };
+
+  const handleSubmit = async () => {
+    if (!data.name.trim() || !data.email.trim()) {
+      setError("Name and email are required.");
+      return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(data.email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (!data.description.trim() || data.description.trim().length < 10) {
+      setError("Please describe your project in at least 10 characters.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setError("");
+
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    if (data.phone) formData.append("phone", data.phone);
+    if (data.company) formData.append("company", data.company);
+    if (data.type) formData.append("projectType", data.type);
+    if (data.goal) formData.append("goal", data.goal);
+    if (data.stage) formData.append("stage", data.stage);
+    formData.append("description", data.description);
+    formData.append("source", "guided");
+    formData.append("website", "");
+    formData.append("t", String(mountTime));
+    formData.append("consent", "true");
+
+    try {
+      const result = await submitLead({ ok: false }, formData);
+      if (result.ok) {
+        setStep(6);
+      } else {
+        setError(result.message || "Failed to submit. Please try again.");
+      }
+    } catch {
+      setError("An unexpected error occurred. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleNext = () => {
+    if (step === 4) {
+      if (!data.description.trim() || data.description.trim().length < 10) {
+        setError("Please describe your project in at least 10 characters.");
+        return;
+      }
+      setError("");
+      setStep(5);
+    } else if (step === 5) {
+      handleSubmit();
+    }
   };
 
   const resetFlow = () => {
@@ -108,7 +179,6 @@ export function BuildYourIdea() {
     setError("");
   };
 
-  // Shared animation variants
   const variants = {
     enter: { opacity: 0, x: 20 },
     center: { opacity: 1, x: 0 },
@@ -116,15 +186,15 @@ export function BuildYourIdea() {
   };
 
   return (
-    <section className="py-32 px-6 bg-background flex flex-col items-center border-t border-border">
+    <div className="py-6 px-4 w-full flex flex-col items-center">
       <div className="max-w-2xl w-full">
         {/* Header (Hidden on final step) */}
         {step <= TOTAL_STEPS && (
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-4">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
               Build Your Idea
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-lg text-muted-foreground">
               You bring the idea. We&apos;ll simplify the rest.
             </p>
           </div>
@@ -132,22 +202,33 @@ export function BuildYourIdea() {
 
         {/* Progress Indicator */}
         {step <= TOTAL_STEPS && (
-          <div className="flex gap-2 mb-12">
-            {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
-              <div
-                key={i}
-                className="h-1 flex-1 rounded-sm transition-colors duration-500"
-                style={{
-                  backgroundColor: i + 1 <= step ? theme.primary : "var(--border)",
-                }}
-              />
-            ))}
+          <div className="mb-10">
+            <div className="flex justify-between items-center text-xs font-mono text-muted-foreground mb-2">
+              <span>Step {step} of {TOTAL_STEPS}</span>
+            </div>
+            <div
+              role="progressbar"
+              aria-valuenow={step}
+              aria-valuemin={1}
+              aria-valuemax={TOTAL_STEPS}
+              aria-label={`Step ${step} of ${TOTAL_STEPS}`}
+              className="flex gap-2"
+            >
+              {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
+                <div
+                  key={i}
+                  className={cn(
+                    "h-1.5 flex-1 rounded-sm transition-colors duration-300",
+                    i + 1 <= step ? "bg-primary" : "bg-border"
+                  )}
+                />
+              ))}
+            </div>
           </div>
         )}
 
-        <div className="min-h-[400px] relative">
+        <div className="min-h-[380px] relative">
           <AnimatePresence mode="wait">
-            
             {step === 1 && (
               <motion.div
                 key="step1"
@@ -158,17 +239,26 @@ export function BuildYourIdea() {
                 transition={{ duration: 0.3 }}
                 className="flex flex-col gap-6"
               >
-                <h3 className="text-2xl font-semibold mb-2">What are you building?</h3>
+                <h3
+                  ref={headingRef}
+                  tabIndex={-1}
+                  className="text-2xl font-semibold mb-2 outline-none"
+                >
+                  What are you building?
+                </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {OPTIONS_TYPE.map((opt) => (
                     <button
                       key={opt}
+                      type="button"
+                      aria-pressed={data.type === opt}
                       onClick={() => handleOptionSelect("type", opt)}
                       className={cn(
-                        "p-4 text-left border rounded-md transition-all duration-300 outline-none focus-visible:ring-2",
-                        data.type === opt ? "bg-muted/30" : "hover:bg-muted/10 border-border"
+                        "p-4 text-left border rounded-md transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer",
+                        data.type === opt
+                          ? "bg-muted/30 border-primary"
+                          : "hover:bg-muted/10 border-border"
                       )}
-                      style={data.type === opt ? { borderColor: theme.primary } : {}}
                     >
                       <span className="font-medium text-foreground">{opt}</span>
                     </button>
@@ -187,17 +277,26 @@ export function BuildYourIdea() {
                 transition={{ duration: 0.3 }}
                 className="flex flex-col gap-6"
               >
-                <h3 className="text-2xl font-semibold mb-2">What&apos;s the goal?</h3>
+                <h3
+                  ref={headingRef}
+                  tabIndex={-1}
+                  className="text-2xl font-semibold mb-2 outline-none"
+                >
+                  What&apos;s the goal?
+                </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {OPTIONS_GOAL.map((opt) => (
                     <button
                       key={opt}
+                      type="button"
+                      aria-pressed={data.goal === opt}
                       onClick={() => handleOptionSelect("goal", opt)}
                       className={cn(
-                        "p-4 text-left border rounded-md transition-all duration-300 outline-none focus-visible:ring-2",
-                        data.goal === opt ? "bg-muted/30" : "hover:bg-muted/10 border-border"
+                        "p-4 text-left border rounded-md transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer",
+                        data.goal === opt
+                          ? "bg-muted/30 border-primary"
+                          : "hover:bg-muted/10 border-border"
                       )}
-                      style={data.goal === opt ? { borderColor: theme.primary } : {}}
                     >
                       <span className="font-medium text-foreground">{opt}</span>
                     </button>
@@ -216,17 +315,26 @@ export function BuildYourIdea() {
                 transition={{ duration: 0.3 }}
                 className="flex flex-col gap-6"
               >
-                <h3 className="text-2xl font-semibold mb-2">How far along are you?</h3>
+                <h3
+                  ref={headingRef}
+                  tabIndex={-1}
+                  className="text-2xl font-semibold mb-2 outline-none"
+                >
+                  How far along are you?
+                </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {OPTIONS_STAGE.map((opt) => (
                     <button
                       key={opt}
+                      type="button"
+                      aria-pressed={data.stage === opt}
                       onClick={() => handleOptionSelect("stage", opt)}
                       className={cn(
-                        "p-4 text-left border rounded-md transition-all duration-300 outline-none focus-visible:ring-2",
-                        data.stage === opt ? "bg-muted/30" : "hover:bg-muted/10 border-border"
+                        "p-4 text-left border rounded-md transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer",
+                        data.stage === opt
+                          ? "bg-muted/30 border-primary"
+                          : "hover:bg-muted/10 border-border"
                       )}
-                      style={data.stage === opt ? { borderColor: theme.primary } : {}}
                     >
                       <span className="font-medium text-foreground">{opt}</span>
                     </button>
@@ -245,10 +353,20 @@ export function BuildYourIdea() {
                 transition={{ duration: 0.3 }}
                 className="flex flex-col gap-6"
               >
-                <h3 className="text-2xl font-semibold mb-2">Tell us a little about it.</h3>
+                <h3
+                  ref={headingRef}
+                  tabIndex={-1}
+                  className="text-2xl font-semibold mb-2 outline-none"
+                >
+                  Tell us a little about it.
+                </h3>
                 <div className="flex flex-col gap-2">
+                  <label htmlFor="guided-description" className="sr-only">
+                    Project description
+                  </label>
                   <Textarea
-                    placeholder="What are you trying to build?"
+                    id="guided-description"
+                    placeholder="What are you trying to build? (minimum 10 characters)"
                     value={data.description}
                     onChange={(e) => {
                       setData({ ...data, description: e.target.value });
@@ -257,7 +375,11 @@ export function BuildYourIdea() {
                     className="min-h-[150px] text-lg resize-none"
                     autoFocus
                   />
-                  {error && <p className="text-sm text-destructive mt-1">{error}</p>}
+                  {error && (
+                    <p role="alert" className="text-sm text-destructive mt-1">
+                      {error}
+                    </p>
+                  )}
                 </div>
               </motion.div>
             )}
@@ -272,11 +394,23 @@ export function BuildYourIdea() {
                 transition={{ duration: 0.3 }}
                 className="flex flex-col gap-6"
               >
-                <h3 className="text-2xl font-semibold mb-2">Where can we reach you?</h3>
+                <h3
+                  ref={headingRef}
+                  tabIndex={-1}
+                  className="text-2xl font-semibold mb-2 outline-none"
+                >
+                  Where can we reach you?
+                </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium text-muted-foreground">Name *</label>
+                    <label htmlFor="guided-name" className="text-sm font-medium">
+                      Name <span className="text-destructive">*</span>
+                    </label>
                     <Input
+                      id="guided-name"
+                      name="name"
+                      required
+                      aria-required="true"
                       placeholder="Jane Doe"
                       value={data.name}
                       onChange={(e) => setData({ ...data, name: e.target.value })}
@@ -284,17 +418,27 @@ export function BuildYourIdea() {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium text-muted-foreground">Email *</label>
+                    <label htmlFor="guided-email" className="text-sm font-medium">
+                      Email <span className="text-destructive">*</span>
+                    </label>
                     <Input
+                      id="guided-email"
+                      name="email"
                       type="email"
+                      required
+                      aria-required="true"
                       placeholder="jane@example.com"
                       value={data.email}
                       onChange={(e) => setData({ ...data, email: e.target.value })}
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium text-muted-foreground">Phone (Optional)</label>
+                    <label htmlFor="guided-phone" className="text-sm font-medium">
+                      Phone (Optional)
+                    </label>
                     <Input
+                      id="guided-phone"
+                      name="phone"
                       type="tel"
                       placeholder="+1 (555) 000-0000"
                       value={data.phone}
@@ -302,15 +446,23 @@ export function BuildYourIdea() {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium text-muted-foreground">Company (Optional)</label>
+                    <label htmlFor="guided-company" className="text-sm font-medium">
+                      Company (Optional)
+                    </label>
                     <Input
+                      id="guided-company"
+                      name="company"
                       placeholder="Acme Corp"
                       value={data.company}
                       onChange={(e) => setData({ ...data, company: e.target.value })}
                     />
                   </div>
                 </div>
-                {error && <p className="text-sm text-destructive">{error}</p>}
+                {error && (
+                  <p role="alert" className="text-sm text-destructive">
+                    {error}
+                  </p>
+                )}
               </motion.div>
             )}
 
@@ -322,53 +474,53 @@ export function BuildYourIdea() {
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className="flex flex-col items-center text-center py-12"
               >
-                <div 
-                  className="w-16 h-16 rounded-full flex items-center justify-center mb-8 bg-muted/20"
-                  style={{ color: theme.primary }}
-                >
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </div>
-                <h3 className="text-3xl font-bold tracking-tight mb-4">
-                  Your idea is taking shape.
+                <CheckCircle2 className="w-16 h-16 text-emerald-500 mb-6" />
+                <h3 className="text-3xl font-bold tracking-tight mb-2">
+                  Thanks — we&apos;ve got it.
                 </h3>
-                <div className="w-full max-w-md bg-muted/10 border border-border p-6 rounded-lg text-left mb-10 flex flex-col gap-4">
-                  <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Building</p>
-                    <p className="font-medium">{data.type}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Goal</p>
-                    <p className="font-medium">{data.goal}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Stage</p>
-                    <p className="font-medium">{data.stage}</p>
-                  </div>
+                <p className="text-muted-foreground mb-8 max-w-md">
+                  {SITE.responseTime
+                    ? `Your project details have been submitted. We'll be in touch ${SITE.responseTime}.`
+                    : "Your project details have been submitted. We'll be in touch shortly."}
+                </p>
+
+                <div className="w-full max-w-md bg-muted/10 border border-border p-6 rounded-lg text-left mb-8 flex flex-col gap-4">
+                  {data.type && (
+                    <div>
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Building</p>
+                      <p className="font-medium text-foreground">{data.type}</p>
+                    </div>
+                  )}
+                  {data.goal && (
+                    <div>
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Goal</p>
+                      <p className="font-medium text-foreground">{data.goal}</p>
+                    </div>
+                  )}
+                  {data.stage && (
+                    <div>
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Stage</p>
+                      <p className="font-medium text-foreground">{data.stage}</p>
+                    </div>
+                  )}
                   <div>
                     <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Description</p>
-                    <p className="font-medium text-sm line-clamp-2 text-muted-foreground">{data.description}</p>
+                    <p className="font-medium text-sm text-muted-foreground line-clamp-3">{data.description}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">Contact</p>
+                    <p className="font-medium text-sm text-foreground">{data.name} ({data.email})</p>
                   </div>
                 </div>
-                
-                <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                  <Button 
-                    size="lg" 
-                    className="w-full sm:w-auto px-8 h-12 text-lg shadow-lg shadow-primary/20 transition-all"
-                    onClick={() => alert("Ready to connect to Supabase backend in Phase 6!")}
-                  >
-                    Let&apos;s Build It &rarr;
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="lg" 
-                    className="w-full sm:w-auto px-8 h-12"
-                    onClick={resetFlow}
-                  >
-                    Start Over
-                  </Button>
-                </div>
+
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="px-8 cursor-pointer"
+                  onClick={resetFlow}
+                >
+                  Start Over
+                </Button>
               </motion.div>
             )}
           </AnimatePresence>
@@ -377,18 +529,33 @@ export function BuildYourIdea() {
         {/* Navigation Controls */}
         {step > 1 && step <= TOTAL_STEPS && (
           <div className="flex items-center justify-between mt-12 pt-6 border-t border-border">
-            <Button variant="ghost" onClick={handleBack} className="text-muted-foreground">
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={handleBack}
+              disabled={isSubmitting}
+              className="text-muted-foreground cursor-pointer"
+            >
               &larr; Back
             </Button>
-            
+
             {step >= 4 && (
-              <Button onClick={handleNext}>
-                {step === TOTAL_STEPS ? "Review Summary" : "Next"} &rarr;
+              <Button
+                type="button"
+                onClick={handleNext}
+                disabled={isSubmitting}
+                className="cursor-pointer"
+              >
+                {step === TOTAL_STEPS
+                  ? isSubmitting
+                    ? "Sending..."
+                    : "Send"
+                  : "Next →"}
               </Button>
             )}
           </div>
         )}
       </div>
-    </section>
+    </div>
   );
 }
