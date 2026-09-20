@@ -1,4 +1,4 @@
-import { Home, Briefcase, Layers, Lightbulb, Info, type LucideIcon } from "lucide-react";
+import { Home, Briefcase, Layers, Lightbulb, Info, Mail, type LucideIcon } from "lucide-react";
 
 export interface NavItem {
   label: string;
@@ -13,4 +13,6 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Services", route: "/services", icon: Layers, commandName: "Go to Services" },
   { label: "Ideas", route: "/lab", icon: Lightbulb, commandName: "Go to Ideas" },
   { label: "About", route: "/about", icon: Info, commandName: "Go to About" },
+  { label: "Contact", route: "/contact", icon: Mail, commandName: "Go to Contact" },
 ];
+

@@ -22,6 +22,7 @@ const FOOTER_NAV_ICONS: Record<string, AnimatedIconName> = {
   "/services": "layers",
   "/lab": "lightbulb",
   "/about": "info",
+  "/contact": "mail",
 };
 
 const CAPABILITY_ITEMS: { label: string; icon: AnimatedIconName }[] = [
@@ -103,7 +104,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                   <li key={item.route}>
                     <Link
                       href={item.route}
-                      className="group text-sm text-muted-foreground hover:text-foreground hover:translate-x-0.5 transition-all inline-flex items-center gap-2"
+                      className="group text-sm text-muted-foreground hover:text-foreground hover:translate-x-0.5 active:scale-95 transition-all inline-flex items-center gap-2"
                     >
                       <AnimatedIcon
                         name={iconName}
@@ -148,7 +149,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                   <li>
                     <a
                       href={`mailto:${SITE.email}`}
-                      className="group text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+                      className="group text-muted-foreground hover:text-primary active:scale-95 transition-all flex items-center gap-2"
                     >
                       <AnimatedMail size={14} className="text-primary" />
                       <span>{SITE.email}</span>
@@ -162,7 +163,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                       href={`https://wa.me/${SITE.whatsapp}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+                      className="group text-muted-foreground hover:text-primary active:scale-95 transition-all flex items-center gap-2"
                     >
                       <AnimatedMessageSquare size={14} className="text-primary" />
                       <span>WhatsApp Direct</span>
@@ -176,7 +177,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
             <div>
               <Button
                 onClick={handleStart}
-                className="group/button w-full rounded-full text-xs h-10 font-semibold cursor-pointer shadow-sm hover:shadow-primary/25 transition-all flex items-center justify-center gap-2"
+                className="group/button w-full rounded-full text-xs h-10 font-semibold cursor-pointer shadow-sm hover:shadow-primary/25 active:scale-95 transition-all flex items-center justify-center gap-2"
               >
                 <span>Start a project</span>
                 <AnimatedArrowRight size={14} />

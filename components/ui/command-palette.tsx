@@ -18,6 +18,7 @@ const CMD_NAV_ICONS: Record<string, AnimatedIconName> = {
   "/services": "layers",
   "/lab": "lightbulb",
   "/about": "info",
+  "/contact": "mail",
 };
 
 interface CommandPaletteProps {

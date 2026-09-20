@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { type Blueprint } from "@/lib/idea-engine";
 import { Button } from "@/components/ui/button";
-import { Clock, ArrowRight, CheckCircle2, MinusCircle } from "lucide-react";
+import { Clock, CheckCircle2, MinusCircle } from "lucide-react";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 
 interface BlueprintCardProps {

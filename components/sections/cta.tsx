@@ -5,7 +5,6 @@ import { motion, useInView } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
-import { ArrowRight, Mail, MessageSquare } from "lucide-react";
 import {
   AnimatedArrowRight,
   AnimatedMail,
@@ -108,7 +107,7 @@ export function CTA({ onStartProject }: CTAProps) {
             size="lg"
             onClick={handleStart}
             id="cta-start-project"
-            className="group/button h-14 px-10 rounded-full text-base font-bold tracking-tight shadow-xl shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-1 active:translate-y-0 transition-all duration-300 cursor-pointer flex items-center gap-2.5"
+            className="group/button h-14 px-10 rounded-full text-base font-bold tracking-tight shadow-xl shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-1 active:scale-95 active:translate-y-0 transition-all duration-300 cursor-pointer flex items-center gap-2.5"
           >
             <span>Start a project</span>
             <AnimatedArrowRight size={18} />
@@ -125,7 +124,7 @@ export function CTA({ onStartProject }: CTAProps) {
           {SITE.email && (
             <a
               href={`mailto:${SITE.email}`}
-              className="group flex items-center gap-2 hover:text-primary transition-colors font-medium"
+              className="group flex items-center gap-2 hover:text-primary active:scale-95 transition-all font-medium"
             >
               <AnimatedMail size={16} className="text-primary" />
               <span>{SITE.email}</span>
@@ -136,7 +135,7 @@ export function CTA({ onStartProject }: CTAProps) {
               href={`https://wa.me/${SITE.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 hover:text-primary transition-colors font-medium"
+              className="group flex items-center gap-2 hover:text-primary active:scale-95 transition-all font-medium"
             >
               <AnimatedMessageSquare size={16} className="text-primary" />
               <span>WhatsApp Direct</span>

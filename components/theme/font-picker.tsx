@@ -395,7 +395,7 @@ export function FontPickerDialog({ trigger }: FontPickerDialogProps) {
             <Button
               variant="ghost"
               size="icon-sm"
-              className="group rounded-full text-muted-foreground hover:text-foreground cursor-pointer relative"
+              className="group rounded-full text-muted-foreground hover:text-foreground cursor-pointer relative active:scale-90 transition-all"
               title={`Change font (current: ${font})`}
             >
               <AnimatedType size={16} />

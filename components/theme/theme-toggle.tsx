@@ -13,7 +13,7 @@ export function ThemeToggle() {
       size="icon-sm"
       onClick={() => setMode(mode === "light" ? "dark" : "light")}
       title="Toggle Theme"
-      className="group rounded-full cursor-pointer hover:bg-muted/80"
+      className="group rounded-full cursor-pointer hover:bg-muted/80 active:scale-90 transition-all"
     >
       {mode === "light" ? (
         <AnimatedMoon size={16} className="text-foreground" />

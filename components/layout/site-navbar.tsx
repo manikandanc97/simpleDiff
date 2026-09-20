@@ -13,7 +13,6 @@ import { MobileAppMenu } from "@/components/layout/mobile-app-menu";
 import { useMobileMenu } from "@/components/layout/mobile-menu-context";
 import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
-import { Menu, X, ArrowRight } from "lucide-react";
 
 import { AnimatedIcon, AnimatedArrowRight, AnimatedMenu, AnimatedX, type AnimatedIconName } from "@/components/ui/animated-icon";
 
@@ -23,6 +22,7 @@ const ROUTE_ICON_NAMES: Record<string, AnimatedIconName> = {
   "/services": "layers",
   "/lab": "lightbulb",
   "/about": "info",
+  "/contact": "mail",
 };
 
 interface SiteNavbarProps {
@@ -88,7 +88,7 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
                   href={item.route}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "group relative px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5",
+                    "group relative px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5 active:scale-95",
                     isActive
                       ? "text-primary-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
@@ -103,6 +103,9 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
                   )}
                   <AnimatedIcon
                     name={iconName}
+                    solid={isActive}
+                    hoverDelay={1000}
+                    oncePerInteraction={true}
                     size={13}
                     className={cn(
                       "relative z-10 transition-transform",
@@ -155,7 +158,8 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
               onClick={toggleMenu}
               aria-expanded={isOpen}
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-              className="group p-2 rounded-full text-foreground hover:bg-muted/60 transition-colors focus-visible:ring-2 focus-visible:ring-ring outline-none cursor-pointer flex items-center justify-center"
+              className="group p-2 rounded-full text-foreground hover:bg-muted/60 active:scale-90 transition-all focus-visible:ring-2 focus-visible:ring-ring outline-none cursor-pointer flex items-center justify-center"
+              id="mobile-menu-trigger"
             >
               {isOpen ? <AnimatedX size={18} /> : <AnimatedMenu size={18} />}
             </button>

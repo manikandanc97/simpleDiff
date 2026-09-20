@@ -18,7 +18,7 @@ import { BuildYourIdea } from "@/components/sections/build-your-idea/build-your-
 import { cn } from "@/lib/utils";
 import { useLead } from "@/components/leads/lead-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import {
   AnimatedArrowRight,
   AnimatedBriefcase,
@@ -224,18 +224,6 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full mb-14 pt-2 sm:pt-4">
             {/* Left Column: Headlines, Pitch, Chips, and CTAs */}
             <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-              {/* 1. Badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="mb-5"
-              >
-                <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  Software Development Company
-                </span>
-              </motion.div>
 
               {/* 2. Single h1 for entire page — refined font-black bold typography */}
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-foreground mb-5 leading-[1.1]">
@@ -305,7 +293,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                 <MagneticButton
                   id="hero-start-project"
                   onClick={() => openLead({ source: "cta" })}
-                  className="group relative inline-flex items-center gap-2 h-12 px-7 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-lg hover:shadow-primary/30 active:translate-y-0 transition-shadow duration-200 cursor-pointer overflow-hidden"
+                  className="group relative inline-flex items-center gap-2 h-12 px-7 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-lg hover:shadow-primary/30 active:scale-95 active:translate-y-0 transition-all duration-200 cursor-pointer overflow-hidden"
                 >
                   <span className="absolute inset-0 animate-shimmer pointer-events-none" />
                   <span>Start a project</span>
@@ -313,7 +301,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                 </MagneticButton>
                 <Link
                   href="/work"
-                  className="group inline-flex items-center gap-2 h-12 px-7 rounded-full border border-border bg-background/60 backdrop-blur-sm text-sm font-semibold text-foreground hover:bg-muted/60 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                  className="group inline-flex items-center gap-2 h-12 px-7 rounded-full border border-border bg-background/60 backdrop-blur-sm text-sm font-semibold text-foreground hover:bg-muted/60 hover:-translate-y-0.5 active:scale-95 active:translate-y-0 transition-all duration-200"
                 >
                   <AnimatedBriefcase size={15} className="text-primary/80 group-hover:text-primary transition-colors" />
                   <span>See our work</span>
@@ -368,7 +356,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
               aria-selected={activeTab === "quick"}
               onClick={() => setActiveTab("quick")}
               className={cn(
-                "group px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5",
+                "group px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5 active:scale-95",
                 activeTab === "quick"
                   ? "bg-background text-foreground shadow-sm font-semibold"
                   : "text-muted-foreground hover:text-foreground"
@@ -384,7 +372,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
               aria-selected={activeTab === "guided"}
               onClick={() => setActiveTab("guided")}
               className={cn(
-                "group px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5",
+                "group px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5 active:scale-95",
                 activeTab === "guided"
                   ? "bg-background text-foreground shadow-sm font-semibold"
                   : "text-muted-foreground hover:text-foreground"
@@ -430,7 +418,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                       key={ex}
                       type="button"
                       onClick={() => setIdea(ex)}
-                      className="group text-xs md:text-sm px-3.5 py-1.5 rounded-full border border-border bg-muted/10 hover:bg-primary/10 hover:border-primary/40 hover:text-primary-text transition-all duration-200 text-muted-foreground cursor-pointer focus-visible:ring-2 focus-visible:ring-ring outline-none flex items-center gap-1.5"
+                      className="group text-xs md:text-sm px-3.5 py-1.5 rounded-full border border-border bg-muted/10 hover:bg-primary/10 hover:border-primary/40 hover:text-primary-text active:scale-95 transition-all duration-200 text-muted-foreground cursor-pointer focus-visible:ring-2 focus-visible:ring-ring outline-none flex items-center gap-1.5"
                     >
                       <AnimatedZap size={12} className="text-primary/70 group-hover:text-primary transition-colors" />
                       <span>{ex}</span>

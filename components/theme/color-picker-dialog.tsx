@@ -60,7 +60,7 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
             <Button
               variant="ghost"
               size="icon-sm"
-              className="group rounded-full text-muted-foreground hover:text-foreground cursor-pointer relative"
+              className="group rounded-full text-muted-foreground hover:text-foreground cursor-pointer relative active:scale-90 transition-all"
               title={`Change color theme (current: ${theme.name})`}
               aria-label={`Change accent color (current: ${theme.name})`}
             >
@@ -117,10 +117,10 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
               variant="outline"
               size="sm"
               onClick={handleReset}
-              className="text-xs h-8 rounded-full gap-1.5 cursor-pointer hover:bg-muted"
+              className="group text-xs h-8 rounded-full gap-1.5 cursor-pointer hover:bg-muted active:scale-95 transition-all"
               title="Reset accent color to default blue"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-muted-foreground" />
+              <RotateCcw className="w-3.5 h-3.5 text-muted-foreground group-hover:-rotate-90 group-active:-rotate-180 transition-transform duration-200" />
               <span>Reset</span>
             </Button>
           </div>

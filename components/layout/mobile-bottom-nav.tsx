@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { Home, Briefcase, Layers, Lightbulb, Grid2X2 } from "lucide-react";
 import { useMobileMenu } from "@/components/layout/mobile-menu-context";
 
 import { AnimatedIcon, type AnimatedIconName } from "@/components/ui/animated-icon";
@@ -37,7 +36,7 @@ export function MobileBottomNav() {
               onClick={closeMenu}
               aria-current={isActive ? "page" : undefined}
               className={cn(
-                "group relative flex flex-col items-center justify-center py-1.5 px-1 rounded-2xl transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring select-none",
+                "group relative flex flex-col items-center justify-center py-1.5 px-1 rounded-2xl transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring select-none active:scale-95",
                 isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -51,10 +50,13 @@ export function MobileBottomNav() {
               <motion.div whileTap={{ scale: 0.88 }} className="relative z-10 flex flex-col items-center gap-0.5">
                 <AnimatedIcon
                   name={tab.iconName}
+                  solid={isActive}
+                  hoverDelay={1000}
+                  oncePerInteraction={true}
                   size={20}
                   className={cn(
-                    "transition-transform",
-                    isActive ? "scale-110 text-primary" : "text-muted-foreground"
+                    "transition-transform duration-200",
+                    isActive ? "scale-110 text-primary" : "text-muted-foreground group-hover:text-foreground group-hover:scale-115 group-active:scale-90"
                   )}
                 />
                 <span className="text-[10px] tracking-tight">{tab.label}</span>
@@ -70,7 +72,7 @@ export function MobileBottomNav() {
           aria-expanded={isOpen}
           aria-label={isOpen ? "Close menu sheet" : "Open full app menu"}
           className={cn(
-            "group relative flex flex-col items-center justify-center py-1.5 px-1 rounded-2xl transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring select-none",
+            "group relative flex flex-col items-center justify-center py-1.5 px-1 rounded-2xl transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring select-none active:scale-95",
             isOpen ? "text-primary font-semibold" : "text-muted-foreground hover:text-foreground"
           )}
         >
@@ -87,8 +89,8 @@ export function MobileBottomNav() {
                 name="grid"
                 size={20}
                 className={cn(
-                  "transition-transform",
-                  isOpen ? "scale-110 text-primary" : "text-muted-foreground"
+                  "transition-transform duration-200",
+                  isOpen ? "scale-110 text-primary" : "text-muted-foreground group-hover:text-foreground group-hover:scale-115 group-active:scale-90"
                 )}
               />
               <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-primary ring-1 ring-background" />

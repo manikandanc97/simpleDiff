@@ -14,17 +14,6 @@ import { COLOR_THEMES } from "@/lib/colors";
 import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
 import {
-  X,
-  ChevronRight,
-  Sun,
-  Moon,
-  Type,
-  Palette,
-  ArrowRight,
-  Mail,
-  Sparkles,
-} from "lucide-react";
-import {
   AnimatedIcon,
   AnimatedArrowRight,
   AnimatedX,
@@ -44,6 +33,7 @@ const ROUTE_ICON_NAMES: Record<string, AnimatedIconName> = {
   "/services": "layers",
   "/lab": "lightbulb",
   "/about": "info",
+  "/contact": "mail",
 };
 
 interface MobileAppMenuProps {
@@ -57,6 +47,7 @@ const NAV_SUBTITLES: Record<string, string> = {
   "/services": "Custom software, web & mobile engineering",
   "/lab": "Prototypes, concepts & interactive tools",
   "/about": "Company ethos, team & capabilities",
+  "/contact": "Direct engineering contact & project inquiries",
 };
 
 export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
@@ -146,7 +137,7 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
                 type="button"
                 onClick={onClose}
                 aria-label="Close menu"
-                className="group w-8 h-8 rounded-full bg-muted/60 text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors cursor-pointer"
+                className="group w-8 h-8 rounded-full bg-muted/60 text-muted-foreground hover:text-foreground active:scale-85 flex items-center justify-center transition-all cursor-pointer"
               >
                 <AnimatedX size={16} />
               </button>
@@ -175,8 +166,8 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
                           type="button"
                           onClick={() => setTheme(t.id)}
                           className={cn(
-                            "relative w-7 h-7 rounded-full shrink-0 transition-transform cursor-pointer ring-1 ring-black/15 dark:ring-white/20",
-                            isActive ? "scale-115 ring-2 ring-primary" : "hover:scale-105 opacity-90"
+                            "relative w-7 h-7 rounded-full shrink-0 transition-transform cursor-pointer ring-1 ring-black/15 dark:ring-white/20 active:scale-90",
+                            isActive ? "scale-115 ring-2 ring-primary" : "hover:scale-110 opacity-90"
                           )}
                           style={{ backgroundColor: t.primary }}
                           aria-label={`Select ${t.name} color`}
@@ -191,7 +182,7 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="group rounded-full text-xs h-7 px-2.5 gap-1.5 cursor-pointer shrink-0 border-border"
+                        className="group rounded-full text-xs h-7 px-2.5 gap-1.5 cursor-pointer shrink-0 border-border active:scale-95 transition-all"
                       >
                         <AnimatedPalette size={12} className="text-primary" />
                         <span>All</span>
@@ -207,7 +198,7 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="group w-full justify-between rounded-xl text-xs h-9 px-3 cursor-pointer bg-background/50 border-border/80"
+                        className="group w-full justify-between rounded-xl text-xs h-9 px-3 cursor-pointer bg-background/50 border-border/80 active:scale-95 transition-all"
                       >
                         <span className="flex items-center gap-1.5 truncate text-muted-foreground">
                           <AnimatedType size={14} className="text-primary shrink-0" />
@@ -222,7 +213,7 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
                   <button
                     type="button"
                     onClick={() => setMode(mode === "dark" ? "light" : "dark")}
-                    className="group flex items-center justify-between px-3 h-9 rounded-xl border border-border/80 bg-background/50 text-xs text-foreground cursor-pointer transition-colors"
+                    className="group flex items-center justify-between px-3 h-9 rounded-xl border border-border/80 bg-background/50 text-xs text-foreground cursor-pointer active:scale-95 transition-all"
                   >
                     <span className="flex items-center gap-1.5 text-muted-foreground">
                       {mode === "dark" ? (
@@ -266,7 +257,7 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
                         <div className="flex items-center gap-3.5 min-w-0">
                           <div
                             className={cn(
-                              "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors",
+                              "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110 group-active:scale-90",
                               isActive
                                 ? "bg-white/20 text-white"
                                 : "bg-primary/10 text-primary border border-primary/20"
@@ -274,6 +265,9 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
                           >
                             <AnimatedIcon
                               name={iconName}
+                              solid={isActive}
+                              hoverDelay={1000}
+                              oncePerInteraction={true}
                               size={20}
                               className={isActive ? "text-white" : "text-primary"}
                             />
