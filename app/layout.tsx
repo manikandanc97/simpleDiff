@@ -5,12 +5,14 @@ import { cn } from "@/lib/utils";
 import { ThemeColorProvider } from "@/components/theme/color-provider";
 import { FontProvider } from "@/components/theme/font-provider";
 import { SiteNavbar } from "@/components/layout/site-navbar";
+import { TopBar } from "@/components/layout/top-bar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { FloatingColorDock } from "@/components/theme/floating-color-dock";
 import { DockProvider } from "@/components/theme/dock-context";
 import { MobileMenuProvider } from "@/components/layout/mobile-menu-context";
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
 import { CommandPalette } from "@/components/ui/command-palette";
+import { NavigationProgress } from "@/components/ui/navigation-progress";
 import { MotionProvider } from "@/components/providers/motion-provider";
 import { LeadProvider } from "@/components/leads/lead-provider";
 import { SITE } from "@/lib/site";
@@ -76,10 +78,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <LeadProvider>
                 <DockProvider>
                   <MobileMenuProvider>
+                    <TopBar />
                     <SiteNavbar />
                     <CommandPalette />
+                    <NavigationProgress />
 
-                    <main id="main" className="flex-1 flex flex-col w-full pt-16 md:pt-20 pb-20 md:pb-0">
+                    <main id="main" className="flex-1 flex flex-col w-full pt-24 md:pt-28 pb-20 md:pb-0">
                       {children}
                     </main>
 

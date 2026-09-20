@@ -41,7 +41,7 @@ export function SectionDockSlot({
       )}
     >
       {isDocked ? (
-        <div className="relative p-1 rounded-full border border-primary/30 bg-primary/5 shadow-sm shadow-primary/10 transition-colors duration-500">
+        <div className="relative p-0.5 sm:p-1 rounded-full border border-primary/30 bg-primary/5 shadow-sm shadow-primary/10 transition-colors duration-500">
           <motion.div
             layoutId="unified-theme-dock"
             transition={{ type: "spring", stiffness: 320, damping: 28 }}
@@ -55,10 +55,10 @@ export function SectionDockSlot({
           type="button"
           onClick={() => scrollToSlot(sectionId)}
           title={`Click to snap theme dock to ${label}`}
-          className="group relative flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-full border border-dashed border-border/80 bg-muted/20 hover:bg-muted/40 hover:border-primary/40 backdrop-blur-xs transition-all duration-300 cursor-pointer select-none"
+          className="group relative flex items-center gap-1.5 p-1 sm:p-1.5 rounded-full border border-dashed border-border/80 bg-muted/20 hover:bg-muted/40 hover:border-primary/40 backdrop-blur-xs transition-all duration-300 cursor-pointer select-none"
         >
           {/* Ghost section badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted/40 text-[11px] font-mono text-muted-foreground group-hover:text-foreground transition-colors">
+          <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-muted/40 text-[10px] sm:text-[10.5px] font-mono text-muted-foreground group-hover:text-foreground transition-colors">
             <span className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:bg-primary transition-colors" />
             <span>{label}</span>
             <span className="text-border">&bull;</span>
@@ -66,12 +66,12 @@ export function SectionDockSlot({
           </div>
 
           {/* 3 ghost dots + ghost plus */}
-          <div className="flex items-center gap-1.5 sm:gap-2 px-1 opacity-50 group-hover:opacity-85 transition-opacity">
-            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-dashed border-border/80 bg-muted/40" />
-            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-dashed border-border/80 bg-muted/40" />
-            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-dashed border-border/80 bg-muted/40" />
-            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-dashed border-border/80 bg-muted/40 flex items-center justify-center text-muted-foreground">
-              <Plus className="w-3 h-3 text-muted-foreground/60" />
+          <div className="flex items-center gap-1.5 px-0.5 opacity-50 group-hover:opacity-85 transition-opacity">
+            <div className="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded-full border border-dashed border-border/80 bg-muted/40" />
+            <div className="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded-full border border-dashed border-border/80 bg-muted/40" />
+            <div className="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded-full border border-dashed border-border/80 bg-muted/40" />
+            <div className="w-5 h-5 sm:w-5.5 sm:h-5.5 rounded-full border border-dashed border-border/80 bg-muted/40 flex items-center justify-center text-muted-foreground">
+              <Plus className="w-2.5 h-2.5 text-muted-foreground/60" />
             </div>
           </div>
         </button>

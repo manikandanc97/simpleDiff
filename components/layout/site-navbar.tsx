@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS } from "@/lib/nav";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
@@ -13,7 +13,6 @@ import { MobileAppMenu } from "@/components/layout/mobile-app-menu";
 import { useMobileMenu } from "@/components/layout/mobile-menu-context";
 import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
-
 import { AnimatedIcon, AnimatedArrowRight, AnimatedMenu, AnimatedX, type AnimatedIconName } from "@/components/ui/animated-icon";
 
 const ROUTE_ICON_NAMES: Record<string, AnimatedIconName> = {
@@ -34,10 +33,16 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
   const pathname = usePathname();
   const { isOpen, toggleMenu, closeMenu } = useMobileMenu();
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      setScrollProgress(Math.min(100, Math.max(0, progress)));
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -52,16 +57,50 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
 
   return (
     <>
-      <header
+      {/* ── Navbar shell — springs from y:32 (below TopBar) to y:0 ── */}
+      <motion.header
         role="banner"
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled
-            ? "bg-background/85 backdrop-blur-md border-b border-border/70 py-2.5 sm:py-3 shadow-xs"
-            : "bg-background/40 backdrop-blur-xs py-3.5 md:py-5"
-        )}
+        className="fixed top-0 left-0 right-0 z-50"
+        animate={{ y: scrolled ? 0 : 32 }}
+        transition={{ type: "spring", stiffness: 380, damping: 38, mass: 0.8 }}
       >
-        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 flex items-center justify-between">
+        {/* ── Glass background layer — fades in on scroll ── */}
+        <AnimatePresence>
+          {scrolled && (
+            <motion.div
+              key="glass-bg"
+              className="absolute inset-0 bg-background/60 backdrop-blur-xl border-b border-primary/20"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              style={{
+                boxShadow:
+                  "0 4px 32px -4px hsl(var(--primary) / 0.12), 0 1px 0 0 hsl(var(--primary) / 0.08)",
+              }}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* ── Scroll Progress Bar ── */}
+        <div
+          aria-hidden="true"
+          className="absolute bottom-0 left-0 right-0 h-[2px] overflow-hidden"
+        >
+          <motion.div
+            className="h-full bg-primary origin-left"
+            style={{ boxShadow: "0 0 8px 1px hsl(var(--primary) / 0.5)" }}
+            animate={{ scaleX: scrollProgress / 100 }}
+            transition={{ type: "spring", stiffness: 300, damping: 40, mass: 0.5 }}
+          />
+        </div>
+
+        {/* ── Content row ── */}
+        <motion.div
+          className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 flex items-center justify-between relative z-10"
+          animate={{ paddingTop: scrolled ? 10 : 14, paddingBottom: scrolled ? 10 : 14 }}
+          transition={{ type: "spring", stiffness: 380, damping: 38, mass: 0.8 }}
+        >
           {/* Brand Logo */}
           <Link
             href="/"
@@ -69,9 +108,14 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
             className="group flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-ring rounded-lg outline-none"
             aria-label="SimpleDiff Home"
           >
-            <span className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+            <motion.span
+              className="text-xl sm:text-2xl font-bold tracking-tight text-foreground"
+              animate={{ scale: scrolled ? 0.93 : 1 }}
+              transition={{ type: "spring", stiffness: 380, damping: 38, mass: 0.8 }}
+              style={{ transformOrigin: "left center" }}
+            >
               Simple<span className="text-primary transition-transform inline-block group-hover:scale-105 animate-pulse">Diff</span>
-            </span>
+            </motion.span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -120,16 +164,9 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
 
           {/* Right Actions (Desktop) */}
           <div className="hidden md:flex items-center gap-2.5">
-            {/* Color Accent Selector */}
             <ColorPickerDialog />
-
-            {/* Typography / Font Selector */}
             <FontPickerDialog />
-
-            {/* Dark / Light Toggle */}
             <ThemeToggle />
-
-            {/* Start a project CTA */}
             <Button
               size="sm"
               onClick={handleStart}
@@ -141,18 +178,11 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
             </Button>
           </div>
 
-          {/* Mobile Right Controls: Color, Font, Theme & Menu */}
+          {/* Mobile Right Controls */}
           <div className="flex md:hidden items-center gap-1">
-            {/* 1-tap Color Picker directly in top navbar */}
             <ColorPickerDialog />
-
-            {/* 1-tap Font Picker directly in top navbar */}
             <FontPickerDialog />
-
-            {/* Dark / Light theme toggle */}
             <ThemeToggle />
-
-            {/* Native Mobile Menu Trigger */}
             <button
               type="button"
               onClick={toggleMenu}
@@ -164,8 +194,8 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
               {isOpen ? <AnimatedX size={18} /> : <AnimatedMenu size={18} />}
             </button>
           </div>
-        </div>
-      </header>
+        </motion.div>
+      </motion.header>
 
       {/* Native Mobile App Sheet Drawer */}
       <MobileAppMenu open={isOpen} onClose={closeMenu} />
