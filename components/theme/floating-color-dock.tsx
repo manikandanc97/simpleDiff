@@ -8,9 +8,11 @@ import { useDock } from "@/components/theme/dock-context";
 import { cn } from "@/lib/utils";
 import { Plus, Sparkles } from "lucide-react";
 
-// Exactly 3 curated colors: Violet, Electric Blue, Emerald
-const DOCK_PRESET_IDS = ["violet", "blue", "emerald"];
-const DOCK_THEMES = COLOR_THEMES.filter((t) => DOCK_PRESET_IDS.includes(t.id));
+// RGB Trio: Red, Green, Blue
+const DOCK_PRESET_IDS = ["red", "green", "blue"];
+const DOCK_THEMES = DOCK_PRESET_IDS
+  .map((id) => COLOR_THEMES.find((t) => t.id === id))
+  .filter((t): t is (typeof COLOR_THEMES)[number] => Boolean(t));
 
 export function ThemeDockContent({ label }: { label?: string }) {
   const { theme, setTheme, setCustomColor, customColor } = useThemeColor();
@@ -41,7 +43,7 @@ export function ThemeDockContent({ label }: { label?: string }) {
         <span className="text-muted-foreground">Theme</span>
       </div>
 
-      {/* 3 Color Palette Dots */}
+      {/* 3 High-Contrast Color Palette Dots */}
       <div className="flex items-center gap-1.5 sm:gap-2 px-1">
         {DOCK_THEMES.map((t) => {
           const isActive = theme.id === t.id && !theme.isCustom;
@@ -51,8 +53,8 @@ export function ThemeDockContent({ label }: { label?: string }) {
               type="button"
               onClick={() => setTheme(t.id)}
               className={cn(
-                "relative flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer",
-                isActive ? "scale-115" : "hover:scale-110 opacity-80 hover:opacity-100"
+                "relative flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer shadow-xs ring-1 ring-black/20 dark:ring-white/25",
+                isActive ? "scale-115" : "hover:scale-110 opacity-95 hover:opacity-100"
               )}
               aria-label={`Switch to ${t.name} color`}
               title={`${t.name} accent`}
@@ -61,7 +63,7 @@ export function ThemeDockContent({ label }: { label?: string }) {
               {isActive && (
                 <motion.div
                   layoutId="dock-active-ring"
-                  className="absolute -inset-1 rounded-full border-2"
+                  className="absolute -inset-1 rounded-full border-2 shadow-xs"
                   style={{ borderColor: t.primary }}
                   transition={{ type: "spring", stiffness: 380, damping: 24 }}
                 />
@@ -149,7 +151,7 @@ export function FloatingColorDock() {
       exit={{ opacity: 0, y: 20 }}
       transition={{ type: "spring", stiffness: 320, damping: 28 }}
       aria-label="Interactive color theme dock"
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 max-w-[95vw] sm:max-w-max pointer-events-auto"
+      className="fixed bottom-20 md:bottom-5 left-1/2 -translate-x-1/2 z-30 max-w-[95vw] sm:max-w-max pointer-events-auto"
     >
       <ThemeDockContent label={activeLabel} />
     </motion.aside>

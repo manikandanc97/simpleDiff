@@ -10,7 +10,7 @@ export function HeroGridAccents() {
       <div className="absolute top-5 left-6 md:left-10 hidden sm:flex items-center gap-2 opacity-35">
         <span className="font-mono text-primary text-xs font-semibold select-none">+</span>
         <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          SYS // 01.STUDIO
+          SYS // 01.ENGINEERING
         </span>
       </div>
 

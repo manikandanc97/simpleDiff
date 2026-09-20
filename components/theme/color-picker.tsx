@@ -35,8 +35,8 @@ export function ColorPicker({ compact = false }: ColorPickerProps) {
               key={t.id}
               onClick={() => setTheme(t.id)}
               className={cn(
-                "relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 cursor-pointer",
-                isActive ? "scale-110" : "hover:scale-105 opacity-90 hover:opacity-100"
+                "relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 cursor-pointer shadow-xs ring-1 ring-black/20 dark:ring-white/25",
+                isActive ? "scale-110" : "hover:scale-105 opacity-95 hover:opacity-100"
               )}
               aria-label={`Select ${t.name} accent`}
               title={t.name}
@@ -47,7 +47,7 @@ export function ColorPicker({ compact = false }: ColorPickerProps) {
               {isActive && (
                 <motion.div
                   layoutId="active-color-ring"
-                  className="absolute -inset-1 rounded-full border-2"
+                  className="absolute -inset-1 rounded-full border-2 shadow-xs"
                   style={{ borderColor: t.primary }}
                   transition={{ type: "spring", stiffness: 350, damping: 22 }}
                 />

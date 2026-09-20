@@ -21,20 +21,39 @@ export function FooterRevealWordmark() {
     <section
       ref={containerRef}
       aria-label="SimpleDiff Brand Finale"
-      className="relative w-full overflow-hidden select-none pointer-events-none bg-background border-t border-border/40 pt-8 sm:pt-12 pb-0"
+      className="relative w-full overflow-hidden select-none pointer-events-none bg-background border-t border-border/40 pt-6 sm:pt-10 pb-[calc(5.25rem+env(safe-area-inset-bottom,0px))] md:pb-2"
     >
       <motion.div
         style={{ y, opacity, scale }}
         className="w-full flex items-end justify-center leading-none"
       >
-        <h2 className="text-[18.3vw] font-black tracking-tighter leading-[0.74] text-center whitespace-nowrap block w-full select-none -mb-1 sm:-mb-2 transition-colors">
-          <span className="text-foreground/10 dark:text-foreground/15 transition-colors">
-            Simple
-          </span>
-          <span className="text-primary transition-colors">
-            Diff
-          </span>
-        </h2>
+        <div className="w-full flex items-end justify-center leading-none">
+          <svg
+            viewBox="0 0 1000 170"
+            className="w-full h-auto block select-none"
+            aria-hidden="true"
+          >
+            <text
+              x="0"
+              y="142"
+              textLength="1000"
+              lengthAdjust="spacingAndGlyphs"
+              fontSize="200"
+              fontWeight="900"
+              letterSpacing="-0.04em"
+              style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+              className="select-none font-black"
+            >
+              <tspan className="fill-foreground/25 dark:fill-foreground/30 transition-colors">
+                Simple
+              </tspan>
+              <tspan className="fill-primary transition-colors">
+                Diff
+              </tspan>
+            </text>
+          </svg>
+          <span className="sr-only">SimpleDiff</span>
+        </div>
       </motion.div>
     </section>
   );

@@ -18,6 +18,7 @@ export const LEAD_SOURCES = [
   "navbar",
   "footer",
   "what-we-build",
+  "mobile-app-menu",
 ] as const;
 
 export const leadSchema = z.object({

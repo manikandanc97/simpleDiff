@@ -10,6 +10,16 @@ import { NAV_ITEMS } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 import { useLead } from "@/components/leads/lead-provider";
 
+import { AnimatedIcon, type AnimatedIconName } from "@/components/ui/animated-icon";
+
+const CMD_NAV_ICONS: Record<string, AnimatedIconName> = {
+  "/": "home",
+  "/work": "briefcase",
+  "/services": "layers",
+  "/lab": "lightbulb",
+  "/about": "info",
+};
+
 interface CommandPaletteProps {
   onStartProject?: () => void;
 }
@@ -44,15 +54,17 @@ export function CommandPalette({ onStartProject }: CommandPaletteProps) {
     return () => document.removeEventListener("keydown", down);
   }, [open]);
 
-  const commands = [
+  const commands: { id: string; label: string; iconName: AnimatedIconName; action: () => void }[] = [
     ...NAV_ITEMS.map((item) => ({
       id: `nav-${item.route.replace("/", "") || "home"}`,
       label: item.commandName,
+      iconName: CMD_NAV_ICONS[item.route] || "sparkles",
       action: () => router.push(item.route),
     })),
     {
       id: "cmd-start-project",
       label: "Start a project",
+      iconName: "sparkles",
       action: () => {
         if (onStartProject) onStartProject();
         else openLead({ source: "topbar" });
@@ -61,6 +73,7 @@ export function CommandPalette({ onStartProject }: CommandPaletteProps) {
     {
       id: "cmd-toggle-theme",
       label: "Toggle theme",
+      iconName: mode === "light" ? "moon" : "sun",
       action: () => setMode(mode === "light" ? "dark" : "light"),
     },
   ];
@@ -138,11 +151,19 @@ export function CommandPalette({ onStartProject }: CommandPaletteProps) {
                   onMouseEnter={() => setSelectedIndex(index)}
                   onClick={() => executeCommand(cmd)}
                   className={cn(
-                    "flex items-center px-4 py-2 text-sm rounded-sm transition-colors text-left w-full cursor-pointer select-none",
+                    "group flex items-center px-4 py-2 text-sm rounded-sm transition-colors text-left w-full cursor-pointer select-none gap-2.5",
                     isSelected ? "bg-muted text-foreground font-medium" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                   )}
                 >
-                  {cmd.label}
+                  <AnimatedIcon
+                    name={cmd.iconName}
+                    size={15}
+                    className={cn(
+                      "shrink-0 transition-colors",
+                      isSelected ? "text-primary" : "text-muted-foreground"
+                    )}
+                  />
+                  <span>{cmd.label}</span>
                 </div>
               );
             })

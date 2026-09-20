@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import type { Experiment } from "@/lib/data/experiments";
+import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 
 interface ExperimentCardProps {
   experiment: Experiment;
@@ -88,7 +89,18 @@ export function ExperimentCard({ experiment, isFeatured = false }: ExperimentCar
             {experiment.category}
           </span>
           <h2 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-foreground mb-3">
-            {experiment.title}
+            {(() => {
+              const words = experiment.title.split(" ");
+              if (words.length === 1) {
+                return <span className="text-primary">{experiment.title}</span>;
+              }
+              const last = words.pop();
+              return (
+                <>
+                  {words.join(" ")} <span className="text-primary">{last}</span>
+                </>
+              );
+            })()}
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
             {experiment.description}
@@ -96,9 +108,10 @@ export function ExperimentCard({ experiment, isFeatured = false }: ExperimentCar
         </div>
 
         <div className="pt-6 mt-6 border-t border-border/40 flex items-center justify-between text-xs text-muted-foreground">
-          <span className="font-mono">Studio Prototype</span>
-          <span className="group-hover:text-primary transition-colors font-medium">
-            Explore concept &rarr;
+          <span className="font-mono">Software Prototype</span>
+          <span className="group-hover:text-primary transition-colors font-medium inline-flex items-center gap-1.5">
+            <span>Explore concept</span>
+            <AnimatedArrowRight size={13} />
           </span>
         </div>
       </div>

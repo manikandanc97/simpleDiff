@@ -2,11 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { Mail, MessageSquare } from "lucide-react";
+import {
+  AnimatedMail,
+  AnimatedMessageSquare,
+  AnimatedArrowRight,
+} from "@/components/ui/animated-icon";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About SimpleDiff — A digital product studio built on the belief that digital products and software should be simple, focused, and different.",
+    "About SimpleDiff — A premier software development company built on the belief that custom software and digital systems should be simple, focused, and high-performance.",
 };
 
 const PRINCIPLES = [
@@ -44,7 +49,8 @@ export default function AboutPage() {
         </span>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.08] mb-8">
-          We believe digital products don&apos;t need to be complicated to be powerful.
+          We believe digital products don&apos;t need to be complicated to be{" "}
+          <span className="text-primary">powerful.</span>
         </h1>
 
         <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
@@ -60,16 +66,16 @@ export default function AboutPage() {
               Our Ethos
             </span>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
-              Who We Are
+              Who We <span className="text-primary">Are</span>
             </h2>
           </div>
 
           <div className="lg:col-span-8 space-y-6 text-lg sm:text-xl text-muted-foreground leading-relaxed">
             <p className="text-foreground font-medium text-xl sm:text-2xl leading-relaxed">
-              We are a dedicated design and engineering studio working directly with founders, business owners, and ambitious teams who value precision over bureaucratic overhead.
+              We are a dedicated software development company working directly with founders, business owners, and engineering leaders who value architectural precision over bureaucratic overhead.
             </p>
             <p>
-              When you collaborate with SimpleDiff, you don&apos;t get handed off through account managers, junior coordinators, or outsourced layers. You work directly with the senior designers and engineers crafting your product.
+              When you collaborate with SimpleDiff, you don&apos;t get handed off through account managers, junior coordinators, or outsourced layers. You work directly with the senior software engineers crafting your system.
             </p>
             <p>
               Our methodology combines deep brand taste with modern fullstack engineering — ensuring that every website, web application, mobile app, and SaaS system we launch looks world-class and performs under pressure.
@@ -91,7 +97,7 @@ export default function AboutPage() {
             Guiding Philosophy
           </span>
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground mb-4">
-            Our Principles
+            Our <span className="text-primary">Principles</span>
           </h2>
           <p className="text-lg text-muted-foreground">
             The three core tenets that guide every architectural decision, layout, and line of code we write.
@@ -118,7 +124,15 @@ export default function AboutPage() {
               {/* Title */}
               <div className="lg:col-span-4">
                 <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
-                  {principle.title}
+                  {(() => {
+                    const words = principle.title.split(" ");
+                    const last = words.pop();
+                    return (
+                      <>
+                        {words.join(" ")} <span className="text-primary">{last}</span>
+                      </>
+                    );
+                  })()}
                 </h3>
               </div>
 
@@ -133,14 +147,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 3: Connect With The Studio */}
+      {/* Section 3: Connect With Our Engineering Team */}
       <section className="py-16 sm:py-24 border-t border-border bg-card/40 rounded-3xl p-8 sm:p-14 border border-border/80">
         <div className="max-w-3xl space-y-6">
           <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary">
-            Direct Studio Line
+            Direct Engineering Line
           </span>
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
-            Let&apos;s build something exceptional together.
+            Let&apos;s build something exceptional <span className="text-primary">together.</span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
             Have an upcoming project, a product to revamp, or an idea to validate? We are available for select client engagements.
@@ -155,9 +169,9 @@ export default function AboutPage() {
             {SITE.email && (
               <a
                 href={`mailto:${SITE.email}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-foreground text-background font-semibold text-sm hover:opacity-90 transition-opacity"
+                className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-foreground text-background font-semibold text-sm hover:opacity-90 transition-opacity"
               >
-                <Mail className="h-4 w-4" />
+                <AnimatedMail size={16} />
                 <span>Email {SITE.email}</span>
               </a>
             )}
@@ -166,17 +180,18 @@ export default function AboutPage() {
                 href={`https://wa.me/${SITE.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border bg-background hover:border-primary/50 text-foreground font-semibold text-sm transition-all"
+                className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl border border-border bg-background hover:border-primary/50 text-foreground font-semibold text-sm transition-all"
               >
-                <MessageSquare className="h-4 w-4 text-primary" />
+                <AnimatedMessageSquare size={16} className="text-primary" />
                 <span>Chat on WhatsApp</span>
               </a>
             )}
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-primary hover:underline font-semibold text-sm"
+              className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl text-primary hover:underline font-semibold text-sm"
             >
-              <span>Explore services &rarr;</span>
+              <span>Explore services</span>
+              <AnimatedArrowRight size={15} />
             </Link>
           </div>
         </div>

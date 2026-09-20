@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { PROJECTS, type Project } from "@/lib/data/projects";
 import { ExternalLink, Sparkles } from "lucide-react";
+import { AnimatedSparkles, AnimatedIcon } from "@/components/ui/animated-icon";
 import { cn } from "@/lib/utils";
 
 /* ─── Selective Simple → Different Toggle Pill ─── */
@@ -36,13 +37,13 @@ function SimpleDifferentToggle({
           type="button"
           onClick={() => setActive("different")}
           className={cn(
-            "text-xs px-3 py-1 rounded-full font-medium transition-all cursor-pointer flex items-center gap-1",
+            "group text-xs px-3 py-1 rounded-full font-medium transition-all cursor-pointer flex items-center gap-1.5",
             active === "different"
               ? "bg-primary text-primary-foreground font-bold shadow-xs"
               : "text-muted-foreground hover:text-primary"
           )}
         >
-          <Sparkles className="w-3 h-3" />
+          <AnimatedSparkles size={12} />
           <span>SimpleDiff</span>
         </button>
       </div>
@@ -261,7 +262,18 @@ function ProjectShowcaseItem({
 
         {/* Project Name */}
         <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
-          {project.name}
+          {(() => {
+            const words = project.name.split(" ");
+            if (words.length === 1) {
+              return <span className="text-primary">{project.name}</span>;
+            }
+            const last = words.pop();
+            return (
+              <>
+                {words.join(" ")} <span className="text-primary">{last}</span>
+              </>
+            );
+          })()}
         </h2>
 
         {/* Description */}
@@ -301,7 +313,7 @@ function ProjectShowcaseItem({
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline group/link"
             >
               <span>Visit live production website</span>
-              <ExternalLink className="h-4 w-4 transition-transform group-hover/link:translate-x-0.5" />
+              <AnimatedIcon name="external-link" size={15} />
             </a>
           </div>
         )}
@@ -320,7 +332,7 @@ export function WorkView() {
           Featured Portfolio
         </span>
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground mb-6">
-          Work.
+          <span className="text-primary">Work.</span>
         </h1>
         <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed">
           Selected client projects and digital experiments. We design and engineer products that strip unnecessary friction and stand out in their markets.

@@ -9,6 +9,12 @@ import { cn } from "@/lib/utils";
 import { submitLead } from "@/lib/leads/actions";
 import { SITE } from "@/lib/site";
 import { CheckCircle2 } from "lucide-react";
+import {
+  AnimatedRotateCcw,
+  AnimatedArrowLeft,
+  AnimatedArrowRight,
+  AnimatedSend,
+} from "@/components/ui/animated-icon";
 
 type ProjectIdea = {
   type: string;
@@ -192,7 +198,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
         {step <= TOTAL_STEPS && (
           <div className="mb-8 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-3">
-              Build Your Idea
+              Build Your <span className="text-primary">Idea</span>
             </h2>
             <p className="text-lg text-muted-foreground">
               You bring the idea. We&apos;ll simplify the rest.
@@ -242,7 +248,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                 <h3
                   ref={headingRef}
                   tabIndex={-1}
-                  className="text-2xl font-semibold mb-2 outline-none"
+                  className="text-2xl font-bold mb-2 outline-none"
                 >
                   What are you building?
                 </h3>
@@ -280,7 +286,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                 <h3
                   ref={headingRef}
                   tabIndex={-1}
-                  className="text-2xl font-semibold mb-2 outline-none"
+                  className="text-2xl font-bold mb-2 outline-none"
                 >
                   What&apos;s the goal?
                 </h3>
@@ -318,7 +324,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                 <h3
                   ref={headingRef}
                   tabIndex={-1}
-                  className="text-2xl font-semibold mb-2 outline-none"
+                  className="text-2xl font-bold mb-2 outline-none"
                 >
                   How far along are you?
                 </h3>
@@ -356,7 +362,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                 <h3
                   ref={headingRef}
                   tabIndex={-1}
-                  className="text-2xl font-semibold mb-2 outline-none"
+                  className="text-2xl font-bold mb-2 outline-none"
                 >
                   Tell us a little about it.
                 </h3>
@@ -397,7 +403,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                 <h3
                   ref={headingRef}
                   tabIndex={-1}
-                  className="text-2xl font-semibold mb-2 outline-none"
+                  className="text-2xl font-bold mb-2 outline-none"
                 >
                   Where can we reach you?
                 </h3>
@@ -476,7 +482,7 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
               >
                 <CheckCircle2 className="w-16 h-16 text-emerald-500 mb-6" />
                 <h3 className="text-3xl font-bold tracking-tight mb-2">
-                  Thanks — we&apos;ve got it.
+                  Thanks — we&apos;ve got <span className="text-primary">it.</span>
                 </h3>
                 <p className="text-muted-foreground mb-8 max-w-md">
                   {SITE.responseTime
@@ -516,10 +522,11 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="px-8 cursor-pointer"
+                  className="group/button px-8 cursor-pointer flex items-center gap-2"
                   onClick={resetFlow}
                 >
-                  Start Over
+                  <AnimatedRotateCcw size={15} />
+                  <span>Start Over</span>
                 </Button>
               </motion.div>
             )}
@@ -534,9 +541,10 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
               variant="ghost"
               onClick={handleBack}
               disabled={isSubmitting}
-              className="text-muted-foreground cursor-pointer"
+              className="group/button text-muted-foreground cursor-pointer flex items-center gap-1.5"
             >
-              &larr; Back
+              <AnimatedArrowLeft size={14} />
+              <span>Back</span>
             </Button>
 
             {step >= 4 && (
@@ -544,13 +552,23 @@ export function BuildYourIdea({ initialDescription = "" }: BuildYourIdeaProps) {
                 type="button"
                 onClick={handleNext}
                 disabled={isSubmitting}
-                className="cursor-pointer"
+                className="group/button cursor-pointer flex items-center gap-2"
               >
-                {step === TOTAL_STEPS
-                  ? isSubmitting
-                    ? "Sending..."
-                    : "Send"
-                  : "Next →"}
+                {step === TOTAL_STEPS ? (
+                  isSubmitting ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      <span>Submit Request</span>
+                      <AnimatedSend size={14} />
+                    </>
+                  )
+                ) : (
+                  <>
+                    <span>Next Step</span>
+                    <AnimatedArrowRight size={14} />
+                  </>
+                )}
               </Button>
             )}
           </div>

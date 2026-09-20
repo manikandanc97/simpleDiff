@@ -14,10 +14,10 @@ export function LabView() {
       <div className="max-w-4xl mb-16 sm:mb-20">
         <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-          Studio Journal & Experiments
+          Software R&D & Prototypes
         </span>
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground mb-6">
-          Ideas.
+          <span className="text-primary">Ideas.</span>
         </h1>
         <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed">
           Experiments, concepts and things we&apos;re exploring. A space for testing interactive ideas, generative interfaces, and design physics before bringing them to client builds.

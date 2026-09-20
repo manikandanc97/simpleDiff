@@ -8,6 +8,31 @@ import { SITE } from "@/lib/site";
 import { NAV_ITEMS } from "@/lib/nav";
 import { FooterRevealWordmark } from "./footer-reveal-wordmark";
 
+import {
+  AnimatedIcon,
+  AnimatedArrowRight,
+  AnimatedMail,
+  AnimatedMessageSquare,
+  type AnimatedIconName,
+} from "@/components/ui/animated-icon";
+
+const FOOTER_NAV_ICONS: Record<string, AnimatedIconName> = {
+  "/": "home",
+  "/work": "briefcase",
+  "/services": "layers",
+  "/lab": "lightbulb",
+  "/about": "info",
+};
+
+const CAPABILITY_ITEMS: { label: string; icon: AnimatedIconName }[] = [
+  { label: "Websites & Landing Pages", icon: "globe" },
+  { label: "Web Applications", icon: "laptop" },
+  { label: "Mobile Apps (iOS & Android)", icon: "smartphone" },
+  { label: "SaaS Platforms", icon: "layers" },
+  { label: "Branding & Identity", icon: "palette" },
+  { label: "AI Automation & Agents", icon: "cpu" },
+];
+
 interface SiteFooterProps {
   onStartProject?: () => void;
 }
@@ -37,9 +62,8 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                 aria-label="SimpleDiff Home"
               >
                 <span>
-                  Simple<span className="text-primary font-bold">Diff</span>
+                  Simple<span className="text-primary font-bold inline-block animate-pulse">Diff</span>
                 </span>
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary ml-1" />
               </Link>
               <p className="text-lg font-medium text-foreground/90 max-w-sm leading-snug">
                 Keep It Simple.
@@ -47,7 +71,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                 Make It Different.
               </p>
               <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                A digital product studio designing and building modern websites, web applications, mobile apps, SaaS products, and custom software for ambitious businesses and founders.
+                A premier software development company engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions for ambitious businesses and founders.
               </p>
             </div>
 
@@ -69,42 +93,54 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
 
           {/* Col 3: Navigation */}
           <div className="space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-semibold">
+            <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-bold">
               Explore
             </h4>
             <ul className="space-y-3">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.route}>
-                  <Link
-                    href={item.route}
-                    className="text-sm text-muted-foreground hover:text-foreground hover:translate-x-0.5 transition-all inline-block"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const iconName = FOOTER_NAV_ICONS[item.route] || "sparkles";
+                return (
+                  <li key={item.route}>
+                    <Link
+                      href={item.route}
+                      className="group text-sm text-muted-foreground hover:text-foreground hover:translate-x-0.5 transition-all inline-flex items-center gap-2"
+                    >
+                      <AnimatedIcon
+                        name={iconName}
+                        size={14}
+                        className="text-primary/70 group-hover:text-primary transition-colors"
+                      />
+                      <span>{item.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
           {/* Col 4: Services */}
           <div className="space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-semibold">
+            <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-bold">
               Capabilities
             </h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li>Websites & Landing Pages</li>
-              <li>Web Applications</li>
-              <li>Mobile Apps (iOS & Android)</li>
-              <li>SaaS Platforms</li>
-              <li>Branding & Identity</li>
-              <li>AI Automation & Agents</li>
+              {CAPABILITY_ITEMS.map((cap) => (
+                <li key={cap.label} className="group flex items-center gap-2">
+                  <AnimatedIcon
+                    name={cap.icon}
+                    size={14}
+                    className="text-primary/70 group-hover:text-primary transition-colors"
+                  />
+                  <span className="group-hover:text-foreground transition-colors">{cap.label}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Col 5: Connect & CTA */}
           <div className="space-y-5 flex flex-col justify-between">
             <div className="space-y-4">
-              <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-semibold">
+              <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-bold">
                 Direct Contact
               </h4>
               <ul className="space-y-2.5 text-sm">
@@ -112,10 +148,11 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                   <li>
                     <a
                       href={`mailto:${SITE.email}`}
-                      className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group"
+                      className="group text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
                     >
+                      <AnimatedMail size={14} className="text-primary" />
                       <span>{SITE.email}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <ArrowUpRight className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ml-auto" />
                     </a>
                   </li>
                 )}
@@ -125,10 +162,11 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                       href={`https://wa.me/${SITE.whatsapp}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group"
+                      className="group text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
                     >
+                      <AnimatedMessageSquare size={14} className="text-primary" />
                       <span>WhatsApp Direct</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <ArrowUpRight className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ml-auto" />
                     </a>
                   </li>
                 )}
@@ -138,9 +176,10 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
             <div>
               <Button
                 onClick={handleStart}
-                className="w-full rounded-full text-xs h-10 font-semibold cursor-pointer shadow-sm hover:shadow-primary/25 transition-all"
+                className="group/button w-full rounded-full text-xs h-10 font-semibold cursor-pointer shadow-sm hover:shadow-primary/25 transition-all flex items-center justify-center gap-2"
               >
-                Start a project &rarr;
+                <span>Start a project</span>
+                <AnimatedArrowRight size={14} />
               </Button>
             </div>
           </div>
@@ -149,7 +188,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
         {/* Copyright & Bottom Bar */}
         <div className="pt-8 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>
-            &copy; {new Date().getFullYear()} SimpleDiff Studio. All rights reserved.
+            &copy; {new Date().getFullYear()} SimpleDiff Software Technologies. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <span>Keep It Simple. Make It Different.</span>

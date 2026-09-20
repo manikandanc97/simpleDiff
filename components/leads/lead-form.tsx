@@ -8,6 +8,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site";
 import { CheckCircle2 } from "lucide-react";
+import {
+  AnimatedSend,
+  AnimatedMessageSquare,
+  AnimatedMail,
+} from "@/components/ui/animated-icon";
 
 interface LeadFormProps {
   prefill?: Partial<LeadInput>;
@@ -172,7 +177,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
             id="lead-company"
             name="company"
             defaultValue={prefill?.company || ""}
-            placeholder="Acme Studio"
+            placeholder="Acme Corp / Enterprise"
             aria-invalid={Boolean(state.fieldErrors?.company)}
             aria-describedby={state.fieldErrors?.company ? "lead-company-error" : undefined}
           />
@@ -212,9 +217,16 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
         <Button
           type="submit"
           disabled={isPending}
-          className="w-full h-11 text-base font-medium rounded-full cursor-pointer shadow-md hover:shadow-primary/25"
+          className="group/button w-full h-11 text-base font-medium rounded-full cursor-pointer shadow-md hover:shadow-primary/25 flex items-center justify-center gap-2"
         >
-          {isPending ? "Sending request..." : "Send project request →"}
+          {isPending ? (
+            "Sending request..."
+          ) : (
+            <>
+              <span>Send project request</span>
+              <AnimatedSend size={16} />
+            </>
+          )}
         </Button>
         <p className="text-xs text-muted-foreground text-center">
           We&apos;ll only use these details to reply about your project.
@@ -230,17 +242,19 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
               href={`https://wa.me/${SITE.whatsapp}?text=${encodedSummary}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline font-medium"
+              className="group inline-flex items-center gap-1.5 text-primary hover:underline font-medium"
             >
-              Chat on WhatsApp
+              <AnimatedMessageSquare size={13} className="text-primary" />
+              <span>Chat on WhatsApp</span>
             </a>
           )}
           {SITE.email && (
             <a
               href={`mailto:${SITE.email}`}
-              className="text-primary hover:underline font-medium"
+              className="group inline-flex items-center gap-1.5 text-primary hover:underline font-medium"
             >
-              Email us
+              <AnimatedMail size={13} className="text-primary" />
+              <span>Email us</span>
             </a>
           )}
         </div>

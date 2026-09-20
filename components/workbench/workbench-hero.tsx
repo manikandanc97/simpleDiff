@@ -19,6 +19,13 @@ import { cn } from "@/lib/utils";
 import { useLead } from "@/components/leads/lead-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import {
+  AnimatedArrowRight,
+  AnimatedBriefcase,
+  AnimatedPencil,
+  AnimatedListChecks,
+  AnimatedZap,
+} from "@/components/ui/animated-icon";
 import { HeroGridAccents } from "./hero-grid-accents";
 import { Hero3DCoder } from "./hero-3d-coder";
 
@@ -29,40 +36,40 @@ const EXAMPLES = [
 ];
 
 const SERVICE_CHIPS = [
-  "Websites",
-  "Web apps",
-  "Mobile apps",
-  "SaaS products",
-  "Branding",
-  "AI automation",
+  "Custom Software",
+  "Web Applications",
+  "Mobile Apps",
+  "SaaS Platforms",
+  "Cloud & DevOps",
+  "AI Solutions",
 ];
 
 const MARQUEE_ITEMS = [
   "React & Next.js",
   "TypeScript",
   "React Native",
-  "Supabase",
-  "Stripe Payments",
-  "AI / LLM Integration",
-  "Tailwind CSS",
-  "Vercel Edge",
+  "Node.js & Python",
   "PostgreSQL",
+  "Cloud Architecture",
   "REST & GraphQL APIs",
+  "Microservices",
   "CI/CD Pipelines",
-  "App Store Launch",
+  "AI / LLM Systems",
+  "Enterprise Security",
+  "App Store & Play Store",
 ];
 
 interface WorkbenchHeroProps {
   onStartProject?: (prefill?: { description: string; blueprintSummary?: string }) => void;
 }
 
-function AnimatedWord({ word, delay }: { word: string; delay: number }) {
+function AnimatedWord({ word, delay, className }: { word: string; delay: number; className?: string }) {
   return (
     <motion.span
       initial={{ opacity: 0, y: 32 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
-      className="inline-block"
+      className={cn("inline-block font-black tracking-tight", className)}
     >
       {word}
     </motion.span>
@@ -226,27 +233,29 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
               >
                 <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em]">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  Digital Product Studio
+                  Software Development Company
                 </span>
               </motion.div>
 
-              {/* 2. h1 — refined typography */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground mb-2 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 leading-[1.1]">
-                <AnimatedWord word="Keep" delay={0.05} />
-                <AnimatedWord word="It" delay={0.12} />
-                <AnimatedWord word="Simple." delay={0.19} />
-              </h1>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 leading-[1.1]">
-                <AnimatedWord word="Make" delay={0.28} />
-                <AnimatedWord word="It" delay={0.33} />
-                <motion.span
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                  className="inline-block"
-                >
-                  <span className="text-primary transition-colors duration-500">Different.</span>
-                </motion.span>
+              {/* 2. Single h1 for entire page — refined font-black bold typography */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-foreground mb-5 leading-[1.1]">
+                <span className="flex flex-wrap items-center justify-center lg:justify-start gap-x-3 mb-2">
+                  <AnimatedWord word="Keep" delay={0.05} />
+                  <AnimatedWord word="It" delay={0.12} />
+                  <AnimatedWord word="Simple." delay={0.19} className="text-primary" />
+                </span>
+                <span className="flex flex-wrap items-center justify-center lg:justify-start gap-x-3">
+                  <AnimatedWord word="Make" delay={0.28} />
+                  <AnimatedWord word="It" delay={0.33} />
+                  <motion.span
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-block font-black"
+                  >
+                    <span className="text-primary transition-colors duration-500 font-black">Different.</span>
+                  </motion.span>
+                </span>
               </h1>
 
               {/* 3. Sub-line */}
@@ -256,7 +265,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                 transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
                 className="text-base sm:text-lg text-muted-foreground max-w-xl mb-6 leading-relaxed font-normal"
               >
-                We design and build websites, web apps, mobile apps, SaaS products and digital experiences for businesses and founders.
+                We design, engineer, and deploy custom software, enterprise web applications, mobile apps, and scalable SaaS platforms for businesses and founders.
               </motion.p>
 
               {/* 4. Service chips */}
@@ -279,9 +288,10 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                 ))}
                 <Link
                   href="/services"
-                  className="text-xs sm:text-sm text-primary hover:underline font-medium ml-1 transition-colors flex items-center gap-1"
+                  className="group text-xs sm:text-sm text-primary hover:underline font-medium ml-1 transition-colors flex items-center gap-1"
                 >
-                  See all <ArrowRight className="h-3 w-3" />
+                  <span>See all</span>
+                  <AnimatedArrowRight size={12} />
                 </Link>
               </motion.div>
 
@@ -298,14 +308,15 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                   className="group relative inline-flex items-center gap-2 h-12 px-7 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-lg hover:shadow-primary/30 active:translate-y-0 transition-shadow duration-200 cursor-pointer overflow-hidden"
                 >
                   <span className="absolute inset-0 animate-shimmer pointer-events-none" />
-                  Start a project
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <span>Start a project</span>
+                  <AnimatedArrowRight size={16} />
                 </MagneticButton>
                 <Link
                   href="/work"
-                  className="inline-flex items-center gap-2 h-12 px-7 rounded-full border border-border bg-background/60 backdrop-blur-sm text-sm font-semibold text-foreground hover:bg-muted/60 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                  className="group inline-flex items-center gap-2 h-12 px-7 rounded-full border border-border bg-background/60 backdrop-blur-sm text-sm font-semibold text-foreground hover:bg-muted/60 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
                 >
-                  See our work
+                  <AnimatedBriefcase size={15} className="text-primary/80 group-hover:text-primary transition-colors" />
+                  <span>See our work</span>
                 </Link>
               </motion.div>
 
@@ -357,13 +368,14 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
               aria-selected={activeTab === "quick"}
               onClick={() => setActiveTab("quick")}
               className={cn(
-                "px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "group px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5",
                 activeTab === "quick"
-                  ? "bg-background text-foreground shadow-sm"
+                  ? "bg-background text-foreground shadow-sm font-semibold"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
-              Describe it
+              <AnimatedPencil size={13} className={activeTab === "quick" ? "text-primary" : "text-muted-foreground"} />
+              <span>Describe it</span>
             </button>
             <button
               role="tab"
@@ -372,13 +384,14 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
               aria-selected={activeTab === "guided"}
               onClick={() => setActiveTab("guided")}
               className={cn(
-                "px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "group px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5",
                 activeTab === "guided"
-                  ? "bg-background text-foreground shadow-sm"
+                  ? "bg-background text-foreground shadow-sm font-semibold"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
-              Answer a few questions
+              <AnimatedListChecks size={13} className={activeTab === "guided" ? "text-primary" : "text-muted-foreground"} />
+              <span>Answer a few questions</span>
             </button>
           </motion.div>
 
@@ -417,9 +430,10 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                       key={ex}
                       type="button"
                       onClick={() => setIdea(ex)}
-                      className="text-xs md:text-sm px-3 py-1.5 rounded-full border border-border bg-muted/10 hover:bg-primary/10 hover:border-primary/40 hover:text-primary-text transition-all duration-200 text-muted-foreground cursor-pointer focus-visible:ring-2 focus-visible:ring-ring outline-none"
+                      className="group text-xs md:text-sm px-3.5 py-1.5 rounded-full border border-border bg-muted/10 hover:bg-primary/10 hover:border-primary/40 hover:text-primary-text transition-all duration-200 text-muted-foreground cursor-pointer focus-visible:ring-2 focus-visible:ring-ring outline-none flex items-center gap-1.5"
                     >
-                      {ex}
+                      <AnimatedZap size={12} className="text-primary/70 group-hover:text-primary transition-colors" />
+                      <span>{ex}</span>
                     </button>
                   ))}
                 </div>

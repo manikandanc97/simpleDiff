@@ -3,7 +3,7 @@ import { LabView } from "@/components/pages/lab-view";
 
 export const metadata: Metadata = {
   title: "Ideas",
-  description: "Ideas, prototypes, and concept experiments being explored by the SimpleDiff digital product studio.",
+  description: "Software prototypes, architectural experiments, and concept explorations developed by the SimpleDiff engineering team.",
 };
 
 export default function LabPage() {

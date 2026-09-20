@@ -105,8 +105,16 @@ export function Philosophy() {
               </span>
 
               {/* Title */}
-              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground md:w-[38%] group-hover:text-primary transition-colors duration-300">
-                {principle.title}
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground md:w-[38%] transition-colors duration-300">
+                {(() => {
+                  const words = principle.title.split(" ");
+                  const last = words.pop();
+                  return (
+                    <>
+                      {words.join(" ")} <span className="text-primary">{last}</span>
+                    </>
+                  );
+                })()}
               </h3>
 
               {/* Description */}

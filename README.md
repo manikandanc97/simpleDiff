@@ -2,7 +2,7 @@
 
 > **Keep It Simple. Make It Different.**
 
-SimpleDiff is a digital product studio that designs and builds websites, web apps, mobile apps, SaaS products, branding, and custom software for local businesses, startups, SMBs, and founders without a technical team.
+SimpleDiff is a software development company that designs, engineers, and deploys custom software, web applications, mobile apps, SaaS platforms, and enterprise solutions for businesses, startups, and founders.
 
 We eliminate boilerplate, over-engineering, and technical bloat to ship clean, fast, and high-impact digital products.
 

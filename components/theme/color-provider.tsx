@@ -25,17 +25,17 @@ function subscribe(callback: () => void) {
 
 function getThemeSnapshot(): string {
   try {
-    return localStorage.getItem("simplediff-theme") || "violet";
+    return localStorage.getItem("simplediff-theme") || "blue";
   } catch {
-    return "violet";
+    return "blue";
   }
 }
 
 function getCustomColorSnapshot(): string {
   try {
-    return localStorage.getItem("simplediff-custom-color") || "#8B5CF6";
+    return localStorage.getItem("simplediff-custom-color") || "#2563EB";
   } catch {
-    return "#8B5CF6";
+    return "#2563EB";
   }
 }
 
@@ -52,8 +52,8 @@ function getModeSnapshot(): "light" | "dark" {
 const ThemeColorContext = createContext<ThemeColorContextType | undefined>(undefined);
 
 export function ThemeColorProvider({ children }: { children: React.ReactNode }) {
-  const themeId = useSyncExternalStore(subscribe, getThemeSnapshot, () => "violet");
-  const customColor = useSyncExternalStore(subscribe, getCustomColorSnapshot, () => "#8B5CF6");
+  const themeId = useSyncExternalStore(subscribe, getThemeSnapshot, () => "blue");
+  const customColor = useSyncExternalStore(subscribe, getCustomColorSnapshot, () => "#2563EB");
   const mode = useSyncExternalStore<"light" | "dark">(subscribe, getModeSnapshot, () => "dark");
 
   const theme: ColorTheme =
@@ -69,6 +69,11 @@ export function ThemeColorProvider({ children }: { children: React.ReactNode }) 
     const isDark = root.classList.contains("dark");
     root.style.setProperty("--primary-text", isDark ? t.textOnDark : t.textOnLight);
   };
+
+  // Keep DOM styles synchronized on mount and whenever theme changes
+  React.useEffect(() => {
+    applyThemeToDOM(theme);
+  }, [theme]);
 
   const setTheme = (id: string) => {
     const found = COLOR_THEMES.find((t) => t.id === id);

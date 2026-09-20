@@ -12,6 +12,7 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react";
+import { AnimatedArrowRight, AnimatedSend } from "@/components/ui/animated-icon";
 import { useLead } from "@/components/leads/lead-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 
@@ -151,14 +152,15 @@ function ServiceCard({
           className="text-xs font-semibold text-foreground/80 hover:text-primary flex items-center gap-1.5 transition-colors group/link"
         >
           <span>Explore service</span>
-          <ArrowRight className="h-3 w-3 group-hover/link:translate-x-1 transition-transform" />
+          <AnimatedArrowRight size={12} />
         </Link>
         <button
           type="button"
           onClick={() => onInquire(service.title)}
-          className="text-[11px] font-mono text-muted-foreground hover:text-primary cursor-pointer transition-colors"
+          className="group text-[11px] font-mono text-muted-foreground hover:text-primary cursor-pointer transition-colors flex items-center gap-1"
         >
-          Request scope &rarr;
+          <span>Request scope</span>
+          <AnimatedSend size={11} className="opacity-70 group-hover:opacity-100" />
         </button>
       </div>
     </motion.div>
@@ -204,7 +206,7 @@ export function WhatWeBuild() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-4"
           >
-            What We Build.
+            What We <span className="text-primary">Build.</span>
           </motion.h2>
 
           <motion.p
@@ -213,7 +215,7 @@ export function WhatWeBuild() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base sm:text-lg text-muted-foreground leading-relaxed"
           >
-            We engineer focused digital products without bloated agency overhead or sluggish development cycles.
+            We engineer custom software, scalable web applications, and mobile platforms with enterprise-grade reliability and zero unnecessary overhead.
           </motion.p>
         </div>
 
@@ -239,10 +241,10 @@ export function WhatWeBuild() {
       <div className="mt-12 text-center">
         <Link
           href="/services"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+          className="group inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
         >
           <span>Need custom scope or a multi-platform rollout? See all services</span>
-          <ArrowRight className="h-4 w-4" />
+          <AnimatedArrowRight size={15} />
         </Link>
       </div>
     </section>

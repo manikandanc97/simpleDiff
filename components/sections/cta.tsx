@@ -6,6 +6,11 @@ import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 import { ArrowRight, Mail, MessageSquare } from "lucide-react";
+import {
+  AnimatedArrowRight,
+  AnimatedMail,
+  AnimatedMessageSquare,
+} from "@/components/ui/animated-icon";
 import { SITE } from "@/lib/site";
 import { LaunchIllustration } from "@/components/ui/clay-3d/clay-illustrations";
 
@@ -66,7 +71,7 @@ export function CTA({ onStartProject }: CTAProps) {
         >
           Got Something
           <br />
-          In Mind?
+          In <span className="text-primary transition-colors duration-500">Mind?</span>
         </motion.h2>
 
         {/* Subtitle */}
@@ -103,10 +108,10 @@ export function CTA({ onStartProject }: CTAProps) {
             size="lg"
             onClick={handleStart}
             id="cta-start-project"
-            className="group h-14 px-10 rounded-full text-base font-bold tracking-tight shadow-xl shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-1 active:translate-y-0 transition-all duration-300 cursor-pointer"
+            className="group/button h-14 px-10 rounded-full text-base font-bold tracking-tight shadow-xl shadow-primary/20 hover:shadow-primary/35 hover:-translate-y-1 active:translate-y-0 transition-all duration-300 cursor-pointer flex items-center gap-2.5"
           >
             <span>Start a project</span>
-            <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1.5" />
+            <AnimatedArrowRight size={18} />
           </Button>
         </motion.div>
 
@@ -120,9 +125,9 @@ export function CTA({ onStartProject }: CTAProps) {
           {SITE.email && (
             <a
               href={`mailto:${SITE.email}`}
-              className="flex items-center gap-2 hover:text-primary transition-colors font-medium"
+              className="group flex items-center gap-2 hover:text-primary transition-colors font-medium"
             >
-              <Mail className="h-4 w-4" />
+              <AnimatedMail size={16} className="text-primary" />
               <span>{SITE.email}</span>
             </a>
           )}
@@ -131,9 +136,9 @@ export function CTA({ onStartProject }: CTAProps) {
               href={`https://wa.me/${SITE.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-primary transition-colors font-medium"
+              className="group flex items-center gap-2 hover:text-primary transition-colors font-medium"
             >
-              <MessageSquare className="h-4 w-4" />
+              <AnimatedMessageSquare size={16} className="text-primary" />
               <span>WhatsApp Direct</span>
             </a>
           )}

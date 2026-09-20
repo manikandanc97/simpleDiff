@@ -14,6 +14,7 @@ import {
   Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnimatedArrowRight, AnimatedRotateCcw } from "@/components/ui/animated-icon";
 import { useLead } from "@/components/leads/lead-provider";
 import { cn } from "@/lib/utils";
 
@@ -165,13 +166,13 @@ export function ServicesView() {
       <div className="max-w-4xl mb-16 sm:mb-20">
         <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-          Studio Services
+          Software Engineering Services
         </span>
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground mb-6">
-          Services.
+          <span className="text-primary">Services.</span>
         </h1>
         <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed">
-          We design and build digital products that solve real business problems. Select the capabilities you need to configure your project scope.
+          We engineer and build custom software, web applications, and mobile platforms tailored to your business goals. Select the capabilities you need to configure your project scope.
         </p>
       </div>
 
@@ -254,7 +255,18 @@ export function ServicesView() {
 
                 {/* Service Title & Outcome */}
                 <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-3">
-                  {service.name}
+                  {(() => {
+                    const words = service.name.split(" ");
+                    if (words.length === 1) {
+                      return <span className="text-primary">{service.name}</span>;
+                    }
+                    const last = words.pop();
+                    return (
+                      <>
+                        {words.join(" ")} <span className="text-primary">{last}</span>
+                      </>
+                    );
+                  })()}
                 </h3>
                 <p className="text-base text-muted-foreground leading-relaxed mb-6">
                   {service.outcome}
@@ -315,9 +327,10 @@ export function ServicesView() {
                   <button
                     type="button"
                     onClick={() => setSelected(new Set())}
-                    className="text-xs text-muted-foreground hover:text-foreground underline ml-2 cursor-pointer"
+                    className="group text-xs text-muted-foreground hover:text-foreground underline ml-2 cursor-pointer inline-flex items-center gap-1"
                   >
-                    Clear
+                    <AnimatedRotateCcw size={11} />
+                    <span>Clear</span>
                   </button>
                 </div>
                 <p className="text-xs text-muted-foreground truncate">
@@ -327,9 +340,10 @@ export function ServicesView() {
 
               <Button
                 onClick={handleStartProject}
-                className="font-semibold text-xs sm:text-sm h-11 px-6 rounded-full shrink-0 cursor-pointer shadow-md hover:shadow-primary/30"
+                className="group/button font-semibold text-xs sm:text-sm h-11 px-6 rounded-full shrink-0 cursor-pointer shadow-md hover:shadow-primary/30 flex items-center gap-2"
               >
-                Start your project &rarr;
+                <span>Start your project</span>
+                <AnimatedArrowRight size={15} />
               </Button>
             </div>
           </motion.div>

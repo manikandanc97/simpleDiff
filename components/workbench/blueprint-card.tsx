@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { type Blueprint } from "@/lib/idea-engine";
 import { Button } from "@/components/ui/button";
 import { Clock, ArrowRight, CheckCircle2, MinusCircle } from "lucide-react";
+import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 
 interface BlueprintCardProps {
   blueprint: Blueprint;
@@ -28,7 +29,18 @@ export function BlueprintCard({ blueprint, onContact }: BlueprintCardProps) {
             SimpleDiff Blueprint
           </span>
           <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
-            {blueprint.type}
+            {(() => {
+              const words = blueprint.type.split(" ");
+              if (words.length === 1) {
+                return <span className="text-primary">{blueprint.type}</span>;
+              }
+              const last = words.pop();
+              return (
+                <>
+                  {words.join(" ")} <span className="text-primary">{last}</span>
+                </>
+              );
+            })()}
           </h3>
         </div>
         <div className="flex items-center gap-3">
@@ -110,10 +122,10 @@ export function BlueprintCard({ blueprint, onContact }: BlueprintCardProps) {
 
         <Button
           onClick={onContact}
-          className="font-medium text-xs sm:text-sm h-10 px-5 rounded-full cursor-pointer shadow-sm hover:shadow-primary/20 active:scale-[0.99] transition-all"
+          className="group/button font-medium text-xs sm:text-sm h-10 px-5 rounded-full cursor-pointer shadow-sm hover:shadow-primary/20 active:scale-[0.99] transition-all flex items-center gap-1.5"
         >
-          Discuss this blueprint with us
-          <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
+          <span>Discuss this blueprint with us</span>
+          <AnimatedArrowRight size={14} />
         </Button>
       </div>
     </motion.div>
