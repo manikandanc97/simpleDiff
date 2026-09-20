@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
@@ -60,10 +60,10 @@ function parseColorToHsl(colorStr: string): [number, number, number] {
 function getVariantByHue(hue: number): string {
   const normHue = ((hue % 360) + 360) % 360;
 
-  if (normHue >= 340 || normHue < 18) {
-    return "/images/hero-3d-coder-red.png"; // Red / Crimson / Coral
+  if (normHue >= 340 || normHue < 30) {
+    return "/images/hero-3d-coder-red.png"; // Red / Crimson / Coral (OKLCH red is ~25)
   }
-  if (normHue >= 18 && normHue < 60) {
+  if (normHue >= 30 && normHue < 60) {
     return "/images/hero-3d-coder-amber.png"; // Orange / Amber / Yellow
   }
   if (normHue >= 60 && normHue < 165) {
@@ -84,13 +84,13 @@ export function Hero3DCoder({ className }: { className?: string }) {
 
   // Dynamic image selection for ANY color in the world
   const shirtImage = useMemo(() => {
-    // 1. Direct ID matches for presets
-    if (theme.id === "emerald") return "/images/hero-3d-coder-green.png";
+    // 1. Direct ID matches for all SimpleThink presets
+    if (theme.id === "red" || theme.id === "rose") return "/images/hero-3d-coder-red.png";
+    if (theme.id === "green" || theme.id === "emerald") return "/images/hero-3d-coder-green.png";
     if (theme.id === "violet") return "/images/hero-3d-coder-violet.png";
     if (theme.id === "blue") return "/images/hero-3d-coder-blue.png";
     if (theme.id === "amber") return "/images/hero-3d-coder-amber.png";
     if (theme.id === "cyan") return "/images/hero-3d-coder-cyan.png";
-    if (theme.id === "rose") return "/images/hero-3d-coder-red.png";
 
     // 2. For ANY custom color picked via color wheel/picker:
     const [h] = parseColorToHsl(theme.primary);

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { motion } from "motion/react";
@@ -119,86 +119,63 @@ function ProjectVisualCanvas({ project }: { project: Project }) {
     );
   }
 
-  if (project.id === "proj-fintech") {
-    return (
-      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-violet-950 via-purple-950 to-zinc-950 p-6 sm:p-8 flex flex-col justify-between border border-purple-500/20 shadow-xl group-hover:border-purple-500/40 transition-colors">
-        <div className="relative z-10 flex items-center justify-between">
-          <span className="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-mono font-medium border border-purple-500/30">
-            Concept Study &bull; Mobile
-          </span>
-          <span className="text-xs text-purple-300/80 font-mono">iOS & Android</span>
-        </div>
-
-        <div className="relative z-10 space-y-2">
-          <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Minimalist Banking Flow
-          </h4>
-          <p className="text-xs sm:text-sm text-purple-100/70 max-w-sm">
-            Stripped of marketing banners, promotional popups, and 6-step confirmation fatigue.
-          </p>
-        </div>
-
-        <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
-          <span>Transfer Steps:</span>
-          <span className="text-purple-300 font-bold font-mono">6 screens &rarr; 2 taps</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (project.id === "proj-retail") {
+  if (project.id === "proj-viha") {
     return (
       <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-amber-950 via-stone-900 to-zinc-950 p-6 sm:p-8 flex flex-col justify-between border border-amber-500/20 shadow-xl group-hover:border-amber-500/40 transition-colors">
+        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_top,#d97706,transparent_70%)]" />
         <div className="relative z-10 flex items-center justify-between">
           <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-mono font-medium border border-amber-500/30">
-            Headless E-Commerce
+            Chettinad Heritage & Art
           </span>
           <span className="text-xs text-amber-300/80 font-mono font-bold">
-            Sub-500ms Loads
+            100% Handcrafted
           </span>
         </div>
 
         <div className="relative z-10 space-y-2">
           <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Editorial Brand Commerce
+            Viha Handicrafts
           </h4>
           <p className="text-xs sm:text-sm text-amber-100/70 max-w-sm">
-            Curated typography and headless performance without heavy plugin bloat.
+            Generational brass idols, Tanjore paintings, and Chettinad artifacts with direct WhatsApp buying flow.
           </p>
         </div>
 
         <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
-          <span>Checkout Speed:</span>
-          <span className="text-amber-400 font-bold font-mono">Instant One-Page Flow</span>
+          <span>Client Reach:</span>
+          <span className="text-amber-400 font-bold font-mono">Pan-India Direct Orders</span>
         </div>
       </div>
     );
   }
 
-  // Default / Operations Dashboard
+  // Dynamic Fallback for any newly added freelance project
   return (
-    <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-rose-950 via-zinc-900 to-zinc-950 p-6 sm:p-8 flex flex-col justify-between border border-rose-500/20 shadow-xl group-hover:border-rose-500/40 transition-colors">
+    <div
+      className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden p-6 sm:p-8 flex flex-col justify-between border border-border/60 shadow-xl group-hover:border-primary/40 transition-colors"
+      style={{ background: project.previewTheme?.previewBg || "linear-gradient(135deg, #111827 0%, #1f2937 100%)" }}
+    >
       <div className="relative z-10 flex items-center justify-between">
-        <span className="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-mono font-medium border border-rose-500/30">
-          Internal Systems & Web App
+        <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-mono font-medium border border-primary/30">
+          {project.category}
         </span>
-        <span className="text-xs text-rose-300/80 font-mono font-bold">
-          High-Signal UI
+        <span className="text-xs text-muted-foreground font-mono font-bold">
+          {project.year || "2025"}
         </span>
       </div>
 
       <div className="relative z-10 space-y-2">
         <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-          Operations Dashboard
+          {project.name}
         </h4>
-        <p className="text-xs sm:text-sm text-rose-100/70 max-w-sm">
-          Surfacing critical business exceptions rather than drowning teams in 50-column data tables.
+        <p className="text-xs sm:text-sm text-white/70 max-w-sm">
+          {project.description}
         </p>
       </div>
 
       <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
-        <span>Decision Clarity:</span>
-        <span className="text-rose-400 font-bold font-mono">Immediate Priorities</span>
+        <span>Milestone Result:</span>
+        <span className="text-emerald-400 font-bold font-mono">{project.result}</span>
       </div>
     </div>
   );
@@ -216,11 +193,12 @@ function ProjectShowcaseItem({
 
   return (
     <motion.article
+      id={project.id}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+      className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center scroll-mt-24"
     >
       {/* Visual Area (Alternates left or right based on index) */}
       <div
