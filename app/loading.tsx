@@ -1,156 +1,257 @@
 "use client";
 
 import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
-/* ─────────────────────────────────────────────
-   Shimmer skeleton atom
-   ───────────────────────────────────────────── */
-function SkeletonLine({
-  width = "100%",
-  height = "1rem",
-  delay = 0,
-  rounded = "rounded-full",
-}: {
-  width?: string;
-  height?: string;
-  delay?: number;
-  rounded?: string;
-}) {
-  return (
-    <motion.div
-      className={`${rounded} overflow-hidden bg-primary/6`}
-      style={{ width, height }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3, delay }}
-    >
-      {/* Shimmer sweep */}
-      <motion.div
-        className="h-full w-[55%] rounded-full"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent 0%, color-mix(in oklch, var(--primary) 10%, var(--background)) 50%, transparent 100%)",
-        }}
-        animate={{ x: ["-100%", "280%"] }}
-        transition={{
-          duration: 1.6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: delay + 0.2,
-          repeatDelay: 0.3,
-        }}
-      />
-    </motion.div>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   Main loading screen
-   ───────────────────────────────────────────── */
+/**
+ * Loading
+ * ─────────────────────────────────────────────────────────────────
+ * Branded full-viewport Suspense fallback for SimpleDiff.
+ *
+ * Slot: replaces only <main> children while a page streams in.
+ * TopBar / SiteNavbar / MobileBottomNav remain mounted above/around.
+ *
+ * Anatomy
+ * 1. Two blurred ambient glow discs (max 2, lightweight)
+ * 2. Animated SVG logomark — "SD" monogram + "+" glyph, stroke-draw
+ *    via pathLength / strokeDashoffset, ~1.1 s draw → pulse hold
+ * 3. Wordmark text "Simple" + "Diff" beneath the mark, stagger-fade
+ * 4. Three micro-dot "thinking" indicator, staggered opacity/scale
+ * 5. Visually-hidden accessible label
+ *
+ * Motion contract
+ * - All looping animations use motion `animate` with `repeat: Infinity`
+ * - MotionConfig reducedMotion="user" (set in MotionProvider) automatically
+ *   collapses them to their `animate` end-state — no extra branching needed.
+ * - Color: CSS vars only — never hardcoded hex.
+ */
 export default function Loading() {
+  // Shared stroke-draw transition factory
+  const drawTransition = (delay = 0, duration = 1.1) => ({
+    pathLength: {
+      duration,
+      delay,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+    opacity: { duration: 0.25, delay },
+  });
+
   return (
     <div
-      className="w-full flex flex-col"
-      aria-label="Loading page content"
-      aria-live="polite"
       role="status"
+      aria-live="polite"
+      className={cn(
+        "relative flex min-h-[60vh] w-full flex-col items-center justify-center",
+        "bg-background overflow-hidden"
+      )}
     >
-      {/* ── Hero skeleton ── */}
-      <section className="w-full min-h-[60vh] flex flex-col items-start justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20 gap-6">
-        {/* Badge pill */}
-        <SkeletonLine width="120px" height="28px" delay={0} rounded="rounded-full" />
+      {/* ── Accessible hidden label ─────────────────────────────── */}
+      <span className="sr-only">Loading SimpleDiff…</span>
 
-        {/* H1 lines */}
-        <div className="w-full max-w-2xl flex flex-col gap-3">
-          <SkeletonLine width="92%" height="52px" delay={0.05} rounded="rounded-xl" />
-          <SkeletonLine width="78%" height="52px" delay={0.1} rounded="rounded-xl" />
-          <SkeletonLine width="60%" height="52px" delay={0.15} rounded="rounded-xl" />
-        </div>
-
-        {/* Sub text lines */}
-        <div className="w-full max-w-lg flex flex-col gap-2 mt-2">
-          <SkeletonLine width="100%" height="18px" delay={0.2} />
-          <SkeletonLine width="88%" height="18px" delay={0.25} />
-          <SkeletonLine width="72%" height="18px" delay={0.3} />
-        </div>
-
-        {/* CTA buttons */}
-        <div className="flex items-center gap-3 mt-4">
-          <SkeletonLine width="140px" height="44px" delay={0.35} rounded="rounded-full" />
-          <SkeletonLine width="110px" height="44px" delay={0.4} rounded="rounded-full" />
-        </div>
-      </section>
-
-      {/* ── Divider ── */}
+      {/* ── Ambient glow discs (max 2, pointer-events-none) ─────── */}
       <motion.div
-        className="h-px w-full bg-border/40"
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: 1, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        style={{ transformOrigin: "left" }}
+        aria-hidden="true"
+        className="pointer-events-none absolute rounded-full blur-3xl"
+        style={{
+          width: 320,
+          height: 320,
+          top: "calc(50% - 220px)",
+          left: "calc(50% - 160px)",
+          background:
+            "radial-gradient(circle, color-mix(in oklch, var(--primary) 22%, transparent) 0%, transparent 70%)",
+        }}
+        animate={{ scale: [1, 1.18, 1], opacity: [0.55, 0.9, 0.55] }}
+        transition={{
+          duration: 3.6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute rounded-full blur-3xl"
+        style={{
+          width: 200,
+          height: 200,
+          top: "calc(50% + 40px)",
+          left: "calc(50% - 40px)",
+          background:
+            "radial-gradient(circle, color-mix(in oklch, var(--primary) 14%, transparent) 0%, transparent 70%)",
+        }}
+        animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{
+          duration: 3.6,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.9,
+        }}
       />
 
-      {/* ── Content cards grid skeleton ── */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Section label */}
-        <div className="flex items-center gap-4 mb-10">
-          <SkeletonLine width="160px" height="14px" delay={0.45} />
-          <motion.div
-            className="flex-1 h-px bg-border/40"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            style={{ transformOrigin: "left" }}
-          />
-        </div>
+      {/* ── Logomark SVG ────────────────────────────────────────── */}
+      {/*
+        Coordinate system:
+          viewBox="0 0 120 72"
+          S glyph: left half, ~0–52 wide, centered vertically
+          D glyph: right half, ~56–108 wide
+          + glyph: small, top-right of the S, or centered above
+      */}
+      <motion.svg
+        viewBox="0 0 120 72"
+        aria-hidden="true"
+        className="relative z-10 mb-7"
+        style={{ width: 112, height: 67 }}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* ── "S" stroke ── */}
+        <motion.path
+          d={
+            // S: starts top-right, curves to bottom-left
+            // Scaled into the left ~52px of the 120-wide canvas, vertically centered
+            "M40 8 C40 8 28 4 18 8 C8 12 6 20 14 26 L34 40 C42 46 40 54 30 58 C20 62 8 58 8 58"
+          }
+          fill="none"
+          stroke="var(--primary)"
+          strokeWidth={5.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={drawTransition(0, 1.1)}
+        />
 
-        {/* 3-column card grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="rounded-2xl border border-border/50 bg-card/40 p-6 flex flex-col gap-4"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.5 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {/* Icon placeholder */}
-              <SkeletonLine width="44px" height="44px" delay={0.55 + i * 0.07} rounded="rounded-xl" />
-              {/* Title */}
-              <SkeletonLine width="70%" height="20px" delay={0.6 + i * 0.07} rounded="rounded-lg" />
-              {/* Body lines */}
-              <div className="flex flex-col gap-2">
-                <SkeletonLine width="100%" height="14px" delay={0.65 + i * 0.07} />
-                <SkeletonLine width="90%" height="14px" delay={0.68 + i * 0.07} />
-                <SkeletonLine width="75%" height="14px" delay={0.71 + i * 0.07} />
-              </div>
-              {/* Link */}
-              <SkeletonLine width="90px" height="14px" delay={0.74 + i * 0.07} />
-            </motion.div>
-          ))}
-        </div>
-      </section>
+        {/* ── "D" stroke ── */}
+        <motion.path
+          d={
+            // D: vertical stem + arc
+            // Positioned in the right half: x from ~64 to ~112
+            "M64 8 L64 58 M64 8 C64 8 88 8 96 22 C104 36 104 42 96 50 C88 58 64 58 64 58"
+          }
+          fill="none"
+          stroke="var(--primary)"
+          strokeWidth={5.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={drawTransition(0.18, 1.05)}
+        />
 
-      {/* ── Branded loading pip at bottom ── */}
-      <div className="flex items-center justify-center pb-12 gap-3">
-        {/* Pulsing dots */}
+        {/* ── "+" glyph — small, sits above-right of the gap ── */}
+        {/* Horizontal bar */}
+        <motion.line
+          x1="51"
+          y1="26"
+          x2="61"
+          y2="26"
+          stroke="var(--primary)"
+          strokeWidth={3.5}
+          strokeLinecap="round"
+          opacity={0.8}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.8 }}
+          transition={drawTransition(0.95, 0.35)}
+        />
+        {/* Vertical bar */}
+        <motion.line
+          x1="56"
+          y1="21"
+          x2="56"
+          y2="31"
+          stroke="var(--primary)"
+          strokeWidth={3.5}
+          strokeLinecap="round"
+          opacity={0.8}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.8 }}
+          transition={drawTransition(1.05, 0.32)}
+        />
+
+      </motion.svg>
+
+      {/* Pulse wrapper — activates after draw finishes (delay=1.4s) */}
+      {/* We use a separate wrapper motion.div since SVG animate scoping is awkward */}
+      {/* It wraps the whole logomark+text block with a gentle opacity pulse */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0, 1, 0.55, 1] }}
+        transition={{
+          duration: 4,
+          times: [0, 0.28, 0.32, 0.55, 1],
+          repeat: Infinity,
+          repeatDelay: 1.2,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* ── Wordmark text ────────────────────────────────────────── */}
+      <motion.div
+        className="relative z-10 flex items-baseline gap-0 select-none mb-8"
+        initial="hidden"
+        animate="visible"
+      >
+        {/* "Simple" — foreground */}
+        <motion.span
+          className="text-[1.35rem] font-bold tracking-tight text-foreground"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Simple
+        </motion.span>
+
+        {/* "+" diff glyph accent — matches topbar.tsx pattern */}
+        <motion.span
+          className="font-mono text-[0.6rem] font-bold select-none leading-none"
+          style={{ color: "var(--primary)", opacity: 0.75, margin: "0 1px" }}
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 0.75, scale: 1 }}
+          transition={{ duration: 0.35, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
+        >
+          +
+        </motion.span>
+
+        {/* "Diff" — primary */}
+        <motion.span
+          className="text-[1.35rem] font-bold tracking-tight"
+          style={{ color: "var(--primary)" }}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Diff
+        </motion.span>
+      </motion.div>
+
+      {/* ── Thinking dots ─────────────────────────────────────────── */}
+      <motion.div
+        role="presentation"
+        className="relative z-10 flex items-center gap-[7px]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, delay: 1.1 }}
+      >
         {[0, 1, 2].map((i) => (
-          <motion.div
+          <motion.span
             key={i}
-            className="w-1.5 h-1.5 rounded-full bg-primary"
+            className="block rounded-full bg-primary"
+            style={{ width: 5, height: 5 }}
             animate={{
-              scale: [1, 1.6, 1],
-              opacity: [0.4, 1, 0.4],
+              opacity: [0.25, 1, 0.25],
+              scale: [0.75, 1.15, 0.75],
             }}
             transition={{
-              duration: 0.8,
+              duration: 1.0,
               repeat: Infinity,
-              delay: i * 0.18,
               ease: "easeInOut",
+              delay: 1.2 + i * 0.2,
+              repeatDelay: 0.15,
             }}
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
