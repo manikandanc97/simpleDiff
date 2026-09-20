@@ -106,7 +106,7 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
             href="/"
             onClick={closeMenu}
             className="group flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-ring rounded-lg outline-none"
-            aria-label="SimpleDiff Home"
+            aria-label="SimpleThink Home"
           >
             <motion.span
               className="text-xl sm:text-2xl font-bold tracking-tight text-foreground"
@@ -114,7 +114,7 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
               transition={{ type: "spring", stiffness: 380, damping: 38, mass: 0.8 }}
               style={{ transformOrigin: "left center" }}
             >
-              Simple<span className="text-primary transition-transform inline-block group-hover:scale-105 animate-pulse">Diff</span>
+              Simple<span className="text-primary transition-transform inline-block group-hover:scale-105 animate-pulse">Think</span>
             </motion.span>
           </Link>
 

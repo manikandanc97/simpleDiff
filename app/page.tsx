@@ -1,9 +1,9 @@
-import { WorkbenchHero } from "@/components/workbench/workbench-hero";
+﻿import { WorkbenchHero } from "@/components/workbench/workbench-hero";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { WhatWeBuild } from "@/components/sections/what-we-build";
 import { SelectedWork } from "@/components/sections/selected-work";
 import { HowWeWork } from "@/components/sections/how-we-work";
-import { WhySimpleDiff } from "@/components/sections/philosophy";
+import { WhySimpleThink } from "@/components/sections/philosophy";
 import { Industries } from "@/components/sections/industries";
 import { TechStack } from "@/components/sections/tech-stack";
 import { Testimonials } from "@/components/sections/testimonials";
@@ -28,8 +28,8 @@ export default function Home() {
       {/* 06 — HOW WE WORK */}
       <HowWeWork />
 
-      {/* 07 — WHY SIMPLEDIFF */}
-      <WhySimpleDiff />
+      {/* 07 — Why SimpleThink */}
+      <WhySimpleThink />
 
       {/* 08 — INDUSTRIES */}
       <Industries />

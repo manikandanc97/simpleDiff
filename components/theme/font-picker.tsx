@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useMemo, useEffect } from "react";
 import {
@@ -48,7 +48,7 @@ const CATEGORIES: { id: GoogleFontCategory; label: string }[] = [
 ];
 
 const PRESET_PREVIEWS = [
-  { label: "Company Name", text: "SimpleDiff — Keep It Simple. Make It Different." },
+  { label: "Company Name", text: "SimpleThink — Keep It Simple. Think It Different." },
   { label: "Sentence", text: "The quick brown fox jumps over the lazy dog." },
   { label: "Alphabet & Numbers", text: "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789" },
 ];
@@ -281,7 +281,7 @@ export function FontPicker({ onSelect }: { onSelect?: () => void }) {
                   )}
                 </div>
                 <p className="text-xs text-muted-foreground line-clamp-1">
-                  Original SimpleDiff high-contrast modern geometric sans-serif
+                  Original SimpleThink high-contrast modern geometric sans-serif
                 </p>
                 <p className="text-sm text-foreground/90 font-sans mt-0.5 truncate">
                   {previewText}

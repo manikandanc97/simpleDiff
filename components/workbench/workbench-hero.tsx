@@ -156,7 +156,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                   <AnimatedWord word="Simple." delay={0.19} className="text-primary" />
                 </span>
                 <span className="flex flex-wrap items-center justify-center lg:justify-start gap-x-3">
-                  <AnimatedWord word="Make" delay={0.28} />
+                  <AnimatedWord word="Think" delay={0.28} />
                   <AnimatedWord word="It" delay={0.33} />
                   <motion.span
                     initial={{ opacity: 0, y: 24 }}

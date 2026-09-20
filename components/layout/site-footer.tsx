@@ -60,16 +60,16 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
               <Link
                 href="/"
                 className="inline-flex items-center text-2xl font-bold tracking-tight text-foreground focus-visible:ring-2 focus-visible:ring-ring outline-none"
-                aria-label="SimpleDiff Home"
+                aria-label="SimpleThink Home"
               >
                 <span>
-                  Simple<span className="text-primary font-bold inline-block animate-pulse">Diff</span>
+                  Simple<span className="text-primary font-bold inline-block animate-pulse">Think</span>
                 </span>
               </Link>
               <p className="text-lg font-medium text-foreground/90 max-w-sm leading-snug">
                 Keep It Simple.
                 <br />
-                Make It Different.
+                Think It Different.
               </p>
               <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
                 A premier software development company engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions for ambitious businesses and founders.
@@ -189,10 +189,10 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
         {/* Copyright & Bottom Bar */}
         <div className="pt-8 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>
-            &copy; {new Date().getFullYear()} SimpleDiff Software Technologies. All rights reserved.
+            &copy; {new Date().getFullYear()} SimpleThink Software Technologies. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <span>Keep It Simple. Make It Different.</span>
+            <span>Keep It Simple. Think It Different.</span>
           </div>
         </div>
       </div>

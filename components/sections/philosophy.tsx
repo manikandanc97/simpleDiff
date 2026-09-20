@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
@@ -32,12 +32,12 @@ const STATS = [
   { value: "<500ms", label: "Target Core Web Vitals" },
 ];
 
-export function WhySimpleDiff() {
+export function WhySimpleThink() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="why-simplediff" className="py-20 sm:py-28 bg-background border-t border-border relative overflow-hidden">
+    <section id="why-simplethink" className="py-20 sm:py-28 bg-background border-t border-border relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-40" />
 
@@ -53,7 +53,7 @@ export function WhySimpleDiff() {
             >
               <span className="w-2 h-2 rounded-full bg-primary" />
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary font-semibold">
-                Why SimpleDiff
+                Why SimpleThink
               </span>
             </motion.div>
 
@@ -77,9 +77,9 @@ export function WhySimpleDiff() {
             </motion.h2>
           </div>
 
-          {/* Dedicated Section Theme Dock Slot for Why SimpleDiff */}
+          {/* Dedicated Section Theme Dock Slot for Why SimpleThink */}
           <div className="shrink-0">
-            <SectionDockSlot sectionId="why-simplediff" label="Why SimpleDiff" />
+            <SectionDockSlot sectionId="why-simplethink" label="Why SimpleThink" />
           </div>
         </div>
 

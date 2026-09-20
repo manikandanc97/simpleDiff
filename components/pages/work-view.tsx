@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion } from "motion/react";
@@ -44,7 +44,7 @@ function SimpleDifferentToggle({
           )}
         >
           <AnimatedSparkles size={12} />
-          <span>SimpleDiff</span>
+          <span>SimpleThink</span>
         </button>
       </div>
       <p className="text-xs text-foreground/80 leading-relaxed font-mono">

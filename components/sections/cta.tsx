@@ -82,7 +82,7 @@ export function CTA({ onStartProject }: CTAProps) {
         >
           Let&apos;s make it <span className="text-foreground font-semibold">simple</span>.
           <br />
-          Let&apos;s make it{" "}
+          Let&apos;s think it{" "}
           <span className="text-primary font-bold transition-colors duration-500">different.</span>
         </motion.div>
 

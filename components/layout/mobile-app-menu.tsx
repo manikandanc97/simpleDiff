@@ -117,12 +117,12 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
             <div className="px-5 py-3 border-b border-border/60 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-primary/10 text-primary border border-primary/25 flex items-center justify-center font-bold text-sm">
-                  S<span className="text-primary font-black">D</span>
+                  S<span className="text-primary font-black">T</span>
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
                     <span className="font-bold text-sm tracking-tight text-foreground">
-                      Simple<span className="text-primary">Diff</span>
+                      Simple<span className="text-primary">Think</span>
                     </span>
                     <span className="inline-flex items-center text-[10px] font-medium text-emerald-500 bg-emerald-500/10 px-1.5 py-0.2 rounded-full">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse mr-1" />
@@ -313,13 +313,13 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
 
                 <div className="flex items-center justify-between px-2 text-[11px] text-muted-foreground">
                   <a
-                    href="mailto:hello@simplediff.design"
+                    href="mailto:hello@SimpleThink.design"
                     className="group inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
                   >
                     <AnimatedMail size={13} className="text-primary" />
-                    <span>hello@simplediff.design</span>
+                    <span>hello@SimpleThink.design</span>
                   </a>
-                  <span className="font-mono text-[10px]">SimpleDiff Software v2.4</span>
+                  <span className="font-mono text-[10px]">SimpleThink Software v2.4</span>
                 </div>
               </div>
             </div>

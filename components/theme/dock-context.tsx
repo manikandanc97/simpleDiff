@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, {
   createContext,
@@ -61,7 +61,7 @@ export function DockProvider({ children }: { children: React.ReactNode }) {
       if (slots.length === 0) {
         if (activeSlot !== "floating") {
           setActiveSlot("floating");
-          setActiveLabel("SimpleDiff");
+          setActiveLabel("SimpleThink");
         }
         return;
       }

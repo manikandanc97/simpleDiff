@@ -1,4 +1,4 @@
-export type GoogleFontCategory =
+﻿export type GoogleFontCategory =
   | "all"
   | "sans-serif"
   | "serif"
@@ -553,7 +553,7 @@ export function preloadFontPreviewBatch(fonts: GoogleFont[]): void {
 
   const chunkSize = 25;
   for (let i = 0; i < fonts.length; i += chunkSize) {
-    const chunkId = `simplediff-preview-batch-${i}`;
+    const chunkId = `SimpleThink-preview-batch-${i}`;
     if (document.getElementById(chunkId)) continue;
 
     const chunk = fonts.slice(i, i + chunkSize);

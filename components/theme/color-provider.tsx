@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { createContext, useContext, useSyncExternalStore } from "react";
 import { COLOR_THEMES, createCustomColorTheme, type ColorTheme } from "@/lib/colors";
@@ -25,7 +25,7 @@ function subscribe(callback: () => void) {
 
 function getThemeSnapshot(): string {
   try {
-    return localStorage.getItem("simplediff-theme") || "blue";
+    return localStorage.getItem("SimpleThink-theme") || "blue";
   } catch {
     return "blue";
   }
@@ -33,7 +33,7 @@ function getThemeSnapshot(): string {
 
 function getCustomColorSnapshot(): string {
   try {
-    return localStorage.getItem("simplediff-custom-color") || "#2563EB";
+    return localStorage.getItem("SimpleThink-custom-color") || "#2563EB";
   } catch {
     return "#2563EB";
   }
@@ -41,7 +41,7 @@ function getCustomColorSnapshot(): string {
 
 function getModeSnapshot(): "light" | "dark" {
   try {
-    const stored = localStorage.getItem("simplediff-mode");
+    const stored = localStorage.getItem("SimpleThink-mode");
     if (stored === "light" || stored === "dark") return stored;
     return document.documentElement.classList.contains("dark") ? "dark" : "light";
   } catch {
@@ -79,7 +79,7 @@ export function ThemeColorProvider({ children }: { children: React.ReactNode }) 
     const found = COLOR_THEMES.find((t) => t.id === id);
     if (found) {
       try {
-        localStorage.setItem("simplediff-theme", id);
+        localStorage.setItem("SimpleThink-theme", id);
       } catch {}
 
       applyThemeToDOM(found);
@@ -92,8 +92,8 @@ export function ThemeColorProvider({ children }: { children: React.ReactNode }) 
 
   const setCustomColor = (hex: string) => {
     try {
-      localStorage.setItem("simplediff-theme", "custom");
-      localStorage.setItem("simplediff-custom-color", hex);
+      localStorage.setItem("SimpleThink-theme", "custom");
+      localStorage.setItem("SimpleThink-custom-color", hex);
     } catch {}
 
     const customTheme = createCustomColorTheme(hex);
@@ -106,7 +106,7 @@ export function ThemeColorProvider({ children }: { children: React.ReactNode }) 
 
   const setMode = (newMode: "light" | "dark") => {
     try {
-      localStorage.setItem("simplediff-mode", newMode);
+      localStorage.setItem("SimpleThink-mode", newMode);
     } catch {}
 
     const root = document.documentElement;

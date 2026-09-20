@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "motion/react";
@@ -14,7 +14,7 @@ const TESTIMONIALS = [
     industry: "FinTech",
     stars: 5,
     quote:
-      "SimpleDiff didn't just build our dashboard — they challenged every assumption we had about the product. The final result is something none of our internal team could have conceived. Three months in and our reconciliation time dropped by 68%.",
+      "SimpleThink didn't just build our dashboard — they challenged every assumption we had about the product. The final result is something none of our internal team could have conceived. Three months in and our reconciliation time dropped by 68%.",
     initials: "AM",
   },
   {
@@ -25,7 +25,7 @@ const TESTIMONIALS = [
     industry: "HealthTech",
     stars: 5,
     quote:
-      "We'd worked with two agencies before. Both over-promised and under-delivered. SimpleDiff was the opposite — realistic scope, weekly visible progress, and a product that our doctors actually enjoy using. Exceptional engineering discipline.",
+      "We'd worked with two agencies before. Both over-promised and under-delivered. SimpleThink was the opposite — realistic scope, weekly visible progress, and a product that our doctors actually enjoy using. Exceptional engineering discipline.",
     initials: "PR",
   },
   {
@@ -47,7 +47,7 @@ const TESTIMONIALS = [
     industry: "Logistics",
     stars: 5,
     quote:
-      "From onboarding to handover, everything was documented, tracked, and delivered on time. The dispatch system reduced manual ops by 60%. SimpleDiff is the kind of technical partner you keep long-term, not just for a project.",
+      "From onboarding to handover, everything was documented, tracked, and delivered on time. The dispatch system reduced manual ops by 60%. SimpleThink is the kind of technical partner you keep long-term, not just for a project.",
     initials: "MN",
   },
 ];

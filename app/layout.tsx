@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -30,28 +30,28 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "SimpleDiff — Keep It Simple. Make It Different.",
-    template: "%s · SimpleDiff",
+    default: "SimpleThink — Keep It Simple. Think It Different.",
+    template: "%s · SimpleThink",
   },
   description:
-    "SimpleDiff is a software development company that engineers custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise digital solutions.",
+    "SimpleThink is a software development company that engineers custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise digital solutions.",
   openGraph: {
-    title: "SimpleDiff — Keep It Simple. Make It Different.",
+    title: "SimpleThink — Keep It Simple. Think It Different.",
     description:
       "Software development company engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions.",
     url: SITE.url,
-    siteName: "SimpleDiff",
+    siteName: "SimpleThink",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SimpleDiff — Keep It Simple. Make It Different.",
+    title: "SimpleThink — Keep It Simple. Think It Different.",
     description:
       "Software development company engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions.",
   },
 };
 
-const THEME_SCRIPT = `(function(){try{var allowedThemes={red:{primary:'oklch(0.60 0.24 25)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.60 0.24 25 / 0.5)',textLight:'oklch(0.42 0.24 25)',textDark:'oklch(0.80 0.20 25)'},green:{primary:'oklch(0.65 0.20 145)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.65 0.20 145 / 0.5)',textLight:'oklch(0.40 0.20 145)',textDark:'oklch(0.82 0.18 145)'},blue:{primary:'oklch(0.60 0.23 250)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.60 0.23 250 / 0.5)',textLight:'oklch(0.40 0.22 250)',textDark:'oklch(0.80 0.18 250)'},violet:{primary:'oklch(0.62 0.24 285)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.62 0.24 285 / 0.5)',textLight:'oklch(0.42 0.24 285)',textDark:'oklch(0.80 0.18 285)'},amber:{primary:'oklch(0.74 0.19 65)',foreground:'oklch(0.145 0 0)',ring:'oklch(0.74 0.19 65 / 0.5)',textLight:'oklch(0.38 0.18 60)',textDark:'oklch(0.86 0.18 70)'},emerald:{primary:'oklch(0.65 0.19 155)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.65 0.19 155 / 0.5)',textLight:'oklch(0.40 0.18 150)',textDark:'oklch(0.82 0.16 150)'},cyan:{primary:'oklch(0.72 0.17 215)',foreground:'oklch(0.145 0 0)',ring:'oklch(0.72 0.17 215 / 0.5)',textLight:'oklch(0.40 0.18 215)',textDark:'oklch(0.85 0.16 215)'},rose:{primary:'oklch(0.65 0.24 20)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.65 0.24 20 / 0.5)',textLight:'oklch(0.42 0.24 20)',textDark:'oklch(0.80 0.19 20)'},fuchsia:{primary:'oklch(0.64 0.25 325)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.64 0.25 325 / 0.5)',textLight:'oklch(0.42 0.24 325)',textDark:'oklch(0.80 0.19 325)'}};var storedMode=localStorage.getItem('simplediff-mode');var mode=(storedMode==='light'||storedMode==='dark')?storedMode:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var storedTheme=localStorage.getItem('simplediff-theme');var doc=document.documentElement;if(mode==='dark'){doc.classList.add('dark');}else{doc.classList.remove('dark');}if(storedTheme==='custom'){var customHex=localStorage.getItem('simplediff-custom-color')||'#2563EB';doc.style.setProperty('--primary',customHex);doc.style.setProperty('--primary-foreground','oklch(0.985 0 0)');doc.style.setProperty('--ring','color-mix(in srgb, '+customHex+' 50%, transparent)');doc.style.setProperty('--primary-text',customHex);}else{var themeId=(storedTheme&&allowedThemes[storedTheme])?storedTheme:'blue';var t=allowedThemes[themeId];doc.style.setProperty('--primary',t.primary);doc.style.setProperty('--primary-foreground',t.foreground);doc.style.setProperty('--ring',t.ring);doc.style.setProperty('--primary-text',mode==='dark'?t.textDark:t.textLight);}var storedFont=localStorage.getItem('simplediff-font');if(storedFont&&storedFont!=='Geist'&&storedFont!=='default'){var safeId='google-font-'+storedFont.toLowerCase().replace(/[^a-z0-9]/g,'-');var fontLink=document.createElement('link');fontLink.id=safeId;fontLink.rel='stylesheet';fontLink.href='https://fonts.googleapis.com/css2?family='+encodeURIComponent(storedFont)+':wght@400;500;600;700;800;900&display=swap';document.head.appendChild(fontLink);var fontCss='"'+storedFont+'", system-ui, sans-serif';doc.style.setProperty('--font-sans',fontCss);doc.style.setProperty('--font-geist-sans',fontCss);doc.style.fontFamily=fontCss;}}catch(e){}})();`;
+const THEME_SCRIPT = `(function(){try{var allowedThemes={red:{primary:'oklch(0.60 0.24 25)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.60 0.24 25 / 0.5)',textLight:'oklch(0.42 0.24 25)',textDark:'oklch(0.80 0.20 25)'},green:{primary:'oklch(0.65 0.20 145)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.65 0.20 145 / 0.5)',textLight:'oklch(0.40 0.20 145)',textDark:'oklch(0.82 0.18 145)'},blue:{primary:'oklch(0.60 0.23 250)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.60 0.23 250 / 0.5)',textLight:'oklch(0.40 0.22 250)',textDark:'oklch(0.80 0.18 250)'},violet:{primary:'oklch(0.62 0.24 285)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.62 0.24 285 / 0.5)',textLight:'oklch(0.42 0.24 285)',textDark:'oklch(0.80 0.18 285)'},amber:{primary:'oklch(0.74 0.19 65)',foreground:'oklch(0.145 0 0)',ring:'oklch(0.74 0.19 65 / 0.5)',textLight:'oklch(0.38 0.18 60)',textDark:'oklch(0.86 0.18 70)'},emerald:{primary:'oklch(0.65 0.19 155)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.65 0.19 155 / 0.5)',textLight:'oklch(0.40 0.18 150)',textDark:'oklch(0.82 0.16 150)'},cyan:{primary:'oklch(0.72 0.17 215)',foreground:'oklch(0.145 0 0)',ring:'oklch(0.72 0.17 215 / 0.5)',textLight:'oklch(0.40 0.18 215)',textDark:'oklch(0.85 0.16 215)'},rose:{primary:'oklch(0.65 0.24 20)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.65 0.24 20 / 0.5)',textLight:'oklch(0.42 0.24 20)',textDark:'oklch(0.80 0.19 20)'},fuchsia:{primary:'oklch(0.64 0.25 325)',foreground:'oklch(0.985 0 0)',ring:'oklch(0.64 0.25 325 / 0.5)',textLight:'oklch(0.42 0.24 325)',textDark:'oklch(0.80 0.19 325)'}};var storedMode=localStorage.getItem('SimpleThink-mode');var mode=(storedMode==='light'||storedMode==='dark')?storedMode:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var storedTheme=localStorage.getItem('SimpleThink-theme');var doc=document.documentElement;if(mode==='dark'){doc.classList.add('dark');}else{doc.classList.remove('dark');}if(storedTheme==='custom'){var customHex=localStorage.getItem('SimpleThink-custom-color')||'#2563EB';doc.style.setProperty('--primary',customHex);doc.style.setProperty('--primary-foreground','oklch(0.985 0 0)');doc.style.setProperty('--ring','color-mix(in srgb, '+customHex+' 50%, transparent)');doc.style.setProperty('--primary-text',customHex);}else{var themeId=(storedTheme&&allowedThemes[storedTheme])?storedTheme:'blue';var t=allowedThemes[themeId];doc.style.setProperty('--primary',t.primary);doc.style.setProperty('--primary-foreground',t.foreground);doc.style.setProperty('--ring',t.ring);doc.style.setProperty('--primary-text',mode==='dark'?t.textDark:t.textLight);}var storedFont=localStorage.getItem('SimpleThink-font');if(storedFont&&storedFont!=='Geist'&&storedFont!=='default'){var safeId='google-font-'+storedFont.toLowerCase().replace(/[^a-z0-9]/g,'-');var fontLink=document.createElement('link');fontLink.id=safeId;fontLink.rel='stylesheet';fontLink.href='https://fonts.googleapis.com/css2?family='+encodeURIComponent(storedFont)+':wght@400;500;600;700;800;900&display=swap';document.head.appendChild(fontLink);var fontCss='"'+storedFont+'", system-ui, sans-serif';doc.style.setProperty('--font-sans',fontCss);doc.style.setProperty('--font-geist-sans',fontCss);doc.style.fontFamily=fontCss;}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

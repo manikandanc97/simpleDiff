@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Terminal, Layers, ShieldCheck } from "lucide-react";
 
 const CODE_SNIPPETS = [
-  "const app = SimpleDiff.create();",
+  "const app = SimpleThink.create();",
   "await app.deploy({ speed: 'instant' });",
   "// 🚀 MVP launched in 48 hours",
   "export default function Product() {}",
@@ -198,7 +198,7 @@ export function Hero3DCoder({ className }: { className?: string }) {
             >
               <Image
                 src={shirtImage}
-                alt="3D Developer Coding - SimpleDiff"
+                alt="3D Developer Coding - SimpleThink"
                 width={600}
                 height={600}
                 priority

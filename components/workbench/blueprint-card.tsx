@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "motion/react";
 import { type Blueprint } from "@/lib/idea-engine";
@@ -26,7 +26,7 @@ export function BlueprintCard({ blueprint, onContact }: BlueprintCardProps) {
       <div className="px-6 py-5 bg-muted/20 border-b border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-[11px] font-mono font-semibold uppercase tracking-widest text-primary">
-            SimpleDiff Blueprint
+            SimpleThink Blueprint
           </span>
           <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
             {(() => {
@@ -55,7 +55,7 @@ export function BlueprintCard({ blueprint, onContact }: BlueprintCardProps) {
         </div>
       </div>
 
-      {/* Editorial Comparison: What typical agencies quote vs How SimpleDiff starts */}
+      {/* Editorial Comparison: What typical agencies quote vs How SimpleThink starts */}
       <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border/60">
         {/* Left: What We Cut */}
         <div className="p-6 sm:p-8 space-y-4 bg-muted/5">

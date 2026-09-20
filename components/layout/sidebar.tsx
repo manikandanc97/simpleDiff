@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,7 +13,7 @@ export function Sidebar() {
     <>
       {/* Desktop Sidebar (Left Dock) */}
       <aside className="hidden md:flex flex-col items-center py-4 fixed top-0 left-0 bottom-0 w-16 bg-background border-r border-border z-50">
-        <Link href="/" className="mb-8 font-bold text-xl select-none" title="SimpleDiff" aria-label="SimpleDiff Home">
+        <Link href="/" className="mb-8 font-bold text-xl select-none" title="SimpleThink" aria-label="SimpleThink Home">
           <span className="text-primary">S</span>D
         </Link>
         <nav aria-label="Primary" className="flex flex-col gap-4">

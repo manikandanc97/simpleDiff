@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "motion/react";
@@ -58,7 +58,7 @@ const FAQS = [
     id: "faq-09",
     question: "Will I own the code and IP?",
     answer:
-      "Absolutely. All code, assets, and intellectual property transfer to you upon final payment. We retain no rights, no backdoors, no dependencies on SimpleDiff-specific infrastructure.",
+      "Absolutely. All code, assets, and intellectual property transfer to you upon final payment. We retain no rights, no backdoors, no dependencies on SimpleThink-specific infrastructure.",
   },
   {
     id: "faq-10",
@@ -248,7 +248,7 @@ export function FAQ() {
         >
           <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground/60">
             Still have questions?{" "}
-            <span className="text-primary">hello@simplediff.in</span>
+            <span className="text-primary">hello@SimpleThink.in</span>
           </p>
         </motion.div>
       </div>

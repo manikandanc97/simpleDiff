@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import { LeadForm } from "@/components/leads/lead-form";
 import {
@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with SimpleDiff. Discuss your web application, mobile app, software architecture, or schedule a direct engineering consultation.",
+    "Get in touch with SimpleThink. Discuss your web application, mobile app, software architecture, or schedule a direct engineering consultation.",
 };
 
 const BENEFITS = [

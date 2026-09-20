@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { createContext, useContext, useEffect, useSyncExternalStore } from "react";
 import { applyFontToDOM, DEFAULT_FONT_NAME, loadGoogleFontToDOM } from "@/lib/fonts";
@@ -23,7 +23,7 @@ function subscribe(callback: () => void) {
 
 function getFontSnapshot(): string {
   try {
-    return localStorage.getItem("simplediff-font") || DEFAULT_FONT_NAME;
+    return localStorage.getItem("SimpleThink-font") || DEFAULT_FONT_NAME;
   } catch {
     return DEFAULT_FONT_NAME;
   }
@@ -42,9 +42,9 @@ export function FontProvider({ children }: { children: React.ReactNode }) {
     const trimmed = fontName.trim();
     try {
       if (!trimmed || trimmed === DEFAULT_FONT_NAME || trimmed.toLowerCase() === "default") {
-        localStorage.removeItem("simplediff-font");
+        localStorage.removeItem("SimpleThink-font");
       } else {
-        localStorage.setItem("simplediff-font", trimmed);
+        localStorage.setItem("SimpleThink-font", trimmed);
       }
     } catch {}
 

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { Mail, MessageSquare } from "lucide-react";
@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About SimpleDiff — A premier software development company built on the belief that custom software and digital systems should be simple, focused, and high-performance.",
+    "About SimpleThink — A premier software development company built on the belief that custom software and digital systems should be simple, focused, and high-performance.",
 };
 
 const PRINCIPLES = [
@@ -45,7 +45,7 @@ export default function AboutPage() {
       <div className="max-w-5xl mb-24 sm:mb-32">
         <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-          About SimpleDiff
+          About SimpleThink
         </span>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.08] mb-8">
@@ -75,7 +75,7 @@ export default function AboutPage() {
               We are a dedicated software development company working directly with founders, business owners, and engineering leaders who value architectural precision over bureaucratic overhead.
             </p>
             <p>
-              When you collaborate with SimpleDiff, you don&apos;t get handed off through account managers, junior coordinators, or outsourced layers. You work directly with the senior software engineers crafting your system.
+              When you collaborate with SimpleThink, you don&apos;t get handed off through account managers, junior coordinators, or outsourced layers. You work directly with the senior software engineers crafting your system.
             </p>
             <p>
               Our methodology combines deep brand taste with modern fullstack engineering — ensuring that every website, web application, mobile app, and SaaS system we launch looks world-class and performs under pressure.

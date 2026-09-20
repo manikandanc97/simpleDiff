@@ -35,7 +35,7 @@ export function Topbar({ onStartProject }: TopbarProps) {
         <Link href="/" className="hover:opacity-90 transition-opacity flex items-center gap-0 group">
           <span>Simple</span>
           <span className="font-mono text-diff-add text-[10px] font-bold select-none opacity-70 group-hover:opacity-100 transition-opacity mr-0.5">+</span>
-          <span className="text-primary">Diff</span>
+          <span className="text-primary">Think</span>
         </Link>
       </div>
 
