@@ -1,4 +1,4 @@
-﻿# SimpleThink
+# SimpleThink
 
 > **Keep It Simple. Think It Different.**
 
@@ -35,19 +35,18 @@ We eliminate boilerplate, over-engineering, and technical bloat to ship clean, f
 │   ├── robots.ts               # Robots.txt generator
 │   └── sitemap.ts              # Sitemap generator
 ├── components/
-│   ├── layout/                 # Sidebar, Topbar, Status-bar
+│   ├── layout/                 # SiteNavbar, TopBar, SiteFooter, MobileAppMenu
 │   ├── leads/                  # Lead dialog, form, and provider (real lead capture)
 │   ├── pages/                  # Page-level client views (work, services, lab)
-│   ├── sections/               # Home sections (what-we-build, philosophy, cta, build-your-idea)
-│   ├── theme/                  # Theme toggle, color picker, and color provider
+│   ├── sections/               # Home sections (what-we-build, philosophy, how-we-work, etc.)
+│   ├── theme/                  # Theme color provider, font provider, color picker dialog
 │   ├── ui/                     # UI components (dialog, button, command-palette, etc.)
-│   └── workbench/              # Interactive hero workbench and blueprint card
+│   └── workbench/              # 3D character hero workbench
 ├── lib/
 │   ├── site.ts                 # Centralized studio configuration (owner details, contacts)
 │   ├── nav.ts                  # Shared navigation items
 │   ├── colors.ts               # Theme palettes with WCAG-compliant high-contrast text
-│   ├── idea-engine.ts          # Deterministic idea classification and scope generator
-│   ├── idea-engine.test-cases.ts # Classification unit test suite
+│   ├── fonts.ts                # Curated typography collection
 │   ├── leads/                  # Lead schema (anti-spam, honeypot) & Server Actions
 │   └── data/                   # Projects and experiments data
 └── supabase/
@@ -127,11 +126,6 @@ npm run lint
 npm run build
 ```
 *All routes are fully static (`○`) for maximum performance and instant CDN edge delivery.*
-
-### Idea Engine Tests
-```bash
-npx tsx lib/idea-engine.test-cases.ts
-```
 
 ---
 
