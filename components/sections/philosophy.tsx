@@ -7,21 +7,21 @@ import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 const PRINCIPLES = [
   {
     id: "01",
-    title: "Clarity over cleverness",
+    title: "Not an agency. Not a freelancer.",
     description:
-      "Code should be easy to read. Interfaces should be easy to use. We don't build to show off; we build to solve real business problems without friction.",
+      "Agencies layer on project managers, account reps, and juniors — then charge you for all of it. Freelancers disappear when things get hard. We're a focused studio: senior engineers and designers who own your project end-to-end, every sprint.",
   },
   {
     id: "02",
-    title: "Purpose-driven scope",
+    title: "Scope that earns trust, not hours.",
     description:
-      "Every feature must justify its existence. If it doesn't serve the core purpose of the product, it gets cut. This keeps your build lean, fast, and cost-effective.",
+      "We don't bill by the hour. We scope per outcome — so our incentive is to build efficiently, not inflate timelines. Clear milestones, predictable costs, zero retrospective invoice surprises.",
   },
   {
     id: "03",
-    title: "Difference is in the details",
+    title: "One studio. Both disciplines.",
     description:
-      "By eliminating unnecessary noise, we create room for precise micro-interactions, robust performance, and real visual distinction that elevates your brand.",
+      "Design and engineering work in the same room from day one. No handoff documents, no translation loss, no 'the designer would have done it differently' moments. What ships is what was intended.",
   },
 ];
 
@@ -32,12 +32,12 @@ const STATS = [
   { value: "<500ms", label: "Target Core Web Vitals" },
 ];
 
-export function Philosophy() {
+export function WhySimpleDiff() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="philosophy" className="py-20 sm:py-28 bg-background border-t border-border relative overflow-hidden">
+    <section id="why-simplediff" className="py-20 sm:py-28 bg-background border-t border-border relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-40" />
 
@@ -53,7 +53,7 @@ export function Philosophy() {
             >
               <span className="w-2 h-2 rounded-full bg-primary" />
               <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary font-semibold">
-                The SimpleDiff Philosophy
+                Why SimpleDiff
               </span>
             </motion.div>
 
@@ -63,7 +63,7 @@ export function Philosophy() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-xl sm:text-2xl font-medium tracking-tight text-muted-foreground mb-3"
             >
-              Simple doesn&apos;t mean basic.
+              The studio built different.
             </motion.p>
 
             <motion.h2
@@ -72,14 +72,14 @@ export function Philosophy() {
               transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-[1.1]"
             >
-              Remove what&apos;s{" "}
-              <span className="text-primary transition-colors duration-500">unnecessary.</span>
+              Three reasons clients{" "}
+              <span className="text-primary transition-colors duration-500">choose us.</span>
             </motion.h2>
           </div>
 
-          {/* Dedicated Section Theme Dock Slot for Philosophy */}
+          {/* Dedicated Section Theme Dock Slot for Why SimpleDiff */}
           <div className="shrink-0">
-            <SectionDockSlot sectionId="philosophy" label="Philosophy" />
+            <SectionDockSlot sectionId="why-simplediff" label="Why SimpleDiff" />
           </div>
         </div>
 

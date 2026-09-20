@@ -10,9 +10,8 @@ import {
   Package2,
   Palette,
   Sparkles,
-  ArrowRight,
 } from "lucide-react";
-import { AnimatedArrowRight, AnimatedSend } from "@/components/ui/animated-icon";
+import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { useLead } from "@/components/leads/lead-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 
@@ -78,7 +77,8 @@ const SERVICES = [
 
 const SPRING = { type: "spring" as const, stiffness: 280, damping: 24 };
 
-function ServiceCard({
+// ─── Featured card (large, col-span-2) ──────────────────────────────────────
+function FeaturedCard({
   service,
   index,
   onInquire,
@@ -95,72 +95,233 @@ function ServiceCard({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ ...SPRING, delay: index * 0.07 }}
-      className="group relative rounded-3xl border border-border/80 bg-card p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1.5 overflow-hidden"
+      className="group relative col-span-1 md:col-span-2 rounded-3xl border border-border/70 bg-card overflow-hidden transition-all duration-300 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10"
     >
-      {/* Dynamic top accent highlight */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary transition-all duration-500" />
+      {/* Top accent */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary transition-all duration-500" />
 
-      {/* Top row: Number and Icon */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-3xl sm:text-4xl font-extrabold tracking-tight text-muted-foreground/30 group-hover:text-primary transition-colors font-mono select-none">
-            {service.id}
-          </span>
-          <div className="w-10 h-10 rounded-xl bg-muted/50 border border-border/60 flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:border-primary/40 group-hover:bg-primary/10 transition-all duration-300">
-            <Icon className="h-5 w-5" />
+      <div className="flex flex-col md:flex-row h-full">
+        {/* Left: content */}
+        <div className="flex flex-col justify-between p-7 sm:p-9 md:w-1/2">
+          <div>
+            {/* Number + Icon */}
+            <div className="flex items-center justify-between mb-8">
+              <span className="text-7xl font-black tracking-tighter text-muted-foreground/10 group-hover:text-primary/15 transition-colors font-mono select-none leading-none">
+                {service.id}
+              </span>
+              <div className="w-11 h-11 rounded-2xl border border-border/60 bg-muted/40 flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:border-primary/40 group-hover:bg-primary/10 transition-all duration-300">
+                <Icon className="h-5 w-5" />
+              </div>
+            </div>
+
+            <h3 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground mb-4 leading-tight group-hover:text-primary transition-colors duration-300">
+              {service.title}
+            </h3>
+            <p className="text-muted-foreground text-base leading-relaxed mb-8 max-w-sm">
+              {service.tagline}
+            </p>
+
+            {/* Pill deliverables */}
+            <div className="flex flex-wrap gap-2">
+              {service.deliverables.map((item, i) => (
+                <span
+                  key={i}
+                  className="px-3 py-1 rounded-full text-xs font-semibold border border-border/60 bg-muted/30 text-muted-foreground group-hover:border-primary/30 group-hover:bg-primary/5 group-hover:text-foreground transition-all duration-300"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Action row */}
+          <div className="flex items-center gap-4 mt-8 pt-6 border-t border-border/40">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
+            >
+              <span>Explore service</span>
+              <AnimatedArrowRight size={13} />
+            </Link>
+            <button
+              type="button"
+              onClick={() => onInquire(service.title)}
+              className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+            >
+              Request scope →
+            </button>
           </div>
         </div>
 
-        {/* 3D Claymorphic Illustration Display (Cloudi5 style, reactive to theme color) */}
-        <div className="relative w-full rounded-2xl bg-gradient-to-b from-muted/30 to-muted/10 border border-border/60 group-hover:border-primary/30 p-2 sm:p-3 mb-6 transition-all duration-500 overflow-hidden">
-          {/* Subtle dynamic glow puddle */}
-          <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500" />
-          <div className="relative z-10 transform group-hover:scale-[1.03] transition-transform duration-500 ease-out">
+        {/* Right: illustration */}
+        <div className="relative md:w-1/2 min-h-[220px] bg-gradient-to-br from-muted/20 via-muted/10 to-transparent flex items-center justify-center p-6 border-t md:border-t-0 md:border-l border-border/40">
+          <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/4 transition-colors duration-500" />
+          <div className="relative z-10 w-full max-w-xs transform group-hover:scale-[1.04] transition-transform duration-500 ease-out">
             <Illustration />
           </div>
         </div>
+      </div>
+    </motion.div>
+  );
+}
 
-        {/* Title and Tagline */}
-        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
-          {service.title}
-        </h3>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-5">
-          {service.tagline}
-        </p>
+// ─── Tall card ───────────────────────────────────────────────────────────────
+function TallCard({
+  service,
+  index,
+  onInquire,
+}: {
+  service: (typeof SERVICES)[0];
+  index: number;
+  onInquire: (name: string) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const Icon = service.icon;
+  const Illustration = service.Illustration;
 
-        {/* Deliverables list */}
-        <div className="space-y-2 pt-3 border-t border-border/50">
-          {service.deliverables.map((item, i) => (
-            <div
-              key={i}
-              className="text-xs text-muted-foreground/90 flex items-center gap-2 font-medium"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary/60 group-hover:bg-primary transition-colors" />
-              <span>{item}</span>
-            </div>
-          ))}
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ ...SPRING, delay: index * 0.07 }}
+      className="group relative rounded-3xl border border-border/70 bg-card overflow-hidden flex flex-col transition-all duration-300 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10"
+    >
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary transition-all duration-500" />
+
+      {/* Illustration panel */}
+      <div className="relative bg-gradient-to-b from-muted/25 to-transparent flex items-center justify-center p-6 border-b border-border/40 min-h-[180px]">
+        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/4 transition-colors duration-500" />
+        {/* Giant ghost number */}
+        <span className="absolute bottom-2 right-4 text-8xl font-black tracking-tighter text-muted-foreground/8 group-hover:text-primary/10 transition-colors font-mono select-none leading-none">
+          {service.id}
+        </span>
+        <div className="relative z-10 w-full max-w-[180px] transform group-hover:scale-[1.04] transition-transform duration-500 ease-out">
+          <Illustration />
         </div>
       </div>
 
-      {/* Card Action Link */}
-      <div className="pt-6 mt-6 border-t border-border/40 flex items-center justify-between">
+      {/* Content */}
+      <div className="flex flex-col justify-between flex-1 p-6">
+        <div>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 rounded-xl border border-border/60 bg-muted/40 flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:border-primary/40 group-hover:bg-primary/10 transition-all duration-300">
+              <Icon className="h-4 w-4" />
+            </div>
+            <h3 className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
+              {service.title}
+            </h3>
+          </div>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-5">
+            {service.tagline}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {service.deliverables.map((item, i) => (
+              <span
+                key={i}
+                className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold border border-border/60 bg-muted/30 text-muted-foreground group-hover:border-primary/30 group-hover:bg-primary/5 group-hover:text-foreground transition-all duration-300"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between mt-6 pt-4 border-t border-border/40">
+          <Link
+            href="/services"
+            className="text-xs font-semibold text-foreground/70 hover:text-primary transition-colors inline-flex items-center gap-1"
+          >
+            <span>Explore</span>
+            <AnimatedArrowRight size={11} />
+          </Link>
+          <button
+            type="button"
+            onClick={() => onInquire(service.title)}
+            className="text-[11px] font-mono text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+          >
+            Request →
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── Compact horizontal strip card ───────────────────────────────────────────
+function StripCard({
+  service,
+  index,
+  onInquire,
+  isLast,
+}: {
+  service: (typeof SERVICES)[0];
+  index: number;
+  onInquire: (name: string) => void;
+  isLast?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const Icon = service.icon;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: -16 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ ...SPRING, delay: index * 0.07 }}
+      className={`group flex items-center gap-6 py-6 ${!isLast ? "border-b border-border/40" : ""} transition-all duration-200 cursor-default`}
+    >
+      {/* Number */}
+      <span className="text-4xl font-black font-mono text-muted-foreground/20 group-hover:text-primary/30 transition-colors select-none w-12 shrink-0 leading-none">
+        {service.id}
+      </span>
+
+      {/* Icon */}
+      <div className="w-10 h-10 rounded-xl border border-border/60 bg-muted/30 flex items-center justify-center text-muted-foreground group-hover:text-primary group-hover:border-primary/40 group-hover:bg-primary/10 transition-all duration-300 shrink-0">
+        <Icon className="h-4 w-4" />
+      </div>
+
+      {/* Title + tagline */}
+      <div className="flex-1 min-w-0">
+        <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors leading-tight mb-0.5">
+          {service.title}
+        </h3>
+        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-1">
+          {service.tagline}
+        </p>
+      </div>
+
+      {/* Pills — hidden on small screens */}
+      <div className="hidden lg:flex flex-wrap gap-1.5 max-w-[340px]">
+        {service.deliverables.map((item, i) => (
+          <span
+            key={i}
+            className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-border/50 bg-muted/20 text-muted-foreground group-hover:border-primary/25 group-hover:text-foreground transition-all duration-300"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+
+      {/* Action */}
+      <div className="shrink-0 flex items-center gap-3">
         <Link
           href="/services"
-          className="text-xs font-semibold text-foreground/80 hover:text-primary flex items-center gap-1.5 transition-colors group/link"
+          className="text-xs font-semibold text-foreground/60 hover:text-primary transition-colors inline-flex items-center gap-1"
         >
-          <span>Explore service</span>
           <AnimatedArrowRight size={12} />
         </Link>
         <button
           type="button"
           onClick={() => onInquire(service.title)}
-          className="group text-[11px] font-mono text-muted-foreground hover:text-primary cursor-pointer transition-colors flex items-center gap-1"
+          className="text-[10px] font-mono text-muted-foreground hover:text-primary transition-colors cursor-pointer hidden sm:block"
         >
-          <span>Request scope</span>
-          <AnimatedSend size={11} className="opacity-70 group-hover:opacity-100" />
+          Scope →
         </button>
       </div>
     </motion.div>
@@ -179,11 +340,14 @@ export function WhatWeBuild() {
     });
   };
 
+  const [featured, ...rest] = SERVICES;
+  const tallCards = rest.slice(0, 3); // 02, 03, 04
+  const stripCards = rest.slice(3);   // 05, 06
+
   return (
     <section id="capabilities" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full overflow-hidden">
-      {/* Subtle ambient lighting */}
+      {/* Ambient glow */}
       <div className="pointer-events-none absolute -top-12 right-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl opacity-60" />
-
 
       {/* Editorial Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 relative z-10">
@@ -196,7 +360,7 @@ export function WhatWeBuild() {
           >
             <span className="w-2 h-2 rounded-full bg-primary" />
             <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary font-semibold">
-              Capabilities & Focus
+              Capabilities &amp; Focus
             </span>
           </motion.div>
 
@@ -219,26 +383,39 @@ export function WhatWeBuild() {
           </motion.p>
         </div>
 
-        {/* Dedicated Section Theme Dock Slot for Capabilities */}
         <div className="shrink-0">
           <SectionDockSlot sectionId="capabilities" label="Capabilities" />
         </div>
       </div>
 
-      {/* 6-Card Editorial Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {SERVICES.map((service, index) => (
-          <ServiceCard
+      {/* ── Bento Grid ── */}
+      {/* Row 1: Featured (col-span-2) + Tall card */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-4 sm:mb-5">
+        <FeaturedCard service={featured} index={0} onInquire={handleInquire} />
+        <TallCard service={tallCards[0]} index={1} onInquire={handleInquire} />
+      </div>
+
+      {/* Row 2: Two equal tall cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-4 sm:mb-5">
+        <TallCard service={tallCards[1]} index={2} onInquire={handleInquire} />
+        <TallCard service={tallCards[2]} index={3} onInquire={handleInquire} />
+      </div>
+
+      {/* Row 3: Horizontal strip */}
+      <div className="rounded-3xl border border-border/70 bg-card px-6 sm:px-8">
+        {stripCards.map((service, i) => (
+          <StripCard
             key={service.id}
             service={service}
-            index={index}
+            index={4 + i}
             onInquire={handleInquire}
+            isLast={i === stripCards.length - 1}
           />
         ))}
       </div>
 
-      {/* Bottom note */}
-      <div className="mt-12 text-center">
+      {/* Bottom link */}
+      <div className="mt-10 text-center">
         <Link
           href="/services"
           className="group inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"

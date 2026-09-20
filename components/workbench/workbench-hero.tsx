@@ -1,20 +1,14 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import {
   motion,
-  AnimatePresence,
   useScroll,
   useTransform,
   useMotionValue,
   useSpring,
 } from "motion/react";
-import { Input } from "@/components/ui/input";
-import { generateBlueprint } from "@/lib/idea-engine";
-import { useDebouncedValue } from "@/lib/use-debounced-value";
-import { BlueprintCard } from "./blueprint-card";
-import { BuildYourIdea } from "@/components/sections/build-your-idea/build-your-idea";
 import { cn } from "@/lib/utils";
 import { useLead } from "@/components/leads/lead-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
@@ -22,18 +16,9 @@ import { ChevronDown } from "lucide-react";
 import {
   AnimatedArrowRight,
   AnimatedBriefcase,
-  AnimatedPencil,
-  AnimatedListChecks,
-  AnimatedZap,
 } from "@/components/ui/animated-icon";
 import { HeroGridAccents } from "./hero-grid-accents";
 import { Hero3DCoder } from "./hero-3d-coder";
-
-const EXAMPLES = [
-  "A modern e-commerce store with headless Shopify",
-  "A SaaS dashboard for managing subscription billing",
-  "A booking system for a multi-location services business",
-];
 
 const SERVICE_CHIPS = [
   "Custom Software",
@@ -42,21 +27,6 @@ const SERVICE_CHIPS = [
   "SaaS Platforms",
   "Cloud & DevOps",
   "AI Solutions",
-];
-
-const MARQUEE_ITEMS = [
-  "React & Next.js",
-  "TypeScript",
-  "React Native",
-  "Node.js & Python",
-  "PostgreSQL",
-  "Cloud Architecture",
-  "REST & GraphQL APIs",
-  "Microservices",
-  "CI/CD Pipelines",
-  "AI / LLM Systems",
-  "Enterprise Security",
-  "App Store & Play Store",
 ];
 
 interface WorkbenchHeroProps {
@@ -73,32 +43,6 @@ function AnimatedWord({ word, delay, className }: { word: string; delay: number;
     >
       {word}
     </motion.span>
-  );
-}
-
-// Marquee strip — pauses on hover via .marquee-track CSS class
-function MarqueeStrip() {
-  const doubled = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
-  return (
-    <div className="relative overflow-hidden py-3 border-y border-border/50 bg-muted/20">
-      {/* fade edges */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-20 z-10 bg-gradient-to-r from-background to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-20 z-10 bg-gradient-to-l from-background to-transparent" />
-      <div
-        className="marquee-track flex gap-10 whitespace-nowrap animate-marquee"
-        style={{ "--duration": "32s" } as React.CSSProperties}
-      >
-        {doubled.map((item, i) => (
-          <span
-            key={i}
-            className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground flex items-center gap-2.5"
-          >
-            <span className="w-1 h-1 rounded-full bg-primary/70 inline-block" />
-            {item}
-          </span>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -154,8 +98,6 @@ function MagneticButton({
 }
 
 export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
-  const [activeTab, setActiveTab] = useState<"quick" | "guided">("quick");
-  const [idea, setIdea] = useState("");
   const { openLead } = useLead();
   const heroRef = useRef<HTMLElement>(null);
 
@@ -165,31 +107,12 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
   const orbY2 = useTransform(scrollY, [0, 600], [0, -50]);
   const orbY3 = useTransform(scrollY, [0, 600], [0, -30]);
 
-  const debouncedIdea = useDebouncedValue(idea, 400);
-
-  const blueprint = useMemo(() => {
-    return debouncedIdea.trim() ? generateBlueprint(debouncedIdea) : null;
-  }, [debouncedIdea]);
-
-  const handleContact = () => {
-    const summary = blueprint
-      ? `Category: ${blueprint.type}. Cuts: ${blueprint.complexityCut.join("; ")}. MVP: ${blueprint.mvpScope.join("; ")}.`
-      : undefined;
-
-    if (onStartProject) {
-      onStartProject({ description: idea, blueprintSummary: summary });
-    } else {
-      openLead({ description: idea, blueprintSummary: summary, source: "quick" });
-    }
-  };
-
   return (
-    <>
-      <section
-        id="hero"
-        ref={heroRef}
-        className="relative min-h-[calc(100svh-3.5rem)] flex flex-col items-center justify-center overflow-hidden"
-      >
+    <section
+      id="hero"
+      ref={heroRef}
+      className="relative min-h-[calc(100svh-3.5rem)] flex flex-col items-center justify-center overflow-hidden"
+    >
         {/* ── Animated mesh background ── */}
         <div className="pointer-events-none absolute inset-0 mesh-bg transition-colors duration-700" />
 
@@ -219,9 +142,9 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
         {/* ── Studio Architectural Grid Accents & Precision Coordinates (Unique, handcrafted) ── */}
         <HeroGridAccents />
 
-        <div className="relative z-10 flex flex-col items-center pt-8 pb-10 px-4 md:px-8 w-full max-w-7xl mx-auto">
-          {/* Top Hero: 2-Column Split with Cloudi5-inspired 3D Animated Coder */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full mb-14 pt-2 sm:pt-4">
+        <div className="relative z-10 flex flex-col items-center pt-8 pb-16 px-4 md:px-8 w-full max-w-7xl mx-auto">
+          {/* Top Hero: 2-Column Split */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full pt-2 sm:pt-4">
             {/* Left Column: Headlines, Pitch, Chips, and CTAs */}
             <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
 
@@ -329,131 +252,6 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
               <Hero3DCoder />
             </motion.div>
           </div>
-
-          {/* 6. Divider label */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.85 }}
-            className="text-sm text-muted-foreground text-center mb-6 font-medium"
-          >
-            Try it &mdash; describe your idea and see how we&apos;d simplify it.
-          </motion.div>
-
-          {/* 7. Glass Tabs */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.92 }}
-            role="tablist"
-            aria-label="Idea input mode"
-            className="flex glass p-1 rounded-full mb-10"
-          >
-            <button
-              role="tab"
-              id="tab-describe"
-              aria-controls="panel-describe"
-              aria-selected={activeTab === "quick"}
-              onClick={() => setActiveTab("quick")}
-              className={cn(
-                "group px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5 active:scale-95",
-                activeTab === "quick"
-                  ? "bg-background text-foreground shadow-sm font-semibold"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              <AnimatedPencil size={13} className={activeTab === "quick" ? "text-primary" : "text-muted-foreground"} />
-              <span>Describe it</span>
-            </button>
-            <button
-              role="tab"
-              id="tab-guided"
-              aria-controls="panel-guided"
-              aria-selected={activeTab === "guided"}
-              onClick={() => setActiveTab("guided")}
-              className={cn(
-                "group px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ring flex items-center gap-1.5 active:scale-95",
-                activeTab === "guided"
-                  ? "bg-background text-foreground shadow-sm font-semibold"
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              <AnimatedListChecks size={13} className={activeTab === "guided" ? "text-primary" : "text-muted-foreground"} />
-              <span>Answer a few questions</span>
-            </button>
-          </motion.div>
-
-          <AnimatePresence mode="wait">
-            {activeTab === "quick" ? (
-              <motion.div
-                key="quick"
-                id="panel-describe"
-                role="tabpanel"
-                aria-labelledby="tab-describe"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="w-full max-w-5xl flex flex-col items-center"
-              >
-                <div className="w-full max-w-3xl relative mb-5">
-                  <label htmlFor="idea-input" className="sr-only">
-                    Describe your idea
-                  </label>
-                  <Input
-                    id="idea-input"
-                    value={idea}
-                    onChange={(e) => setIdea(e.target.value)}
-                    placeholder="e.g. A marketplace for vintage synthesizers..."
-                    className={cn(
-                      "h-16 px-6 text-lg rounded-xl bg-background border-2 shadow-xs transition-all duration-200 outline-none",
-                      "border-border focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-ring/50",
-                      idea.trim() ? "border-primary shadow-primary/10 shadow-lg" : ""
-                    )}
-                  />
-                </div>
-
-                <div className="flex flex-wrap gap-2 justify-center mb-10">
-                  {EXAMPLES.map((ex) => (
-                    <button
-                      key={ex}
-                      type="button"
-                      onClick={() => setIdea(ex)}
-                      className="group text-xs md:text-sm px-3.5 py-1.5 rounded-full border border-border bg-muted/10 hover:bg-primary/10 hover:border-primary/40 hover:text-primary-text active:scale-95 transition-all duration-200 text-muted-foreground cursor-pointer focus-visible:ring-2 focus-visible:ring-ring outline-none flex items-center gap-1.5"
-                    >
-                      <AnimatedZap size={12} className="text-primary/70 group-hover:text-primary transition-colors" />
-                      <span>{ex}</span>
-                    </button>
-                  ))}
-                </div>
-
-                {blueprint && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="w-full"
-                  >
-                    <BlueprintCard blueprint={blueprint} onContact={handleContact} />
-                  </motion.div>
-                )}
-              </motion.div>
-            ) : (
-              <motion.div
-                key="guided"
-                id="panel-guided"
-                role="tabpanel"
-                aria-labelledby="tab-guided"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="w-full max-w-5xl"
-              >
-                <div className="border border-border rounded-2xl overflow-hidden bg-muted/5 shadow-sm p-6 sm:p-8">
-                  <BuildYourIdea initialDescription={idea} />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
 
         {/* scroll indicator */}
@@ -471,10 +269,6 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
             <ChevronDown className="h-4 w-4" />
           </motion.div>
         </motion.div>
-      </section>
-
-      {/* ── Marquee strip ── */}
-      <MarqueeStrip />
-    </>
+    </section>
   );
 }
