@@ -11,7 +11,7 @@ export function LabView() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       {/* Header */}
-      <div className="max-w-4xl mb-16 sm:mb-20">
+      <div className="max-w-4xl mb-12 sm:mb-16">
         <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
           <span className="w-1.5 h-1.5 rounded-full bg-primary" />
           Software R&D & Prototypes

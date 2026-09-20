@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useTransform } from "motion/react";
 import {
   Search,
@@ -17,6 +16,7 @@ import {
 import { useThemeColor } from "@/components/theme/color-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { cn } from "@/lib/utils";
 
 interface Phase {
@@ -34,14 +34,10 @@ interface Phase {
     value: string;
     label: string;
   };
-  baseName: string;
-  imageSrc: string;
-  imageAlt: string;
   statusBadge: string;
   ctaText: string;
   icon: typeof Search;
 }
-
 
 const PHASES: Phase[] = [
   {
@@ -64,9 +60,6 @@ const PHASES: Phase[] = [
       value: "100%",
       label: "Scope & Timeline Lock",
     },
-    baseName: "discovery-3d",
-    imageSrc: "/images/process/discovery-3d-blue.jpg",
-    imageAlt: "3D Product Discovery & Architecture Blueprint Whiteboard Session",
     statusBadge: "Sprint 01 Handover",
     ctaText: "Start with Discovery",
     icon: Search,
@@ -91,9 +84,6 @@ const PHASES: Phase[] = [
       value: "100%",
       label: "Interactive Prototype Fidelity",
     },
-    baseName: "design-3d",
-    imageSrc: "/images/process/design-3d-blue.jpg",
-    imageAlt: "3D UI UX Product Designer working on Design Tokens and Wireframes",
     statusBadge: "Design Sign-Off",
     ctaText: "Explore Design Phase",
     icon: Palette,
@@ -118,9 +108,6 @@ const PHASES: Phase[] = [
       value: "<500ms",
       label: "LCP Performance Benchmark",
     },
-    baseName: "engineer-3d",
-    imageSrc: "/images/process/engineer-3d-blue.jpg",
-    imageAlt: "3D Senior Software Engineer Coding High-Performance Cloud Architecture",
     statusBadge: "Code Review Pass",
     ctaText: "See Tech Stack",
     icon: Code2,
@@ -145,9 +132,6 @@ const PHASES: Phase[] = [
       value: "99.99%",
       label: "Production Uptime Guarantee",
     },
-    baseName: "launch-3d",
-    imageSrc: "/images/process/launch-3d-blue.jpg",
-    imageAlt: "3D Startup Team Celebrating Successful High-Performance Product Launch",
     statusBadge: "Production Ready",
     ctaText: "Schedule Launch",
     icon: Rocket,
@@ -161,9 +145,6 @@ export function HowWeWork() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const activePhase = PHASES[activeIndex];
-
-  // Map theme ID to pre-rendered image variant (custom falls back to blue)
-  const themeVariant = theme.id === 'custom' ? 'blue' : theme.id;
 
   // Interactive 3D tilt parallax on mouse move
   const showcaseRef = useRef<HTMLDivElement>(null);
@@ -455,33 +436,19 @@ export function HowWeWork() {
                         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
                         className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border border-border/80 aspect-[4/3] group bg-card select-none"
                       >
-                        {/* Pre-rendered 3D image with pixel-perfect shirt colour per theme */}
-                        <div className="absolute inset-0 w-full h-full">
-                          <Image
-                            key={`${activePhase.baseName}-${themeVariant}`}
-                            src={`/images/process/${activePhase.baseName}-${themeVariant}.jpg`}
-                            alt={activePhase.imageAlt}
-                            fill
-                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                            sizes="(max-width: 768px) 100vw, 40vw"
-                            priority={activeIndex === 0}
-                          />
-                        </div>
-
-                        {/* Top Floating Glass 3D HUD Badge */}
-                        <div
-                          style={{ transform: "translateZ(25px)" }}
-                          className="absolute top-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none"
+                        <ImagePlaceholder
+                          title={`Phase ${activePhase.step} · ${activePhase.title}`}
+                          subtitle={activePhase.headline}
+                          icon={activePhase.icon}
+                          badge={activePhase.statusBadge}
+                          dimensionsText={activePhase.timeframe}
+                          aspectRatio="4/3"
+                          className="w-full h-full border-0 rounded-none bg-transparent"
                         >
-                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background/85 backdrop-blur-md border border-border/80 text-[10px] font-mono font-medium text-foreground shadow-sm">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                            <span>{activePhase.statusBadge}</span>
+                          <div className="flex items-center gap-2 mt-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-mono text-primary font-semibold">
+                            <span>Target: {activePhase.metric.label} ({activePhase.metric.value})</span>
                           </div>
-
-                          <div className="px-2.5 py-1 rounded-full bg-background/85 backdrop-blur-md border border-border/80 text-[10px] font-mono text-muted-foreground shadow-xs">
-                            {activePhase.timeframe}
-                          </div>
-                        </div>
+                        </ImagePlaceholder>
                       </motion.div>
                     </AnimatePresence>
                   </div>

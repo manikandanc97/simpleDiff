@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
-import Image from "next/image";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useTransform } from "motion/react";
 import {
   Users,
@@ -22,56 +21,8 @@ import {
 import { useThemeColor } from "@/components/theme/color-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { cn } from "@/lib/utils";
-
-// Helper: Calculate hue from any color format (OKLCH, Hex, HSL) or theme ID
-function parseColorToHue(colorStr: string, themeId?: string): number {
-  if (themeId === "red") return 25;
-  if (themeId === "green") return 145;
-  if (themeId === "blue") return 250;
-  if (themeId === "violet") return 285;
-  if (themeId === "amber") return 65;
-  if (themeId === "emerald") return 155;
-  if (themeId === "cyan") return 215;
-  if (themeId === "rose") return 20;
-
-  if (!colorStr) return 215;
-
-  // OKLCH: oklch(L C H)
-  const oklch = colorStr.match(/oklch\s*\(\s*[\d.]+\s+[\d.]+\s+([\d.]+)/);
-  if (oklch) {
-    return Math.round(parseFloat(oklch[1]));
-  }
-
-  // HSL: hsl(H S L)
-  const hsl = colorStr.match(/hsl\s*\(\s*([\d.]+)/);
-  if (hsl) {
-    return Math.round(parseFloat(hsl[1]));
-  }
-
-  // Hex: #RRGGBB
-  if (colorStr.startsWith("#")) {
-    const cleanHex = colorStr.replace("#", "");
-    const r = parseInt(cleanHex.substring(0, 2), 16) / 255;
-    const g = parseInt(cleanHex.substring(2, 4), 16) / 255;
-    const b = parseInt(cleanHex.substring(4, 6), 16) / 255;
-    const max = Math.max(r, g, b);
-    const min = Math.min(r, g, b);
-    let h = 0;
-    if (max !== min) {
-      const d = max - min;
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
-      }
-      h /= 6;
-    }
-    return Math.round(h * 360);
-  }
-
-  return 215;
-}
 
 interface Principle {
   id: string;
@@ -89,8 +40,6 @@ interface Principle {
     label: string;
     sublabel: string;
   };
-  imageSrc: string;
-  imageAlt: string;
   statusBadge: string;
   ctaText: string;
   icon: typeof Users;
@@ -107,10 +56,10 @@ const PRINCIPLES: Principle[] = [
     headline: "Senior creators only.",
     headlineAccent: "Zero account managers.",
     description:
-      "Agencies layer on project managers, account reps, and juniors — then charge you for all of it. Freelancers disappear when things get hard. We're a focused studio: senior engineers and designers who own your project end-to-end, every sprint.",
+      "You work directly with the senior engineer and designer actually building your product. No account managers, no junior developers learning on your dime, no communication lag.",
     deliverables: [
-      "100% Senior Hands-On Execution",
-      "Direct Async Slack Channel with Creators",
+      "Direct Senior Technical Leadership",
+      "Real-Time Slack Collaborative Channel",
       "Zero Middleman Overhead or Hand-Off Lag",
       "Rapid Sprint Cycles with Working Software",
     ],
@@ -119,8 +68,6 @@ const PRINCIPLES: Principle[] = [
       label: "Middlemen Bloat",
       sublabel: "Direct maker access",
     },
-    imageSrc: "/images/why/studio-3d.jpg",
-    imageAlt: "3D Senior Tech Duo Collaborating at Sleek Glass Holographic Workstation",
     statusBadge: "Direct Maker Access",
     ctaText: "Work With Senior Creators",
     icon: Users,
@@ -147,8 +94,6 @@ const PRINCIPLES: Principle[] = [
       label: "Milestone Predictability",
       sublabel: "Zero billing creep",
     },
-    imageSrc: "/images/why/milestone-3d.jpg",
-    imageAlt: "3D Product Blueprint & Milestone Roadmap Planning Board",
     statusBadge: "Fixed Scope Guarantee",
     ctaText: "Review Milestone Model",
     icon: Target,
@@ -175,8 +120,6 @@ const PRINCIPLES: Principle[] = [
       label: "Core Web Vitals Target",
       sublabel: "Zero translation loss",
     },
-    imageSrc: "/images/why/disciplines-3d.jpg",
-    imageAlt: "3D UI UX Designer and Frontend Engineer Crafting Unified Interface",
     statusBadge: "Zero Handoff Loss",
     ctaText: "Explore Dual Discipline",
     icon: Layers,
@@ -254,15 +197,6 @@ export function WhySimpleThink() {
   const [showMatrix, setShowMatrix] = useState(false);
 
   const activePrinciple = PRINCIPLES[activeIndex];
-
-  // Dynamic hue calculation matching theme primary
-  const primaryHue = useMemo(() => parseColorToHue(theme.primary, theme.id), [theme.primary, theme.id]);
-  const hueShift = useMemo(() => {
-    let shift = (primaryHue - 215) % 360;
-    if (shift > 180) shift -= 360;
-    if (shift < -180) shift += 360;
-    return shift;
-  }, [primaryHue]);
 
   // Interactive 3D tilt parallax on mouse move
   const showcaseRef = useRef<HTMLDivElement>(null);
@@ -674,46 +608,19 @@ export function WhySimpleThink() {
                     style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
                     className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-border/90 aspect-[4/3] group bg-card select-none"
                   >
-                    {/* 3D Image Canvas with Dynamic Hue Shift */}
-                    <div
-                      className="absolute inset-0 w-full h-full transition-all duration-500"
-                      style={{
-                        filter: `hue-rotate(${hueShift}deg) saturate(1.1) contrast(1.02)`,
-                      }}
+                    <ImagePlaceholder
+                      title={`${activePrinciple.headline} ${activePrinciple.headlineAccent}`}
+                      subtitle={activePrinciple.subtitle}
+                      icon={activePrinciple.icon}
+                      badge={activePrinciple.statusBadge}
+                      dimensionsText={`Pillar ${activePrinciple.step} / 03`}
+                      aspectRatio="4/3"
+                      className="w-full h-full border-0 rounded-none bg-transparent"
                     >
-                      <Image
-                        src={activePrinciple.imageSrc}
-                        alt={activePrinciple.imageAlt}
-                        fill
-                        priority
-                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        sizes="(max-width: 1024px) 100vw, 40vw"
-                      />
-                    </div>
-
-                    {/* Gradient Overlay Vignette */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent pointer-events-none" />
-
-                    {/* Top Floating Glass Badge */}
-                    <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-20 pointer-events-none">
-                      <div className="px-3 py-1 rounded-full bg-background/80 backdrop-blur-md border border-border/80 text-[11px] font-mono font-semibold text-foreground flex items-center gap-1.5 shadow-md">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
-                        <span>{activePrinciple.statusBadge}</span>
+                      <div className="flex items-center gap-2 mt-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-mono text-primary font-semibold">
+                        <span>Target: {activePrinciple.metric.label} ({activePrinciple.metric.value})</span>
                       </div>
-                      <div className="px-2.5 py-1 rounded-full bg-primary/20 backdrop-blur-md border border-primary/30 text-[10px] font-mono font-bold text-primary">
-                        {activePrinciple.step} / 03
-                      </div>
-                    </div>
-
-                    {/* Bottom Floating Title */}
-                    <div className="absolute bottom-3.5 left-3.5 right-3.5 z-20 p-3 rounded-xl bg-card/80 backdrop-blur-md border border-border/80">
-                      <div className="text-[10px] font-mono uppercase tracking-wider text-primary font-bold">
-                        {activePrinciple.kicker}
-                      </div>
-                      <div className="text-xs sm:text-sm font-bold text-foreground mt-0.5 line-clamp-1">
-                        {activePrinciple.title}
-                      </div>
-                    </div>
+                    </ImagePlaceholder>
                   </motion.div>
                 </AnimatePresence>
               </div>

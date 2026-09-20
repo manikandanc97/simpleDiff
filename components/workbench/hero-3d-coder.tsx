@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "motion/react";
-import { useThemeColor } from "@/components/theme/color-provider";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
-import { Terminal, Layers, ShieldCheck } from "lucide-react";
+import { Terminal, Layers, ShieldCheck, Code2, Sparkles, Cpu, CheckCircle2 } from "lucide-react";
 
 const CODE_SNIPPETS = [
   "const app = SimpleThink.create();",
@@ -14,88 +12,12 @@ const CODE_SNIPPETS = [
   "export default function Product() {}",
 ];
 
-// Helper: Parse any color format (hex, oklch, hsl, rgb) to HSL
-function parseColorToHsl(colorStr: string): [number, number, number] {
-  if (!colorStr) return [218, 0.7, 0.45];
-
-  // Hex format #RRGGBB
-  if (colorStr.startsWith("#")) {
-    const hex = colorStr.replace("#", "");
-    const r = parseInt(hex.substring(0, 2), 16) / 255;
-    const g = parseInt(hex.substring(2, 4), 16) / 255;
-    const b = parseInt(hex.substring(4, 6), 16) / 255;
-    const max = Math.max(r, g, b);
-    const min = Math.min(r, g, b);
-    const l = (max + min) / 2;
-    let h = 0, s = 0;
-    if (max !== min) {
-      const d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
-      }
-      h /= 6;
-    }
-    return [Math.round(h * 360), s, l];
-  }
-
-  // OKLCH format oklch(L C H)
-  const oklch = colorStr.match(/oklch\s*\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)/);
-  if (oklch) {
-    return [Math.round(parseFloat(oklch[3])), Math.min(1, parseFloat(oklch[2]) * 4), parseFloat(oklch[1])];
-  }
-
-  // HSL format
-  const hsl = colorStr.match(/hsl\s*\(\s*([\d.]+)/);
-  if (hsl) {
-    return [Math.round(parseFloat(hsl[1])), 0.8, 0.5];
-  }
-
-  return [218, 0.7, 0.45];
+interface Hero3DCoderProps {
+  className?: string;
 }
 
-// Map any hue angle (0-360) to the best matching raytraced 3D polo image
-function getVariantByHue(hue: number): string {
-  const normHue = ((hue % 360) + 360) % 360;
-
-  if (normHue >= 340 || normHue < 30) {
-    return "/images/hero-3d-coder-red.png"; // Red / Crimson / Coral (OKLCH red is ~25)
-  }
-  if (normHue >= 30 && normHue < 60) {
-    return "/images/hero-3d-coder-amber.png"; // Orange / Amber / Yellow
-  }
-  if (normHue >= 60 && normHue < 165) {
-    return "/images/hero-3d-coder-green.png"; // Lime / Emerald / Green
-  }
-  if (normHue >= 165 && normHue < 205) {
-    return "/images/hero-3d-coder-cyan.png"; // Teal / Cyan
-  }
-  if (normHue >= 205 && normHue < 250) {
-    return "/images/hero-3d-coder-blue.png"; // Blue / Electric Blue
-  }
-  return "/images/hero-3d-coder-violet.png"; // Violet / Purple / Magenta
-}
-
-export function Hero3DCoder({ className }: { className?: string }) {
+export function Hero3DCoder({ className }: Hero3DCoderProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { theme } = useThemeColor();
-
-  // Dynamic image selection for ANY color in the world
-  const shirtImage = useMemo(() => {
-    // 1. Direct ID matches for all SimpleThink presets
-    if (theme.id === "red" || theme.id === "rose") return "/images/hero-3d-coder-red.png";
-    if (theme.id === "green" || theme.id === "emerald") return "/images/hero-3d-coder-green.png";
-    if (theme.id === "violet") return "/images/hero-3d-coder-violet.png";
-    if (theme.id === "blue") return "/images/hero-3d-coder-blue.png";
-    if (theme.id === "amber") return "/images/hero-3d-coder-amber.png";
-    if (theme.id === "cyan") return "/images/hero-3d-coder-cyan.png";
-
-    // 2. For ANY custom color picked via color wheel/picker:
-    const [h] = parseColorToHsl(theme.primary);
-    return getVariantByHue(h);
-  }, [theme.id, theme.primary]);
 
   // Mouse tilt parallax
   const mouseX = useMotionValue(0);
@@ -163,7 +85,7 @@ export function Hero3DCoder({ className }: { className?: string }) {
         className
       )}
     >
-      {/* Dynamic Ambient Background Glow matching active theme color */}
+      {/* Dynamic Ambient Background Glow */}
       <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-primary/30 via-primary/15 to-transparent blur-3xl opacity-80 pointer-events-none animate-pulse-glow transition-colors duration-500" />
       <div className="absolute -inset-4 rounded-full bg-gradient-to-bl from-primary/20 via-transparent to-primary/10 blur-2xl pointer-events-none transition-colors duration-500" />
 
@@ -172,10 +94,10 @@ export function Hero3DCoder({ className }: { className?: string }) {
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative w-full h-full flex items-center justify-center"
       >
-        {/* Central 3D Coder Character with authentic raytraced 3D polo t-shirt */}
+        {/* Central Developer Architecture Canvas */}
         <motion.div
           animate={{
-            y: [-10, 10, -10],
+            y: [-8, 8, -8],
             rotate: [-1, 1, -1],
           }}
           transition={{
@@ -184,28 +106,75 @@ export function Hero3DCoder({ className }: { className?: string }) {
             ease: "easeInOut",
           }}
           style={{ transform: "translateZ(30px)" }}
-          className="relative z-10 w-[85%] sm:w-[92%] h-[85%] sm:h-[92%] drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)]"
+          className="relative z-10 w-[86%] sm:w-[92%] h-[86%] sm:h-[92%] drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)]"
         >
-          {/* Authentic 3D Polo Coder with smooth cross-fade for all colors */}
-          <AnimatePresence mode="popLayout">
-            <motion.div
-              key={shirtImage}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="w-full h-full"
-            >
-              <Image
-                src={shirtImage}
-                alt="3D Developer Coding - SimpleThink"
-                width={600}
-                height={600}
-                priority
-                className="w-full h-full object-contain pointer-events-none"
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div className="relative w-full h-full rounded-3xl border border-border/80 bg-card/75 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center p-6 shadow-2xl group transition-all duration-500">
+            {/* Technical Blueprint Grid Pattern */}
+            <div
+              className="absolute inset-0 pointer-events-none opacity-[0.08] dark:opacity-[0.14]"
+              style={{
+                backgroundImage: `
+                  linear-gradient(to right, currentColor 1px, transparent 1px),
+                  linear-gradient(to bottom, currentColor 1px, transparent 1px)
+                `,
+                backgroundSize: "28px 28px",
+              }}
+            />
+
+            {/* Ambient Radial Accent */}
+            <div className="absolute inset-0 bg-radial from-primary/20 via-primary/5 to-transparent pointer-events-none transition-colors duration-500" />
+
+            {/* Corner Precision Brackets */}
+            <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-primary/60" />
+            <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-primary/60" />
+            <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-primary/60" />
+            <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-primary/60" />
+
+            {/* Top Metadata Badges */}
+            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-background/85 backdrop-blur-md border border-border/80 text-[10px] font-mono font-medium text-foreground shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
+                <span>SimpleThink Studio Engine</span>
+              </div>
+              <div className="px-2 py-0.5 rounded-md bg-muted/80 backdrop-blur-md border border-border/60 text-[10px] font-mono text-muted-foreground">
+                Next.js · TypeScript
+              </div>
+            </div>
+
+            {/* Central Developer Architecture Graphic */}
+            <div className="relative flex flex-col items-center justify-center gap-3 my-auto z-10">
+              <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-b from-primary/20 to-primary/5 border-2 border-primary/30 shadow-xl shadow-primary/15 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                {/* Glowing Aura Ring */}
+                <div className="absolute -inset-2 rounded-3xl bg-primary/20 blur-xl opacity-60 animate-pulse pointer-events-none" />
+
+                {/* Central Icons Blend */}
+                <div className="relative z-10 flex items-center justify-center">
+                  <Code2 className="w-12 h-12 text-primary transition-transform duration-300" />
+                  <Sparkles className="w-5 h-5 text-primary/80 absolute -top-1 -right-1 animate-bounce" />
+                </div>
+              </div>
+
+              {/* Title & Description */}
+              <div className="text-center space-y-1 mt-1">
+                <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold tracking-tight text-foreground">
+                  <Cpu className="w-3.5 h-3.5 text-primary" />
+                  <span>High-Performance Software Architecture</span>
+                </div>
+                <p className="text-[11px] font-mono text-muted-foreground">
+                  Zero Technical Debt · Instant Edge Deployment
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Status Tag */}
+            <div className="absolute bottom-3 left-5 right-5 flex items-center justify-between text-[9px] font-mono text-muted-foreground border-t border-border/40 pt-1.5">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                SYSTEM_STATUS: ONLINE
+              </span>
+              <span>EDGE RUNTIME: VERIFIED</span>
+            </div>
+          </div>
         </motion.div>
 
         {/* Floating Code Typing Window (Simulated IDE snippet) */}
@@ -239,7 +208,7 @@ export function Hero3DCoder({ className }: { className?: string }) {
           </div>
         </motion.div>
 
-        {/* Floating Tech Pill 1: Modern Tech Stacks (Generic, studio-grade) */}
+        {/* Floating Tech Pill 1: Modern Tech Stacks */}
         <motion.div
           animate={{
             y: [-10, 10, -10],
