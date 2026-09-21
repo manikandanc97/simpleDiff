@@ -38,7 +38,7 @@ export default function Home() {
       <TechStack />
 
       {/* 10 — TESTIMONIALS */}
-      <Testimonials />
+      {/* <Testimonials /> */}
 
       {/* 11 — FAQ */}
       <FAQ />

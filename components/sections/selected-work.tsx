@@ -408,17 +408,7 @@ export function SelectedWork() {
       {/* Editorial Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 relative z-10">
         <div ref={headerRef} className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 mb-3"
-          >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary font-semibold">
-              Shipped Client Websites · Portfolio
-            </span>
-          </motion.div>
+          <SectionDockSlot sectionId="selected-work" label="Shipped Client Websites · Portfolio" className="mb-3" />
 
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
@@ -437,10 +427,6 @@ export function SelectedWork() {
           >
             Live client websites engineered end-to-end. We own every detail from UX architecture and responsive design to local SEO and production launch.
           </motion.p>
-        </div>
-
-        <div className="shrink-0">
-          <SectionDockSlot sectionId="selected-work" label="Selected Work" />
         </div>
       </div>
 

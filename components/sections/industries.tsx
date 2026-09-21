@@ -97,17 +97,7 @@ export function Industries() {
         {/* Editorial Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 sm:mb-16">
           <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-2 mb-3"
-            >
-              <span className="w-2 h-2 rounded-full bg-primary" />
-              <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary font-semibold">
-                Verticals · Domains
-              </span>
-            </motion.div>
+            <SectionDockSlot sectionId="industries" label="Verticals · Domains" className="mb-3" />
 
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
@@ -126,10 +116,6 @@ export function Industries() {
             >
               We bring domain literacy to every engagement. Whether your product is regulated, high-growth, or consumer-facing — we understand the context, not just the code.
             </motion.p>
-          </div>
-
-          <div className="shrink-0">
-            <SectionDockSlot sectionId="industries" label="Industries" />
           </div>
         </div>
 

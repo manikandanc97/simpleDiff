@@ -414,17 +414,7 @@ export function WhatWeBuild() {
       {/* ── Editorial Section Header ── */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 relative z-10">
         <div ref={headerRef} className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 mb-3"
-          >
-            <span className="w-2 h-2 rounded-full bg-primary" />
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary font-semibold">
-              Capabilities &amp; Focus
-            </span>
-          </motion.div>
+          <SectionDockSlot sectionId="capabilities" label="Capabilities & Focus" className="mb-3" />
 
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
@@ -445,10 +435,6 @@ export function WhatWeBuild() {
             platforms — with enterprise-grade reliability and zero unnecessary
             overhead.
           </motion.p>
-        </div>
-
-        <div className="shrink-0">
-          <SectionDockSlot sectionId="capabilities" label="Capabilities" />
         </div>
       </div>
 

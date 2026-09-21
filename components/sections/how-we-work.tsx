@@ -191,17 +191,7 @@ export function HowWeWork() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div className="max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-2 mb-2"
-            >
-              <span className="w-2 h-2 rounded-full bg-primary" />
-              <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary font-semibold">
-                Process · Methodology
-              </span>
-            </motion.div>
+            <SectionDockSlot sectionId="how-we-work" label="Process · Methodology" className="mb-2" />
 
             <motion.h2
               initial={{ opacity: 0, y: 14 }}
@@ -221,8 +211,6 @@ export function HowWeWork() {
               A focused 4-step delivery pipeline. Clean communication, weekly staging builds, and guaranteed milestones.
             </motion.p>
           </div>
-
-          <SectionDockSlot sectionId="how-we-work" label="Process" />
         </div>
 
         {/* ========================================================================= */}

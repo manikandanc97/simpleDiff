@@ -22,29 +22,32 @@ export function ThemeDockContent({ label }: { label?: string }) {
     setCustomColor(e.target.value);
   };
 
+  const displayLabel = label || "Theme";
+
   return (
     <div className="flex items-center gap-1.5 p-1 sm:p-1.5 rounded-full bg-background/95 backdrop-blur-xl border border-border/90 shadow-xl shadow-primary/10 transition-all hover:border-primary/50">
       {/* Section indicator badge */}
       <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-muted/60 text-[10px] sm:text-[10.5px] font-mono font-medium text-muted-foreground select-none">
-        <Sparkles className="w-2.5 h-2.5 text-primary animate-pulse" />
-        <AnimatePresence mode="wait">
+        <Sparkles className="w-2.5 h-2.5 text-primary shrink-0 animate-pulse" />
+        <AnimatePresence mode="wait" initial={false}>
           <motion.span
-            key={label || "Theme"}
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 4 }}
-            transition={{ duration: 0.2 }}
-            className="text-foreground font-semibold"
+            key={displayLabel}
+            initial={{ opacity: 0, y: -5, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: 5, filter: "blur(2px)" }}
+            transition={{ duration: 0.22, ease: "easeInOut" }}
+            className="text-foreground font-semibold inline-block max-w-[170px] sm:max-w-[280px] truncate"
+            title={displayLabel}
           >
-            {label || "Theme"}
+            {displayLabel}
           </motion.span>
         </AnimatePresence>
-        <span className="text-border">&bull;</span>
-        <span className="text-muted-foreground">Theme</span>
+        <span className="text-border shrink-0">&bull;</span>
+        <span className="text-muted-foreground shrink-0">Theme</span>
       </div>
 
       {/* 3 High-Contrast Color Palette Dots */}
-      <div className="flex items-center gap-1.5 px-0.5">
+      <div className="flex items-center gap-1.5 px-0.5 shrink-0">
         {DOCK_THEMES.map((t) => {
           const isActive = theme.id === t.id && !theme.isCustom;
           return (
@@ -73,7 +76,7 @@ export function ThemeDockContent({ label }: { label?: string }) {
         })}
 
         {/* Plus button for Custom Color Wheel */}
-        <div className="relative flex items-center justify-center ml-0.5">
+        <div className="relative flex items-center justify-center ml-0.5 shrink-0">
           <input
             ref={colorInputRef}
             type="color"
@@ -127,9 +130,9 @@ export function FloatingColorDock() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Hide dock when user has scrolled near the bottom reveal wordmark
+      // Hide dock when user has scrolled near the bottom reveal wordmark/footer
       const scrollBottom = window.innerHeight + window.scrollY;
-      const threshold = document.documentElement.scrollHeight - 320;
+      const threshold = document.documentElement.scrollHeight - 250;
       setIsNearBottom(scrollBottom >= threshold);
     };
 
@@ -138,20 +141,23 @@ export function FloatingColorDock() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Only render the fixed floating dock when the dock is NOT docked in any section slot and NOT near the bottom wordmark
-  if (activeSlot !== "floating" || isNearBottom) {
+  const isVisible = activeSlot === "floating" && !isNearBottom;
+
+  if (!isVisible) {
     return null;
   }
 
   return (
     <motion.aside
       layoutId="unified-theme-dock"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ type: "spring", stiffness: 320, damping: 28 }}
+      transition={{
+        type: "spring",
+        stiffness: 280,
+        damping: 28,
+        mass: 0.8,
+      }}
       aria-label="Interactive color theme dock"
-      className="fixed bottom-20 md:bottom-5 left-1/2 -translate-x-1/2 z-30 max-w-[95vw] sm:max-w-max pointer-events-auto"
+      className="fixed bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 z-30 max-w-[95vw] sm:max-w-max pointer-events-auto"
     >
       <ThemeDockContent label={activeLabel} />
     </motion.aside>
