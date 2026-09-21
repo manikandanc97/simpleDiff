@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { COLOR_THEMES } from "@/lib/colors";
 import { useThemeColor } from "@/components/theme/color-provider";
 import { useDock } from "@/components/theme/dock-context";
 import { cn } from "@/lib/utils";
-import { Plus, Sparkles } from "lucide-react";
+import { Plus, Sparkles, Check } from "lucide-react";
+import { ColorPickerDialog } from "@/components/theme/color-picker-dialog";
 
 // RGB Trio: Red, Green, Blue
 const DOCK_PRESET_IDS = ["red", "green", "blue"];
@@ -15,12 +16,7 @@ const DOCK_THEMES = DOCK_PRESET_IDS
   .filter((t): t is (typeof COLOR_THEMES)[number] => Boolean(t));
 
 export function ThemeDockContent({ label }: { label?: string }) {
-  const { theme, setTheme, setCustomColor, customColor } = useThemeColor();
-  const colorInputRef = useRef<HTMLInputElement>(null);
-
-  const handleCustomColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomColor(e.target.value);
-  };
+  const { theme, setTheme } = useThemeColor();
 
   const displayLabel = label || "Theme";
 
@@ -56,8 +52,8 @@ export function ThemeDockContent({ label }: { label?: string }) {
               type="button"
               onClick={() => setTheme(t.id)}
               className={cn(
-                "relative flex h-5 w-5 sm:h-5.5 sm:w-5.5 items-center justify-center rounded-full transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer shadow-xs ring-1 ring-black/20 dark:ring-white/25",
-                isActive ? "scale-110" : "hover:scale-105 opacity-95 hover:opacity-100"
+                "relative flex h-5 w-5 sm:h-5.5 sm:w-5.5 items-center justify-center rounded-full transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer shadow-xs",
+                isActive ? "scale-105" : "hover:scale-105 opacity-90 hover:opacity-100"
               )}
               aria-label={`Switch to ${t.name} color`}
               title={`${t.name} accent`}
@@ -65,59 +61,46 @@ export function ThemeDockContent({ label }: { label?: string }) {
             >
               {isActive && (
                 <motion.div
-                  layoutId="dock-active-ring"
-                  className="absolute -inset-1 rounded-full border-2 shadow-xs"
-                  style={{ borderColor: t.primary }}
-                  transition={{ type: "spring", stiffness: 380, damping: 24 }}
-                />
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 450, damping: 25 }}
+                  className="text-white flex items-center justify-center pointer-events-none"
+                >
+                  <Check className="w-3 h-3 stroke-[2.8] drop-shadow-xs" />
+                </motion.div>
               )}
             </button>
           );
         })}
 
-        {/* Plus button for Custom Color Wheel */}
+        {/* Plus button to open Brand Accent Colors popup dialog */}
         <div className="relative flex items-center justify-center ml-0.5 shrink-0">
-          <input
-            ref={colorInputRef}
-            type="color"
-            value={theme.isCustom ? theme.primary : customColor}
-            onChange={handleCustomColorChange}
-            className="sr-only"
-            id="dock-color-wheel"
-            aria-label="Pick any custom color"
-          />
-          <button
-            type="button"
-            onClick={() => colorInputRef.current?.click()}
-            className={cn(
-              "relative flex h-5 w-5 sm:h-5.5 sm:w-5.5 items-center justify-center rounded-full border border-dashed border-border transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-              theme.isCustom
-                ? "scale-110 border-solid shadow-xs"
-                : "hover:scale-105 hover:border-primary/60 bg-muted/40"
-            )}
-            style={
-              theme.isCustom
-                ? { backgroundColor: theme.primary, borderColor: theme.primary }
-                : undefined
+          <ColorPickerDialog
+            trigger={
+              <button
+                type="button"
+                className={cn(
+                  "relative flex h-5 w-5 sm:h-5.5 sm:w-5.5 items-center justify-center rounded-full border transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  theme.isCustom
+                    ? "scale-105 border-transparent shadow-xs"
+                    : "border-dashed border-border hover:scale-105 hover:border-primary/60 bg-muted/40"
+                )}
+                style={
+                  theme.isCustom
+                    ? { backgroundColor: theme.primary }
+                    : undefined
+                }
+                title="Brand accent colors & custom palette (+)"
+                aria-label="Open brand accent colors dialog"
+              >
+                {theme.isCustom ? (
+                  <Check className="h-3 w-3 text-white stroke-[2.8] drop-shadow-xs" />
+                ) : (
+                  <Plus className="h-3 w-3 text-muted-foreground hover:text-foreground transition-colors" />
+                )}
+              </button>
             }
-            title="Custom color wheel (+ any color)"
-            aria-label="Custom color wheel"
-          >
-            {theme.isCustom && (
-              <motion.div
-                layoutId="dock-active-ring"
-                className="absolute -inset-1 rounded-full border-2"
-                style={{ borderColor: theme.primary }}
-                transition={{ type: "spring", stiffness: 380, damping: 24 }}
-              />
-            )}
-            <Plus
-              className={cn(
-                "h-3 w-3 transition-colors",
-                theme.isCustom ? "text-white" : "text-muted-foreground hover:text-foreground"
-              )}
-            />
-          </button>
+          />
         </div>
       </div>
     </div>

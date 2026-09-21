@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
+import { DynamicTShirtCharacter } from "@/components/ui/dynamic-tshirt-character";
 import { Terminal, Layers, ShieldCheck, Code2, Sparkles, Cpu, CheckCircle2 } from "lucide-react";
 
 const CODE_SNIPPETS = [
@@ -109,17 +110,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
           className="relative z-10 w-[86%] sm:w-[92%] h-[86%] sm:h-[92%] drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)]"
         >
           <div className="relative w-full h-full rounded-3xl border border-border/80 bg-card/75 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center p-6 shadow-2xl group transition-all duration-500">
-            {/* Technical Blueprint Grid Pattern */}
-            <div
-              className="absolute inset-0 pointer-events-none opacity-[0.08] dark:opacity-[0.14]"
-              style={{
-                backgroundImage: `
-                  linear-gradient(to right, currentColor 1px, transparent 1px),
-                  linear-gradient(to bottom, currentColor 1px, transparent 1px)
-                `,
-                backgroundSize: "28px 28px",
-              }}
-            />
+
 
             {/* Ambient Radial Accent */}
             <div className="absolute inset-0 bg-radial from-primary/20 via-primary/5 to-transparent pointer-events-none transition-colors duration-500" />
@@ -141,17 +132,10 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
               </div>
             </div>
 
-            {/* Central Developer Architecture Graphic */}
-            <div className="relative flex flex-col items-center justify-center gap-3 my-auto z-10">
-              <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-b from-primary/20 to-primary/5 border-2 border-primary/30 shadow-xl shadow-primary/15 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                {/* Glowing Aura Ring */}
-                <div className="absolute -inset-2 rounded-3xl bg-primary/20 blur-xl opacity-60 animate-pulse pointer-events-none" />
-
-                {/* Central Icons Blend */}
-                <div className="relative z-10 flex items-center justify-center">
-                  <Code2 className="w-12 h-12 text-primary transition-transform duration-300" />
-                  <Sparkles className="w-5 h-5 text-primary/80 absolute -top-1 -right-1 animate-bounce" />
-                </div>
+            {/* Central Developer Character Graphic */}
+            <div className="relative flex flex-col items-center justify-center gap-2 my-auto z-10 mt-4">
+              <div className="relative w-40 h-40 sm:w-56 sm:h-56 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+                <DynamicTShirtCharacter />
               </div>
 
               {/* Title & Description */}

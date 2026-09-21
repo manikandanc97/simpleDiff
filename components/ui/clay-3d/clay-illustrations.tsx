@@ -1,16 +1,12 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 interface ClayIllustrationProps {
   className?: string;
   isHovered?: boolean;
 }
-
-// Helper unique ID generator to prevent SVG gradient collisions across cards
-const uid = (prefix: string) => `${prefix}`;
 
 /**
  * 1. WEBSITES ILLUSTRATION

@@ -13,8 +13,8 @@ import {
   Clock,
   Code2,
 } from "lucide-react";
-import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { SectionHeader } from "@/components/ui/section-header";
 import { useLead } from "@/components/leads/lead-provider";
 
 // ─── 5 Curated FAQs (Essential Client Questions Only) ──────────────────────────
@@ -108,9 +108,10 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="relative py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-background border-t border-border overflow-hidden"
+      className="relative py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-zinc-100/75 dark:bg-zinc-900/45 border-y border-zinc-200/80 dark:border-white/10 overflow-hidden"
     >
       {/* Ambient background glows */}
+
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-25" />
       <div className="pointer-events-none absolute top-12 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl opacity-40" />
       <div className="pointer-events-none absolute bottom-12 right-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl opacity-30" />
@@ -122,25 +123,17 @@ export function FAQ() {
 
           {/* Left Column (Sticky Hub & Direct Consultation Card) */}
           <div className="lg:col-span-5 lg:sticky lg:top-24">
-            <SectionDockSlot sectionId="faq" label="Questions · Answers" className="mb-3" />
-
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-4"
-            >
-              Frequently Asked <span className="text-primary">Questions.</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8"
-            >
-              Honest answers to the critical questions every founder and engineering leader asks before building with us.
-            </motion.p>
+            <SectionHeader
+              sectionId="faq"
+              dockLabel="Questions · Answers"
+              title={
+                <>
+                  Frequently Asked <span className="text-primary">Questions.</span>
+                </>
+              }
+              description="Honest answers to the critical questions every founder and engineering leader asks before building with us."
+              className="mb-8"
+            />
 
             {/* Interactive Consultation Card */}
             <motion.div
@@ -212,7 +205,7 @@ export function FAQ() {
           </div>
 
           {/* Right Column (Interactive Modern FAQ Bento Stack) */}
-          <div className="lg:col-span-7 flex flex-col gap-3.5 sm:gap-4">
+          <div className="lg:col-span-7 flex flex-col gap-2.5 sm:gap-3">
             {FAQS.map((faq, index) => {
               const isOpen = openId === faq.id;
               const Icon = faq.icon;
@@ -223,7 +216,7 @@ export function FAQ() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ ...SPRING, delay: index * 0.08 }}
-                  className={`group relative rounded-2xl border transition-all duration-300 backdrop-blur-md overflow-hidden ${
+                  className={`group relative rounded-xl sm:rounded-2xl border transition-all duration-300 backdrop-blur-md overflow-hidden ${
                     isOpen
                       ? "border-primary/50 bg-card shadow-xl shadow-primary/5"
                       : "border-border/60 bg-card/65 hover:border-primary/40 hover:bg-card/90"
@@ -241,13 +234,13 @@ export function FAQ() {
                     id={faq.id}
                     type="button"
                     onClick={() => toggle(faq.id)}
-                    className="w-full flex items-start sm:items-center justify-between gap-4 p-5 sm:p-6 text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                    className="w-full flex items-center justify-between gap-3 sm:gap-4 px-4 py-3 sm:px-5 sm:py-3.5 text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                     aria-expanded={isOpen}
                   >
-                    <div className="flex items-start sm:items-center gap-3.5 sm:gap-4 flex-1">
+                    <div className="flex items-center gap-3 sm:gap-3.5 flex-1 min-w-0">
                       {/* Step Number Pill */}
                       <span
-                        className={`text-xs font-mono font-bold px-2 py-1 rounded-lg shrink-0 transition-colors ${
+                        className={`text-[11px] sm:text-xs font-mono font-bold px-2 py-0.5 rounded-md shrink-0 transition-colors ${
                           isOpen
                             ? "bg-primary text-primary-foreground shadow-xs"
                             : "bg-muted/40 text-muted-foreground group-hover:text-foreground"
@@ -256,18 +249,18 @@ export function FAQ() {
                         {faq.num}
                       </span>
 
-                      <div>
+                      <div className="min-w-0 flex-1">
                         {/* Domain Tag */}
-                        <div className="flex items-center gap-1.5 mb-1">
+                        <div className="flex items-center gap-1.5 mb-0.5">
                           <Icon className={`w-3 h-3 ${isOpen ? "text-primary" : "text-muted-foreground/60"}`} />
-                          <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
+                          <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
                             {faq.category}
                           </span>
                         </div>
 
                         {/* Question */}
                         <h3
-                          className={`text-sm sm:text-base font-bold transition-colors duration-200 leading-snug ${
+                          className={`text-sm sm:text-[15px] font-bold transition-colors duration-200 leading-snug ${
                             isOpen
                               ? "text-primary"
                               : "text-foreground group-hover:text-primary"
@@ -280,16 +273,16 @@ export function FAQ() {
 
                     {/* Toggle Icon Indicator */}
                     <div
-                      className={`shrink-0 w-8 h-8 rounded-xl border flex items-center justify-center transition-all duration-300 mt-1 sm:mt-0 ${
+                      className={`shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-lg border flex items-center justify-center transition-all duration-300 ${
                         isOpen
                           ? "border-primary/50 bg-primary/10 text-primary rotate-180"
                           : "border-border/70 text-muted-foreground group-hover:border-primary/40 group-hover:text-primary group-hover:bg-primary/5"
                       }`}
                     >
                       {isOpen ? (
-                        <Minus className="h-4 w-4" />
+                        <Minus className="h-3.5 w-3.5" />
                       ) : (
-                        <Plus className="h-4 w-4" />
+                        <Plus className="h-3.5 w-3.5" />
                       )}
                     </div>
                   </button>
@@ -304,20 +297,20 @@ export function FAQ() {
                         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="px-5 pb-6 sm:px-6 sm:pb-6 pt-0">
+                        <div className="px-4 pb-4 sm:px-5 sm:pb-4.5 pt-0">
                           {/* Answer Body */}
                           <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                             {faq.answer}
                           </p>
 
                           {/* Key Takeaway Badges */}
-                          <div className="mt-4 pt-4 border-t border-border/50 flex flex-wrap gap-2">
+                          <div className="mt-3 pt-3 border-t border-border/50 flex flex-wrap gap-1.5 sm:gap-2">
                             {faq.highlights.map((item) => (
                               <span
                                 key={item}
-                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium border border-primary/25 bg-primary/[0.04] text-foreground"
+                                className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[10px] sm:text-[11px] font-medium border border-primary/25 bg-primary/[0.04] text-foreground"
                               >
-                                <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
+                                <CheckCircle2 className="w-3 h-3 text-primary shrink-0" />
                                 <span>{item}</span>
                               </span>
                             ))}

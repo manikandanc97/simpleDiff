@@ -97,7 +97,7 @@ function MagneticButton({
   );
 }
 
-export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
+export function WorkbenchHero() {
   const { openLead } = useLead();
   const heroRef = useRef<HTMLElement>(null);
 
@@ -116,14 +116,7 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
         {/* ── Animated mesh background ── */}
         <div className="pointer-events-none absolute inset-0 mesh-bg transition-colors duration-700" />
 
-        {/* ── Subtle grid overlay ── */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg,transparent,transparent 60px,currentColor 60px,currentColor 61px),repeating-linear-gradient(90deg,transparent,transparent 60px,currentColor 60px,currentColor 61px)",
-          }}
-        />
+
 
         {/* ── Parallax glowing orbs ── */}
         <motion.div
@@ -147,29 +140,24 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full pt-2 sm:pt-4">
             {/* Left Column: Headlines, Pitch, Chips, and CTAs */}
             <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+              {/* 1. Hero Theme Dock Slot */}
+              <SectionDockSlot sectionId="hero" label="Hero" className="mb-4" />
 
-              {/* 2. Single h1 for entire page — refined font-black bold typography */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-foreground mb-5 leading-[1.1]">
+              {/* 2. Single h1 for entire page — standardized 64px H1 typography */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-foreground mb-5 leading-[1.08]">
                 <span className="flex flex-wrap items-center justify-center lg:justify-start gap-x-3 mb-2">
                   <AnimatedWord word="Keep" delay={0.05} />
                   <AnimatedWord word="It" delay={0.12} />
-                  <AnimatedWord word="Simple." delay={0.19} className="text-primary" />
+                  <AnimatedWord word="Simple." delay={0.19} className="text-primary transition-colors duration-500" />
                 </span>
                 <span className="flex flex-wrap items-center justify-center lg:justify-start gap-x-3">
-                  <AnimatedWord word="Think" delay={0.28} />
+                  <AnimatedWord word="Think" delay={0.28} className="text-primary transition-colors duration-500" />
                   <AnimatedWord word="It" delay={0.33} />
-                  <motion.span
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                    className="inline-block font-black"
-                  >
-                    <span className="text-primary transition-colors duration-500 font-black">Different.</span>
-                  </motion.span>
+                  <AnimatedWord word="Different." delay={0.38} />
                 </span>
               </h1>
 
-              {/* 3. Sub-line */}
+              {/* 3. Lead Paragraph */}
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -229,16 +217,6 @@ export function WorkbenchHero({ onStartProject }: WorkbenchHeroProps) {
                   <AnimatedBriefcase size={15} className="text-primary/80 group-hover:text-primary transition-colors" />
                   <span>See our work</span>
                 </Link>
-              </motion.div>
-
-              {/* Dedicated Section Theme Dock Slot for Hero */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                className="mb-2"
-              >
-                <SectionDockSlot sectionId="hero" label="Hero" />
               </motion.div>
             </div>
 

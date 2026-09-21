@@ -1,10 +1,8 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useMemo, useEffect } from "react";
 import {
   GOOGLE_FONTS,
-  DEFAULT_FONT_NAME,
-  type GoogleFont,
   type GoogleFontCategory,
   preloadFontPreviewBatch,
   loadGoogleFontToDOM,
@@ -22,9 +20,7 @@ import { Button } from "@/components/ui/button";
 import {
   Type,
   Search,
-  X,
   Check,
-  RotateCcw,
   Sparkles,
   SlidersHorizontal,
 } from "lucide-react";
@@ -35,7 +31,6 @@ import {
   AnimatedCheck,
   AnimatedSparkles,
 } from "@/components/ui/animated-icon";
-import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const CATEGORIES: { id: GoogleFontCategory; label: string }[] = [
@@ -58,7 +53,6 @@ export function FontPicker({ onSelect }: { onSelect?: () => void }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<GoogleFontCategory>("all");
   const [previewText, setPreviewText] = useState(PRESET_PREVIEWS[0].text);
-  const [customSearchFont, setCustomSearchFont] = useState<string | null>(null);
 
   // Preload preview batches when FontPicker mounts
   useEffect(() => {
@@ -136,7 +130,6 @@ export function FontPicker({ onSelect }: { onSelect?: () => void }) {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
-            setCustomSearchFont(e.target.value.trim());
           }}
           placeholder="Search 65+ Google fonts (e.g., Poppins, Playfair, Fira Code, Outfit)..."
           className="w-full h-11 pl-10 pr-10 rounded-xl bg-muted/30 hover:bg-muted/50 focus:bg-background border border-border/70 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm transition-all"
@@ -146,7 +139,6 @@ export function FontPicker({ onSelect }: { onSelect?: () => void }) {
             type="button"
             onClick={() => {
               setSearch("");
-              setCustomSearchFont(null);
             }}
             className="group absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors cursor-pointer"
             aria-label="Clear search"

@@ -2,9 +2,9 @@
 
 import { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { motion, AnimatePresence } from "motion/react";
-import { PROJECTS, type Project, type ServiceType } from "@/lib/data/projects";
-import { ExternalLink, Sparkles, Globe, LayoutDashboard, Smartphone, Layers } from "lucide-react";
+import { motion } from "motion/react";
+import { PROJECTS, type Project } from "@/lib/data/projects";
+import { Globe, LayoutDashboard, Smartphone, Layers } from "lucide-react";
 import { AnimatedSparkles, AnimatedIcon } from "@/components/ui/animated-icon";
 import { cn } from "@/lib/utils";
 

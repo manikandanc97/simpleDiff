@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { COLOR_THEMES } from "@/lib/colors";
 import { useThemeColor } from "@/components/theme/color-provider";
 import {
@@ -13,7 +13,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Check, Palette, Sparkles, SlidersHorizontal, RotateCcw, Plus } from "lucide-react";
+import { Check, Sparkles, RotateCcw, Plus, ChevronDown, Pipette } from "lucide-react";
 import {
   AnimatedPalette,
   AnimatedCheck,
@@ -31,6 +31,17 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
   const [open, setOpen] = useState(false);
   const colorInputRef = useRef<HTMLInputElement>(null);
   const [hexInput, setHexInput] = useState(theme.isCustom ? theme.primary : "#2563EB");
+  const [showCustom, setShowCustom] = useState(Boolean(theme.isCustom));
+
+  React.useEffect(() => {
+    if (open) {
+      // eslint-disable-next-line
+      setHexInput(theme.isCustom ? theme.primary : (theme.primary || "#2563EB"));
+      if (theme.isCustom) {
+        setShowCustom(true);
+      }
+    }
+  }, [open, theme]);
 
   const handleCustomColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -48,6 +59,7 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
   const handleReset = () => {
     setTheme("blue");
     setHexInput("#2563EB");
+    setShowCustom(false);
   };
 
   return (
@@ -179,67 +191,122 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
             </div>
           </div>
 
-          {/* Custom Color Wheel & Hex Picker */}
-          <div className="p-3.5 rounded-xl border border-border/70 bg-muted/20 space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-foreground flex items-center gap-1.5">
-                <Plus className="w-3.5 h-3.5 text-primary" />
-                Custom Color Shade
-              </span>
-              <span className="text-[11px] text-muted-foreground">Any HEX color</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              {/* Color Wheel Trigger */}
-              <div className="relative shrink-0">
-                <input
-                  ref={colorInputRef}
-                  type="color"
-                  value={theme.isCustom ? theme.primary : customColor}
-                  onChange={handleCustomColorChange}
-                  className="sr-only"
-                  id="dialog-custom-color-wheel"
-                  aria-label="Pick custom color from palette"
-                />
-                <button
-                  type="button"
-                  onClick={() => colorInputRef.current?.click()}
-                  className="w-10 h-10 rounded-xl border-2 border-border/80 shadow-xs transition-transform hover:scale-105 cursor-pointer relative overflow-hidden flex items-center justify-center"
-                  style={{
-                    backgroundColor: theme.isCustom ? theme.primary : hexInput,
-                  }}
-                  title="Click to open system color wheel"
-                >
-                  <Plus className="w-4 h-4 text-white drop-shadow-md" />
-                </button>
+          {/* Custom Color Option / Collapsible Trigger */}
+          <div className="rounded-xl border border-border/70 bg-muted/20 overflow-hidden transition-all">
+            <button
+              type="button"
+              id="dialog-custom-color-trigger"
+              onClick={() => setShowCustom((prev) => !prev)}
+              className="w-full flex items-center justify-between p-3.5 text-left cursor-pointer hover:bg-muted/40 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-expanded={showCustom}
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/25 text-primary flex items-center justify-center shrink-0">
+                  <Pipette className="w-4 h-4" />
+                </span>
+                <div>
+                  <span className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                    Custom Color
+                    {theme.isCustom && (
+                      <span className="px-1.5 py-0.5 rounded-full text-[10px] font-mono bg-primary text-primary-foreground font-medium">
+                        Active
+                      </span>
+                    )}
+                  </span>
+                  <span className="text-[11px] text-muted-foreground block">
+                    {showCustom
+                      ? "Enter HEX code or pick from color wheel"
+                      : "Click to enter HEX or choose from color wheel"}
+                  </span>
+                </div>
               </div>
 
-              {/* Hex Code Input Form */}
-              <form onSubmit={handleHexSubmit} className="flex items-center gap-2 flex-1">
-                <div className="relative flex-1">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-mono text-muted-foreground">
-                    #
-                  </span>
-                  <input
-                    type="text"
-                    value={hexInput.replace(/^#/, "")}
-                    onChange={(e) => setHexInput(`#${e.target.value}`)}
-                    placeholder="2563EB"
-                    maxLength={7}
-                    className="w-full h-9 pl-7 pr-3 rounded-lg border border-border/80 bg-background text-xs font-mono uppercase focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  size="sm"
-                  className="group/button h-9 px-3.5 rounded-lg text-xs cursor-pointer flex items-center gap-1.5"
-                  disabled={!/^#([0-9A-Fa-f]{3}){1,2}$/.test(hexInput.trim())}
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-medium text-primary">
+                  {showCustom ? "Close" : "+ Custom Color"}
+                </span>
+                <ChevronDown
+                  className={cn(
+                    "w-4 h-4 text-muted-foreground transition-transform duration-200",
+                    showCustom && "rotate-180"
+                  )}
+                />
+              </div>
+            </button>
+
+            <AnimatePresence initial={false}>
+              {showCustom && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.22, ease: "easeInOut" }}
+                  className="overflow-hidden"
                 >
-                  <AnimatedCheck size={14} />
-                  <span>Apply</span>
-                </Button>
-              </form>
-            </div>
+                  <div className="p-3.5 pt-1 border-t border-border/60 space-y-3">
+                    <div className="flex items-center justify-between pt-1">
+                      <span className="text-[11px] font-medium text-muted-foreground">
+                        Type HEX Code or Pick Color Wheel
+                      </span>
+                      <span className="text-[11px] text-muted-foreground font-mono">Any HEX color</span>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      {/* Color Wheel Trigger */}
+                      <div className="relative shrink-0">
+                        <input
+                          ref={colorInputRef}
+                          type="color"
+                          value={theme.isCustom ? theme.primary : customColor}
+                          onChange={handleCustomColorChange}
+                          className="sr-only"
+                          id="dialog-custom-color-wheel"
+                          aria-label="Pick custom color from palette"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => colorInputRef.current?.click()}
+                          className="w-10 h-10 rounded-xl border-2 border-border/80 shadow-xs transition-transform hover:scale-105 cursor-pointer relative overflow-hidden flex items-center justify-center group"
+                          style={{
+                            backgroundColor: theme.isCustom ? theme.primary : hexInput,
+                          }}
+                          title="Click to open system color wheel"
+                        >
+                          <Plus className="w-4 h-4 text-white drop-shadow-md group-hover:scale-110 transition-transform" />
+                        </button>
+                      </div>
+
+                      {/* Hex Code Input Form */}
+                      <form onSubmit={handleHexSubmit} className="flex items-center gap-2 flex-1">
+                        <div className="relative flex-1">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-mono text-muted-foreground">
+                            #
+                          </span>
+                          <input
+                            type="text"
+                            value={hexInput.replace(/^#/, "")}
+                            onChange={(e) => setHexInput(`#${e.target.value}`)}
+                            placeholder="2563EB"
+                            maxLength={7}
+                            autoFocus
+                            className="w-full h-9 pl-7 pr-3 rounded-lg border border-border/80 bg-background text-xs font-mono uppercase focus:outline-none focus:ring-2 focus:ring-primary"
+                          />
+                        </div>
+                        <Button
+                          type="submit"
+                          size="sm"
+                          className="group/button h-9 px-3.5 rounded-lg text-xs cursor-pointer flex items-center gap-1.5"
+                          disabled={!/^#([0-9A-Fa-f]{3}){1,2}$/.test(hexInput.trim())}
+                        >
+                          <AnimatedCheck size={14} />
+                          <span>Apply</span>
+                        </Button>
+                      </form>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Interactive Live Preview */}

@@ -12,7 +12,7 @@ import {
   Layers,
 } from "lucide-react";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
-import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+import { SectionHeader } from "@/components/ui/section-header";
 import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
 import { PROJECTS, type Project, type ServiceType } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
@@ -267,7 +267,6 @@ function ActiveServiceContent({
 
 export function SelectedWork() {
   const headerRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(headerRef, { once: true, margin: "-80px" });
 
   const [activeService, setActiveService] = useState<ServiceType>("Websites");
 
@@ -278,10 +277,11 @@ export function SelectedWork() {
   return (
     <section
       id="selected-work"
-      className="relative w-full py-12 sm:py-16 bg-muted/25 dark:bg-muted/10 border-y border-border/50 overflow-hidden"
+      ref={headerRef}
+      className="relative w-full py-12 sm:py-16 bg-zinc-100/75 dark:bg-zinc-900/45 border-y border-zinc-200/80 dark:border-white/10 overflow-hidden"
     >
       {/* Subtle Background Pattern & Ambient Glows */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:28px_28px]" />
+
       <div className="pointer-events-none absolute -top-16 right-1/4 w-96 h-96 rounded-full bg-primary/8 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-16 left-1/4 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
 
@@ -291,28 +291,21 @@ export function SelectedWork() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Editorial Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 relative z-10">
-        <div ref={headerRef} className="max-w-3xl">
-          <SectionDockSlot sectionId="selected-work" label="Portfolio · Our Work" className="mb-2" />
-
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground mb-3"
-          >
-            Selected <span className="text-primary">Work.</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-sm sm:text-base text-muted-foreground leading-relaxed"
-          >
-            Explore client projects and technical builds organized by our core services. 
-            From live production websites to high-concurrency web platforms and mobile applications.
-          </motion.p>
-        </div>
+        <SectionHeader
+          sectionId="selected-work"
+          dockLabel="Portfolio · Our Work"
+          title={
+            <>
+              Selected <span className="text-primary">Work.</span>
+            </>
+          }
+          description={
+            <>
+              Explore client projects and technical builds organized by our core services. 
+              From live production websites to high-concurrency web platforms and mobile applications.
+            </>
+          }
+        />
       </div>
 
       {/* Service-Based Tab Navigation */}

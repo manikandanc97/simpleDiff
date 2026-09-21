@@ -11,11 +11,10 @@ import {
   Clock,
   Sparkles,
   ShieldCheck,
-  Zap,
 } from "lucide-react";
 import { useThemeColor } from "@/components/theme/color-provider";
-import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { SectionHeader } from "@/components/ui/section-header";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
 import { cn } from "@/lib/utils";
@@ -172,7 +171,6 @@ const PHASES: Phase[] = [
 export function HowWeWork() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-80px" });
-  const { theme } = useThemeColor();
 
   const [activeIndex, setActiveIndex] = useState(0);
   const activePhase = PHASES[activeIndex];
@@ -224,27 +222,17 @@ export function HowWeWork() {
 
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8">
-          <div className="max-w-2xl">
-            <SectionDockSlot sectionId="how-we-work" label="Process · Methodology" className="mb-2" />
-
-            <motion.h2
-              initial={{ opacity: 0, y: 14 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-foreground"
-            >
-              How We <span className="text-primary transition-colors duration-500">Work.</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xs sm:text-sm text-muted-foreground mt-2 leading-relaxed"
-            >
-              A focused 4-step delivery pipeline. Clean communication, weekly staging builds, and guaranteed milestones.
-            </motion.p>
-          </div>
+          <SectionHeader
+            sectionId="how-we-work"
+            dockLabel="Process · Methodology"
+            title={
+              <>
+                How We <span className="text-primary transition-colors duration-500">Work.</span>
+              </>
+            }
+            description="A focused 4-step delivery pipeline. Clean communication, weekly staging builds, and guaranteed milestones."
+            maxWidth="max-w-2xl"
+          />
         </div>
 
         {/* ========================================================================= */}

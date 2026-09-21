@@ -1,14 +1,16 @@
-﻿import { WorkbenchHero } from "@/components/workbench/workbench-hero";
-import { TrustBar } from "@/components/sections/trust-bar";
-import { WhatWeBuild } from "@/components/sections/what-we-build";
-import { SelectedWork } from "@/components/sections/selected-work";
-import { HowWeWork } from "@/components/sections/how-we-work";
-import { WhySimpleThink } from "@/components/sections/philosophy";
-import { Industries } from "@/components/sections/industries";
-import { TechStack } from "@/components/sections/tech-stack";
-import { Testimonials } from "@/components/sections/testimonials";
-import { FAQ } from "@/components/sections/faq";
-import { CTA } from "@/components/sections/cta";
+﻿import dynamic from "next/dynamic";
+import { WorkbenchHero } from "@/components/workbench/workbench-hero";
+
+// Lazy-loaded sections to reduce initial JS bundle size
+const WhatWeBuild = dynamic(() => import("@/components/sections/what-we-build").then((mod) => mod.WhatWeBuild));
+const SelectedWork = dynamic(() => import("@/components/sections/selected-work").then((mod) => mod.SelectedWork));
+const HowWeWork = dynamic(() => import("@/components/sections/how-we-work").then((mod) => mod.HowWeWork));
+const WhySimpleThink = dynamic(() => import("@/components/sections/philosophy").then((mod) => mod.WhySimpleThink));
+const Industries = dynamic(() => import("@/components/sections/industries").then((mod) => mod.Industries));
+const TechStack = dynamic(() => import("@/components/sections/tech-stack").then((mod) => mod.TechStack));
+// const Testimonials = dynamic(() => import("@/components/sections/testimonials").then((mod) => mod.Testimonials));
+const FAQ = dynamic(() => import("@/components/sections/faq").then((mod) => mod.FAQ));
+const CTA = dynamic(() => import("@/components/sections/cta").then((mod) => mod.CTA));
 
 export default function Home() {
   return (
@@ -16,10 +18,7 @@ export default function Home() {
       {/* 02 — HERO */}
       <WorkbenchHero />
 
-      {/* 03 — TRUST / CAPABILITIES */}
-      <TrustBar />
-
-      {/* 04 — WHAT WE BUILD */}
+      {/* 03 — WHAT WE BUILD */}
       <WhatWeBuild />
 
       {/* 05 — SELECTED WORK */}
@@ -32,7 +31,7 @@ export default function Home() {
       <WhySimpleThink />
 
       {/* 08 — INDUSTRIES */}
-      <Industries />
+      {/* <Industries /> */}
 
       {/* 09 — TECHNOLOGY */}
       <TechStack />

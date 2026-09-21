@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { motion } from "motion/react";
 import {
-  DollarSign,
+  Landmark,
   Heart,
   BookOpen,
   ShoppingCart,
@@ -14,13 +13,13 @@ import {
   Tv,
   Zap,
 } from "lucide-react";
-import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+import { SectionHeader } from "@/components/ui/section-header";
 
 const INDUSTRIES = [
   {
     id: "fintech",
     label: "FinTech",
-    icon: DollarSign,
+    icon: Landmark,
     description: "Payments, dashboards, lending",
   },
   {
@@ -80,8 +79,6 @@ const INDUSTRIES = [
 ];
 
 export function Industries() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(containerRef, { once: true, margin: "-80px" });
 
   return (
     <section
@@ -92,31 +89,20 @@ export function Industries() {
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-25" />
       <div className="pointer-events-none absolute -bottom-8 right-1/4 w-72 h-72 rounded-full bg-primary/10 blur-3xl" />
 
-      <div ref={containerRef} className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Editorial Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 sm:mb-16">
-          <div className="max-w-3xl">
-            <SectionDockSlot sectionId="industries" label="Verticals · Domains" className="mb-3" />
-
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-4"
-            >
-              Industries We <span className="text-primary">Serve.</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl"
-            >
-              We bring domain literacy to every engagement. Whether your product is regulated, high-growth, or consumer-facing — we understand the context, not just the code.
-            </motion.p>
-          </div>
+          <SectionHeader
+            sectionId="industries"
+            dockLabel="Verticals · Domains"
+            title={
+              <>
+                Industries We <span className="text-primary">Serve.</span>
+              </>
+            }
+            description="We bring domain literacy to every engagement. Whether your product is regulated, high-growth, or consumer-facing — we understand the context, not just the code."
+          />
         </div>
 
         {/* Industry Grid */}
@@ -162,7 +148,8 @@ export function Industries() {
         {/* Bottom note */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, delay: 0.65 }}
           className="mt-12 pt-8 border-t border-border/60 text-center"
         >

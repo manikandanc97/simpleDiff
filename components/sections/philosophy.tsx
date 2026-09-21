@@ -8,7 +8,7 @@ import {
   Layers,
   CheckCircle2,
 } from "lucide-react";
-import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+import { SectionHeader } from "@/components/ui/section-header";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
 
@@ -174,11 +174,11 @@ export function WhySimpleThink() {
   return (
     <section
       id="why-simplethink"
-      className="relative w-full py-12 sm:py-16 bg-muted/25 dark:bg-muted/10 border-y border-border/50 overflow-hidden"
+      className="relative w-full py-12 sm:py-16 bg-zinc-100/75 dark:bg-zinc-900/45 border-y border-zinc-200/80 dark:border-white/10 overflow-hidden"
     >
       {/* Subtle Background Pattern & Ambient Glows */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-70" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:28px_28px]" />
+
       <div className="pointer-events-none absolute top-12 left-1/4 w-96 h-96 rounded-full bg-primary/6 blur-3xl" />
       <div className="pointer-events-none absolute bottom-16 right-1/4 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
 
@@ -188,32 +188,21 @@ export function WhySimpleThink() {
       <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header with Section Theme Dock */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div className="max-w-3xl">
-            <SectionDockSlot sectionId="why-simplethink" label="Why SimpleThink" className="mb-3" />
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-[1.1]"
-            >
-              Three structural reasons{" "}
-              <span className="text-primary transition-colors duration-500">clients choose us.</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-base sm:text-lg text-muted-foreground mt-3 max-w-2xl"
-            >
-              No middle management, no billing surprises, and no handoff friction. Just direct access to senior builders who ship.
-            </motion.p>
-          </div>
+          <SectionHeader
+            sectionId="why-simplethink"
+            dockLabel="Why SimpleThink"
+            title={
+              <>
+                Three structural reasons{" "}
+                <span className="text-primary transition-colors duration-500">clients choose us.</span>
+              </>
+            }
+            description="No middle management, no billing surprises, and no handoff friction. Just direct access to senior builders who ship."
+          />
         </div>
 
         {/* 3 Pillars Grid - Direct, Simple, No Tabs */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 mb-12 sm:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 mb-6 sm:mb-8">
           {PILLARS.map((pillar, index) => {
             const IconComponent = pillar.icon;
 
@@ -280,7 +269,7 @@ export function WhySimpleThink() {
         </div>
 
         {/* Elevated Editorial Stats Strip */}
-        <div className="pt-8 border-t border-border">
+        <div className="pt-6 sm:pt-8 border-t border-border">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {STATS.map((stat, i) => (
               <motion.div

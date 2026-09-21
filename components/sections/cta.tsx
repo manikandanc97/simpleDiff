@@ -51,24 +51,24 @@ export function CTA({ onStartProject }: CTAProps) {
           <LaunchIllustration />
         </motion.div>
 
-        {/* Scaled-down Headline */}
+        {/* Scaled Headline (64px H1/Finale Scale) */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-foreground mb-5 leading-[1.05] uppercase select-none"
+          className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-foreground mb-5 leading-[1.08] uppercase select-none"
         >
           Got Something
           <br />
           In <span className="text-primary transition-colors duration-500">Mind?</span>
         </motion.h2>
 
-        {/* Subtitle */}
+        {/* Subtitle (Lead: 20px) */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="text-lg sm:text-2xl font-medium tracking-tight text-muted-foreground mb-8 max-w-xl"
+          className="text-lg sm:text-xl font-medium tracking-tight text-muted-foreground mb-8 max-w-xl"
         >
           Let&apos;s make it <span className="text-foreground font-semibold">simple</span>.
           <br />

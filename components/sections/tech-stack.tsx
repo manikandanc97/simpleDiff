@@ -3,8 +3,7 @@
 import { useRef, useState, useMemo } from "react";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence } from "motion/react";
-import { ShieldCheck, Zap, Lock } from "lucide-react";
-import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+import { SectionHeader } from "@/components/ui/section-header";
 
 
 
@@ -472,10 +471,9 @@ export function TechStack() {
   return (
     <section
       id="tech-stack"
-      className="relative w-full py-12 sm:py-16 bg-muted/25 dark:bg-muted/10 border-y border-border/50 overflow-hidden"
+      className="relative w-full py-12 sm:py-16 bg-background border-t border-border overflow-hidden"
     >
       {/* Subtle background grid & ambient glows */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:28px_28px]" />
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-30" />
       <div className="pointer-events-none absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl opacity-40" />
       <div className="pointer-events-none absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl opacity-40" />
@@ -483,26 +481,17 @@ export function TechStack() {
       <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
-        <div className="max-w-3xl mb-12 sm:mb-16">
-          <SectionDockSlot sectionId="tech-stack" label="Tools & Technologies" className="mb-3" />
-
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-4"
-          >
-            Our Tech <span className="text-primary">Stack.</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg text-muted-foreground leading-relaxed"
-          >
-            Battle-tested tools chosen for reliability, performance, and long-term maintainability — not just trends.
-          </motion.p>
+        <div className="mb-12 sm:mb-16">
+          <SectionHeader
+            sectionId="tech-stack"
+            dockLabel="Tools & Technologies"
+            title={
+              <>
+                Our Tech <span className="text-primary">Stack.</span>
+              </>
+            }
+            description="Battle-tested tools chosen for reliability, performance, and long-term maintainability — not just trends."
+          />
         </div>
 
 
@@ -559,7 +548,7 @@ export function TechStack() {
         <div
           role="tabpanel"
           aria-label={`${activeCategory} technologies`}
-          className="min-h-[280px]"
+          className="relative"
         >
           <AnimatePresence mode="popLayout">
             <motion.div
@@ -574,56 +563,16 @@ export function TechStack() {
 
         </div>
 
-        {/* Engineering Principles & Architecture Standards Strip */}
+        {/* Bottom note */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.45 }}
-          className="mt-14 pt-10 border-t border-border/70"
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="mt-8 pt-6 border-t border-border/60 text-center"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            <div className="flex items-start gap-3.5 p-4 rounded-xl border border-border/50 bg-card/40">
-              <div className="p-2 rounded-lg bg-primary/10 text-primary border border-primary/20 shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-foreground">Zero Vendor Lock-in</h4>
-                <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                  Engineered with portable open standards and decoupled architectures so you retain complete control over your code and data.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3.5 p-4 rounded-xl border border-border/50 bg-card/40">
-              <div className="p-2 rounded-lg bg-primary/10 text-primary border border-primary/20 shrink-0">
-                <Zap className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-foreground">Sub-Second Latency</h4>
-                <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                  Optimized bundles, edge CDN routing, server-rendered components, and high-performance database indexing for instant UX.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3.5 p-4 rounded-xl border border-border/50 bg-card/40">
-              <div className="p-2 rounded-lg bg-primary/10 text-primary border border-primary/20 shrink-0">
-                <Lock className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-foreground">Enterprise Type Safety</h4>
-                <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                  Strict TypeScript contracts from database schemas to API routes, paired with automated CI/CD validation on every push.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 text-center">
-            <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground/60">
-              We select tools that fit your unique project — not the other way around.
-            </p>
-          </div>
+          <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground/60">
+            We choose tools that fit your project — not the other way around.
+          </p>
         </motion.div>
 
       </div>

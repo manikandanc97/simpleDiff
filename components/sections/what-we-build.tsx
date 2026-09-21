@@ -14,7 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { useLead } from "@/components/leads/lead-provider";
-import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+import { SectionHeader } from "@/components/ui/section-header";
 import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
 import {
   WebsitesIllustration,
@@ -173,8 +173,8 @@ function DesktopPanel({
                   </div>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-2xl font-black tracking-tight text-foreground mb-1.5 leading-tight">
+                {/* Title (H3: 32px) */}
+                <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground mb-1.5 leading-tight">
                   {service.title}
                 </h3>
 
@@ -428,6 +428,7 @@ export function WhatWeBuild() {
   return (
     <section
       id="capabilities"
+      ref={headerRef}
       className="relative w-full py-12 sm:py-16 bg-background overflow-hidden"
     >
       {/* Ambient glow */}
@@ -439,29 +440,16 @@ export function WhatWeBuild() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* ── Editorial Section Header ── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 relative z-10">
-        <div ref={headerRef} className="max-w-3xl">
-          <SectionDockSlot sectionId="capabilities" label="Capabilities & Focus" className="mb-3" />
-
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-4"
-          >
-            What We <span className="text-primary">Build.</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg text-muted-foreground leading-relaxed"
-          >
-            We engineer custom software, scalable web applications, and mobile
-            platforms — with enterprise-grade reliability and zero unnecessary
-            overhead.
-          </motion.p>
-        </div>
+        <SectionHeader
+          sectionId="capabilities"
+          dockLabel="Capabilities & Focus"
+          title={
+            <>
+              What We <span className="text-primary">Build.</span>
+            </>
+          }
+          description="We engineer custom software, scalable web applications, and mobile platforms — with enterprise-grade reliability and zero unnecessary overhead."
+        />
       </div>
 
 

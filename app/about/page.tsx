@@ -1,7 +1,7 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
-import { Mail, MessageSquare } from "lucide-react";
+
 import {
   AnimatedMail,
   AnimatedMessageSquare,
