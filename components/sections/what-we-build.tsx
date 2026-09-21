@@ -15,12 +15,34 @@ import { cn } from "@/lib/utils";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { useLead } from "@/components/leads/lead-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
 import {
   WebsitesIllustration,
   WebAppsIllustration,
   MobileAppsIllustration,
   SaaSProductsIllustration,
 } from "@/components/ui/clay-3d/clay-illustrations";
+
+const FLOATING_BUILD_TECHS: FloatingTechItem[] = [
+  {
+    slug: "swift",
+    label: "Swift",
+    top: "6%",
+    right: "3.5%",
+    duration: 8.5,
+    delay: 0.3,
+    size: "md",
+  },
+  {
+    slug: "aws",
+    label: "AWS",
+    bottom: "16%",
+    left: "2.5%",
+    duration: 9,
+    delay: 0.7,
+    size: "md",
+  },
+];
 
 // ── Only the first 4 services are shown here. See /services for all 6. ────────
 const SERVICES = [
@@ -406,13 +428,17 @@ export function WhatWeBuild() {
   return (
     <section
       id="capabilities"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full overflow-hidden"
+      className="relative w-full py-12 sm:py-16 bg-background overflow-hidden"
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute -top-12 right-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl opacity-60" />
 
-      {/* ── Editorial Section Header ── */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 relative z-10">
+      {/* Floating Animated Badges */}
+      <FloatingTechGroup items={FLOATING_BUILD_TECHS} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* ── Editorial Section Header ── */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 relative z-10">
         <div ref={headerRef} className="max-w-3xl">
           <SectionDockSlot sectionId="capabilities" label="Capabilities & Focus" className="mb-3" />
 
@@ -490,6 +516,7 @@ export function WhatWeBuild() {
           Branding · AI Automation · and more
         </span>
       </motion.div>
+      </div>
     </section>
   );
 }

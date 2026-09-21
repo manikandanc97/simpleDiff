@@ -3,14 +3,15 @@
 import { useRef, useState, useMemo } from "react";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence } from "motion/react";
-import { Search, X, ShieldCheck, Zap, Lock } from "lucide-react";
+import { ShieldCheck, Zap, Lock } from "lucide-react";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+
+
 
 
 // ─── Categories ───────────────────────────────────────────────────────────────
 
 export const CATEGORIES = [
-  "All",
   "Frontend & Web",
   "Mobile",
   "Backend & APIs",
@@ -24,12 +25,13 @@ export type Category = (typeof CATEGORIES)[number];
 export interface TechItem {
   name: string;
   slug: string;
-  category: Exclude<Category, "All">;
+  category: Category;
   role: string;
   badge: string;
   accentColor: string;
   invertInDark?: boolean;
 }
+
 
 // ─── Curated Tech Stack (Zero Redundancy — Exactly 1 Category Each) ───────────
 
@@ -447,43 +449,33 @@ function TechCard({ tech, index }: { tech: TechItem; index: number }) {
 // ─── Main Section ────────────────────────────────────────────────────────────
 
 export function TechStack() {
-  const [activeCategory, setActiveCategory] = useState<Category>("All");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<Category>("Frontend & Web");
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-80px" });
 
   // Counts per category
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { All: TECH_STACK.length };
+    const counts: Record<string, number> = {};
     for (const tech of TECH_STACK) {
       counts[tech.category] = (counts[tech.category] || 0) + 1;
     }
     return counts;
   }, []);
 
-  // Filtered list
+  // Filtered list by active category
   const filtered = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-    return TECH_STACK.filter((tech) => {
-      const matchesCategory =
-        activeCategory === "All" || tech.category === activeCategory;
-      const matchesSearch =
-        !query ||
-        tech.name.toLowerCase().includes(query) ||
-        tech.role.toLowerCase().includes(query) ||
-        tech.badge.toLowerCase().includes(query) ||
-        tech.category.toLowerCase().includes(query);
+    return TECH_STACK.filter((tech) => tech.category === activeCategory);
+  }, [activeCategory]);
 
-      return matchesCategory && matchesSearch;
-    });
-  }, [activeCategory, searchQuery]);
+
 
   return (
     <section
       id="tech-stack"
-      className="py-20 sm:py-28 bg-background border-t border-border relative overflow-hidden"
+      className="relative w-full py-12 sm:py-16 bg-muted/25 dark:bg-muted/10 border-y border-border/50 overflow-hidden"
     >
-      {/* Ambient background glows */}
+      {/* Subtle background grid & ambient glows */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:28px_28px]" />
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-30" />
       <div className="pointer-events-none absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl opacity-40" />
       <div className="pointer-events-none absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl opacity-40" />
@@ -491,57 +483,28 @@ export function TechStack() {
       <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div className="max-w-3xl">
-            <SectionDockSlot sectionId="tech-stack" label="Tools & Technologies" className="mb-3" />
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <SectionDockSlot sectionId="tech-stack" label="Tools & Technologies" className="mb-3" />
 
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-4"
-            >
-              Our Tech <span className="text-primary">Stack.</span>
-            </motion.h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-4"
+          >
+            Our Tech <span className="text-primary">Stack.</span>
+          </motion.h2>
 
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg text-muted-foreground leading-relaxed"
-            >
-              Battle-tested tools chosen for reliability, performance, and long-term maintainability — not just trends.
-            </motion.p>
-          </div>
-
-          {/* Quick Search Filter */}
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="relative w-full lg:w-72"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base sm:text-lg text-muted-foreground leading-relaxed"
           >
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={`Search ${TECH_STACK.length}+ tools...`}
-              aria-label="Search technologies"
-              className="w-full pl-9 pr-8 py-2 text-sm rounded-xl border border-border/70 bg-card/60 backdrop-blur-md placeholder:text-muted-foreground/60 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all duration-200"
-            />
-
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                aria-label="Clear search"
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-muted/40 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            )}
-          </motion.div>
+            Battle-tested tools chosen for reliability, performance, and long-term maintainability — not just trends.
+          </motion.p>
         </div>
+
 
         {/* Category Pill Tabs */}
         <motion.div
@@ -599,41 +562,16 @@ export function TechStack() {
           className="min-h-[280px]"
         >
           <AnimatePresence mode="popLayout">
-            {filtered.length > 0 ? (
-              <motion.div
-                key={activeCategory + searchQuery}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4"
-              >
-                {filtered.map((tech, i) => (
-                  <TechCard key={tech.slug} tech={tech} index={i} />
-                ))}
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                className="flex flex-col items-center justify-center py-16 px-4 text-center border border-dashed border-border/80 rounded-2xl bg-card/40"
-              >
-                <Search className="w-8 h-8 text-muted-foreground/40 mb-3" />
-                <p className="text-sm font-medium text-foreground">
-                  No matching technology found for &quot;{searchQuery}&quot;
-                </p>
-                <p className="text-xs text-muted-foreground mt-1 mb-4">
-                  Try searching for a different framework, language, or clear your query.
-                </p>
-                <button
-                  onClick={() => {
-                    setSearchQuery("");
-                    setActiveCategory("All");
-                  }}
-                  className="px-4 py-1.5 text-xs font-semibold rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity cursor-pointer"
-                >
-                  Reset Filter
-                </button>
-              </motion.div>
-            )}
+            <motion.div
+              key={activeCategory}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4"
+            >
+              {filtered.map((tech, i) => (
+                <TechCard key={tech.slug} tech={tech} index={i} />
+              ))}
+            </motion.div>
           </AnimatePresence>
+
         </div>
 
         {/* Engineering Principles & Architecture Standards Strip */}

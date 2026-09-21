@@ -77,7 +77,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative py-20 sm:py-28 bg-background border-t border-border overflow-hidden"
+      className="relative py-10 sm:py-16 bg-background border-t border-border overflow-hidden"
     >
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-30" />

@@ -10,6 +10,46 @@ import {
 } from "lucide-react";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
+import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
+
+const FLOATING_WHY_TECHS: FloatingTechItem[] = [
+  {
+    slug: "postgresql",
+    label: "PostgreSQL",
+    top: "8%",
+    right: "3.5%",
+    duration: 8.5,
+    delay: 0.2,
+    size: "md",
+  },
+  {
+    slug: "docker",
+    label: "Docker",
+    top: "35%",
+    left: "2.5%",
+    duration: 9,
+    delay: 0.7,
+    size: "md",
+  },
+  {
+    slug: "python",
+    label: "Python",
+    bottom: "14%",
+    left: "3%",
+    duration: 8,
+    delay: 0.4,
+    size: "md",
+  },
+  {
+    slug: "fastapi",
+    label: "FastAPI",
+    bottom: "10%",
+    right: "3.5%",
+    duration: 9.5,
+    delay: 1.1,
+    size: "md",
+  },
+];
 
 interface Pillar {
   id: string;
@@ -134,12 +174,16 @@ export function WhySimpleThink() {
   return (
     <section
       id="why-simplethink"
-      className="relative py-20 sm:py-28 bg-background border-t border-border overflow-hidden"
+      className="relative w-full py-12 sm:py-16 bg-muted/25 dark:bg-muted/10 border-y border-border/50 overflow-hidden"
     >
-      {/* Subtle Ambient Background Glows */}
-      <div className="pointer-events-none absolute inset-0 mesh-bg opacity-30" />
+      {/* Subtle Background Pattern & Ambient Glows */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-70" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:28px_28px]" />
       <div className="pointer-events-none absolute top-12 left-1/4 w-96 h-96 rounded-full bg-primary/6 blur-3xl" />
       <div className="pointer-events-none absolute bottom-16 right-1/4 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
+
+      {/* Floating Animated Tech Badges */}
+      <FloatingTechGroup items={FLOATING_WHY_TECHS} />
 
       <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header with Section Theme Dock */}

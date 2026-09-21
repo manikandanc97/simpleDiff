@@ -86,7 +86,7 @@ export function Industries() {
   return (
     <section
       id="industries"
-      className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-background border-t border-border overflow-hidden"
+      className="relative py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-background border-t border-border overflow-hidden"
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-25" />

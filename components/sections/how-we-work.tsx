@@ -17,7 +17,38 @@ import { useThemeColor } from "@/components/theme/color-provider";
 import { SectionDockSlot } from "@/components/theme/section-dock-slot";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
 import { cn } from "@/lib/utils";
+
+const FLOATING_PROCESS_TECHS: FloatingTechItem[] = [
+  {
+    slug: "figma",
+    label: "Figma",
+    top: "6%",
+    right: "4%",
+    duration: 8.5,
+    delay: 0.3,
+    size: "md",
+  },
+  {
+    slug: "react",
+    label: "React",
+    top: "38%",
+    left: "2.5%",
+    duration: 9,
+    delay: 0.9,
+    size: "md",
+  },
+  {
+    slug: "githubactions",
+    label: "GitHub Actions",
+    bottom: "8%",
+    right: "3%",
+    duration: 8,
+    delay: 0.4,
+    size: "md",
+  },
+];
 
 interface Phase {
   id: string;
@@ -179,12 +210,15 @@ export function HowWeWork() {
   return (
     <section
       id="how-we-work"
-      className="relative py-14 sm:py-16 bg-background border-t border-border overflow-hidden select-none"
+      className="relative py-8 sm:py-12 bg-background border-t border-border overflow-hidden select-none"
     >
       {/* Subtle Background Ambience */}
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-30" />
       <div className="pointer-events-none absolute top-10 right-1/4 w-96 h-96 rounded-full bg-primary/8 blur-3xl" />
       <div className="pointer-events-none absolute bottom-10 left-10 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
+
+      {/* Floating Animated Badges */}
+      <FloatingTechGroup items={FLOATING_PROCESS_TECHS} />
 
       <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 

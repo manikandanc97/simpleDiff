@@ -31,7 +31,7 @@ export function CTA({ onStartProject }: CTAProps) {
     <section
       id="cta"
       ref={ref}
-      className="relative w-full py-24 sm:py-36 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden border-t border-border"
+      className="relative w-full py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden border-t border-border"
     >
       {/* Background ambient lighting */}
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-70" />
