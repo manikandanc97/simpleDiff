@@ -3,15 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView, AnimatePresence } from "motion/react";
-import {
-  ExternalLink,
-  ArrowUpRight,
-  Globe,
-  LayoutDashboard,
-  Smartphone,
-  Layers,
-} from "lucide-react";
-import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { AnimatedArrowRight, AnimatedIcon, type AnimatedIconName } from "@/components/ui/animated-icon";
 import { SectionHeader } from "@/components/ui/section-header";
 import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
 import { PROJECTS, type Project, type ServiceType } from "@/lib/data/projects";
@@ -61,8 +53,7 @@ const FLOATING_TECHS: FloatingTechItem[] = [
 interface ServiceTabItem {
   id: ServiceType;
   label: string;
-  icon: typeof Globe;
-  tag: string;
+  iconName: AnimatedIconName;
   tagline: string;
 }
 
@@ -70,22 +61,19 @@ const SERVICE_TABS: ServiceTabItem[] = [
   {
     id: "Websites",
     label: "Websites",
-    icon: Globe,
-    tag: "3 Live Client Sites",
+    iconName: "globe",
     tagline: "High-performance client websites engineered for sub-second speeds, top-tier SEO, and measurable conversions.",
   },
   {
     id: "Web Apps",
     label: "Web Apps",
-    icon: LayoutDashboard,
-    tag: "3 Fullstack Systems",
+    iconName: "grid",
     tagline: "Focused enterprise software, cloud ERP platforms, and real-time operational dashboards.",
   },
   {
     id: "Mobile Apps",
     label: "Mobile Apps",
-    icon: Smartphone,
-    tag: "3 Mobile Products",
+    iconName: "smartphone",
     tagline: "Cross-platform iOS and Android mobile experiences engineered with native performance and offline sync.",
   },
 ];
@@ -136,11 +124,11 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[11px] font-mono text-white/90 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/15 hover:border-primary/50 transition-colors shadow-xs"
+              className="inline-flex items-center gap-1.5 text-[11px] font-mono text-white/90 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/15 hover:border-primary/50 transition-colors shadow-xs group/domain"
             >
-              <Globe size={11} className="text-primary" />
+              <AnimatedIcon name="globe" size={11} className="text-primary" />
               <span>{project.domain}</span>
-              <ExternalLink size={10} className="text-white/60" />
+              <AnimatedIcon name="external-link" size={10} className="text-white/60 group-hover/domain:text-white transition-colors" />
             </a>
           </div>
         )}
@@ -191,7 +179,7 @@ function ProjectCard({ project }: { project: Project }) {
                 className="text-xs font-bold text-primary hover:underline inline-flex items-center gap-1.5 group/link"
               >
                 <span>Visit Production Site</span>
-                <ExternalLink size={12} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                <AnimatedIcon name="external-link" size={12} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
               </a>
             ) : (
               <span />
@@ -235,7 +223,7 @@ function ActiveServiceContent({
           {tab.tagline}
         </p>
         <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-mono font-semibold text-primary">
-          <Layers size={12} />
+          <AnimatedIcon name="layers" size={12} />
           <span>{projects.length} Works</span>
         </span>
       </div>
@@ -312,7 +300,6 @@ export function SelectedWork() {
       <div className="mb-6 relative z-10" role="tablist" aria-label="Work service categories">
         <div className="inline-flex items-center gap-1.5 p-1.5 bg-muted/40 border border-border/70 rounded-full backdrop-blur-md overflow-x-auto w-full sm:w-auto scrollbar-hide shadow-xs">
           {SERVICE_TABS.map((tab) => {
-            const Icon = tab.icon;
             const isActive = activeService === tab.id;
 
             return (
@@ -324,36 +311,27 @@ export function SelectedWork() {
                 className={cn(
                   "relative flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap cursor-pointer select-none",
                   isActive
-                    ? "text-background"
+                    ? "text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/80"
                 )}
               >
                 {isActive && (
                   <motion.div
                     layoutId="active-service-tab"
-                    className="absolute inset-0 bg-foreground rounded-full shadow-md"
+                    className="absolute inset-0 bg-primary rounded-full shadow-md"
                     initial={false}
                     transition={SPRING}
                   />
                 )}
-                <Icon
+                <AnimatedIcon
+                  name={tab.iconName}
                   size={14}
                   className={cn(
                     "relative z-10 transition-colors",
-                    isActive ? "text-background" : "text-primary"
+                    isActive ? "text-primary-foreground" : "text-primary"
                   )}
                 />
                 <span className="relative z-10">{tab.label}</span>
-                <span
-                  className={cn(
-                    "relative z-10 text-[10px] font-mono px-2 py-0.2 rounded-full transition-colors hidden sm:inline",
-                    isActive
-                      ? "bg-background/20 text-background font-bold"
-                      : "bg-muted text-muted-foreground"
-                  )}
-                >
-                  {tab.tag}
-                </span>
               </button>
             );
           })}
@@ -378,7 +356,7 @@ export function SelectedWork() {
           className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-background border border-border/80 shadow-xs text-xs sm:text-sm font-semibold text-foreground hover:border-primary/50 hover:text-primary transition-all duration-300"
         >
           <span>View complete project archive & case studies</span>
-          <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          <AnimatedIcon name="arrow-right" size={14} className="group-hover:translate-x-0.5 transition-transform" />
         </Link>
       </div>
       </div>

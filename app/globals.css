@@ -69,8 +69,8 @@
   --text-xl--line-height: 1.75rem;
   --text-3xl: 2rem; /* H3: 32px */
   --text-3xl--line-height: 2.25rem;
-  --text-5xl: 3rem; /* H2: 48px */
-  --text-5xl--line-height: 1.15;
+  --text-5xl: 2.5rem; /* H2: 40px */
+  --text-5xl--line-height: 1.2;
   --text-6xl: 4rem; /* H1: 64px */
   --text-6xl--line-height: 1.08;
 }
@@ -84,8 +84,8 @@
 }
 
 .type-h2 {
-  font-size: clamp(1.875rem, 4vw, 3rem); /* 30px mobile -> 48px desktop */
-  line-height: 1.15;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem); /* 28px mobile -> 40px desktop */
+  line-height: 1.2;
   font-weight: 800;
   letter-spacing: -0.02em;
 }

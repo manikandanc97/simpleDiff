@@ -3,16 +3,9 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView, AnimatePresence } from "motion/react";
-import {
-  Globe,
-  LayoutDashboard,
-  Smartphone,
-  Package2,
-  ChevronDown,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { AnimatedArrowRight, AnimatedIcon, type AnimatedIconName } from "@/components/ui/animated-icon";
 import { useLead } from "@/components/leads/lead-provider";
 import { SectionHeader } from "@/components/ui/section-header";
 import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
@@ -48,7 +41,7 @@ const FLOATING_BUILD_TECHS: FloatingTechItem[] = [
 const SERVICES = [
   {
     id: "01",
-    icon: Globe,
+    iconName: "globe" as AnimatedIconName,
     title: "Websites",
     tagline:
       "Digital experiences that make your business clear, credible and memorable.",
@@ -61,7 +54,7 @@ const SERVICES = [
   },
   {
     id: "02",
-    icon: LayoutDashboard,
+    iconName: "grid" as AnimatedIconName,
     title: "Web Applications",
     tagline:
       "Focused software built around how your business actually works.",
@@ -74,7 +67,7 @@ const SERVICES = [
   },
   {
     id: "03",
-    icon: Smartphone,
+    iconName: "smartphone" as AnimatedIconName,
     title: "Mobile Apps",
     tagline:
       "Useful mobile experiences built for real-world customers.",
@@ -87,7 +80,7 @@ const SERVICES = [
   },
   {
     id: "04",
-    icon: Package2,
+    iconName: "layers" as AnimatedIconName,
     title: "SaaS Products",
     tagline:
       "From first release to scalable, multi-tenant product systems.",
@@ -116,7 +109,6 @@ function DesktopPanel({
   onActivate: () => void;
   onInquire: (name: string) => void;
 }) {
-  const Icon = service.icon;
   const Illustration = service.Illustration;
 
   return (
@@ -169,7 +161,7 @@ function DesktopPanel({
                     {service.id}
                   </span>
                   <div className="w-9 h-9 rounded-xl border border-primary/40 bg-primary/10 flex items-center justify-center text-primary shadow-sm">
-                    <Icon className="h-4 w-4" />
+                    <AnimatedIcon name={service.iconName} size={16} />
                   </div>
                 </div>
 
@@ -220,7 +212,7 @@ function DesktopPanel({
 
             {/* Illustration side */}
             <div className="hidden xl:flex w-[35%] shrink-0 items-center justify-center p-4 border-l border-primary/20 bg-gradient-to-br from-primary/12 to-primary/4 relative">
-              <div className="w-full max-w-[155px] transform transition-transform duration-500">
+              <div className="w-full max-w-[280px] transform transition-transform duration-500">
                 <Illustration />
               </div>
             </div>
@@ -241,14 +233,14 @@ function DesktopPanel({
                 {service.id}
               </span>
               <div className="w-6 h-6 rounded-full border border-border/70 bg-card/90 flex items-center justify-center text-muted-foreground group-hover/collapsed:text-primary group-hover/collapsed:border-primary/50 group-hover/collapsed:bg-primary/10 transition-all duration-300 shadow-xs">
-                <ChevronRight className="h-3 w-3 group-hover/collapsed:translate-x-0.5 transition-transform" />
+                <AnimatedIcon name="chevron-right" size={12} className="group-hover/collapsed:translate-x-0.5 transition-transform" />
               </div>
             </div>
 
             {/* Middle: Icon + vertical label */}
             <div className="flex flex-col items-center gap-4 my-auto">
               <div className="w-9 h-9 rounded-xl border border-border/60 bg-muted/30 flex items-center justify-center text-muted-foreground group-hover/collapsed:text-primary group-hover/collapsed:border-primary/40 group-hover/collapsed:bg-primary/10 transition-all duration-300">
-                <Icon className="h-4 w-4" />
+                <AnimatedIcon name={service.iconName} size={16} />
               </div>
               {/* Vertical text */}
               <span
@@ -282,7 +274,6 @@ function MobileCard({
   onInquire: (name: string) => void;
   index: number;
 }) {
-  const Icon = service.icon;
 
   return (
     <motion.div
@@ -335,7 +326,7 @@ function MobileCard({
               : "border-border/60 bg-muted/30 text-muted-foreground"
           )}
         >
-          <Icon className="h-4 w-4" />
+          <AnimatedIcon name={service.iconName} size={16} />
         </div>
 
         {/* Title */}

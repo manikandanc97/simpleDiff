@@ -30,13 +30,13 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
   const { theme, setTheme, setCustomColor, customColor } = useThemeColor();
   const [open, setOpen] = useState(false);
   const colorInputRef = useRef<HTMLInputElement>(null);
-  const [hexInput, setHexInput] = useState(theme.isCustom ? theme.primary : "#2563EB");
+  const [hexInput, setHexInput] = useState(theme.isCustom ? theme.primary : "#2563eb");
   const [showCustom, setShowCustom] = useState(Boolean(theme.isCustom));
 
   React.useEffect(() => {
     if (open) {
       // eslint-disable-next-line
-      setHexInput(theme.isCustom ? theme.primary : (theme.primary || "#2563EB"));
+      setHexInput(theme.isCustom ? theme.primary : (theme.primary || "#2563eb"));
       if (theme.isCustom) {
         setShowCustom(true);
       }
@@ -46,7 +46,6 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
   const handleCustomColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setHexInput(val);
-    setCustomColor(val);
   };
 
   const handleHexSubmit = (e: React.FormEvent) => {
@@ -58,9 +57,22 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
 
   const handleReset = () => {
     setTheme("blue");
-    setHexInput("#2563EB");
+    setHexInput("#2563eb");
     setShowCustom(false);
   };
+
+  const isHexValid = /^#([0-9A-Fa-f]{3}){1,2}$/.test(hexInput.trim());
+  let hasChanges = false;
+  if (isHexValid && theme.primary) {
+    const normalizeHex = (hex: string) => {
+      let h = hex.trim().toLowerCase();
+      if (h.length === 4) {
+        h = '#' + h[1] + h[1] + h[2] + h[2] + h[3] + h[3];
+      }
+      return h;
+    };
+    hasChanges = normalizeHex(hexInput) !== normalizeHex(theme.primary);
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -86,8 +98,8 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
           )
         }
       />
-      <DialogContent className="sm:max-w-[540px] max-h-[90vh] overflow-hidden flex flex-col p-6">
-        <DialogHeader className="pb-2 border-b border-border/70">
+      <DialogContent className="sm:max-w-[540px] max-h-[90vh] overflow-hidden flex flex-col p-5">
+        <DialogHeader className="pb-2.5 border-b border-border/70">
           <div className="flex items-center justify-between pr-6">
             <DialogTitle className="text-lg font-bold tracking-tight flex items-center gap-2">
               <AnimatedPalette size={18} className="text-primary" />
@@ -100,7 +112,7 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="overflow-y-auto pt-4 pr-1 space-y-5">
+        <div className="overflow-y-auto pr-1 space-y-4">
           {/* Active Color Info Bar */}
           <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-muted/40 border border-border/70 backdrop-blur-xs">
             <div className="flex items-center gap-3">
@@ -257,7 +269,7 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
                         <input
                           ref={colorInputRef}
                           type="color"
-                          value={theme.isCustom ? theme.primary : customColor}
+                          value={hexInput.toLowerCase()}
                           onChange={handleCustomColorChange}
                           className="sr-only"
                           id="dialog-custom-color-wheel"
@@ -268,7 +280,7 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
                           onClick={() => colorInputRef.current?.click()}
                           className="w-10 h-10 rounded-xl border-2 border-border/80 shadow-xs transition-transform hover:scale-105 cursor-pointer relative overflow-hidden flex items-center justify-center group"
                           style={{
-                            backgroundColor: theme.isCustom ? theme.primary : hexInput,
+                            backgroundColor: hexInput,
                           }}
                           title="Click to open system color wheel"
                         >
@@ -295,8 +307,11 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
                         <Button
                           type="submit"
                           size="sm"
-                          className="group/button h-9 px-3.5 rounded-lg text-xs cursor-pointer flex items-center gap-1.5"
-                          disabled={!/^#([0-9A-Fa-f]{3}){1,2}$/.test(hexInput.trim())}
+                          className={cn(
+                            "group/button h-9 px-3.5 rounded-lg text-xs flex items-center gap-1.5 transition-all",
+                            !hasChanges ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                          )}
+                          disabled={!hasChanges}
                         >
                           <AnimatedCheck size={14} />
                           <span>Apply</span>
@@ -315,19 +330,27 @@ export function ColorPickerDialog({ trigger }: ColorPickerDialogProps) {
               Live Preview
             </span>
             <div className="flex flex-wrap items-center gap-2.5">
-              <Button size="sm" className="rounded-full text-xs h-8 cursor-default pointer-events-none flex items-center gap-1.5">
+              <Button 
+                size="sm" 
+                className="rounded-full text-xs h-8 cursor-default pointer-events-none flex items-center gap-1.5"
+                style={{ backgroundColor: hexInput, borderColor: hexInput, color: '#fff' }}
+              >
                 <AnimatedSparkles size={13} />
                 <span>Primary Button</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="rounded-full text-xs h-8 border-primary/50 text-primary cursor-default pointer-events-none flex items-center gap-1.5"
+                className="rounded-full text-xs h-8 cursor-default pointer-events-none flex items-center gap-1.5"
+                style={{ borderColor: `${hexInput}80`, color: hexInput }}
               >
                 <span>Outlined</span>
                 <AnimatedArrowRight size={12} />
               </Button>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/15 text-primary border border-primary/25">
+              <span 
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border"
+                style={{ backgroundColor: `${hexInput}26`, color: hexInput, borderColor: `${hexInput}40` }}
+              >
                 <AnimatedSparkles size={12} /> Badge
               </span>
             </div>

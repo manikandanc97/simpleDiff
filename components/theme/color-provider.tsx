@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { createContext, useContext, useSyncExternalStore } from "react";
 import { COLOR_THEMES, createCustomColorTheme, type ColorTheme } from "@/lib/colors";
@@ -33,9 +33,9 @@ function getThemeSnapshot(): string {
 
 function getCustomColorSnapshot(): string {
   try {
-    return localStorage.getItem("SimpleThink-custom-color") || "#2563EB";
+    return (localStorage.getItem("SimpleThink-custom-color") || "#2563eb").toLowerCase();
   } catch {
-    return "#2563EB";
+    return "#2563eb";
   }
 }
 
@@ -53,7 +53,7 @@ const ThemeColorContext = createContext<ThemeColorContextType | undefined>(undef
 
 export function ThemeColorProvider({ children }: { children: React.ReactNode }) {
   const themeId = useSyncExternalStore(subscribe, getThemeSnapshot, () => "blue");
-  const customColor = useSyncExternalStore(subscribe, getCustomColorSnapshot, () => "#2563EB");
+  const customColor = useSyncExternalStore(subscribe, getCustomColorSnapshot, () => "#2563eb");
   const mode = useSyncExternalStore<"light" | "dark">(subscribe, getModeSnapshot, () => "dark");
 
   const theme: ColorTheme =
