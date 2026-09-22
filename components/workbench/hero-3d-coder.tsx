@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
 import { DynamicTShirtCharacter } from "@/components/ui/dynamic-tshirt-character";
-import { Terminal, Layers, ShieldCheck, Code2, Sparkles, Cpu, CheckCircle2 } from "lucide-react";
+import { Terminal, Layers, ShieldCheck } from "lucide-react";
 
 const CODE_SNIPPETS = [
   "const app = SimpleThink.create();",
@@ -95,7 +95,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative w-full h-full flex items-center justify-center"
       >
-        {/* Central Developer Architecture Canvas */}
+        {/* Central Developer Character Graphic without card */}
         <motion.div
           animate={{
             y: [-8, 8, -8],
@@ -107,57 +107,10 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
             ease: "easeInOut",
           }}
           style={{ transform: "translateZ(30px)" }}
-          className="relative z-10 w-[86%] sm:w-[92%] h-[86%] sm:h-[92%] drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)]"
+          className="relative z-10 w-[86%] sm:w-[92%] h-[86%] sm:h-[92%] drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)] flex items-center justify-center"
         >
-          <div className="relative w-full h-full rounded-3xl border border-border/80 bg-card/75 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center p-6 shadow-2xl group transition-all duration-500">
-
-
-            {/* Ambient Radial Accent */}
-            <div className="absolute inset-0 bg-radial from-primary/20 via-primary/5 to-transparent pointer-events-none transition-colors duration-500" />
-
-            {/* Corner Precision Brackets */}
-            <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-primary/60" />
-            <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-primary/60" />
-            <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-primary/60" />
-            <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-primary/60" />
-
-            {/* Top Metadata Badges */}
-            <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-background/85 backdrop-blur-md border border-border/80 text-[10px] font-mono font-medium text-foreground shadow-xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
-                <span>SimpleThink Studio Engine</span>
-              </div>
-              <div className="px-2 py-0.5 rounded-md bg-muted/80 backdrop-blur-md border border-border/60 text-[10px] font-mono text-muted-foreground">
-                Next.js · TypeScript
-              </div>
-            </div>
-
-            {/* Central Developer Character Graphic */}
-            <div className="relative flex flex-col items-center justify-center gap-2 my-auto z-10 mt-6 sm:mt-8">
-              <div className="relative w-52 h-52 sm:w-68 sm:h-68 md:w-76 md:h-76 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
-                <DynamicTShirtCharacter />
-              </div>
-
-              {/* Title & Description */}
-              <div className="text-center space-y-1 mt-0 sm:mt-1">
-                <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold tracking-tight text-foreground">
-                  <Cpu className="w-3.5 h-3.5 text-primary" />
-                  <span>High-Performance Software Architecture</span>
-                </div>
-                <p className="text-[11px] font-mono text-muted-foreground">
-                  Zero Technical Debt · Instant Edge Deployment
-                </p>
-              </div>
-            </div>
-
-            {/* Bottom Status Tag */}
-            <div className="absolute bottom-3 left-5 right-5 flex items-center justify-between text-[9px] font-mono text-muted-foreground border-t border-border/40 pt-1.5">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3 h-3 text-emerald-500" />
-                SYSTEM_STATUS: ONLINE
-              </span>
-              <span>EDGE RUNTIME: VERIFIED</span>
-            </div>
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center transition-transform duration-700 hover:scale-105">
+            <DynamicTShirtCharacter />
           </div>
         </motion.div>
 
