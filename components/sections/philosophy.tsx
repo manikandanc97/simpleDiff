@@ -70,53 +70,53 @@ const PILLARS: Pillar[] = [
   {
     id: "01",
     step: "01",
-    badge: "Studio Model",
-    headline: "Senior creators only.",
-    headlineAccent: "Zero account managers.",
+    badge: "Elite Squad",
+    headline: "Senior builders.",
+    headlineAccent: "Zero middlemen.",
     description:
-      "You work directly with the senior engineer and designer actually building your product. No middle management, no junior delegates learning on your dime, no translation lag.",
+      "Work directly with the elite engineers and designers actually crafting your product. No account managers, no translation lag, no juniors learning on your dime.",
     deliverables: [
-      "Direct technical leadership via Slack",
-      "Real-time async feedback & rapid sprints",
-      "Zero middleman overhead or hand-off lag",
+      "Direct technical leadership",
+      "Real-time Slack collaboration",
+      "Rapid async execution",
     ],
     metric: {
       value: "0 Layers",
-      label: "Middlemen Bloat",
+      label: "Bureaucracy",
     },
     icon: Users,
   },
   {
     id: "02",
     step: "02",
-    badge: "Pricing Integrity",
-    headline: "Milestone-gated scope.",
-    headlineAccent: "Zero surprise invoices.",
+    badge: "Velocity",
+    headline: "Ship in weeks.",
+    headlineAccent: "Not months.",
     description:
-      "We scope strictly per outcome, not open-ended hours. Clear milestones, predictable costs, and 100% transparent delivery with zero retrospective billing surprises.",
+      "We operate at startup speed with enterprise precision. Strict milestone-driven delivery means you know exactly what ships and when, with zero billing surprises.",
     deliverables: [
-      "Fixed-investment sprint roadmaps",
-      "Weekly staging environment verification",
-      "Milestone-gated sign-off guarantee",
+      "Fixed-scope sprint roadmaps",
+      "Weekly staging deployments",
+      "Transparent milestone delivery",
     ],
     metric: {
       value: "100%",
-      label: "Fixed Scope Guarantee",
+      label: "On-Time Shipping",
     },
     icon: Target,
   },
   {
     id: "03",
     step: "03",
-    badge: "Dual Discipline",
-    headline: "Design & engineering.",
-    headlineAccent: "In the same room.",
+    badge: "Craftsmanship",
+    headline: "Pixel perfect.",
+    headlineAccent: "Edge performance.",
     description:
-      "Design and engineering collaborate in lockstep from day one. What is designed in Figma is directly what ships in production Next.js code with sub-second performance.",
+      "Design and engineering collaborate in lockstep. We translate stunning Figma designs into blazing fast Next.js applications with sub-second performance.",
     deliverables: [
-      "Design tokens synced directly to code",
-      "Production-grade Next.js & TypeScript",
-      "Zero design-to-code translation loss",
+      "Fluid, micro-animated interfaces",
+      "Modern Next.js & TypeScript stack",
+      "Zero design-to-code loss",
     ],
     metric: {
       value: "<500ms",
@@ -193,8 +193,8 @@ export function WhySimpleThink() {
             dockLabel="Why SimpleThink"
             title={
               <>
-                Three structural reasons{" "}
-                <span className="text-primary transition-colors duration-500">clients choose us.</span>
+                The unfair advantage{" "}
+                <span className="text-primary transition-colors duration-500">for modern teams.</span>
               </>
             }
             description="No middle management, no billing surprises, and no handoff friction. Just direct access to senior builders who ship."

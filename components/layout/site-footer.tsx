@@ -139,7 +139,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
           </div>
 
           {/* Col 5: Connect & CTA */}
-          <div className="space-y-5 flex flex-col justify-between">
+          <div className="space-y-5 flex flex-col">
             <div className="space-y-4">
               <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-bold">
                 Direct Contact
@@ -153,6 +153,18 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                     >
                       <AnimatedMail size={14} className="text-primary" />
                       <span>{SITE.email}</span>
+                      <ArrowUpRight className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ml-auto" />
+                    </a>
+                  </li>
+                )}
+                {SITE.phone && (
+                  <li>
+                    <a
+                      href={`tel:${SITE.phone.replace(/\s+/g, '')}`}
+                      className="group text-muted-foreground hover:text-primary active:scale-95 transition-all flex items-center gap-2"
+                    >
+                      <AnimatedIcon name="smartphone" size={14} className="text-primary" />
+                      <span>{SITE.phone}</span>
                       <ArrowUpRight className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ml-auto" />
                     </a>
                   </li>
