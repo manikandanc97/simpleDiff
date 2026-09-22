@@ -43,11 +43,14 @@ function parseCssColorToRgb(colorStr: string): [number, number, number] {
   return [37, 99, 235];
 }
 
-interface DynamicTShirtCharacterProps {
+interface DynamicImageWithMaskProps {
+  src: string;
+  maskSrc: string;
+  alt?: string;
   className?: string;
 }
 
-export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProps) {
+export function DynamicImageWithMask({ src, maskSrc, alt = "Dynamic Image", className }: DynamicImageWithMaskProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useThemeColor();
 
@@ -56,8 +59,8 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
     width: number;
     height: number;
     baseData: Uint8ClampedArray;
-    shirtIndices: Uint32Array;
-    shirtLums: Float32Array;
+    maskIndices: Uint32Array;
+    maskLums: Float32Array;
   } | null>(null);
 
   const [isReady, setIsReady] = useState(false);
@@ -78,18 +81,18 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
     if (!ctx) return;
 
     const [tR, tG, tB] = parseCssColorToRgb(color);
-    const { width, height, baseData, shirtIndices, shirtLums } = cache;
+    const { width, height, baseData, maskIndices, maskLums } = cache;
 
     // Fast clone of base image data
     const outputData = ctx.createImageData(width, height);
     outputData.data.set(baseData);
     const data = outputData.data;
 
-    // Tint only shirt pixels using pre-indexed luminance map
-    const len = shirtIndices.length;
+    // Tint only masked pixels using pre-indexed luminance map
+    const len = maskIndices.length;
     for (let i = 0; i < len; i++) {
-      const idx = shirtIndices[i];
-      const lum = shirtLums[i];
+      const idx = maskIndices[i];
+      const lum = maskLums[i];
       data[idx] = Math.min(255, Math.round(tR * lum));
       data[idx + 1] = Math.min(255, Math.round(tG * lum));
       data[idx + 2] = Math.min(255, Math.round(tB * lum));
@@ -105,18 +108,18 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
 
     async function loadAssets() {
       try {
-        const heroImg = new Image();
-        heroImg.src = "/hero.png";
+        const baseImg = new Image();
+        baseImg.src = src;
 
         const maskImg = new Image();
-        maskImg.src = "/hero-mask.png";
+        maskImg.src = maskSrc;
 
         await Promise.all([
           new Promise((resolve, reject) => {
-            if (heroImg.complete && heroImg.naturalWidth > 0) resolve(true);
+            if (baseImg.complete && baseImg.naturalWidth > 0) resolve(true);
             else {
-              heroImg.onload = () => resolve(true);
-              heroImg.onerror = reject;
+              baseImg.onload = () => resolve(true);
+              baseImg.onerror = reject;
             }
           }),
           new Promise((resolve, reject) => {
@@ -130,19 +133,19 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
 
         if (isCancelled) return;
 
-        const width = heroImg.naturalWidth;
-        const height = heroImg.naturalHeight;
+        const width = baseImg.naturalWidth;
+        const height = baseImg.naturalHeight;
 
         if (!width || !height) return;
 
-        // Read hero pixels
-        const heroCanvas = document.createElement("canvas");
-        heroCanvas.width = width;
-        heroCanvas.height = height;
-        const heroCtx = heroCanvas.getContext("2d", { willReadFrequently: true });
-        if (!heroCtx) return;
-        heroCtx.drawImage(heroImg, 0, 0);
-        const heroImageData = heroCtx.getImageData(0, 0, width, height);
+        // Read base pixels
+        const baseCanvas = document.createElement("canvas");
+        baseCanvas.width = width;
+        baseCanvas.height = height;
+        const baseCtx = baseCanvas.getContext("2d", { willReadFrequently: true });
+        if (!baseCtx) return;
+        baseCtx.drawImage(baseImg, 0, 0);
+        const baseImageData = baseCtx.getImageData(0, 0, width, height);
 
         // Read mask pixels
         const maskCanvas = document.createElement("canvas");
@@ -153,8 +156,8 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
         maskCtx.drawImage(maskImg, 0, 0);
         const maskImageData = maskCtx.getImageData(0, 0, width, height);
 
-        // Extract shirt indices and precompute luminance
-        const hData = heroImageData.data;
+        // Extract mask indices and precompute luminance
+        const hData = baseImageData.data;
         const mData = maskImageData.data;
         const indices: number[] = [];
         const lums: number[] = [];
@@ -165,7 +168,7 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
             const r = hData[i];
             const g = hData[i + 1];
             const b = hData[i + 2];
-            // Perceived luminance normalized to shirt midtone
+            // Perceived luminance normalized to midtone
             const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 140.0;
             lums.push(lum);
           }
@@ -175,8 +178,8 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
           width,
           height,
           baseData: new Uint8ClampedArray(hData),
-          shirtIndices: new Uint32Array(indices),
-          shirtLums: new Float32Array(lums),
+          maskIndices: new Uint32Array(indices),
+          maskLums: new Float32Array(lums),
         };
 
         const canvas = canvasRef.current;
@@ -186,7 +189,7 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
           applyThemeColor(latestPrimaryRef.current);
         }
       } catch (err) {
-        console.error("Failed to initialize dynamic t-shirt character:", err);
+        console.error("Failed to initialize dynamic image with mask:", err);
       }
     }
 
@@ -195,7 +198,7 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
     return () => {
       isCancelled = true;
     };
-  }, [applyThemeColor]);
+  }, [src, maskSrc, applyThemeColor]);
 
   // Re-apply whenever theme.primary changes
   useEffect(() => {
@@ -205,11 +208,11 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
   }, [theme.primary, applyThemeColor]);
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center pointer-events-none select-none">
+    <div className={`relative w-full h-full flex items-center justify-center pointer-events-none select-none ${className || ''}`}>
       {/* Dynamic Recolor Canvas */}
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.22)] transition-opacity duration-500"
+        className="w-full h-full object-cover transition-opacity duration-500"
         style={{ opacity: isReady ? 1 : 0 }}
       />
     </div>

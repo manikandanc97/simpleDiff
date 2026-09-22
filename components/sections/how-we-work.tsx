@@ -17,6 +17,7 @@ import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
+import { DynamicImageWithMask } from "@/components/ui/dynamic-image-with-mask";
 import { cn } from "@/lib/utils";
 
 const FLOATING_PROCESS_TECHS: FloatingTechItem[] = [
@@ -67,6 +68,8 @@ interface Phase {
   statusBadge: string;
   ctaText: string;
   icon: typeof Search;
+  imageSrc: string;
+  maskSrc: string;
 }
 
 const PHASES: Phase[] = [
@@ -75,96 +78,104 @@ const PHASES: Phase[] = [
     step: "01",
     title: "Discovery",
     subtitle: "Architecture & Scope",
-    timeframe: "Week 1",
+    timeframe: "Phase 1",
     kicker: "Phase 01 · 3D Blueprint",
     headline: "Blueprint before",
     headlineAccent: "building.",
     summary:
-      "Zero guesswork. We map your user journeys, bench-test technical feasibility, and lock scope so there are never retrospective budget surprises.",
+      "We map your user journeys, bench-test technical feasibility, and define the project scope to align with your business goals.",
     deliverables: [
       "Architecture & DB Schema Map",
       "User Journey & Scope Specs",
-      "Fixed Milestone Roadmap",
+      "Defined Project Roadmap",
     ],
     metric: {
-      value: "100%",
-      label: "Scope & Timeline Lock",
+      value: "Aligned",
+      label: "Scope & Objectives",
     },
     statusBadge: "Sprint 01 Handover",
     ctaText: "Start with Discovery",
     icon: Search,
+    imageSrc: "/how we work/discovery.png",
+    maskSrc: "/how we work/discovery-mask.png",
   },
   {
     id: "02",
     step: "02",
     title: "Design",
     subtitle: "Tokens & Prototypes",
-    timeframe: "Weeks 2–3",
+    timeframe: "Phase 2",
     kicker: "Phase 02 · 3D Design System",
     headline: "Clarity before a single line",
     headlineAccent: "of code.",
     summary:
-      "Interactive Figma prototypes and a production token library. You test and validate every screen and interaction before developers touch a key.",
+      "Interactive Figma prototypes and a production token library. You test and validate the screens and interactions before development begins.",
     deliverables: [
       "Clickable High-Fidelity Flows",
       "Scalable Design Token System",
       "WCAG Accessibility Compliance",
     ],
     metric: {
-      value: "100%",
-      label: "Interactive Prototype Fidelity",
+      value: "Valid",
+      label: "Interactive Prototyping",
     },
     statusBadge: "Design Sign-Off",
     ctaText: "Explore Design Phase",
     icon: Palette,
+    imageSrc: "/how we work/design.png",
+    maskSrc: "/how we work/design-mask.png",
   },
   {
     id: "03",
     step: "03",
     title: "Engineer",
     subtitle: "Full-Stack Development",
-    timeframe: "Weeks 4–7",
+    timeframe: "Phase 3",
     kicker: "Phase 03 · 3D Production Build",
     headline: "Production code, built",
     headlineAccent: "to scale.",
     summary:
-      "Next.js App Router, TailwindCSS, TypeScript, and serverless backend architecture. Weekly demo deployments so you watch the product come alive in real time.",
+      "Next.js App Router, TailwindCSS, TypeScript, and serverless backend architecture. Demo deployments let you watch the product come alive.",
     deliverables: [
-      "Weekly Staging URL Deployments",
+      "Staging URL Deployments",
       "End-to-End API Integration",
       "Automated CI/CD Pipeline & Tests",
     ],
     metric: {
-      value: "<500ms",
-      label: "LCP Performance Benchmark",
+      value: "Optimized",
+      label: "Performance Benchmarks",
     },
     statusBadge: "Code Review Pass",
     ctaText: "See Tech Stack",
     icon: Code2,
+    imageSrc: "/how we work/engineer.png",
+    maskSrc: "/how we work/engineer-mask.png",
   },
   {
     id: "04",
     step: "04",
     title: "Launch & Scale",
     subtitle: "Production Deployment",
-    timeframe: "Week 8+",
+    timeframe: "Phase 4",
     kicker: "Phase 04 · 3D Release",
     headline: "Launch day is step one,",
     headlineAccent: "not the finish line.",
     summary:
-      "Zero-downtime DNS cutover, SEO indexing check, telemetry dashboards, and 30-day post-launch warranty with dedicated founder support.",
+      "DNS cutover, SEO indexing check, telemetry dashboards, and post-launch support to ensure a smooth transition to production.",
     deliverables: [
-      "Zero-Downtime Production Cutover",
-      "Real-Time Error & Analytics Setup",
-      "30-Day Founder Warranty & Handoff",
+      "Production Cutover",
+      "Error & Analytics Setup",
+      "Post-Launch Handoff & Support",
     ],
     metric: {
-      value: "99.99%",
-      label: "Production Uptime Guarantee",
+      value: "Stable",
+      label: "Production Deployment",
     },
     statusBadge: "Production Ready",
     ctaText: "Schedule Launch",
     icon: Rocket,
+    imageSrc: "/how we work/launch.png",
+    maskSrc: "/how we work/launch-mask.png",
   },
 ];
 
@@ -407,7 +418,7 @@ export function HowWeWork() {
                                 {activePhase.metric.label}
                               </span>
                               <span className="text-[10px] text-muted-foreground">
-                                Verified Milestone Sign-Off
+                                Milestone Review & Handoff
                               </span>
                             </div>
                           </div>
@@ -436,31 +447,37 @@ export function HowWeWork() {
                     {/* Dynamic Ambient Background Glow matching active theme color */}
                     <div className="absolute -inset-3 rounded-2xl bg-primary/20 blur-xl opacity-70 pointer-events-none transition-colors duration-500" />
 
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={`phase-3d-showcase-${activePhase.id}`}
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 1.02 }}
-                        transition={{ duration: 0.35, ease: "easeOut" }}
-                        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-                        className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border border-border/80 aspect-[4/3] group bg-card select-none"
-                      >
-                        <ImagePlaceholder
-                          title={`Phase ${activePhase.step} · ${activePhase.title}`}
-                          subtitle={activePhase.headline}
-                          icon={activePhase.icon}
-                          badge={activePhase.statusBadge}
-                          dimensionsText={activePhase.timeframe}
-                          aspectRatio="4/3"
-                          className="w-full h-full border-0 rounded-none bg-transparent"
-                        >
-                          <div className="flex items-center gap-2 mt-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-[10px] font-mono text-primary font-semibold">
-                            <span>Target: {activePhase.metric.label} ({activePhase.metric.value})</span>
-                          </div>
-                        </ImagePlaceholder>
-                      </motion.div>
-                    </AnimatePresence>
+                    <motion.div
+                      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+                      className="relative rounded-xl sm:rounded-2xl shadow-xl border border-border/80 aspect-[4/3] group bg-card select-none flex items-center justify-center"
+                    >
+                      {PHASES.map((phase) => {
+                        const isActive = phase.id === activePhase.id;
+                        return (
+                          <motion.div
+                            key={`phase-3d-showcase-${phase.id}`}
+                            initial={false}
+                            animate={{ 
+                              opacity: isActive ? 1 : 0,
+                              scale: isActive ? 1 : 0.96,
+                              pointerEvents: isActive ? "auto" : "none"
+                            }}
+                            transition={{ duration: 0.35, ease: "easeOut" }}
+                            className="absolute inset-0 overflow-hidden rounded-xl sm:rounded-2xl flex items-center justify-center bg-card"
+                          >
+                            <DynamicImageWithMask
+                              src={phase.imageSrc}
+                              maskSrc={phase.maskSrc}
+                              alt={`Phase ${phase.step} · ${phase.title}`}
+                              className="w-full h-full scale-[1.02]"
+                            />
+                            <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/80 backdrop-blur-md border border-border/50 text-[10px] font-mono text-primary font-semibold shadow-sm">
+                              <span>Focus: {phase.metric.label} ({phase.metric.value})</span>
+                            </div>
+                          </motion.div>
+                        );
+                      })}
+                    </motion.div>
                   </div>
 
                 </div>
@@ -479,7 +496,7 @@ export function HowWeWork() {
         >
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
-            <span>Dedicated senior engineering · Weekly live staging · Zero surprise invoices.</span>
+            <span>Dedicated engineering · Live staging builds · Transparent process.</span>
           </div>
 
           <span className="text-[11px] text-muted-foreground/50 tracking-wider uppercase">

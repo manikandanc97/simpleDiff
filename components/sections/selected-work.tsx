@@ -87,7 +87,7 @@ function ProjectCard({ project }: { project: Project }) {
     <div className="group relative rounded-2xl sm:rounded-3xl border border-border/70 bg-card/85 backdrop-blur-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1">
       {/* Top accent line */}
       <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent group-hover:via-primary transition-all duration-500 z-10" />
-      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none", project.accentGradient)} />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
       {/* ─── Visual Showcase Banner (Real Live Image) ─── */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted/40 border-b border-border/60">
@@ -99,7 +99,7 @@ function ProjectCard({ project }: { project: Project }) {
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (
-          <div className={cn("w-full h-full bg-gradient-to-br", project.accentGradient)} />
+          <div className="w-full h-full bg-gradient-to-br from-primary/20 via-primary/5 to-background" />
         )}
 
         {/* Soft Vignettes */}
