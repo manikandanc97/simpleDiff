@@ -43,7 +43,7 @@ const CATEGORIES: { id: GoogleFontCategory; label: string }[] = [
 ];
 
 const PRESET_PREVIEWS = [
-  { label: "Company Name", text: "SimpleThink — Keep It Simple. Think It Different." },
+  { label: "Company Name", text: "SimpleThink — Keep It Simple. Think Different." },
   { label: "Sentence", text: "The quick brown fox jumps over the lazy dog." },
   { label: "Alphabet & Numbers", text: "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789" },
 ];

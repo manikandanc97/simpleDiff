@@ -1,6 +1,6 @@
 # SimpleThink
 
-> **Keep It Simple. Think It Different.**
+> **Keep It Simple. Think Different.**
 
 SimpleThink is a software development company that designs, engineers, and deploys custom software, web applications, mobile apps, SaaS platforms, and enterprise solutions for businesses, startups, and founders.
 
@@ -94,6 +94,7 @@ SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 ### 4. Database Setup (Supabase)
 
 To enable lead capture storage:
+
 1. Create a project in [Supabase](https://supabase.com).
 2. Open the **SQL Editor** in your Supabase dashboard.
 3. Run the SQL script located at [`supabase/leads.sql`](supabase/leads.sql).
@@ -112,26 +113,31 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 ## 🧪 Verification & Testing
 
 ### TypeScript Check
+
 ```bash
 npx tsc --noEmit
 ```
 
 ### ESLint Check
+
 ```bash
 npm run lint
 ```
 
 ### Production Build
+
 ```bash
 npm run build
 ```
-*All routes are fully static (`○`) for maximum performance and instant CDN edge delivery.*
+
+_All routes are fully static (`○`) for maximum performance and instant CDN edge delivery._
 
 ---
 
 ## 🎨 Owner Customization
 
 All studio identity details are centralized in [`lib/site.ts`](lib/site.ts). Update this file to configure:
+
 - Studio email and telephone
 - Physical/virtual location
 - Social profile links

@@ -69,7 +69,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
               <p className="text-lg font-medium text-foreground/90 max-w-sm leading-snug">
                 Keep It Simple.
                 <br />
-                Think It Different.
+                Think Different.
               </p>
               <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
                 A premier software development company engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions for ambitious businesses and founders.
@@ -192,7 +192,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
             &copy; {new Date().getFullYear()} SimpleThink Software Technologies. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <span>Keep It Simple. Think It Different.</span>
+            <span>Keep It Simple. Think Different.</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 ﻿export const SITE = {
   name: "SimpleThink",
-  tagline: "Keep It Simple. Think It Different.",
+  tagline: "Keep It Simple. Think Different.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://SimpleThink.com",
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hello@SimpleThink.com",
   phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+91 98765 43210",

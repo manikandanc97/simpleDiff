@@ -30,13 +30,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "SimpleThink — Keep It Simple. Think It Different.",
+    default: "SimpleThink — Keep It Simple. Think Different.",
     template: "%s · SimpleThink",
   },
   description:
     "SimpleThink is a software development company that engineers custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise digital solutions.",
   openGraph: {
-    title: "SimpleThink — Keep It Simple. Think It Different.",
+    title: "SimpleThink — Keep It Simple. Think Different.",
     description:
       "Software development company engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions.",
     url: SITE.url,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SimpleThink — Keep It Simple. Think It Different.",
+    title: "SimpleThink — Keep It Simple. Think Different.",
     description:
       "Software development company engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions.",
   },

@@ -152,7 +152,6 @@ export function WorkbenchHero() {
                 </span>
                 <span className="flex flex-wrap items-center justify-center lg:justify-start gap-x-3">
                   <AnimatedWord word="Think" delay={0.28} className="text-primary transition-colors duration-500" />
-                  <AnimatedWord word="It" delay={0.33} />
                   <AnimatedWord word="Different." delay={0.38} />
                 </span>
               </h1>
