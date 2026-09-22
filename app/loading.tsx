@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -92,7 +92,7 @@ export default function Loading() {
         Coordinate system:
           viewBox="0 0 120 72"
           S glyph: left half, ~0–52 wide, centered vertically
-          D glyph: right half, ~56–108 wide
+          T glyph: right half, ~64–112 wide
           + glyph: small, top-right of the S, or centered above
       */}
       <motion.svg
@@ -120,12 +120,12 @@ export default function Loading() {
           transition={drawTransition(0, 1.1)}
         />
 
-        {/* ── "D" stroke ── */}
+        {/* ── "T" stroke ── */}
         <motion.path
           d={
-            // D: vertical stem + arc
-            // Positioned in the right half: x from ~64 to ~112
-            "M64 8 L64 58 M64 8 C64 8 88 8 96 22 C104 36 104 42 96 50 C88 58 64 58 64 58"
+            // T: horizontal bar + vertical stem
+            // Positioned in the right half: x from ~58 to ~110, stem at 84
+            "M64 8 L108 8 M86 8 L86 58"
           }
           fill="none"
           stroke="var(--primary)"
@@ -213,7 +213,7 @@ export default function Loading() {
           +
         </motion.span>
 
-        {/* "Diff" — primary */}
+        {/* "Think" — primary */}
         <motion.span
           className="text-[1.35rem] font-bold tracking-tight"
           style={{ color: "var(--primary)" }}
@@ -221,7 +221,7 @@ export default function Loading() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
         >
-          Diff
+          Think
         </motion.span>
       </motion.div>
 
