@@ -1,116 +1,219 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
-import { SiteLogo } from "@/components/ui/site-logo";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { useThemeColor } from "@/components/theme/color-provider";
 
-export function DynamicTShirtCharacter() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
-  const { theme } = useThemeColor();
-  const [isLoaded, setIsLoaded] = useState(false);
+// Converts any CSS color (OKLCH, Hex, RGB, HSL) into exact RGB numbers
+function parseCssColorToRgb(colorStr: string): [number, number, number] {
+  if (typeof window === "undefined" || !colorStr) return [37, 99, 235];
 
-  // Helper to parse hex color to RGB
-  const hexToRgb = (hex: string) => {
-    let c: any;
-    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
-      c = hex.substring(1).split("");
-      if (c.length === 3) {
-        c = [c[0], c[0], c[1], c[1], c[2], c[2]];
-      }
-      c = "0x" + c.join("");
-      return [(c >> 16) & 255, (c >> 8) & 255, c & 255];
+  try {
+    const scratch = document.createElement("canvas");
+    scratch.width = 1;
+    scratch.height = 1;
+    const ctx = scratch.getContext("2d", { willReadFrequently: true });
+    if (!ctx) return [37, 99, 235];
+
+    ctx.fillStyle = colorStr;
+    ctx.fillRect(0, 0, 1, 1);
+    const pixel = ctx.getImageData(0, 0, 1, 1).data;
+    // If successfully rendered
+    if (pixel[3] > 0) {
+      return [pixel[0], pixel[1], pixel[2]];
     }
-    return [37, 99, 235]; // Default fallback (blue)
-  };
+  } catch (e) {
+    console.warn("Scratch canvas parse failed, falling back to computed style", e);
+  }
 
-  useEffect(() => {
+  // Fallback via computed style
+  try {
+    const temp = document.createElement("div");
+    temp.style.color = colorStr;
+    document.body.appendChild(temp);
+    const comp = window.getComputedStyle(temp).color;
+    document.body.removeChild(temp);
+    const m = comp.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (m) {
+      return [parseInt(m[1]), parseInt(m[2]), parseInt(m[3])];
+    }
+  } catch (err) {
+    console.error("Color parse error:", err);
+  }
+
+  return [37, 99, 235];
+}
+
+interface DynamicTShirtCharacterProps {
+  className?: string;
+}
+
+export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { theme } = useThemeColor();
+
+  // Cached pixel structures for <1ms tinting
+  const cacheRef = useRef<{
+    width: number;
+    height: number;
+    baseData: Uint8ClampedArray;
+    shirtIndices: Uint32Array;
+    shirtLums: Float32Array;
+  } | null>(null);
+
+  const [isReady, setIsReady] = useState(false);
+
+  // Recolor function
+  const applyThemeColor = useCallback((color: string) => {
     const canvas = canvasRef.current;
-    const img = imageRef.current;
-    if (!canvas || !img || !isLoaded) return;
+    const cache = cacheRef.current;
+    if (!canvas || !cache) return;
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
 
-    // Set canvas dimensions to match image natural dimensions
-    const width = img.naturalWidth;
-    const height = img.naturalHeight;
-    canvas.width = width;
-    canvas.height = height;
+    const [tR, tG, tB] = parseCssColorToRgb(color);
+    const { width, height, baseData, shirtIndices, shirtLums } = cache;
 
-    // Draw the original image
-    ctx.drawImage(img, 0, 0, width, height);
-    
-    // Get image data for pixel manipulation
-    const imageData = ctx.getImageData(0, 0, width, height);
-    const data = imageData.data;
-    
-    const [targetR, targetG, targetB] = hexToRgb(theme.primary || "#2563EB");
+    // Fast clone of base image data
+    const outputData = ctx.createImageData(width, height);
+    outputData.data.set(baseData);
+    const data = outputData.data;
 
-    // Loop through every pixel
-    for (let i = 0; i < data.length; i += 4) {
-      const r = data[i];
-      const g = data[i + 1];
-      const b = data[i + 2];
-      const a = data[i + 3];
+    // Tint only shirt pixels using pre-indexed luminance map
+    const len = shirtIndices.length;
+    for (let i = 0; i < len; i++) {
+      const idx = shirtIndices[i];
+      const lum = shirtLums[i];
+      data[idx] = Math.min(255, Math.round(tR * lum));
+      data[idx + 1] = Math.min(255, Math.round(tG * lum));
+      data[idx + 2] = Math.min(255, Math.round(tB * lum));
+    }
 
-      if (a === 0) continue; // Skip transparent pixels
+    ctx.putImageData(outputData, 0, 0);
+    setIsReady(true);
+  }, []);
 
-      // Detect Magenta/Pink t-shirt
-      // The generated shirt is magenta (#FF00FF). We look for high red and blue, low green.
-      const isMagenta = r > 120 && b > 120 && g < r - 40 && g < b - 40;
+  // Initial load
+  useEffect(() => {
+    let isCancelled = false;
 
-      if (isMagenta) {
-        // Calculate luminosity of the original pixel
-        // Using average of R and B since they are the dominant channels in magenta
-        const brightness = ((r + b) / 2) / 255;
-        
-        // Enhance brightness factor slightly for a vivid look
-        const lum = Math.min(1.2, Math.max(0.3, brightness));
+    async function loadAssets() {
+      try {
+        const heroImg = new Image();
+        heroImg.src = "/hero.png";
 
-        // Tint the pixel with the target color multiplied by original luminosity
-        data[i] = Math.min(255, targetR * lum);
-        data[i + 1] = Math.min(255, targetG * lum);
-        data[i + 2] = Math.min(255, targetB * lum);
+        const maskImg = new Image();
+        maskImg.src = "/hero-mask.png";
+
+        await Promise.all([
+          new Promise((resolve, reject) => {
+            if (heroImg.complete && heroImg.naturalWidth > 0) resolve(true);
+            else {
+              heroImg.onload = () => resolve(true);
+              heroImg.onerror = reject;
+            }
+          }),
+          new Promise((resolve, reject) => {
+            if (maskImg.complete && maskImg.naturalWidth > 0) resolve(true);
+            else {
+              maskImg.onload = () => resolve(true);
+              maskImg.onerror = reject;
+            }
+          }),
+        ]);
+
+        if (isCancelled) return;
+
+        const width = heroImg.naturalWidth;
+        const height = heroImg.naturalHeight;
+
+        if (!width || !height) return;
+
+        // Read hero pixels
+        const heroCanvas = document.createElement("canvas");
+        heroCanvas.width = width;
+        heroCanvas.height = height;
+        const heroCtx = heroCanvas.getContext("2d", { willReadFrequently: true });
+        if (!heroCtx) return;
+        heroCtx.drawImage(heroImg, 0, 0);
+        const heroImageData = heroCtx.getImageData(0, 0, width, height);
+
+        // Read mask pixels
+        const maskCanvas = document.createElement("canvas");
+        maskCanvas.width = width;
+        maskCanvas.height = height;
+        const maskCtx = maskCanvas.getContext("2d", { willReadFrequently: true });
+        if (!maskCtx) return;
+        maskCtx.drawImage(maskImg, 0, 0);
+        const maskImageData = maskCtx.getImageData(0, 0, width, height);
+
+        // Extract shirt indices and precompute luminance
+        const hData = heroImageData.data;
+        const mData = maskImageData.data;
+        const indices: number[] = [];
+        const lums: number[] = [];
+
+        for (let i = 0; i < mData.length; i += 4) {
+          if (mData[i] > 128) {
+            indices.push(i);
+            const r = hData[i];
+            const g = hData[i + 1];
+            const b = hData[i + 2];
+            // Perceived luminance normalized to shirt midtone
+            const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 140.0;
+            lums.push(lum);
+          }
+        }
+
+        cacheRef.current = {
+          width,
+          height,
+          baseData: new Uint8ClampedArray(hData),
+          shirtIndices: new Uint32Array(indices),
+          shirtLums: new Float32Array(lums),
+        };
+
+        const canvas = canvasRef.current;
+        if (canvas) {
+          canvas.width = width;
+          canvas.height = height;
+          applyThemeColor(theme.primary || "#2563EB");
+        }
+      } catch (err) {
+        console.error("Failed to initialize dynamic t-shirt character:", err);
       }
     }
 
-    // Put modified data back
-    ctx.putImageData(imageData, 0, 0);
-  }, [theme.primary, isLoaded]);
+    loadAssets();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [applyThemeColor]);
+
+  // Re-apply whenever theme.primary changes
+  useEffect(() => {
+    if (cacheRef.current && theme?.primary) {
+      applyThemeColor(theme.primary);
+    }
+  }, [theme.primary, applyThemeColor]);
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
-      {/* Hidden original image for source data */}
+    <div className="relative w-full h-full flex items-center justify-center pointer-events-none select-none">
+      {/* Immediate fallback so there is never a blank delay */}
       <img
-        ref={imageRef}
-        src="/hero-coder.png"
-        alt="Developer"
-        className="hidden"
-        crossOrigin="anonymous"
-        onLoad={() => setIsLoaded(true)}
+        src="/hero.png"
+        alt="SimpleThink Developer"
+        className="w-full h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.22)] transition-opacity duration-300"
+        style={{ opacity: isReady ? 0 : 1 }}
       />
 
-      {/* Processed Canvas */}
+      {/* Dynamic Recolor Canvas */}
       <canvas
         ref={canvasRef}
-        className="w-[120%] h-[120%] max-w-none object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)] transition-opacity duration-500"
-        style={{ opacity: isLoaded ? 1 : 0 }}
+        className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.22)] transition-opacity duration-300"
+        style={{ opacity: isReady ? 1 : 0 }}
       />
-
-      {/* 3D Transform Logo Overlay */}
-      <div 
-        className="absolute transition-colors duration-500 flex items-center justify-center z-20"
-        style={{
-          // Relative to container, position it over the chest area
-          top: "45%",
-          left: "40%",
-          transform: "translate(-50%, -50%) perspective(400px) rotateY(10deg) rotateX(5deg) rotateZ(-2deg)",
-          opacity: isLoaded ? 0.95 : 0
-        }}
-      >
-        <SiteLogo className="text-xl sm:text-2xl mix-blend-overlay opacity-90 drop-shadow-md text-white/90" />
-      </div>
     </div>
   );
 }

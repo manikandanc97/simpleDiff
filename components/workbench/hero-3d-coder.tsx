@@ -133,13 +133,13 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
             </div>
 
             {/* Central Developer Character Graphic */}
-            <div className="relative flex flex-col items-center justify-center gap-2 my-auto z-10 mt-4">
-              <div className="relative w-40 h-40 sm:w-56 sm:h-56 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
+            <div className="relative flex flex-col items-center justify-center gap-2 my-auto z-10 mt-6 sm:mt-8">
+              <div className="relative w-52 h-52 sm:w-68 sm:h-68 md:w-76 md:h-76 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
                 <DynamicTShirtCharacter />
               </div>
 
               {/* Title & Description */}
-              <div className="text-center space-y-1 mt-1">
+              <div className="text-center space-y-1 mt-0 sm:mt-1">
                 <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold tracking-tight text-foreground">
                   <Cpu className="w-3.5 h-3.5 text-primary" />
                   <span>High-Performance Software Architecture</span>
