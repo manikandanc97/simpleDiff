@@ -13,8 +13,7 @@ import { cn } from "@/lib/utils";
  *
  * Anatomy
  * 1. Two blurred ambient glow discs (max 2, lightweight)
- * 2. Animated SVG logomark — "SD" monogram + "+" glyph, stroke-draw
- *    via pathLength / strokeDashoffset, ~1.1 s draw → pulse hold
+ * 2. CENTRAL PIECE: Animated "Live Diff" card cycling through snippets
  * 3. Wordmark text "Simple" + "Diff" beneath the mark, stagger-fade
  * 4. Three micro-dot "thinking" indicator, staggered opacity/scale
  * 5. Visually-hidden accessible label
@@ -25,17 +24,14 @@ import { cn } from "@/lib/utils";
  *   collapses them to their `animate` end-state — no extra branching needed.
  * - Color: CSS vars only — never hardcoded hex.
  */
-export default function Loading() {
-  // Shared stroke-draw transition factory
-  const drawTransition = (delay = 0, duration = 1.1) => ({
-    pathLength: {
-      duration,
-      delay,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    },
-    opacity: { duration: 0.25, delay },
-  });
 
+const DIFF_PAIRS = [
+  { before: "12 dependencies", after: "1 clean API" },
+  { before: "complex_setup()", after: "simple_diff()" },
+  { before: "hours of work", after: "seconds of joy" },
+];
+
+export default function Loading() {
   return (
     <div
       role="status"
@@ -87,104 +83,117 @@ export default function Loading() {
         }}
       />
 
-      {/* ── Logomark SVG ────────────────────────────────────────── */}
-      {/*
-        Coordinate system:
-          viewBox="0 0 120 72"
-          S glyph: left half, ~0–52 wide, centered vertically
-          T glyph: right half, ~64–112 wide
-          + glyph: small, top-right of the S, or centered above
-      */}
-      <motion.svg
-        viewBox="0 0 120 72"
-        aria-hidden="true"
-        className="relative z-10 mb-7"
-        style={{ width: 112, height: 67 }}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* ── "S" stroke ── */}
-        <motion.path
-          d={
-            // S: starts top-right, curves to bottom-left
-            // Scaled into the left ~52px of the 120-wide canvas, vertically centered
-            "M40 8 C40 8 28 4 18 8 C8 12 6 20 14 26 L34 40 C42 46 40 54 30 58 C20 62 8 58 8 58"
-          }
-          fill="none"
-          stroke="var(--primary)"
-          strokeWidth={5.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={drawTransition(0, 1.1)}
-        />
-
-        {/* ── "T" stroke ── */}
-        <motion.path
-          d={
-            // T: horizontal bar + vertical stem
-            // Positioned in the right half: x from ~58 to ~110, stem at 84
-            "M64 8 L108 8 M86 8 L86 58"
-          }
-          fill="none"
-          stroke="var(--primary)"
-          strokeWidth={5.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={drawTransition(0.18, 1.05)}
-        />
-
-        {/* ── "+" glyph — small, sits above-right of the gap ── */}
-        {/* Horizontal bar */}
-        <motion.line
-          x1="51"
-          y1="26"
-          x2="61"
-          y2="26"
-          stroke="var(--primary)"
-          strokeWidth={3.5}
-          strokeLinecap="round"
-          opacity={0.8}
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.8 }}
-          transition={drawTransition(0.95, 0.35)}
-        />
-        {/* Vertical bar */}
-        <motion.line
-          x1="56"
-          y1="21"
-          x2="56"
-          y2="31"
-          stroke="var(--primary)"
-          strokeWidth={3.5}
-          strokeLinecap="round"
-          opacity={0.8}
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.8 }}
-          transition={drawTransition(1.05, 0.32)}
-        />
-
-      </motion.svg>
-
-      {/* Pulse wrapper — activates after draw finishes (delay=1.4s) */}
-      {/* We use a separate wrapper motion.div since SVG animate scoping is awkward */}
-      {/* It wraps the whole logomark+text block with a gentle opacity pulse */}
+      {/* ── Live Diff Card ──────────────────────────────────────── */}
       <motion.div
-        aria-hidden="true"
-        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0, 1, 0.55, 1] }}
-        transition={{
-          duration: 4,
-          times: [0, 0.28, 0.32, 0.55, 1],
-          repeat: Infinity,
-          repeatDelay: 1.2,
-          ease: "easeInOut",
-        }}
-      />
+        className="relative z-10 w-[260px] rounded-xl border border-border/70 bg-card/90 backdrop-blur-md shadow-sm overflow-hidden flex flex-col mb-7"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {/* Header */}
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-border/50 bg-muted/20">
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-destructive/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+          </div>
+          <div className="text-[10px] text-muted-foreground font-mono ml-1 select-none">
+            app.tsx
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="relative h-[78px] w-full p-3 font-mono text-xs">
+          {DIFF_PAIRS.map((pair, i) => {
+            const cycle = 3.2;
+            const total = DIFF_PAIRS.length;
+            const transition = {
+              duration: cycle,
+              repeat: Infinity,
+              repeatDelay: (total - 1) * cycle,
+              delay: i * cycle,
+              ease: "easeInOut",
+            };
+
+            return (
+              <motion.div
+                key={i}
+                className="absolute inset-x-3 top-3 flex flex-col"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: [0, 1, 1, 0] }}
+                transition={{ ...transition, times: [0, 0.05, 0.9, 1] }}
+              >
+                {/* Before Line */}
+                <motion.div
+                  className="flex items-center text-[var(--diff-remove)] bg-[var(--diff-remove-bg)] rounded-md px-2 py-1"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0, 1, 0.5, 0.5] }}
+                  transition={{ ...transition, times: [0, 0.05, 0.2, 1] }}
+                >
+                  <span className="opacity-70 select-none mr-2">-</span>
+                  <div className="relative">
+                    <span>{pair.before}</span>
+                    {/* Live strike-through animation */}
+                    <motion.div
+                      className="absolute top-1/2 left-0 h-[1.5px] bg-current"
+                      initial={{ width: "0%" }}
+                      animate={{ width: ["0%", "0%", "100%", "100%"] }}
+                      transition={{ ...transition, times: [0, 0.15, 0.2, 1] }}
+                    />
+                  </div>
+                </motion.div>
+
+                {/* After Line */}
+                <motion.div
+                  className="flex items-center overflow-hidden text-[var(--diff-add)] bg-[var(--diff-add-bg)] rounded-md px-2"
+                  initial={{
+                    height: 0,
+                    opacity: 0,
+                    marginTop: 0,
+                    paddingTop: 0,
+                    paddingBottom: 0,
+                  }}
+                  animate={{
+                    height: [0, 0, 24, 24],
+                    opacity: [0, 0, 1, 1],
+                    marginTop: [0, 0, 4, 4],
+                    paddingTop: [0, 0, 4, 4],
+                    paddingBottom: [0, 0, 4, 4],
+                  }}
+                  transition={{ ...transition, times: [0, 0.2, 0.25, 1] }}
+                >
+                  <span className="opacity-70 select-none mr-2">+</span>
+                  <motion.div
+                    className="overflow-hidden whitespace-nowrap"
+                    initial={{ width: "0ch" }}
+                    animate={{
+                      width: [
+                        "0ch",
+                        "0ch",
+                        `${pair.after.length}ch`,
+                        `${pair.after.length}ch`,
+                      ],
+                    }}
+                    transition={{ ...transition, times: [0, 0.25, 0.45, 1] }}
+                  >
+                    {pair.after}
+                  </motion.div>
+                  {/* Blinking typing cursor */}
+                  <motion.span
+                    className="inline-block w-[2px] h-[12px] bg-[var(--primary)] ml-[1px]"
+                    animate={{ opacity: [1, 0] }}
+                    transition={{
+                      duration: 0.4,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  />
+                </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </motion.div>
 
       {/* ── Wordmark text ────────────────────────────────────────── */}
       <motion.div
@@ -213,7 +222,7 @@ export default function Loading() {
           +
         </motion.span>
 
-        {/* "Think" — primary */}
+        {/* "Diff" — primary */}
         <motion.span
           className="text-[1.35rem] font-bold tracking-tight"
           style={{ color: "var(--primary)" }}
@@ -221,7 +230,7 @@ export default function Loading() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
         >
-          Think
+          Diff
         </motion.span>
       </motion.div>
 

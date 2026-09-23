@@ -11,8 +11,6 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Home", route: "/", icon: Home, commandName: "Go to Home" },
   { label: "Work", route: "/work", icon: Briefcase, commandName: "Go to Work" },
   { label: "Services", route: "/services", icon: Layers, commandName: "Go to Services" },
-  { label: "Ideas", route: "/lab", icon: Lightbulb, commandName: "Go to Ideas" },
   { label: "About", route: "/about", icon: Info, commandName: "Go to About" },
   { label: "Contact", route: "/contact", icon: Mail, commandName: "Go to Contact" },
 ];
-

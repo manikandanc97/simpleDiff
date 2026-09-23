@@ -18,6 +18,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { FloatingTechGroup, type FloatingTechItem } from "@/components/ui/floating-tech-elements";
 import { DynamicImageWithMask } from "@/components/ui/dynamic-image-with-mask";
+import { useLead } from "@/components/leads/lead-provider";
 import { cn } from "@/lib/utils";
 
 const FLOATING_PROCESS_TECHS: FloatingTechItem[] = [
@@ -182,6 +183,7 @@ const PHASES: Phase[] = [
 export function HowWeWork() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-80px" });
+  const { openLead } = useLead();
 
   const [activeIndex, setActiveIndex] = useState(0);
   const activePhase = PHASES[activeIndex];
@@ -424,13 +426,13 @@ export function HowWeWork() {
                           </div>
 
                           {/* CTA Button */}
-                          <a
-                            href="#contact"
+                          <button
+                            onClick={() => openLead({ source: "how-we-work" })}
                             className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-sm shadow-primary/20 cursor-pointer w-full sm:w-auto"
                           >
                             <span>{activePhase.ctaText}</span>
                             <AnimatedArrowRight size={13} />
-                          </a>
+                          </button>
                         </div>
 
                       </motion.div>

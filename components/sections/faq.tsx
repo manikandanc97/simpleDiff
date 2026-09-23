@@ -13,9 +13,10 @@ import {
   Clock,
   Code2,
 } from "lucide-react";
-import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { AnimatedArrowRight, AnimatedMail } from "@/components/ui/animated-icon";
 import { SectionHeader } from "@/components/ui/section-header";
 import { useLead } from "@/components/leads/lead-provider";
+import { SITE } from "@/lib/site";
 
 // ─── 5 Curated FAQs (Essential Client Questions Only) ──────────────────────────
 
@@ -178,11 +179,11 @@ export function FAQ() {
                 </button>
 
                 <a
-                  href="mailto:hello@simplethink.in"
-                  className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl border border-border/70 bg-muted/20 hover:bg-muted/40 hover:border-border text-foreground text-xs sm:text-sm font-medium transition-colors"
+                  href={`mailto:${SITE.email}`}
+                  className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl border border-border/70 bg-muted/20 hover:bg-muted/40 hover:border-border text-foreground text-xs sm:text-sm font-medium transition-colors group/mail"
                 >
-                  <Mail className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span>hello@simplethink.in</span>
+                  <AnimatedMail className="w-3.5 h-3.5 text-muted-foreground transition-colors group-hover/mail:text-primary" />
+                  <span>{SITE.email}</span>
                 </a>
               </div>
 
@@ -336,10 +337,10 @@ export function FAQ() {
           <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground/60">
             Have a custom requirement? Brief us at{" "}
             <a
-              href="mailto:hello@simplethink.in"
+              href={`mailto:${SITE.email}`}
               className="text-primary hover:underline font-semibold"
             >
-              hello@SimpleThink.in
+              {SITE.email}
             </a>
           </p>
         </motion.div>

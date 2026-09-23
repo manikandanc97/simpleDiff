@@ -13,7 +13,6 @@ const BOTTOM_TABS: { label: string; route: string; iconName: AnimatedIconName }[
   { label: "Home", route: "/", iconName: "home" },
   { label: "Work", route: "/work", iconName: "briefcase" },
   { label: "Services", route: "/services", iconName: "layers" },
-  { label: "Ideas", route: "/lab", iconName: "lightbulb" },
 ];
 
 export function MobileBottomNav() {

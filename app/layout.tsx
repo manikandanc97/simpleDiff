@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -16,6 +16,8 @@ import { NavigationProgress } from "@/components/ui/navigation-progress";
 import { MotionProvider } from "@/components/providers/motion-provider";
 import { LeadProvider } from "@/components/leads/lead-provider";
 import { SITE } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -96,6 +98,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </FontProvider>
           </ThemeColorProvider>
         </MotionProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

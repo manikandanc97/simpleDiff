@@ -4,304 +4,249 @@ import { useState, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import { PROJECTS, type Project } from "@/lib/data/projects";
-import { Globe, LayoutDashboard, Smartphone, Layers } from "lucide-react";
-import { AnimatedSparkles, AnimatedIcon } from "@/components/ui/animated-icon";
+import { Globe, LayoutDashboard, Smartphone, Layers, ChevronRight, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { PageBanner } from "@/components/ui/page-banner";
 
-/* ─── Selective Simple → Different Toggle Pill ─── */
-function SimpleDifferentToggle({
-  simpleText,
-  differentText,
-}: {
-  simpleText: string;
-  differentText: string;
-}) {
-  const [active, setActive] = useState<"simple" | "different">("different");
-
-  return (
-    <div className="inline-flex flex-col gap-2 p-4 rounded-xl border border-border bg-muted/20 my-4 max-w-lg">
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={() => setActive("simple")}
-          className={cn(
-            "text-xs px-3 py-1 rounded-full font-medium transition-all cursor-pointer",
-            active === "simple"
-              ? "bg-foreground text-background font-bold"
-              : "text-muted-foreground hover:text-foreground"
-          )}
-        >
-          Typical Build
-        </button>
-        <span className="text-muted-foreground text-xs">&rarr;</span>
-        <button
-          type="button"
-          onClick={() => setActive("different")}
-          className={cn(
-            "group text-xs px-3 py-1 rounded-full font-medium transition-all cursor-pointer flex items-center gap-1.5",
-            active === "different"
-              ? "bg-primary text-primary-foreground font-bold shadow-xs"
-              : "text-muted-foreground hover:text-primary"
-          )}
-        >
-          <AnimatedSparkles size={12} />
-          <span>SimpleThink</span>
-        </button>
-      </div>
-      <p className="text-xs text-foreground/80 leading-relaxed font-mono">
-        {active === "simple" ? simpleText : differentText}
-      </p>
-    </div>
-  );
-}
-
-/* ─── Stylized Visual Preview Canvas ─── */
+/* ─── Modern Visual Preview Canvas with Live Iframe ─── */
 function ProjectVisualCanvas({ project }: { project: Project }) {
-  if (project.id === "proj-valparai") {
-    return (
-      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-950 via-teal-900 to-zinc-950 p-6 sm:p-8 flex flex-col justify-between border border-emerald-500/20 shadow-xl group-hover:border-emerald-500/40 transition-colors">
-        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_top,#10b981,transparent_70%)]" />
-        <div className="relative z-10 flex items-center justify-between">
-          <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-mono font-medium border border-emerald-500/30">
-            Valparai, Western Ghats
-          </span>
-          <span className="text-xs text-emerald-300/80 font-mono font-bold">
-            4.9★ Google Reviews
-          </span>
-        </div>
+  const [isHovered, setIsHovered] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [isInteractive, setIsInteractive] = useState(false);
 
-        <div className="relative z-10 space-y-2">
-          <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Valparai Wanderer Tours
-          </h4>
-          <p className="text-xs sm:text-sm text-emerald-100/70 max-w-sm">
-            Immersive tea estate visuals, guided rainforest treks, and instant WhatsApp booking flow.
-          </p>
-        </div>
-
-        <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
-          <span>WhatsApp Bookings:</span>
-          <span className="text-emerald-400 font-bold font-mono">+300% in Month 1</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (project.id === "proj-grn") {
-    return (
-      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-slate-950 via-cyan-950 to-neutral-900 p-6 sm:p-8 flex flex-col justify-between border border-cyan-500/20 shadow-xl group-hover:border-cyan-500/40 transition-colors">
-        <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#06b6d4_1px,transparent_1px),linear-gradient(to_bottom,#06b6d4_1px,transparent_1px)] bg-[size:24px_24px]" />
-        
-        <div className="relative z-10 flex items-center justify-between">
-          <span className="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-mono font-medium border border-cyan-500/30">
-            Construction & Architecture
-          </span>
-          <span className="text-xs text-cyan-300/80 font-mono font-bold">
-            10+ Years Authority
-          </span>
-        </div>
-
-        <div className="relative z-10 space-y-2">
-          <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-            GRN Construction
-          </h4>
-          <p className="text-xs sm:text-sm text-cyan-100/70 max-w-sm">
-            Glassmorphism portfolio, structured project categories, and regional SEO authority.
-          </p>
-        </div>
-
-        <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
-          <span>Search Ranking:</span>
-          <span className="text-cyan-400 font-bold font-mono">Page 1 Local Builder</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (project.id === "proj-viha") {
-    return (
-      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-gradient-to-br from-amber-950 via-stone-900 to-zinc-950 p-6 sm:p-8 flex flex-col justify-between border border-amber-500/20 shadow-xl group-hover:border-amber-500/40 transition-colors">
-        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_top,#d97706,transparent_70%)]" />
-        <div className="relative z-10 flex items-center justify-between">
-          <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-mono font-medium border border-amber-500/30">
-            Chettinad Heritage & Art
-          </span>
-          <span className="text-xs text-amber-300/80 font-mono font-bold">
-            100% Handcrafted
-          </span>
-        </div>
-
-        <div className="relative z-10 space-y-2">
-          <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Viha Handicrafts
-          </h4>
-          <p className="text-xs sm:text-sm text-amber-100/70 max-w-sm">
-            Generational brass idols, Tanjore paintings, and Chettinad artifacts with direct WhatsApp buying flow.
-          </p>
-        </div>
-
-        <div className="relative z-10 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between text-xs text-white">
-          <span>Client Reach:</span>
-          <span className="text-amber-400 font-bold font-mono">Pan-India Direct Orders</span>
-        </div>
-      </div>
-    );
-  }
-
-  // Dynamic Visual Canvas with Real Images & Themes
   return (
-    <div
-      className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden p-6 sm:p-8 flex flex-col justify-between border border-border/60 shadow-xl group-hover:border-primary/40 transition-colors"
-      style={{ background: project.previewTheme?.previewBg || "linear-gradient(135deg, #111827 0%, #1f2937 100%)" }}
-    >
-      {project.image && (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={project.image}
-            alt={project.name}
-            className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-55 transition-opacity duration-700 ease-out"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-        </>
+    <div 
+      className={cn(
+        "relative w-full h-[50vh] lg:h-[calc(100vh-16rem)] min-h-[400px] max-h-[800px] rounded-2xl overflow-hidden bg-muted/10 border shadow-xl transition-all duration-500 group/canvas flex flex-col",
+        isInteractive ? "border-primary shadow-2xl shadow-primary/20 ring-1 ring-primary/50" : "border-border/50 group-hover:shadow-2xl group-hover:border-primary/50"
       )}
-
-      <div className="relative z-10 flex items-center justify-between">
-        <span className="px-3 py-1 rounded-full bg-primary/20 backdrop-blur-md text-primary-foreground text-xs font-mono font-medium border border-primary/40">
-          {project.serviceType} · {project.category.split("·")[0].trim()}
-        </span>
-        <span className="text-xs text-white/80 font-mono font-bold bg-black/40 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/10">
-          {project.year || "2025"}
-        </span>
-      </div>
-
-      <div className="relative z-10 space-y-2">
-        <h4 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight drop-shadow-sm">
-          {project.name}
-        </h4>
-        <p className="text-xs sm:text-sm text-white/80 max-w-sm line-clamp-2">
-          {project.description}
-        </p>
-      </div>
-
-      <div className="relative z-10 bg-black/60 backdrop-blur-md rounded-xl p-3 border border-white/15 flex items-center justify-between text-xs text-white">
-        <span className="text-white/70">Milestone Result:</span>
-        <span className="text-emerald-400 font-bold font-mono">{project.result}</span>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Alternating Project Showcase Item ─── */
-function ProjectShowcaseItem({
-  project,
-  index,
-}: {
-  project: Project;
-  index: number;
-}) {
-  const isEven = index % 2 === 0;
-
-  return (
-    <motion.article
-      id={project.id}
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center scroll-mt-24"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => {
+        if (!isInteractive) {
+          setIsHovered(false);
+        }
+      }}
     >
-      {/* Visual Area (Alternates left or right based on index) */}
-      <div
-        className={cn(
-          "lg:col-span-7",
-          isEven ? "lg:order-1" : "lg:order-2"
-        )}
-      >
-        <ProjectVisualCanvas project={project} />
+      {/* Mock Browser Header */}
+      <div className="w-full h-8 sm:h-10 bg-background/80 backdrop-blur-md flex items-center px-3 sm:px-4 border-b border-border/50 z-30 shrink-0 transition-colors group-hover/canvas:bg-muted/80">
+        <div className="flex items-center gap-1.5 sm:gap-2 w-1/4">
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-rose-500/80" />
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-500/80" />
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500/80" />
+        </div>
+        <div className="flex-1 flex justify-center px-2">
+          <div className="max-w-[150px] sm:max-w-[200px] w-full h-5 sm:h-6 bg-muted rounded-md border border-border/50 flex items-center justify-center px-2">
+            <span className="text-[9px] sm:text-[10px] text-muted-foreground truncate font-mono">
+              {project.domain || project.url}
+            </span>
+          </div>
+        </div>
+        <div className="w-1/4 flex justify-end gap-2 items-center">
+           {isInteractive && (
+             <button
+               onClick={() => {
+                 setIsInteractive(false);
+                 setIsHovered(false);
+               }}
+               className="text-[9px] sm:text-[10px] font-bold text-red-500 bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded-md hover:bg-red-500/20 transition-colors cursor-pointer"
+             >
+               Close
+             </button>
+           )}
+           {(isHovered || isInteractive) && project.url && (
+             <div className="flex items-center gap-1.5 animate-in fade-in zoom-in duration-300">
+               <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
+                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-primary"></span>
+               </span>
+               <span className="text-[8px] sm:text-[9px] font-bold text-primary uppercase tracking-widest hidden sm:block">Live</span>
+             </div>
+           )}
+        </div>
       </div>
 
       {/* Content Area */}
-      <div
-        className={cn(
-          "lg:col-span-5 space-y-5",
-          isEven ? "lg:order-2" : "lg:order-1"
-        )}
-      >
-        {/* Service Type, Category & Year */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/25">
-            {project.serviceType}
-          </span>
-          <span className="text-xs font-mono text-muted-foreground">
-            {project.number} &mdash; {project.category}
-          </span>
-          {project.badge && (
-            <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/25">
-              {project.badge}
-            </span>
-          )}
-        </div>
-
-        {/* Project Name */}
-        <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
-          {(() => {
-            const words = project.name.split(" ");
-            if (words.length === 1) {
-              return <span className="text-primary">{project.name}</span>;
-            }
-            const last = words.pop();
-            return (
-              <>
-                {words.join(" ")} <span className="text-primary">{last}</span>
-              </>
-            );
-          })()}
-        </h2>
-
-        {/* Description */}
-        <p className="text-base text-muted-foreground leading-relaxed">
-          {project.description}
-        </p>
-
-        {/* Selective Simple → Different Toggle Pill */}
-        {project.before.length > 0 && project.after.length > 0 && (
-          <SimpleDifferentToggle
-            simpleText={project.before[0]}
-            differentText={project.after[0]}
+      <div className="relative flex-1 w-full bg-background overflow-hidden">
+        
+        {/* Fallback Static Image */}
+        {project.image && (
+          <img
+            src={project.image}
+            alt={project.name}
+            className={cn(
+              "absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out z-0",
+              (isHovered || isInteractive) && project.url ? "scale-110 opacity-0 blur-sm" : "scale-100 opacity-100 blur-0"
+            )}
           />
         )}
 
-        {/* Technologies / Stack tags */}
-        {project.stack && project.stack.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-1">
-            {project.stack.map((tech) => (
-              <span
-                key={tech}
-                className="px-2.5 py-1 rounded-md text-xs font-mono bg-muted/50 border border-border/60 text-foreground/80 font-medium"
-              >
-                {tech}
-              </span>
-            ))}
+        {/* Live Iframe Preview */}
+        {project.url && (isHovered || isInteractive) && (
+           <div className="absolute inset-0 w-full h-full bg-background animate-in fade-in duration-700 z-10 flex items-center justify-center">
+              {!iframeLoaded && (
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-background/80 backdrop-blur-sm gap-3">
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                  <span className="text-[10px] sm:text-xs font-mono text-muted-foreground animate-pulse">Connecting to live preview...</span>
+                </div>
+              )}
+              <iframe
+                src={project.url}
+                className={cn(
+                  "w-full h-full border-none transition-all",
+                  isInteractive ? "pointer-events-auto" : "pointer-events-none"
+                )}
+                onLoad={() => setIframeLoaded(true)}
+              />
+           </div>
+        )}
+
+        {/* Interactive Overlay Button */}
+        {project.url && isHovered && !isInteractive && iframeLoaded && (
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/10 hover:bg-black/20 transition-colors backdrop-blur-[1px] cursor-pointer" onClick={() => setIsInteractive(true)}>
+            <button 
+              className="bg-primary text-primary-foreground px-4 py-2 sm:px-6 sm:py-2.5 rounded-full font-bold shadow-lg shadow-primary/30 flex items-center gap-2 hover:scale-105 transition-transform text-xs sm:text-sm"
+            >
+              <LayoutDashboard size={16} />
+              Interact Live
+            </button>
           </div>
         )}
 
-        {/* Live Site Link if Available */}
-        {project.url && (
-          <div className="pt-2">
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline group/link"
-            >
-              <span>{project.serviceType === "Websites" ? "Visit live production website" : "Open project demo / portal"}</span>
-              <AnimatedIcon name="external-link" size={15} />
-            </a>
-          </div>
-        )}
+        {/* Overlay Gradient on image only (hide when iframe active) */}
+        <div className={cn(
+          "absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none transition-opacity duration-500 z-10",
+          (isHovered || isInteractive) ? "opacity-0" : "opacity-100"
+        )} />
+        
+        {/* Project Name & Tags Overlay */}
+        <div className={cn(
+          "absolute bottom-0 left-0 w-full p-4 sm:p-6 z-20 pointer-events-none flex flex-col sm:flex-row sm:items-end justify-between gap-4 transition-opacity duration-500",
+          (isHovered || isInteractive) ? "opacity-0" : "opacity-100"
+        )}>
+           <div>
+             <h4 className="text-xl sm:text-3xl font-extrabold text-white mb-2 sm:mb-3 tracking-tight drop-shadow-md">
+               {project.name}
+             </h4>
+             <div className="flex flex-wrap gap-1.5 sm:gap-2">
+               {project.tags.slice(0, 3).map((tag) => (
+                 <span key={tag} className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-black/40 backdrop-blur-md text-[9px] sm:text-[10px] font-mono text-white/90 border border-white/20">
+                   {tag}
+                 </span>
+               ))}
+             </div>
+           </div>
+           {project.result && project.result !== "Work in Progress" && project.result !== "Coming Soon" && (
+             <div className="text-left sm:text-right">
+               <span className="block text-[9px] sm:text-[10px] font-mono text-white/70 mb-0.5 sm:mb-1 uppercase tracking-wider">Key Result</span>
+               <span className="block text-xs sm:text-sm font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 inline-block">{project.result}</span>
+             </div>
+           )}
+        </div>
       </div>
-    </motion.article>
+    </div>
+  );
+}
+
+/* ─── Modern Project List Item ─── */
+function ProjectListItem({
+  project,
+  isActive,
+  onClick,
+}: {
+  project: Project;
+  isActive: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "group relative w-full text-left p-4 sm:p-5 rounded-2xl transition-all duration-300 overflow-hidden flex items-center gap-4 sm:gap-5 border",
+        isActive 
+          ? "bg-primary text-primary-foreground shadow-lg scale-[1.02] border-primary" 
+          : "bg-muted/40 hover:bg-muted/80 text-foreground hover:scale-[1.01] border-transparent hover:border-border/60"
+      )}
+    >
+      {/* Background Accent Gradient for active state */}
+      {isActive && (
+        <div 
+          className={cn("absolute inset-0 opacity-20 bg-gradient-to-br", project.accentGradient)} 
+          aria-hidden="true" 
+        />
+      )}
+
+      {/* Original Logo / Favicon Placeholder */}
+      <div className={cn(
+        "relative z-10 w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full flex items-center justify-center overflow-hidden border shadow-sm transition-colors",
+        isActive ? "bg-white border-white/20" : "bg-background border-border/60 group-hover:border-primary/30"
+      )}>
+         {project.url ? (
+           // eslint-disable-next-line @next/next/no-img-element
+           <img 
+             src={`https://www.google.com/s2/favicons?domain=${project.domain}&sz=64`} 
+             alt={`${project.name} logo`}
+             className="w-6 h-6 sm:w-7 sm:h-7 object-contain drop-shadow-sm"
+             onError={(e) => {
+               (e.target as HTMLImageElement).style.display = 'none';
+               (e.target as HTMLImageElement).parentElement!.innerText = project.name.charAt(0);
+               (e.target as HTMLImageElement).parentElement!.className = cn(
+                 (e.target as HTMLImageElement).parentElement!.className,
+                 "text-xl font-bold font-mono",
+                 isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary"
+               );
+             }}
+           />
+         ) : (
+           <span className={cn(
+             "text-xl font-bold font-mono",
+             isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary"
+           )}>
+             {project.name.charAt(0)}
+           </span>
+         )}
+      </div>
+
+      {/* Content Area */}
+      <div className="relative z-10 flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <span className={cn(
+            "text-[9px] sm:text-[10px] font-mono font-bold tracking-widest",
+            isActive ? "text-primary-foreground/80" : "text-muted-foreground"
+          )}>
+            {project.number}
+          </span>
+          <span className={cn(
+            "text-[9px] sm:text-[10px] font-mono px-1.5 py-0.5 rounded-full border",
+            isActive ? "bg-primary-foreground/20 border-primary-foreground/30 text-primary-foreground" : "bg-muted border-border/50 text-muted-foreground"
+          )}>
+            {project.year}
+          </span>
+        </div>
+
+        <h3 className={cn(
+          "text-base sm:text-lg font-bold tracking-tight truncate transition-colors",
+          isActive ? "text-white" : "text-foreground group-hover:text-primary"
+        )}>
+          {project.name}
+        </h3>
+        
+        <p className={cn(
+          "text-xs sm:text-sm truncate mt-0.5",
+          isActive ? "text-primary-foreground/80" : "text-muted-foreground"
+        )}>
+           {project.category}
+        </p>
+      </div>
+      
+      {/* Arrow Indicator */}
+      <div className={cn(
+        "relative z-10 w-8 h-8 shrink-0 rounded-full flex items-center justify-center transition-all duration-300 ml-2",
+        isActive ? "bg-white text-primary translate-x-1" : "bg-muted text-muted-foreground group-hover:bg-primary group-hover:text-white"
+      )}>
+        <ArrowRight size={16} />
+      </div>
+    </button>
   );
 }
 
@@ -347,25 +292,38 @@ function WorkViewContent() {
     return result;
   }, [activeFilter, categoryParam]);
 
+  // Handle active project state for the split-pane layout
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
+
+  // When filtered projects change, ensure the active project is valid
+  useMemo(() => {
+    if (filteredProjects.length > 0) {
+      if (!activeProjectId || !filteredProjects.find(p => p.id === activeProjectId)) {
+        setActiveProjectId(filteredProjects[0].id);
+      }
+    } else {
+      setActiveProjectId(null);
+    }
+  }, [filteredProjects, activeProjectId]);
+
+  const activeProject = filteredProjects.find(p => p.id === activeProjectId) || filteredProjects[0];
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      {/* Header */}
-      <div className="max-w-4xl mb-12 sm:mb-16">
-        <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-          Featured Portfolio
-        </span>
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground mb-6">
-          <span className="text-primary">Work.</span>
-        </h1>
-        <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed">
-          Selected client projects and digital architectures engineered end-to-end. 
-          Explore our works across Websites, Web Applications, and Mobile Apps.
-        </p>
-      </div>
+    <div className="w-full">
+      <PageBanner
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: "Work" },
+        ]}
+        title="Our Works"
+        description="A curated selection of our finest digital architectures, platforms, and experiences engineered end-to-end."
+        techStack={["react", "nextjs", "typescript", "tailwindcss", "supabase", "docker"]}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
 
       {/* Interactive Service Filter Tabs */}
-      <div className="mb-16 flex flex-wrap items-center gap-2 border-b border-border/60 pb-6">
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-12 sm:mb-16">
         {FILTER_SERVICES.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeFilter === tab.id;
@@ -378,18 +336,18 @@ function WorkViewContent() {
               key={tab.id}
               onClick={() => setActiveFilter(tab.id)}
               className={cn(
-                "relative flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer select-none",
+                "group relative flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300",
                 isActive
-                  ? "bg-foreground text-background shadow-xs font-bold"
-                  : "bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/80 border border-border/60"
+                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30 scale-105"
+                  : "bg-muted/40 text-muted-foreground hover:bg-muted/80 hover:text-foreground border border-border/50"
               )}
             >
-              <Icon size={14} className={isActive ? "text-background" : "text-primary"} />
+              <Icon size={16} className={cn("transition-colors", isActive ? "text-primary-foreground" : "text-primary group-hover:scale-110")} />
               <span>{tab.label}</span>
               <span
                 className={cn(
-                  "text-[10px] font-mono px-1.5 py-0.2 rounded-full",
-                  isActive ? "bg-background/25 text-background" : "bg-muted text-muted-foreground"
+                  "ml-0.5 sm:ml-1 text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full transition-colors",
+                  isActive ? "bg-primary-foreground/20 text-primary-foreground" : "bg-muted text-muted-foreground group-hover:bg-background"
                 )}
               >
                 {count}
@@ -399,21 +357,75 @@ function WorkViewContent() {
         })}
       </div>
 
-      {/* Alternating Project Showcase Stack */}
-      <div className="space-y-28 sm:space-y-36">
-        {filteredProjects.length === 0 ? (
-          <div className="text-center py-20 text-muted-foreground">
-            No projects found matching the selected filter.
+      {/* Modern Split-Pane Project Showcase */}
+      {filteredProjects.length === 0 ? (
+        <div className="text-center py-20 sm:py-32 bg-muted/10 rounded-2xl border border-border border-dashed">
+          <p className="text-muted-foreground font-mono">No projects found matching the selected filter.</p>
+        </div>
+      ) : (
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start relative">
+          
+          {/* Left Column: Project List */}
+          <div className="w-full lg:w-[40%] flex flex-col gap-4">
+            {filteredProjects.map((project) => (
+              <ProjectListItem 
+                key={project.id} 
+                project={project} 
+                isActive={project.id === activeProject?.id}
+                onClick={() => setActiveProjectId(project.id)}
+              />
+            ))}
           </div>
-        ) : (
-          filteredProjects.map((project, index) => (
-            <ProjectShowcaseItem
-              key={project.id}
-              project={project}
-              index={index}
-            />
-          ))
-        )}
+
+          {/* Right Column: Sticky Preview Canvas */}
+          <div className="w-full lg:w-[60%] lg:sticky lg:top-28 z-10">
+            {activeProject ? (
+              <motion.div
+                key={activeProject.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col gap-6"
+              >
+                <ProjectVisualCanvas project={activeProject} />
+                
+                {/* Project Details Below Canvas */}
+                <div className="flex flex-col gap-4 p-2 sm:px-4">
+                   <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                     {activeProject.description}
+                   </p>
+                   <div className="flex flex-wrap items-center gap-2 mt-2">
+                     <span className="text-xs font-mono text-foreground/50 mr-2">Tech Stack:</span>
+                     {activeProject.stack.map((tech) => (
+                       <span key={tech} className="px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono bg-muted/50 border border-border/50 text-foreground/80 hover:bg-muted transition-colors cursor-default">
+                         {tech}
+                       </span>
+                     ))}
+                   </div>
+                   {activeProject.url && (
+                     <div className="mt-4 pt-4 border-t border-border/40 flex flex-wrap gap-4 items-center justify-between">
+                       <div className="text-xs font-mono text-muted-foreground">
+                         <span className="text-emerald-500 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 mr-2 inline-block mb-1 sm:mb-0">Result</span>
+                         {activeProject.result}
+                       </div>
+                       <a
+                         href={activeProject.url}
+                         target="_blank"
+                         rel="noreferrer"
+                         className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-bold shadow-lg shadow-primary/30 hover:scale-105 transition-all w-full sm:w-auto text-sm"
+                       >
+                         <Globe size={16} />
+                         Visit Live
+                       </a>
+                     </div>
+                   )}
+                </div>
+              </motion.div>
+            ) : null}
+          </div>
+
+        </div>
+      )}
       </div>
     </div>
   );
@@ -421,7 +433,7 @@ function WorkViewContent() {
 
 export function WorkView() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+    <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center"><div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" /></div>}>
       <WorkViewContent />
     </Suspense>
   );

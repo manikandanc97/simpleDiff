@@ -8,6 +8,7 @@ import { useDock } from "@/components/theme/dock-context";
 import { cn } from "@/lib/utils";
 import { Plus, Sparkles, Check } from "lucide-react";
 import { ColorPickerDialog } from "@/components/theme/color-picker-dialog";
+import { usePathname } from "next/navigation";
 
 // RGB Trio: Red, Green, Blue
 const DOCK_PRESET_IDS = ["red", "green", "blue"];
@@ -110,6 +111,7 @@ export function ThemeDockContent({ label }: { label?: string }) {
 export function FloatingColorDock() {
   const { activeSlot, activeLabel } = useDock();
   const [isNearBottom, setIsNearBottom] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -124,7 +126,7 @@ export function FloatingColorDock() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isVisible = activeSlot === "floating" && !isNearBottom;
+  const isVisible = activeSlot === "floating" && !isNearBottom && pathname === "/";
 
   if (!isVisible) {
     return null;

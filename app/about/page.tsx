@@ -7,6 +7,7 @@ import {
   AnimatedMessageSquare,
   AnimatedArrowRight,
 } from "@/components/ui/animated-icon";
+import { PageBanner } from "@/components/ui/page-banner";
 
 export const metadata: Metadata = {
   title: "About",
@@ -40,23 +41,23 @@ const PRINCIPLES = [
 
 export default function AboutPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      {/* Hero Header */}
-      <div className="max-w-5xl mb-24 sm:mb-32">
-        <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-          About SimpleThink
-        </span>
+    <div className="w-full">
+      <PageBanner
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: "About" },
+        ]}
+        badge="About SimpleThink"
+        title={
+          <span>
+            Simplicity Engineered for <span className="text-primary">Impact.</span>
+          </span>
+        }
+        description="We believe digital products don't need to be complicated to be powerful. Modern software without bloat, engineered for high performance."
+        techStack={["typescript", "python", "graphql", "docker", "figma", "vite"]}
+      />
 
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.08] mb-8">
-          We believe digital products don&apos;t need to be complicated to be{" "}
-          <span className="text-primary">powerful.</span>
-        </h1>
-
-        <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
-          Modern web apps, software, and websites have become overloaded with bloat. We design and engineer clean, focused products that deliver outsized business impact.
-        </p>
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
       {/* Section 1: Who We Are */}
       <section className="py-16 sm:py-20 border-t border-border">
@@ -196,6 +197,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }

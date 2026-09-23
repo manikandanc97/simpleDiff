@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import { LeadForm } from "@/components/leads/lead-form";
 import {
@@ -8,6 +8,7 @@ import {
   AnimatedCheck,
   AnimatedContact,
 } from "@/components/ui/animated-icon";
+import { PageBanner } from "@/components/ui/page-banner";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -42,22 +43,24 @@ const FAQS = [
 
 export default function ContactPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-      {/* Hero Header */}
-      <div className="max-w-4xl mb-16 sm:mb-20">
-        <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-xs font-semibold uppercase tracking-[0.18em] mb-6">
-          <AnimatedContact size={14} className="text-primary" />
-          Direct Engineering Line
-        </span>
+    <div className="w-full">
+      <PageBanner
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: "Contact" },
+        ]}
+        badge="Direct Engineering Line"
+        badgeIcon={<AnimatedContact size={14} className="text-primary" />}
+        title={
+          <span>
+            Let&apos;s build your system <span className="text-primary">right.</span>
+          </span>
+        }
+        description="Whether you need an enterprise web application, mobile app, or modern design system, our team is ready to deliver. Reach out directly below."
+        techStack={["nextjs", "typescript", "supabase", "stripe", "postman", "git"]}
+      />
 
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.08] mb-6">
-          Let&apos;s build your system <span className="text-primary">right.</span>
-        </h1>
-
-        <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
-          Whether you need an enterprise web application, mobile app, or modern design system, our team is ready to deliver. Reach out directly below.
-        </p>
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
 
       {/* Main Contact Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -186,6 +189,7 @@ export default function ContactPage() {
           ))}
         </div>
       </section>
+      </div>
     </div>
   );
 }
