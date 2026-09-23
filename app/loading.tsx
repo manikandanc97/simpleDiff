@@ -112,7 +112,7 @@ export default function Loading() {
               repeat: Infinity,
               repeatDelay: (total - 1) * cycle,
               delay: i * cycle,
-              ease: "easeInOut",
+              ease: "easeInOut" as const,
             };
 
             return (
