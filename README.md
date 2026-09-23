@@ -1,8 +1,8 @@
-# SimpleThink
+# SimplePrime
 
 > **Keep It Simple. Think Different.**
 
-SimpleThink is a software development company that designs, engineers, and deploys custom software, web applications, mobile apps, SaaS platforms, and enterprise solutions for businesses, startups, and founders.
+SimplePrime is a software development company that designs, engineers, and deploys custom software, web applications, mobile apps, SaaS platforms, and enterprise solutions for businesses, startups, and founders.
 
 We eliminate boilerplate, over-engineering, and technical bloat to ship clean, fast, and high-impact digital products.
 
@@ -148,4 +148,4 @@ All studio identity details are centralized in [`lib/site.ts`](lib/site.ts). Upd
 
 ## 📄 License
 
-Private & proprietary — SimpleThink.
+Private & proprietary — SimplePrime.

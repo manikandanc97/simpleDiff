@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState, useCallback } from "react";
-import { useThemeColor } from "@/components/theme/color-provider";
+
 
 // Converts any CSS color (OKLCH, Hex, RGB, HSL) into exact RGB numbers
 function parseCssColorToRgb(colorStr: string): [number, number, number] {
@@ -49,7 +49,6 @@ interface DynamicTShirtCharacterProps {
 
 export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { theme } = useThemeColor();
 
   // Cached pixel structures for <1ms tinting
   const cacheRef = useRef<{
@@ -63,10 +62,7 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
   const [isReady, setIsReady] = useState(false);
 
   // Keep track of the latest primary color for async callbacks
-  const latestPrimaryRef = useRef(theme.primary || "#2563EB");
-  useEffect(() => {
-    latestPrimaryRef.current = theme.primary || "#2563EB";
-  }, [theme.primary]);
+  const latestPrimaryRef = useRef("#7C2D4A");
 
   // Recolor function
   const applyThemeColor = useCallback((color: string) => {
@@ -198,11 +194,12 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
   }, [applyThemeColor]);
 
   // Re-apply whenever theme.primary changes
+  // Re-apply once ready
   useEffect(() => {
-    if (cacheRef.current && theme?.primary) {
-      applyThemeColor(theme.primary);
+    if (cacheRef.current) {
+      applyThemeColor("#7C2D4A");
     }
-  }, [theme.primary, applyThemeColor]);
+  }, [applyThemeColor]);
 
   return (
     <div className="relative w-full h-full flex items-center justify-center pointer-events-none select-none">

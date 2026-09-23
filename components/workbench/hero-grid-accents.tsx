@@ -22,7 +22,7 @@ export function HeroGridAccents() {
         <span className="font-mono text-primary text-xs font-semibold select-none">+</span>
       </div>
 
-      <div className="absolute bottom-20 left-10 md:left-20 hidden lg:flex items-center gap-2 opacity-40">
+      <div className="absolute bottom-4 sm:bottom-6 left-6 md:left-10 hidden lg:flex items-center gap-2 opacity-40 z-10">
         <span className="font-mono text-primary text-xs font-semibold select-none">+</span>
         <span className="font-mono text-[10px] tracking-widest text-muted-foreground/70">
           COORDINATES // 13.0827°N 80.2707°E

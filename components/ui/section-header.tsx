@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
-import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+
 import { cn } from "@/lib/utils";
 
 export interface SectionHeaderProps {
@@ -32,9 +32,7 @@ export function SectionHeader({
       ref={headerRef}
       className={cn(maxWidth, centered && "mx-auto text-center", className)}
     >
-      <div className={cn("mb-3", centered && "flex justify-center")}>
-        <SectionDockSlot sectionId={sectionId} label={dockLabel} />
-      </div>
+
 
       <motion.h2
         initial={{ opacity: 0, y: 16 }}

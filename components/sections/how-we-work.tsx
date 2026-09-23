@@ -12,7 +12,7 @@ import {
   Sparkles,
   ShieldCheck,
 } from "lucide-react";
-import { useThemeColor } from "@/components/theme/color-provider";
+
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
@@ -502,7 +502,7 @@ export function HowWeWork() {
           </div>
 
           <span className="text-[11px] text-muted-foreground/50 tracking-wider uppercase">
-            SimpleThink · Delivery Framework
+            SimplePrime · Delivery Framework
           </span>
         </motion.div>
 

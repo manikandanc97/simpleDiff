@@ -7,7 +7,7 @@ import { DynamicTShirtCharacter } from "@/components/ui/dynamic-tshirt-character
 import { Terminal, Layers, ShieldCheck } from "lucide-react";
 
 const CODE_SNIPPETS = [
-  "const app = SimpleThink.create();",
+  "const app = SimplePrime.create();",
   "await app.deploy({ speed: 'instant' });",
   "// 🚀 MVP launched in 48 hours",
   "export default function Product() {}",
@@ -82,7 +82,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative w-full max-w-[480px] sm:max-w-[540px] aspect-square flex items-center justify-center select-none perspective-[1200px]",
+        "relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[460px] xl:max-w-[500px] max-h-[min(480px,52vh)] aspect-square flex items-center justify-center select-none perspective-[1200px]",
         className
       )}
     >

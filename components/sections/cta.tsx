@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
-import { SectionDockSlot } from "@/components/theme/section-dock-slot";
+
 import {
   AnimatedArrowRight,
   AnimatedMail,
@@ -38,9 +38,6 @@ export function CTA({ onStartProject }: CTAProps) {
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/10 rounded-full blur-[140px]" />
 
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
-        {/* Dock as Subheading / Eyebrow */}
-        <SectionDockSlot sectionId="cta" label="Start Your Build" className="mb-4" />
-
         {/* 3D Claymorphic Launch Illustration (Dynamic theme color) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 15 }}
@@ -72,8 +69,8 @@ export function CTA({ onStartProject }: CTAProps) {
         >
           Let&apos;s make it <span className="text-foreground font-semibold">simple</span>.
           <br />
-          Let&apos;s think it{" "}
-          <span className="text-primary font-bold transition-colors duration-500">different.</span>
+          Let&apos;s build it{" "}
+          <span className="text-primary font-bold transition-colors duration-500">premium.</span>
         </motion.div>
 
         {/* Dedicated Section Theme Dock Slot for Final CTA */}

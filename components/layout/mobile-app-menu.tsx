@@ -6,22 +6,13 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS } from "@/lib/nav";
-import { useThemeColor } from "@/components/theme/color-provider";
-import { useFont } from "@/components/theme/font-provider";
-import { FontPickerDialog } from "@/components/theme/font-picker";
-import { ColorPickerDialog } from "@/components/theme/color-picker-dialog";
-import { COLOR_THEMES } from "@/lib/colors";
+
 import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
 import {
   AnimatedIcon,
   AnimatedArrowRight,
   AnimatedX,
-  AnimatedSparkles,
-  AnimatedPalette,
-  AnimatedType,
-  AnimatedMoon,
-  AnimatedSun,
   AnimatedChevronRight,
   AnimatedMail,
   type AnimatedIconName,
@@ -53,8 +44,6 @@ const NAV_SUBTITLES: Record<string, string> = {
 export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
   const pathname = usePathname();
   const { openLead } = useLead();
-  const { theme, setTheme, mode, setMode } = useThemeColor();
-  const { font } = useFont();
 
   // Lock body scroll when mobile sheet is open
   useEffect(() => {
@@ -145,90 +134,7 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
 
             {/* Scrollable Sheet Content */}
             <div className="overflow-y-auto px-5 py-4 space-y-5 overscroll-contain">
-              {/* Quick Customization Hub */}
-              <div className="p-3.5 rounded-2xl bg-muted/40 border border-border/70 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                    <AnimatedSparkles size={14} className="text-primary" />
-                    Quick Controls
-                  </span>
-                  <span className="text-[10px] text-muted-foreground">Tap to switch</span>
-                </div>
 
-                {/* Color Swatches Strip */}
-                <div className="flex items-center justify-between gap-1.5 pt-0.5">
-                  <div className="flex items-center gap-2 overflow-x-auto py-1 scrollbar-none">
-                    {COLOR_THEMES.slice(0, 6).map((t) => {
-                      const isActive = theme.id === t.id && !theme.isCustom;
-                      return (
-                        <button
-                          key={t.id}
-                          type="button"
-                          onClick={() => setTheme(t.id)}
-                          className={cn(
-                            "relative w-7 h-7 rounded-full shrink-0 transition-transform cursor-pointer ring-1 ring-black/15 dark:ring-white/20 active:scale-90",
-                            isActive ? "scale-115 ring-2 ring-primary" : "hover:scale-110 opacity-90"
-                          )}
-                          style={{ backgroundColor: t.primary }}
-                          aria-label={`Select ${t.name} color`}
-                          title={t.name}
-                        />
-                      );
-                    })}
-                  </div>
-
-                  <ColorPickerDialog
-                    trigger={
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="group rounded-full text-xs h-7 px-2.5 gap-1.5 cursor-pointer shrink-0 border-border active:scale-95 transition-all"
-                      >
-                        <AnimatedPalette size={12} className="text-primary" />
-                        <span>All</span>
-                      </Button>
-                    }
-                  />
-                </div>
-
-                {/* Font & Theme Switchers Row */}
-                <div className="grid grid-cols-2 gap-2 pt-1 border-t border-border/50">
-                  <FontPickerDialog
-                    trigger={
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="group w-full justify-between rounded-xl text-xs h-9 px-3 cursor-pointer bg-background/50 border-border/80 active:scale-95 transition-all"
-                      >
-                        <span className="flex items-center gap-1.5 truncate text-muted-foreground">
-                          <AnimatedType size={14} className="text-primary shrink-0" />
-                          <span className="truncate">{font}</span>
-                        </span>
-                        <AnimatedChevronRight size={14} className="opacity-60 shrink-0" />
-                      </Button>
-                    }
-                  />
-
-                  {/* Dark / Light Toggle */}
-                  <button
-                    type="button"
-                    onClick={() => setMode(mode === "dark" ? "light" : "dark")}
-                    className="group flex items-center justify-between px-3 h-9 rounded-xl border border-border/80 bg-background/50 text-xs text-foreground cursor-pointer active:scale-95 transition-all"
-                  >
-                    <span className="flex items-center gap-1.5 text-muted-foreground">
-                      {mode === "dark" ? (
-                        <AnimatedMoon size={14} className="text-primary" />
-                      ) : (
-                        <AnimatedSun size={14} className="text-amber-500" />
-                      )}
-                      <span className="capitalize">{mode} mode</span>
-                    </span>
-                    <span className="text-[10px] font-mono text-muted-foreground uppercase">
-                      {mode === "dark" ? "Dark" : "Light"}
-                    </span>
-                  </button>
-                </div>
-              </div>
 
               {/* Native App Navigation List */}
               <div className="space-y-1.5">
@@ -313,13 +219,13 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
 
                 <div className="flex items-center justify-between px-2 text-[11px] text-muted-foreground">
                   <a
-                    href="mailto:hello@SimpleThink.design"
+                    href="mailto:hello@SimplePrime.design"
                     className="group inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
                   >
                     <AnimatedMail size={13} className="text-primary" />
-                    <span>hello@SimpleThink.design</span>
+                    <span>hello@SimplePrime.design</span>
                   </a>
-                  <span className="font-mono text-[10px]">SimpleThink Software v2.4</span>
+                  <span className="font-mono text-[10px]">SimplePrime Software v2.4</span>
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useActionState, useState } from "react";
 import { submitLead } from "@/lib/leads/actions";
@@ -45,8 +45,8 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
 
   const encodedSummary = encodeURIComponent(
     prefill?.description
-      ? `Hi SimpleThink, I'm interested in discussing this project: ${prefill.description.slice(0, 100)}...`
-      : "Hi SimpleThink, I'd like to discuss a project."
+      ? `Hi SimplePrime, I'm interested in discussing this project: ${prefill.description.slice(0, 100)}...`
+      : "Hi SimplePrime, I'd like to discuss a project."
   );
 
   return (

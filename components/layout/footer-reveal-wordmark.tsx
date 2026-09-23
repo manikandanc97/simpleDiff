@@ -20,7 +20,7 @@ export function FooterRevealWordmark() {
   return (
     <section
       ref={containerRef}
-      aria-label="SimpleThink Brand Finale"
+      aria-label="SimplePrime Brand Finale"
       className="relative w-full overflow-hidden select-none pointer-events-none bg-background border-t border-border/40 pt-6 sm:pt-10 pb-[calc(5.25rem+env(safe-area-inset-bottom,0px))] md:pb-2"
     >
       <motion.div
@@ -41,18 +41,18 @@ export function FooterRevealWordmark() {
               fontSize="200"
               fontWeight="900"
               letterSpacing="-0.04em"
-              style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
+              style={{ fontFamily: "var(--font-heading), system-ui, sans-serif" }}
               className="select-none font-black"
             >
               <tspan className="fill-foreground/25 dark:fill-foreground/30 transition-colors">
-                Simple
+                SIMPLE
               </tspan>
               <tspan className="fill-primary transition-colors">
-                Think
+                PRIME
               </tspan>
             </text>
           </svg>
-          <span className="sr-only">SimpleThink</span>
+          <span className="sr-only">SimplePrime</span>
         </div>
       </motion.div>
     </section>

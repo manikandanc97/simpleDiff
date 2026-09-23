@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 /**
  * Loading
  * ─────────────────────────────────────────────────────────────────
- * Branded full-viewport Suspense fallback for SimpleThink.
+ * Branded full-viewport Suspense fallback for SimplePrime.
  *
  * Slot: replaces only <main> children while a page streams in.
  * TopBar / SiteNavbar / MobileBottomNav remain mounted above/around.
@@ -42,7 +42,7 @@ export default function Loading() {
       )}
     >
       {/* ── Accessible hidden label ─────────────────────────────── */}
-      <span className="sr-only">Loading SimpleThink…</span>
+      <span className="sr-only">Loading SimplePrime…</span>
 
       {/* ── Ambient glow discs (max 2, pointer-events-none) ─────── */}
       <motion.div

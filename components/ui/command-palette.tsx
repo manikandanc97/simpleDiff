@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { useThemeColor } from "@/components/theme/color-provider";
+import { useTheme } from "@/components/providers/theme-provider";
 import { NAV_ITEMS } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 import { useLead } from "@/components/leads/lead-provider";
@@ -30,7 +30,7 @@ export function CommandPalette({ onStartProject }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
-  const { mode, setMode } = useThemeColor();
+  const { theme, setTheme } = useTheme();
   const { openLead } = useLead();
   const listboxId = useId();
 
@@ -74,8 +74,8 @@ export function CommandPalette({ onStartProject }: CommandPaletteProps) {
     {
       id: "cmd-toggle-theme",
       label: "Toggle theme",
-      iconName: mode === "light" ? "moon" : "sun",
-      action: () => setMode(mode === "light" ? "dark" : "light"),
+      iconName: theme === "light" ? "moon" : "sun",
+      action: () => setTheme(theme === "light" ? "dark" : "light"),
     },
   ];
 

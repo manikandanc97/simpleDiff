@@ -19,7 +19,7 @@ export const PAGE_SECTIONS: SectionMeta[] = [
   { id: "capabilities", label: "Capabilities & Focus" },
   { id: "selected-work", label: "Shipped Client Websites · Portfolio" },
   { id: "how-we-work", label: "Process · Methodology" },
-  { id: "why-simplethink", label: "Why SimpleThink" },
+  { id: "why-SimplePrime", label: "Why SimplePrime" },
   { id: "industries", label: "Verticals · Domains" },
   { id: "tech-stack", label: "Tools & Technologies" },
   { id: "testimonials", label: "Client Voices · Reviews" },

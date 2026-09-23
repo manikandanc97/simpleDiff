@@ -6,9 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS } from "@/lib/nav";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
-import { FontPickerDialog } from "@/components/theme/font-picker";
-import { ColorPickerDialog } from "@/components/theme/color-picker-dialog";
+
 import { MobileAppMenu } from "@/components/layout/mobile-app-menu";
 import { useMobileMenu } from "@/components/layout/mobile-menu-context";
 import { Button } from "@/components/ui/button";
@@ -106,15 +104,15 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
             href="/"
             onClick={closeMenu}
             className="group flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-ring rounded-lg outline-none"
-            aria-label="SimpleThink Home"
+            aria-label="SimplePrime Home"
           >
             <motion.span
-              className="text-xl sm:text-2xl font-bold tracking-tight text-foreground"
+              className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-foreground"
               animate={{ scale: scrolled ? 0.93 : 1 }}
               transition={{ type: "spring", stiffness: 380, damping: 38, mass: 0.8 }}
               style={{ transformOrigin: "left center" }}
             >
-              Simple<span className="text-primary transition-transform inline-block group-hover:scale-105 animate-pulse">Think</span>
+              SIMPLE<span className="text-primary transition-transform inline-block group-hover:scale-105">PRIME</span>
             </motion.span>
           </Link>
 
@@ -164,9 +162,6 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
 
           {/* Right Actions (Desktop) */}
           <div className="hidden md:flex items-center gap-2.5">
-            <ColorPickerDialog />
-            <FontPickerDialog />
-            <ThemeToggle />
             <Button
               size="sm"
               onClick={handleStart}
@@ -180,9 +175,6 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
 
           {/* Mobile Right Controls */}
           <div className="flex md:hidden items-center gap-1">
-            <ColorPickerDialog />
-            <FontPickerDialog />
-            <ThemeToggle />
             <button
               type="button"
               onClick={toggleMenu}
