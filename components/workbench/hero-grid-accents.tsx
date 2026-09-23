@@ -1,101 +1,126 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
 
 export function HeroGridAccents() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
-      {/* Architectural Corner & Grid Crosshairs */}
-      <div className="absolute top-5 left-6 md:left-10 hidden sm:flex items-center gap-2 opacity-35">
-        <span className="font-mono text-primary text-xs font-semibold select-none">+</span>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          SYS // 01.ENGINEERING
-        </span>
-      </div>
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none bg-[#FFFDFC]">
+      {/* ── Main SVG Background with Radial Glows & Translucent Glass Waves ── */}
+      <svg
+        className="absolute inset-0 h-full w-full"
+        viewBox="0 0 1920 900"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="purpleGlow">
+            <stop offset="0%" stopColor="#e8dafa" stopOpacity=".9" />
+            <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+          </radialGradient>
 
-      <div className="absolute top-5 right-6 md:right-10 hidden lg:flex items-center gap-2.5 opacity-35">
-        <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          LATENCY // &lt;40MS
-        </span>
-        <span className="font-mono text-primary text-xs font-semibold select-none">+</span>
-      </div>
+          <radialGradient id="pinkGlow">
+            <stop offset="0%" stopColor="#f4cddd" stopOpacity=".7" />
+            <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+          </radialGradient>
 
-      <div className="absolute bottom-4 sm:bottom-6 left-6 md:left-10 hidden lg:flex items-center gap-2 opacity-40 z-10">
-        <span className="font-mono text-primary text-xs font-semibold select-none">+</span>
-        <span className="font-mono text-[10px] tracking-widest text-muted-foreground/70">
-          COORDINATES // 13.0827°N 80.2707°E
-        </span>
-      </div>
+          <radialGradient id="topRightDisk">
+            <stop offset="0%" stopColor="#6C1D54" />
+            <stop offset="100%" stopColor="#4A0E38" />
+          </radialGradient>
 
-      {/* Subtle Precision Grid Intersection Crosshairs */}
-      <div className="absolute top-1/3 left-1/4 hidden md:block text-primary/30 font-mono text-xs select-none">
-        +
-      </div>
-      <div className="absolute top-2/3 right-1/4 hidden md:block text-primary/30 font-mono text-xs select-none">
-        +
-      </div>
-      <div className="absolute top-1/4 right-1/3 hidden lg:block text-primary/25 font-mono text-xs select-none">
-        +
-      </div>
+          <radialGradient id="topLeftGlow">
+            <stop offset="0%" stopColor="#F3EBF9" stopOpacity=".9" />
+            <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+          </radialGradient>
 
-      {/* Delicate Architectural Blueprint Corner Brackets */}
-      <div className="absolute top-24 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[480px] pointer-events-none hidden xl:block">
-        {/* Top-Left Bracket */}
-        <svg
-          className="absolute top-0 left-0 w-8 h-8 text-border/60"
-          fill="none"
-          stroke="currentColor"
+          <filter id="heroBlur">
+            <feGaussianBlur stdDeviation="45" />
+          </filter>
+
+          <filter id="softBlur">
+            <feGaussianBlur stdDeviation="65" />
+          </filter>
+        </defs>
+
+        {/* Base warm white canvas */}
+        <rect width="1920" height="900" fill="#fffdfc" />
+
+        {/* Top-left soft lavender bloom */}
+        <ellipse
+          cx="80"
+          cy="100"
+          rx="450"
+          ry="300"
+          fill="url(#topLeftGlow)"
+          filter="url(#softBlur)"
+        />
+
+        {/* Top-right prominent purple circle disk as seen in reference */}
+        <circle cx="1920" cy="30" r="145" fill="url(#topRightDisk)" />
+
+        {/* Purple Glow behind right visual area */}
+        <ellipse
+          cx="1450"
+          cy="360"
+          rx="650"
+          ry="430"
+          fill="url(#purpleGlow)"
+          filter="url(#heroBlur)"
+        />
+
+        {/* Pink Glow near lower center */}
+        <ellipse
+          cx="1050"
+          cy="780"
+          rx="500"
+          ry="200"
+          fill="url(#pinkGlow)"
+          filter="url(#heroBlur)"
+        />
+
+        {/* Bottom Left decorative gentle curve */}
+        <path
+          d="M0 620 C 180 580, 280 720, 480 840 C 580 900, 680 920, 800 900 L 0 900 Z"
+          fill="#FAF0F6"
+          opacity="0.45"
+        />
+
+        {/* Abstract Glass Wave 1 */}
+        <path
+          d="M780 260
+             C1050 70 1370 110 1630 250
+             C1470 300 1340 380 1300 500
+             C1160 410 1010 350 780 260Z"
+          fill="white"
+          fillOpacity=".30"
+          stroke="white"
+          strokeOpacity=".75"
           strokeWidth="1.5"
-        >
-          <path d="M 0 16 L 0 0 L 16 0" />
-        </svg>
+        />
 
-        {/* Top-Right Bracket */}
-        <svg
-          className="absolute top-0 right-0 w-8 h-8 text-border/60"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        >
-          <path d="M 16 0 L 32 0 L 32 16" />
-        </svg>
+        {/* Second Glass Wave */}
+        <path
+          d="M850 300
+             C1080 140 1360 150 1570 280
+             C1430 320 1340 400 1300 475
+             C1160 390 1010 350 850 300Z"
+          fill="white"
+          fillOpacity=".18"
+          stroke="white"
+          strokeOpacity=".55"
+          strokeWidth="1.2"
+        />
+      </svg>
 
-        {/* Bottom-Left Bracket */}
-        <svg
-          className="absolute bottom-0 left-0 w-8 h-8 text-border/60"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        >
-          <path d="M 0 16 L 0 32 L 16 32" />
-        </svg>
-
-        {/* Bottom-Right Bracket */}
-        <svg
-          className="absolute bottom-0 right-0 w-8 h-8 text-border/60"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        >
-          <path d="M 16 32 L 32 32 L 32 16" />
-        </svg>
-      </div>
-
-      {/* Soft Luminous Background Glow Ray behind center */}
-      <motion.div
-        animate={{
-          opacity: [0.15, 0.28, 0.15],
-          scale: [0.95, 1.05, 0.95],
+      {/* ── Dotted Pattern Grid on Upper Right ── */}
+      <div
+        className="hero-dots absolute top-12 right-0 w-[550px] lg:w-[700px] h-[480px] pointer-events-none"
+        style={{
+          maskImage: "radial-gradient(ellipse 75% 75% at 75% 35%, black 25%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(ellipse 75% 75% at 75% 35%, black 25%, transparent 75%)",
         }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-gradient-to-tr from-primary/20 via-primary/10 to-transparent blur-3xl pointer-events-none"
       />
     </div>
   );
 }
+

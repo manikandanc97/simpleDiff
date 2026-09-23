@@ -1,110 +1,16 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  useSpring,
-} from "motion/react";
-import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
 import { useLead } from "@/components/leads/lead-provider";
-import { ChevronDown } from "lucide-react";
-import {
-  AnimatedArrowRight,
-  AnimatedBriefcase,
-} from "@/components/ui/animated-icon";
+import { ChevronDown, Play } from "lucide-react";
+import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { HeroGridAccents } from "./hero-grid-accents";
 import { Hero3DCoder } from "./hero-3d-coder";
-
-const SERVICE_CHIPS = [
-  "Custom Software",
-  "Web Applications",
-  "Mobile Apps",
-  "SaaS Platforms",
-  "Cloud & DevOps",
-  "AI Solutions",
-];
-
-interface WorkbenchHeroProps {
-  onStartProject?: (prefill?: { description: string; blueprintSummary?: string }) => void;
-}
-
-function AnimatedWord({ word, delay, className }: { word: string; delay: number; className?: string }) {
-  return (
-    <motion.span
-      initial={{ opacity: 0, y: 32 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={cn("inline-block font-black tracking-tight", className)}
-    >
-      {word}
-    </motion.span>
-  );
-}
-
-// Magnetic tilt button wrapper
-function MagneticButton({
-  children,
-  className,
-  onClick,
-  id,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
-  id?: string;
-}) {
-  const ref = useRef<HTMLButtonElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-30, 30], [6, -6]), {
-    stiffness: 400,
-    damping: 30,
-  });
-  const rotateY = useSpring(useTransform(x, [-60, 60], [-6, 6]), {
-    stiffness: 400,
-    damping: 30,
-  });
-
-  const handleMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    x.set(e.clientX - rect.left - rect.width / 2);
-    y.set(e.clientY - rect.top - rect.height / 2);
-  };
-
-  const handleLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.button
-      ref={ref}
-      id={id}
-      onClick={onClick}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className={className}
-    >
-      {children}
-    </motion.button>
-  );
-}
 
 export function WorkbenchHero() {
   const { openLead } = useLead();
   const heroRef = useRef<HTMLElement>(null);
-
-  // Scroll-linked parallax for glow orbs
-  const { scrollY } = useScroll();
-  const orbY1 = useTransform(scrollY, [0, 600], [0, -80]);
-  const orbY2 = useTransform(scrollY, [0, 600], [0, -50]);
-  const orbY3 = useTransform(scrollY, [0, 600], [0, -30]);
 
   const handleScrollDown = () => {
     const nextSection = document.getElementById("capabilities");
@@ -125,103 +31,165 @@ export function WorkbenchHero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-[calc(100dvh-6rem)] md:min-h-[calc(100dvh-7rem)] flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-[100dvh] pt-28 sm:pt-32 lg:pt-36 pb-12 flex flex-col items-center justify-between overflow-hidden bg-[#FFFDFC]"
     >
-      {/* ── Studio Architectural Grid Accents & Precision Coordinates ── */}
+      {/* Background Elements */}
       <HeroGridAccents />
 
-      <div className="relative z-10 flex flex-col items-center justify-center pt-2 sm:pt-4 md:pt-6 pb-16 sm:pb-20 px-4 md:px-8 w-full max-w-7xl mx-auto my-auto flex-1">
-        {/* Top Hero: 2-Column Split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center w-full">
-          {/* Left Column: Headlines, Pitch, Chips, and CTAs */}
-          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-            {/* 2. Single h1 for entire page — standardized H1 typography */}
-            <h1 className="font-heading text-4xl sm:text-5xl lg:text-[3.25rem] xl:text-6xl font-black tracking-tight text-foreground mb-3 sm:mb-4 lg:mb-5 leading-[1.08]">
-              <span className="flex flex-wrap items-center justify-center lg:justify-start gap-x-3 mb-1.5 sm:mb-2">
-                <AnimatedWord word="Think" delay={0.05} />
-                <AnimatedWord word="Simple." delay={0.12} className="text-primary transition-colors duration-500" />
-              </span>
-              <span className="flex flex-wrap items-center justify-center lg:justify-start gap-x-3">
-                <AnimatedWord word="Build" delay={0.28} />
-                <AnimatedWord word="Premium." delay={0.38} />
-              </span>
-            </h1>
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full">
+          
+          {/* LEFT: Text Content */}
+          <div className="lg:col-span-5 xl:col-span-6 flex flex-col items-start text-left max-w-[580px] z-10">
 
-            {/* 3. Lead Paragraph */}
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
+            {/* Pill Tag */}
+            
+
+            {/* Headline */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-              className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-xl mb-4 sm:mb-6 leading-relaxed font-normal"
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              className="font-satoshi font-[800] tracking-[-0.065em] text-[#121114] leading-[0.94] mb-5 text-[clamp(52px,5.5vw,104px)]"
             >
-              We design, engineer, and deploy custom software, enterprise web applications, mobile apps, and scalable SaaS platforms for businesses and founders.
+              <span className="block mb-2">Think Simple.</span>
+              <span className="block relative inline-block whitespace-nowrap">
+                Build{" "}
+                <span className="relative inline-block brand-gradient-text">
+                  Premium.
+                  {/* Hand-drawn style SVG underline stroke */}
+                  <svg 
+                    className="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-[14px] text-[#922F55] overflow-visible pointer-events-none" 
+                    viewBox="0 0 240 24" 
+                    fill="none" 
+                    preserveAspectRatio="none"
+                  >
+                    <path 
+                      d="M4 14 C60 4, 150 6, 230 12" 
+                      stroke="currentColor" 
+                      strokeWidth="4.5" 
+                      strokeLinecap="round" 
+                    />
+                    <path 
+                      d="M40 18 C105 13, 175 14, 215 17" 
+                      stroke="#D23D78" 
+                      strokeWidth="2.5" 
+                      strokeLinecap="round" 
+                      strokeOpacity="0.85"
+                    />
+                    <path 
+                      d="M224 8 L234 12 L227 18" 
+                      stroke="#6C2BB8" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                    />
+                  </svg>
+                </span>
+              </span>
+            </motion.h1>
+
+            {/* Paragraph */}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="font-satoshi font-[500] text-[18px] sm:text-[20px] leading-[1.5] tracking-[-0.02em] text-[#68666C] max-w-[490px] mb-8"
+            >
+              We turn complex ideas into simple, high-quality digital experiences that help businesses grow.
             </motion.p>
 
-            {/* 4. Service chips */}
+            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-1.5 sm:gap-2 mb-5 sm:mb-7 max-w-xl"
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 mb-12 sm:mb-14 w-full sm:w-auto font-satoshi"
             >
-              {SERVICE_CHIPS.map((chip, i) => (
-                <motion.span
-                  key={chip}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: 0.6 + i * 0.05 }}
-                  className="px-3 py-1 rounded-full text-xs sm:text-sm bg-muted/40 border border-border text-foreground font-medium select-none hover:bg-primary/10 hover:border-primary/40 hover:text-primary-text transition-colors duration-200 cursor-default"
-                >
-                  {chip}
-                </motion.span>
-              ))}
-              <Link
-                href="/services"
-                className="group text-xs sm:text-sm text-primary hover:underline font-medium ml-1 transition-colors flex items-center gap-1"
-              >
-                <span>See all</span>
-                <AnimatedArrowRight size={12} />
-              </Link>
-            </motion.div>
-
-            {/* 5. CTA buttons — primary uses magnetic tilt */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.72, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row items-center gap-3 mb-2 sm:mb-4"
-            >
-              <MagneticButton
+              <button
                 id="hero-start-project"
                 onClick={() => openLead({ source: "cta" })}
-                className="group relative inline-flex items-center gap-2 h-12 px-7 rounded-full bg-primary text-primary-foreground text-sm font-semibold shadow-lg hover:shadow-primary/30 active:scale-95 active:translate-y-0 transition-all duration-200 cursor-pointer overflow-hidden"
+                className="group inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-[#922F55] text-white text-[16px] font-[700] tracking-[-0.02em] hover:bg-[#7D2748] active:scale-95 transition-all duration-200 shadow-[0_6px_20px_rgba(146,47,85,0.25)]"
               >
-                <span className="absolute inset-0 animate-shimmer pointer-events-none" />
                 <span>Start a project</span>
-                <AnimatedArrowRight size={16} />
-              </MagneticButton>
-              <Link
-                href="/work"
-                className="group inline-flex items-center gap-2 h-12 px-7 rounded-full border border-border bg-background/60 backdrop-blur-sm text-sm font-semibold text-foreground hover:bg-muted/60 hover:-translate-y-0.5 active:scale-95 active:translate-y-0 transition-all duration-200"
+                <AnimatedArrowRight size={16} className="text-white" />
+              </button>
+              
+              <button
+                type="button"
+                className="group flex items-center gap-3.5 hover:opacity-85 transition-opacity py-1"
               >
-                <AnimatedBriefcase size={15} className="text-primary/80 group-hover:text-primary transition-colors" />
-                <span>See our work</span>
-              </Link>
+                <div className="flex items-center justify-center w-11 h-11 rounded-full bg-white shadow-sm border border-[rgba(30,24,30,0.08)] text-[#121114] group-hover:scale-105 transition-transform pl-0.5">
+                  <Play size={13} fill="currentColor" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[15px] font-[700] text-[#121114] leading-tight tracking-[-0.01em]">See our work</span>
+                  <span className="text-[12px] font-[500] text-[#68666C] mt-0.5">2 min overview</span>
+                </div>
+              </button>
+            </motion.div>
+
+            {/* Stats Row */}
+            <motion.div 
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              className="flex items-center gap-5 sm:gap-8 w-full pt-2 font-satoshi"
+            >
+              {/* Stat 1 */}
+              <div className="flex items-center gap-3">
+                <div className="w-[42px] h-[42px] rounded-[12px] bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[22px] sm:text-[24px] font-[800] tracking-[-0.03em] text-[#121114] leading-tight">50+</span>
+                  <span className="text-[12px] font-[500] text-[#68666C] leading-none mt-0.5">Happy Clients</span>
+                </div>
+              </div>
+              
+              {/* Vertical divider */}
+              <div className="w-[1px] h-8 bg-[rgba(30,24,30,0.08)] hidden sm:block" />
+
+              {/* Stat 2 */}
+              <div className="flex items-center gap-3">
+                <div className="w-[42px] h-[42px] rounded-[12px] bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[22px] sm:text-[24px] font-[800] tracking-[-0.03em] text-[#121114] leading-tight">100+</span>
+                  <span className="text-[12px] font-[500] text-[#68666C] leading-none mt-0.5">Projects Delivered</span>
+                </div>
+              </div>
+
+              {/* Vertical divider */}
+              <div className="w-[1px] h-8 bg-[rgba(30,24,30,0.08)] hidden sm:block" />
+
+              {/* Stat 3 */}
+              <div className="flex items-center gap-3">
+                <div className="w-[42px] h-[42px] rounded-[12px] bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[22px] sm:text-[24px] font-[800] tracking-[-0.03em] text-[#121114] leading-tight">5 ★</span>
+                  <span className="text-[12px] font-[500] text-[#68666C] leading-none mt-0.5">Client Satisfaction</span>
+                </div>
+              </div>
             </motion.div>
           </div>
 
-          {/* Right Column: 3D Coder Showcase with GIF-like float animation */}
+          {/* RIGHT: 3D Character & Floating UI Cards */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 flex justify-center items-center w-full"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="lg:col-span-7 xl:col-span-6 flex justify-center items-center w-full relative min-h-[460px] lg:min-h-[580px]"
           >
             <Hero3DCoder />
           </motion.div>
+          
         </div>
       </div>
-
+      
       {/* Interactive scroll indicator button */}
       <motion.button
         type="button"
@@ -230,20 +198,21 @@ export function WorkbenchHero() {
         onClick={handleScrollDown}
         initial={{ opacity: 0, y: -6 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="group absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 text-muted-foreground/60 hover:text-foreground cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full px-3 py-1.5 transition-all select-none"
+        transition={{ delay: 1.0, duration: 0.6 }}
+        className="group absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 text-slate-400 hover:text-foreground cursor-pointer focus:outline-none transition-all select-none"
       >
-        <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/70 group-hover:text-primary group-hover:tracking-[0.2em] transition-all duration-300">
+        <span className="text-[8px] font-bold uppercase tracking-[0.2em] group-hover:text-primary transition-colors duration-300">
           scroll
         </span>
         <motion.div
           animate={{ y: [0, 4, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-5 rounded-full border border-border/70 group-hover:border-primary/50 group-hover:bg-primary/10 flex items-center justify-center transition-colors shadow-xs"
+          className="w-4 h-4 rounded-full border-[1.5px] border-slate-300 group-hover:border-primary/50 flex items-center justify-center transition-colors"
         >
-          <ChevronDown className="h-3 w-3 text-muted-foreground group-hover:text-primary transition-colors" />
+          <ChevronDown className="h-2.5 w-2.5 text-slate-400 group-hover:text-primary transition-colors" />
         </motion.div>
       </motion.button>
     </section>
   );
 }
+

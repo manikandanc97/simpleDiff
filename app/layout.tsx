@@ -3,7 +3,6 @@ import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SiteNavbar } from "@/components/layout/site-navbar";
-import { TopBar } from "@/components/layout/top-bar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { MobileMenuProvider } from "@/components/layout/mobile-menu-context";
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
@@ -14,7 +13,7 @@ import { LeadProvider } from "@/components/leads/lead-provider";
 import { SITE } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -57,6 +56,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={cn("h-full antialiased scroll-smooth", inter.variable, manrope.variable, "font-sans")}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preload" href="/fonts/satoshi-variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="min-h-full flex flex-col overflow-x-hidden">
         {/* Skip to main content for accessibility */}
         <a
@@ -66,25 +78,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
 
-        <ThemeProvider>
-          <MotionProvider>
-            <LeadProvider>
-              <MobileMenuProvider>
-                <TopBar />
-                <SiteNavbar />
-                <CommandPalette />
-                <NavigationProgress />
+        <MotionProvider>
+          <LeadProvider>
+            <MobileMenuProvider>
+              <SiteNavbar />
+              <CommandPalette />
+              <NavigationProgress />
 
-                <main id="main" className="flex-1 flex flex-col w-full pt-24 md:pt-28 pb-20 md:pb-0">
-                  {children}
-                </main>
+              <main id="main" className="flex-1 flex flex-col w-full pb-20 md:pb-0">
+                {children}
+              </main>
 
-                <MobileBottomNav />
-                <SiteFooter />
-              </MobileMenuProvider>
-            </LeadProvider>
-          </MotionProvider>
-        </ThemeProvider>
+              <MobileBottomNav />
+              <SiteFooter />
+            </MobileMenuProvider>
+          </LeadProvider>
+        </MotionProvider>
         
         <Analytics />
         <SpeedInsights />

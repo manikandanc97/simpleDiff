@@ -1,17 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
-import { DynamicTShirtCharacter } from "@/components/ui/dynamic-tshirt-character";
-import { Terminal, Layers, ShieldCheck } from "lucide-react";
-
-const CODE_SNIPPETS = [
-  "const app = SimplePrime.create();",
-  "await app.deploy({ speed: 'instant' });",
-  "// 🚀 MVP launched in 48 hours",
-  "export default function Product() {}",
-];
 
 interface Hero3DCoderProps {
   className?: string;
@@ -24,13 +16,13 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const rotateX = useSpring(useTransform(mouseY, [-150, 150], [10, -10]), {
-    stiffness: 250,
-    damping: 25,
+  const rotateX = useSpring(useTransform(mouseY, [-150, 150], [4, -4]), {
+    stiffness: 150,
+    damping: 30,
   });
-  const rotateY = useSpring(useTransform(mouseX, [-150, 150], [-10, 10]), {
-    stiffness: 250,
-    damping: 25,
+  const rotateY = useSpring(useTransform(mouseX, [-150, 150], [-4, 4]), {
+    stiffness: 150,
+    damping: 30,
   });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -47,179 +39,231 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
     mouseY.set(0);
   };
 
-  // Typing code animation
-  const [snippetIndex, setSnippetIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const current = CODE_SNIPPETS[snippetIndex];
-    const speed = isDeleting ? 30 : 65;
-
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayedText.length < current.length) {
-          setDisplayedText(current.slice(0, displayedText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), 2200);
-        }
-      } else {
-        if (displayedText.length > 0) {
-          setDisplayedText(current.slice(0, displayedText.length - 1));
-        } else {
-          setIsDeleting(false);
-          setSnippetIndex((prev) => (prev + 1) % CODE_SNIPPETS.length);
-        }
-      }
-    }, speed);
-
-    return () => clearTimeout(timer);
-  }, [displayedText, isDeleting, snippetIndex]);
-
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[460px] xl:max-w-[500px] max-h-[min(480px,52vh)] aspect-square flex items-center justify-center select-none perspective-[1200px]",
+        "relative w-full h-[480px] lg:h-[560px] flex items-center justify-center select-none perspective-[1200px]",
         className
       )}
     >
-      {/* Dynamic Ambient Background Glow */}
-      <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-primary/30 via-primary/15 to-transparent blur-3xl opacity-80 pointer-events-none animate-pulse-glow transition-colors duration-500" />
-      <div className="absolute -inset-4 rounded-full bg-gradient-to-bl from-primary/20 via-transparent to-primary/10 blur-2xl pointer-events-none transition-colors duration-500" />
-
       {/* 3D Parallax Canvas */}
       <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative w-full h-full flex items-center justify-center"
       >
-        {/* Central Developer Character Graphic without card */}
+        {/* ── LEFT FLOATING WORKFLOW CARD (Behind desk/character) ── */}
         <motion.div
-          animate={{
-            y: [-8, 8, -8],
-            rotate: [-1, 1, -1],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          style={{ transform: "translateZ(30px)" }}
-          className="relative z-10 w-[86%] sm:w-[92%] h-[86%] sm:h-[92%] drop-shadow-[0_25px_35px_rgba(0,0,0,0.18)] flex items-center justify-center"
+          animate={{ y: [3, -3, 3] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+          style={{ transform: "translateZ(8px) rotateY(6deg)" }}
+          className="absolute top-[12%] sm:top-[16%] left-0 sm:-left-4 lg:-left-2 xl:-left-10 z-0 bg-white/80 backdrop-blur-xl border border-[rgba(30,24,30,0.08)] shadow-[0_16px_36px_-10px_rgba(0,0,0,0.06),0_2px_8px_rgba(0,0,0,0.02)] rounded-[22px] p-3 sm:p-3.5 flex gap-2.5 sm:gap-3.5 font-satoshi"
         >
-          <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center transition-transform duration-700 hover:scale-105">
-            <DynamicTShirtCharacter />
+          {/* Menu Column */}
+          <div className="flex flex-col gap-1.5 w-[85px] sm:w-[95px] justify-center">
+            {/* Ideas */}
+            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-[600] text-[#68666C]">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#68666C]">
+                <path d="M12 2L2 12l10 10 10-10L12 2z" />
+              </svg>
+              <span>Ideas</span>
+            </div>
+            {/* Design */}
+            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-[600] text-[#68666C]">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#68666C]">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="4" />
+              </svg>
+              <span>Design</span>
+            </div>
+            {/* Develop (Active State) */}
+            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#922F55] text-[12px] font-[600] text-white shadow-sm">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
+              </svg>
+              <span>Develop</span>
+            </div>
+            {/* Launch */}
+            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-[600] text-[#68666C]">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#68666C]">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-2.05 9.05A22 22 0 0 1 15 12z"/>
+              </svg>
+              <span>Launch</span>
+            </div>
+          </div>
+
+          {/* Right Code Editor Mockup (#1B1B1D background, specified accents) */}
+          <div className="w-[105px] sm:w-[125px] bg-[#1B1B1D] rounded-xl p-2.5 flex flex-col gap-1.5 relative overflow-hidden shadow-inner">
+            {/* Window control dots */}
+            <div className="flex gap-1 mb-1 items-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#FF5F56]" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#FFBD2E]" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#27C93F]" />
+            </div>
+            {/* Decorative colored syntax bars */}
+            {[
+              { num: 12, w: "72%", c: "bg-[#F05BAD]" },
+              { num: 13, w: "86%", c: "bg-[#4BA8FF]" },
+              { num: 14, w: "52%", c: "bg-[#B86BFF]" },
+              { num: 15, w: "78%", c: "bg-[#FFD23F]" },
+              { num: 16, w: "62%", c: "bg-[#13D59B]" },
+              { num: 17, w: "84%", c: "bg-[#F05BAD]" },
+              { num: 18, w: "45%", c: "bg-[#4BA8FF]" },
+              { num: 19, w: "68%", c: "bg-[#B86BFF]" },
+            ].map((line) => (
+              <div key={line.num} className="flex items-center gap-1.5">
+                <span className="text-[7.5px] text-white/30 font-mono w-2.5 text-right select-none">{line.num}</span>
+                <div className={`h-[3px] rounded-full ${line.c}`} style={{ width: line.w }} />
+              </div>
+            ))}
+          </div>
+
+          {/* Handwritten Annotation: From Idea to Launch */}
+          <div
+            className="absolute -top-12 left-2 sm:left-4 flex items-end gap-1.5 text-[#922F55] pointer-events-none"
+            style={{ transform: "translateZ(15px)" }}
+          >
+            <span className="font-handwriting text-[18px] sm:text-[20px] font-bold text-[#68666C] -rotate-6 leading-none whitespace-nowrap">
+              From Idea<br />to Launch
+            </span>
+            <svg
+              width="26"
+              height="36"
+              viewBox="0 0 40 50"
+              fill="none"
+              className="text-[#922F55] -mb-1"
+            >
+              {/* Curved arrow pointing down to workflow card */}
+              <path
+                d="M5 8 C18 10, 28 22, 24 42"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <path
+                d="M17 36 L24 43 L29 34"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+            </svg>
           </div>
         </motion.div>
 
-        {/* Floating Code Typing Window (Simulated IDE snippet) */}
+        {/* ── CENTRAL 3D CHARACTER (Strictly preserving simplehero.png) ── */}
         <motion.div
-          animate={{
-            y: [8, -8, 8],
-            x: [-4, 4, -4],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          style={{ transform: "translateZ(70px)" }}
-          className="absolute -top-2 -left-2 sm:top-4 sm:-left-6 z-20 glass rounded-xl p-3 sm:p-3.5 border border-primary/30 shadow-xl shadow-primary/10 backdrop-blur-md max-w-[220px] sm:max-w-[250px]"
+          animate={{ y: [-3, 3, -3] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          style={{ transform: "translateZ(25px)" }}
+          className="relative z-10 w-full max-w-[460px] lg:max-w-[500px] h-[460px] lg:h-[540px] flex items-center justify-center pointer-events-none"
         >
-          <div className="flex items-center justify-between gap-2 mb-2 pb-1.5 border-b border-border/40">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+          <div className="relative w-full h-full flex items-center justify-center">
+            <Image
+              src="/assets/simplehero.png"
+              alt="SimplePrime 3D Developer Character"
+              fill
+              sizes="(max-width: 768px) 100vw, 500px"
+              className="object-contain drop-shadow-xl"
+              priority
+            />
+          </div>
+        </motion.div>
+
+        {/* ── RIGHT FLOATING FEATURE BADGES ── */}
+        <div
+          className="absolute top-[16%] sm:top-[20%] right-0 sm:-right-4 lg:-right-2 xl:-right-6 z-20 flex flex-col gap-3 font-satoshi"
+          style={{ transform: "translateZ(35px) rotateY(-6deg)" }}
+        >
+          {/* Card 1: Modern Design */}
+          <motion.div
+            animate={{ y: [2, -2, 2] }}
+            transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
+            className="bg-white/90 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.02)] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-3 min-w-[155px] sm:min-w-[175px]"
+          >
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#922F55]/10 flex items-center justify-center text-[#922F55]">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 10 10 0 0 0 9.5-6.5" />
+                <circle cx="8" cy="9" r="1.5" fill="currentColor" />
+                <circle cx="12" cy="7" r="1.5" fill="currentColor" />
+                <circle cx="16" cy="10" r="1.5" fill="currentColor" />
+              </svg>
             </div>
-            <span className="text-[10px] font-mono text-muted-foreground flex items-center gap-1">
-              <Terminal className="w-2.5 h-2.5 text-primary" /> main.tsx
+            <span className="text-[13px] font-[700] text-[#121114] tracking-[-0.01em]">Modern Design</span>
+          </motion.div>
+
+          {/* Card 2: Clean Code */}
+          <motion.div
+            animate={{ y: [3, -3, 3] }}
+            transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+            className="bg-white/90 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.02)] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-3 min-w-[155px] sm:min-w-[175px]"
+          >
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#922F55]/10 flex items-center justify-center text-[#922F55]">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
+              </svg>
+            </div>
+            <span className="text-[13px] font-[700] text-[#121114] tracking-[-0.01em]">Clean Code</span>
+          </motion.div>
+
+          {/* Card 3: Scalable Solutions */}
+          <motion.div
+            animate={{ y: [2, -2, 2] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+            className="bg-white/90 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.02)] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-3 min-w-[155px] sm:min-w-[175px]"
+          >
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#922F55]/10 flex items-center justify-center text-[#922F55]">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 3v18h18" />
+                <path d="m19 9-5 5-4-4-3 3" />
+              </svg>
+            </div>
+            <span className="text-[13px] font-[700] text-[#121114] tracking-[-0.01em]">Scalable Solutions</span>
+          </motion.div>
+
+          {/* Handwritten Annotation: Ideas into Impact */}
+          <div
+            className="flex flex-col items-center self-end mr-2 text-[#922F55] pointer-events-none mt-1"
+            style={{ transform: "translateZ(15px)" }}
+          >
+            <svg
+              width="32"
+              height="36"
+              viewBox="0 0 50 60"
+              fill="none"
+              className="text-[#922F55] -mr-4"
+            >
+              {/* Curved arrow from card down-left to text */}
+              <path
+                d="M40 5 C38 28, 25 42, 12 50"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <path
+                d="M12 40 L10 52 L22 52"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+            </svg>
+            <span className="font-handwriting text-[18px] sm:text-[20px] font-bold text-[#68666C] -rotate-3 leading-none text-center whitespace-nowrap mt-1">
+              Ideas<br />into Impact
             </span>
           </div>
-          <div className="font-mono text-[11px] sm:text-xs text-foreground/90 leading-snug min-h-[34px] flex items-center">
-            <span className="text-primary font-semibold mr-1">&gt;</span>
-            <span className="text-foreground">{displayedText}</span>
-            <span className="w-1.5 h-3.5 bg-primary ml-0.5 animate-pulse inline-block" />
-          </div>
-        </motion.div>
-
-        {/* Floating Tech Pill 1: Modern Tech Stacks */}
-        <motion.div
-          animate={{
-            y: [-10, 10, -10],
-            rotate: [1.5, -2, 1.5],
-          }}
-          transition={{
-            duration: 5.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.4,
-          }}
-          style={{ transform: "translateZ(85px)" }}
-          className="absolute top-10 -right-2 sm:top-14 sm:-right-4 z-20 glass px-3.5 py-1.5 rounded-full border border-border/80 shadow-lg flex items-center gap-2"
-        >
-          <div className="w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center text-primary">
-            <Layers className="w-3 h-3" />
-          </div>
-          <span className="text-xs font-semibold text-foreground tracking-tight">
-            Modern Tech Stacks
-          </span>
-        </motion.div>
-
-        {/* Floating Tech Pill 2: Shipped Live Status */}
-        <motion.div
-          animate={{
-            y: [10, -10, 10],
-            rotate: [-2, 2, -2],
-          }}
-          transition={{
-            duration: 6.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.8,
-          }}
-          style={{ transform: "translateZ(60px)" }}
-          className="absolute -bottom-2 -right-2 sm:bottom-6 sm:-right-4 z-20 glass px-3.5 py-2 rounded-xl border border-primary/25 shadow-lg flex items-center gap-2.5"
-        >
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-          </span>
-          <div className="text-left">
-            <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
-              Production
-            </div>
-            <div className="text-xs font-bold text-foreground">
-              100% Optimized
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Floating Tech Pill 3: Clean Architecture */}
-        <motion.div
-          animate={{
-            y: [-8, 8, -8],
-            x: [3, -3, 3],
-          }}
-          transition={{
-            duration: 5.2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.2,
-          }}
-          style={{ transform: "translateZ(50px)" }}
-          className="absolute bottom-6 -left-2 sm:bottom-12 sm:-left-4 z-20 glass px-3.5 py-1.5 rounded-full border border-border/80 shadow-md flex items-center gap-2"
-        >
-          <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-            <ShieldCheck className="w-3 h-3" />
-          </div>
-          <span className="text-xs font-medium text-foreground">
-            Type-Safe Architecture
-          </span>
-        </motion.div>
+        </div>
       </motion.div>
     </div>
   );
 }
+
+

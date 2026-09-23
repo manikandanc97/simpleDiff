@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+﻿import dynamic from "next/dynamic";
 import { WorkbenchHero } from "@/components/workbench/workbench-hero";
 
 // Lazy-loaded sections to reduce initial JS bundle size
