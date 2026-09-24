@@ -219,13 +219,13 @@ export function MobileAppMenu({ open, onClose }: MobileAppMenuProps) {
 
                 <div className="flex items-center justify-between px-2 text-[11px] text-muted-foreground">
                   <a
-                    href="mailto:hello@SimplePrime.design"
+                    href="mailto:hello@SimpleThink.design"
                     className="group inline-flex items-center gap-1.5 hover:text-foreground transition-colors"
                   >
                     <AnimatedMail size={13} className="text-primary" />
-                    <span>hello@SimplePrime.design</span>
+                    <span>hello@SimpleThink.design</span>
                   </a>
-                  <span className="font-mono text-[10px]">SimplePrime Software v2.4</span>
+                  <span className="font-mono text-[10px]">SimpleThink Software v2.4</span>
                 </div>
               </div>
             </div>

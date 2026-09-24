@@ -5,7 +5,7 @@ import { WorkbenchHero } from "@/components/workbench/workbench-hero";
 const WhatWeBuild = dynamic(() => import("@/components/sections/what-we-build").then((mod) => mod.WhatWeBuild));
 const SelectedWork = dynamic(() => import("@/components/sections/selected-work").then((mod) => mod.SelectedWork));
 const HowWeWork = dynamic(() => import("@/components/sections/how-we-work").then((mod) => mod.HowWeWork));
-const WhySimplePrime = dynamic(() => import("@/components/sections/philosophy").then((mod) => mod.WhySimplePrime));
+const WhySimpleThink = dynamic(() => import("@/components/sections/philosophy").then((mod) => mod.WhySimpleThink));
 const Industries = dynamic(() => import("@/components/sections/industries").then((mod) => mod.Industries));
 const TechStack = dynamic(() => import("@/components/sections/tech-stack").then((mod) => mod.TechStack));
 // const Testimonials = dynamic(() => import("@/components/sections/testimonials").then((mod) => mod.Testimonials));
@@ -27,8 +27,8 @@ export default function Home() {
       {/* 06 — HOW WE WORK */}
       <HowWeWork />
 
-      {/* 07 — Why SimplePrime */}
-      <WhySimplePrime />
+      {/* 07 — Why SimpleThink */}
+      <WhySimpleThink />
 
       {/* 08 — INDUSTRIES */}
       {/* <Industries /> */}

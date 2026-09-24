@@ -167,13 +167,13 @@ const STATS: StatItem[] = [
   },
 ];
 
-export function WhySimplePrime() {
+export function WhySimpleThink() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-80px" });
 
   return (
     <section
-      id="why-SimplePrime"
+      id="why-SimpleThink"
       className="relative w-full py-12 sm:py-16 bg-zinc-100/75 dark:bg-zinc-900/45 border-y border-zinc-200/80 dark:border-white/10 overflow-hidden"
     >
       {/* Subtle Background Pattern & Ambient Glows */}
@@ -189,8 +189,8 @@ export function WhySimplePrime() {
         {/* Section Header with Section Theme Dock */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <SectionHeader
-            sectionId="why-SimplePrime"
-            dockLabel="Why SimplePrime"
+            sectionId="why-SimpleThink"
+            dockLabel="Why SimpleThink"
             title={
               <>
                 The unfair advantage{" "}

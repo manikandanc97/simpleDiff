@@ -28,22 +28,22 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "SimplePrime — Think Simple. Build Premium.",
-    template: "%s · SimplePrime",
+    default: "SimpleThink — Keep It Simple. Make It Luxury.",
+    template: "%s · SimpleThink",
   },
   description:
-    "SimplePrime is a premium digital studio that engineers custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions.",
+    "SimpleThink is a premium digital studio that engineers custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions.",
   openGraph: {
-    title: "SimplePrime — Think Simple. Build Premium.",
+    title: "SimpleThink — Keep It Simple. Make It Luxury.",
     description:
       "Premium digital studio engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions.",
     url: SITE.url,
-    siteName: "SimplePrime",
+    siteName: "SimpleThink",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SimplePrime — Think Simple. Build Premium.",
+    title: "SimpleThink — Keep It Simple. Make It Luxury.",
     description:
       "Premium digital studio engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions.",
   },

@@ -60,16 +60,16 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
               <Link
                 href="/"
                 className="inline-flex items-center font-heading text-2xl font-bold tracking-tight text-foreground focus-visible:ring-2 focus-visible:ring-ring outline-none"
-                aria-label="SimplePrime Home"
+                aria-label="SimpleThink Home"
               >
                 <span>
                   SIMPLE<span className="text-primary font-bold inline-block">PRIME</span>
                 </span>
               </Link>
               <p className="text-lg font-medium text-foreground/90 max-w-sm leading-snug">
-                Think Simple.
+                Keep It Simple.
                 <br />
-                Build Premium.
+                Make It Luxury.
               </p>
               <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
                 A premier software development company engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions for ambitious businesses and founders.
@@ -201,10 +201,10 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
         {/* Copyright & Bottom Bar */}
         <div className="pt-8 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>
-            &copy; {new Date().getFullYear()} SimplePrime Digital Studio. All rights reserved.
+            &copy; {new Date().getFullYear()} SimpleThink Digital Studio. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <span>Think Simple. Build Premium.</span>
+            <span>Keep It Simple. Make It Luxury.</span>
           </div>
         </div>
       </div>

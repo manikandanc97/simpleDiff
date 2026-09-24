@@ -52,11 +52,11 @@ export function WorkbenchHero() {
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
               className="font-satoshi font-[800] tracking-[-0.065em] text-[#121114] leading-[0.94] mb-5 text-[clamp(52px,5.5vw,104px)]"
             >
-              <span className="block mb-2">Think Simple.</span>
+              <span className="block mb-2">Keep It Simple.</span>
               <span className="block relative inline-block whitespace-nowrap">
-                Build{" "}
+                Make It{" "}
                 <span className="relative inline-block brand-gradient-text">
-                  Premium.
+                  Luxury.
                   {/* Hand-drawn style SVG underline stroke */}
                   <svg 
                     className="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-[14px] text-[#922F55] overflow-visible pointer-events-none" 

@@ -63,7 +63,7 @@ export const PROJECTS: Project[] = [
     url: "https://valparaiwanderertours.com",
     badge: "Live Client Site",
     image: "/images/projects/valparai_live.jpg",
-    result: "+300% Month 1 Bookings",
+    result: "+ 3600% Month 1 Bookings",
     description:
       "An experiential travel & tour booking platform for Valparai tour packages, misty Western Ghats jungle safaris, and tea estate explorations. Features live WhatsApp-first booking and interactive route showcases.",
     problem:
@@ -82,8 +82,8 @@ export const PROJECTS: Project[] = [
       "curated customer reviews & 4.9★ rating proof",
       "established organic search presence for Valparai tour packages",
     ],
-    stack: ["Next.js", "Tailwind CSS", "motion/react", "Cloudinary", "Vercel"],
-    tags: ["Next.js", "Tailwind CSS", "motion/react", "WhatsApp API", "Cloudinary"],
+    stack: ["Next.js", "Tailwind CSS", "motion/react"],
+    tags: ["Next.js", "Tailwind CSS", "motion/react"],
     outcome:
       "Organic search presence established across South India. WhatsApp bookings increased 3× in the first month following launch.",
     accent: "oklch(0.55 0.15 150)",
@@ -115,9 +115,9 @@ export const PROJECTS: Project[] = [
     url: "https://grnconstruction.in",
     badge: "Live Client Site",
     image: "/images/projects/grn_live.webp",
-    result: "Page 1 Google SEO Ranking",
+    result: "#1 Google SEO Ranking",
     description:
-      "A corporate brand website for Udumalpet's premier builders. Features glassmorphism navigation, project portfolio gallery, BOQ estimation, and structured local SEO targeting builders in Tamil Nadu.",
+      "Construction company site with project showcase and lead generation.",
     problem:
       "An established construction firm with 10+ years of civil engineering excellence and a 4.9★ Google rating, yet had zero professional website to showcase completed architectural projects to high-ticket clients.",
     solution:
@@ -133,8 +133,8 @@ export const PROJECTS: Project[] = [
       "milestone-based pricing cards and instant estimate inquiry form",
       "Page 1 Google ranking for key local construction terms",
     ],
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "SEO Schema", "motion/react"],
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Local SEO", "motion/react"],
+    stack: ["Next.js", "Tailwind CSS", "CMS"],
+    tags: ["Next.js", "Tailwind CSS", "CMS"],
     outcome:
       "Achieved Page 1 Google ranking for regional building queries. Generated qualified turnkey villa inquiries within 48 hours of go-live.",
     accent: "oklch(0.55 0.18 220)",
@@ -166,9 +166,9 @@ export const PROJECTS: Project[] = [
     url: "https://vihahandicrafts.com",
     badge: "Live Client Site",
     image: "/images/projects/viha_live.png",
-    result: "Pan-India Direct Orders",
+    result: "Pan-India Orders",
     description:
-      "A Chettinad heritage showcase platform celebrating traditional South Indian art. Features brass idol collections, Tanjore paintings, wooden panel showcases, and a direct WhatsApp purchasing flow.",
+      "Handicrafts e-commerce with direct orders and catalog management.",
     problem:
       "Authentic generational Chettinad artisans struggled to reach customers outside regional craft exhibitions, lacking a digital showcase for handcrafted brass idols and Tanjore art.",
     solution:
@@ -184,8 +184,8 @@ export const PROJECTS: Project[] = [
       "integrated Spiritual Guidance section for idol placement and Vastu",
       "frictionless WhatsApp direct inquiry & custom sizing orders",
     ],
-    stack: ["Next.js", "Tailwind CSS", "motion/react", "E-Commerce", "Vercel"],
-    tags: ["Next.js", "Tailwind CSS", "motion/react", "E-Commerce", "Artisan UI"],
+    stack: ["Next.js", "Shopify", "Payments"],
+    tags: ["Next.js", "Shopify", "Payments"],
     outcome:
       "Expanded client reach pan-India. Converted sacred idol and custom Tanjore painting inquiries into steady weekly orders.",
     accent: "oklch(0.6 0.18 45)",
@@ -210,7 +210,7 @@ export const PROJECTS: Project[] = [
   
   {
     id: "proj-clixprocrm",
-    number: "07",
+    number: "04",
     name: "ClixPro CRM",
     domain: "clixprocrm.vercel.app",
     serviceType: "Web Apps",
@@ -219,15 +219,15 @@ export const PROJECTS: Project[] = [
     year: "2025",
     url: "https://clixprocrm.vercel.app/",
     badge: "Forging in Lab 🚀",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
-    result: "Work in Progress",
-    description: "A next-generation CRM platform designed for high-velocity sales teams. Currently undergoing active engineering and beta testing.",
+    image: "/images/projects/clixpro_crm.jpg",
+    result: "Work In Progress",
+    description: "Universal CRM for Indian SMBs with AI-driven automation.",
     problem: "Traditional CRMs are bloated and slow down high-performing sales teams with unnecessary friction.",
     solution: "A modern, unified CRM dashboard focused on speed, keyboard accessibility, and intelligent pipeline management.",
     before: ["Cluttered interfaces", "Slow load times", "Scattered lead data"],
     after: ["Lightning fast dashboard", "AI-powered lead scoring", "Unified pipeline view"],
-    stack: ["Next.js", "Tailwind CSS", "TypeScript", "Supabase"],
-    tags: ["Next.js", "CRM", "SaaS", "In Development"],
+    stack: ["Next.js", "Prisma", "PostgreSQL"],
+    tags: ["Next.js", "Prisma", "PostgreSQL"],
     outcome: "Currently forging in our lab. Preparing for an upcoming beta launch.",
     accent: "oklch(0.55 0.2 280)",
     accentGradient: "from-blue-600/20 via-indigo-600/10 to-transparent",
@@ -249,7 +249,7 @@ export const PROJECTS: Project[] = [
   
   {
     id: "proj-grn-app",
-    number: "10",
+    number: "05",
     name: "GRN Construction App",
     domain: "grnconstruction.in",
     serviceType: "Mobile Apps",
@@ -258,15 +258,15 @@ export const PROJECTS: Project[] = [
     year: "2025",
     url: "https://grnconstruction.in",
     badge: "Building in Stealth 🛠️",
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop",
+    image: "/images/projects/grn_app.jpg",
     result: "Coming Soon",
-    description: "A comprehensive mobile application for GRN Construction clients to track project milestones, view blueprints, and receive live site updates.",
+    description: "Field management mobile app for construction teams.",
     problem: "Clients want real-time transparency and mobile-first access to their construction project timelines and daily site progress.",
     solution: "A dedicated mobile app with live timeline tracking, daily photo uploads from the site, and instant communication with project managers.",
     before: ["Updates scattered across WhatsApp", "No central repository for blueprints", "Unclear project milestones"],
     after: ["Live milestone tracking", "Centralized blueprint viewer", "Daily site progress feed"],
-    stack: ["React Native", "Expo", "Firebase", "Tailwind CSS"],
-    tags: ["React Native", "Construction", "Client Portal", "In Development"],
+    stack: ["React Native", "Supabase", "Offline Sync"],
+    tags: ["React Native", "Supabase", "Offline Sync"],
     outcome: "Currently under active development. Aiming to revolutionize client-contractor transparency.",
     accent: "oklch(0.55 0.18 220)",
     accentGradient: "from-cyan-500/20 via-blue-500/10 to-transparent",

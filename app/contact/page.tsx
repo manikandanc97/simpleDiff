@@ -13,7 +13,7 @@ import { PageBanner } from "@/components/ui/page-banner";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with SimplePrime. Discuss your web application, mobile app, software architecture, or schedule a direct engineering consultation.",
+    "Get in touch with SimpleThink. Discuss your web application, mobile app, software architecture, or schedule a direct engineering consultation.",
 };
 
 const BENEFITS = [

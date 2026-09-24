@@ -502,7 +502,7 @@ export function HowWeWork() {
           </div>
 
           <span className="text-[11px] text-muted-foreground/50 tracking-wider uppercase">
-            SimplePrime · Delivery Framework
+            SimpleThink · Delivery Framework
           </span>
         </motion.div>
 

@@ -12,7 +12,7 @@ import { PageBanner } from "@/components/ui/page-banner";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About SimplePrime — A premier software development company built on the belief that custom software and digital systems should be simple, focused, and high-performance.",
+    "About SimpleThink — A premier software development company built on the belief that custom software and digital systems should be simple, focused, and high-performance.",
 };
 
 const PRINCIPLES = [
@@ -47,7 +47,7 @@ export default function AboutPage() {
           { label: "Home", href: "/" },
           { label: "About" },
         ]}
-        badge="About SimplePrime"
+        badge="About SimpleThink"
         title={
           <span>
             Simplicity Engineered for <span className="text-primary">Impact.</span>
@@ -76,7 +76,7 @@ export default function AboutPage() {
               We are a dedicated software development company working directly with founders, business owners, and engineering leaders who value architectural precision over bureaucratic overhead.
             </p>
             <p>
-              When you collaborate with SimplePrime, you don&apos;t get handed off through account managers, junior coordinators, or outsourced layers. You work directly with the senior software engineers crafting your system.
+              When you collaborate with SimpleThink, you don&apos;t get handed off through account managers, junior coordinators, or outsourced layers. You work directly with the senior software engineers crafting your system.
             </p>
             <p>
               Our methodology combines deep brand taste with modern fullstack engineering — ensuring that every website, web application, mobile app, and SaaS system we launch looks world-class and performs under pressure.

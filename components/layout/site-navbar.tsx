@@ -7,11 +7,9 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS } from "@/lib/nav";
 
-import { MobileAppMenu } from "@/components/layout/mobile-app-menu";
-import { useMobileMenu } from "@/components/layout/mobile-menu-context";
 import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
-import { AnimatedArrowRight, AnimatedMenu, AnimatedX } from "@/components/ui/animated-icon";
+import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 
 interface SiteNavbarProps {
   onStartProject?: () => void;
@@ -20,7 +18,6 @@ interface SiteNavbarProps {
 export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
   const { openLead } = useLead();
   const pathname = usePathname();
-  const { isOpen, toggleMenu, closeMenu } = useMobileMenu();
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +29,6 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
   }, []);
 
   const handleStart = () => {
-    closeMenu();
     if (onStartProject) onStartProject();
     else openLead({ source: "navbar" });
   };
@@ -53,12 +49,11 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
           {/* Brand Logo */}
           <Link
             href="/"
-            onClick={closeMenu}
             className="group flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-ring rounded-lg outline-none font-satoshi"
-            aria-label="SimplePrime Home"
+            aria-label="SimpleThink Home"
           >
             <span className="text-lg sm:text-[21px] font-[800] tracking-[-0.045em] text-[#121114] flex items-center">
-              SIMPLE<span className="text-[#922F55] transition-transform inline-block group-hover:scale-105">PRIME.</span>
+              SIMPLE<span className="text-[#922F55] transition-transform inline-block group-hover:scale-105">THINK.</span>
             </span>
           </Link>
 
@@ -103,33 +98,19 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
               <span className="text-[13px] font-[500] text-[#121114]/90 tracking-[-0.01em]">Available for projects</span>
             </div>
             
+            {/* Start a project CTA Button */}
             <Button
               size="sm"
               onClick={handleStart}
               id="navbar-start-project"
-              className="hidden md:flex group font-[700] text-[16px] tracking-[-0.02em] h-11 px-6 rounded-full bg-[#922F55] text-white hover:bg-[#7D2748] active:scale-95 cursor-pointer transition-all duration-200 items-center gap-1.5 shadow-[0_4px_14px_rgba(146,47,85,0.25)] border-0"
+              className="flex group font-[700] text-[14px] sm:text-[16px] tracking-[-0.02em] h-9 sm:h-11 px-4 sm:px-6 rounded-full bg-[#922F55] text-white hover:bg-[#7D2748] active:scale-95 cursor-pointer transition-all duration-200 items-center gap-1.5 shadow-[0_4px_14px_rgba(146,47,85,0.25)] border-0"
             >
               <span>Start a project</span>
-              <AnimatedArrowRight size={16} className="ml-0.5 text-white" />
+              <AnimatedArrowRight size={15} className="ml-0.5 text-white" />
             </Button>
-
-            {/* Menu Trigger */}
-            <button
-              type="button"
-              onClick={toggleMenu}
-              aria-expanded={isOpen}
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-              className="group w-11 h-11 rounded-full bg-white/90 border border-[rgba(30,24,30,0.08)] shadow-sm text-[#121114] hover:bg-slate-50 active:scale-90 transition-all focus-visible:ring-2 focus-visible:ring-ring outline-none cursor-pointer flex items-center justify-center"
-              id="mobile-menu-trigger"
-            >
-              {isOpen ? <AnimatedX size={18} /> : <AnimatedMenu size={18} />}
-            </button>
           </div>
         </motion.div>
       </motion.header>
-
-      {/* Native Mobile App Sheet Drawer */}
-      <MobileAppMenu open={isOpen} onClose={closeMenu} />
     </>
   );
 }
