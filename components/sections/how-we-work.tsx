@@ -105,7 +105,7 @@ const STEPS: StepConfig[] = [
       },
     ],
     nextStepName: "Design",
-    imageSrc: "/images/process/discover.png",
+    imageSrc: "/assets/discover.png",
   },
   {
     id: "design",
@@ -114,8 +114,8 @@ const STEPS: StepConfig[] = [
     title: "Design",
     subtitle: "UI/UX & Prototype",
     icon: Pencil,
-    headlineFirst: "Clarity before a single line",
-    headlineAccent: "of code.",
+    headlineFirst: "Clarity before",
+    headlineAccent: "we code.",
     summary:
       "Interactive Figma prototypes and a production token library. You test and validate the screens and interactions before development begins.",
     features: [
@@ -148,17 +148,17 @@ const STEPS: StepConfig[] = [
         desc: "Pre-code feedback loops with real stakeholder testing.",
       },
     ],
-    nextStepName: "Engineer",
-    imageSrc: "/images/process/design.png",
+    nextStepName: "Develop",
+    imageSrc: "/assets/design-develop.png",
   },
   {
-    id: "engineer",
+    id: "develop",
     number: "03",
     stepKicker: "STEP 03 / 04",
-    title: "Engineer",
+    title: "Develop",
     subtitle: "Build & Integrate",
     icon: Code2,
-    headlineFirst: "Production code, built",
+    headlineFirst: "Code built",
     headlineAccent: "to scale.",
     summary:
       "Next.js App Router, TailwindCSS, TypeScript, and serverless backend architecture. Demo deployments let you watch the product come alive.",
@@ -193,7 +193,7 @@ const STEPS: StepConfig[] = [
       },
     ],
     nextStepName: "Launch",
-    imageSrc: "/images/process/engineer.png",
+    imageSrc: "/assets/design-develop.png",
   },
   {
     id: "launch",
@@ -202,8 +202,8 @@ const STEPS: StepConfig[] = [
     title: "Launch",
     subtitle: "Deploy & Grow",
     icon: Rocket,
-    headlineFirst: "Launch day is step one,",
-    headlineAccent: "not the finish line.",
+    headlineFirst: "Launch is just",
+    headlineAccent: "the beginning.",
     summary:
       "DNS cutover, SEO indexing check, telemetry dashboards, and post-launch support to ensure a smooth transition to production.",
     features: [
@@ -237,7 +237,7 @@ const STEPS: StepConfig[] = [
       },
     ],
     nextStepName: "Start Project",
-    imageSrc: "/images/process/launch.png",
+    imageSrc: "/assets/launch.png",
   },
 ];
 
@@ -302,7 +302,7 @@ export function HowWeWork() {
         {/* ========================================================================= */}
         {/* STEPPER NAVIGATION BAR (Horizontal connected flow) */}
         {/* ========================================================================= */}
-        <div className="flex items-center justify-start md:justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-10 overflow-x-auto py-4 -my-4 px-4 -mx-4 scrollbar-none">
+        <div className="flex items-center justify-start md:justify-center gap-2 sm:gap-3 md:gap-4 mb-4 overflow-x-auto py-4 -my-4 px-4 -mx-4 scrollbar-none">
           {STEPS.map((step, index) => {
             const isActive = activeStepIndex === index;
             const StepIcon = step.icon;
@@ -741,7 +741,7 @@ export function HowWeWork() {
                     {/* Layer 6: Foreground 3D Character at Desk (discover.png) */}
                     <div className="relative z-20 w-full flex items-end justify-center pointer-events-none">
                       <Image
-                        src="/images/process/discover.png"
+                        src="/assets/discover.png"
                         alt="Discover Phase - SimpleThink"
                         width={1774}
                         height={887}
@@ -879,7 +879,7 @@ export function HowWeWork() {
                     {/* Layer 6: Image */}
                     <div className="relative z-20 w-full flex items-end justify-center pointer-events-none">
                       <Image
-                        src="/images/process/design.png"
+                        src="/assets/design-develop.png"
                         alt="Design Phase - SimpleThink"
                         width={1774}
                         height={887}
@@ -1006,8 +1006,8 @@ export function HowWeWork() {
                     {/* Layer 6: Image */}
                     <div className="relative z-20 w-full flex items-end justify-center pointer-events-none">
                       <Image
-                        src="/images/process/engineer.png"
-                        alt="Engineer Phase - SimpleThink"
+                        src="/assets/design-develop.png"
+                        alt="Develop Phase - SimpleThink"
                         width={1774}
                         height={887}
                         priority
@@ -1143,7 +1143,7 @@ export function HowWeWork() {
                     {/* Layer 6: Image */}
                     <div className="relative z-20 w-full flex items-end justify-center pointer-events-none">
                       <Image
-                        src="/images/process/launch.png"
+                        src="/assets/launch.png"
                         alt="Launch Phase - SimpleThink"
                         width={1774}
                         height={887}
