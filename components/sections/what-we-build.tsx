@@ -527,7 +527,7 @@ export function WhatWeBuild() {
       <div className="absolute top-1/3 right-[-10%] w-[500px] h-[500px] bg-[#FAF0F6]/70 rounded-full blur-[100px] pointer-events-none z-0" />
 
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6">
-        <div className="flex flex-col items-center text-center max-w-[760px] mx-auto mb-14 sm:mb-20 font-satoshi">
+        <div className="flex flex-col items-center text-center max-w-[760px] mx-auto mb-8 sm:mb-10 font-satoshi">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_2px_8px_rgba(0,0,0,0.03)] mb-4">
             <span className="w-2 h-2 rounded-full bg-[#922F55] inline-block" />
             <span className="text-[11px] sm:text-[12px] font-[800] tracking-[0.08em] text-[#121114]/90 uppercase">
@@ -567,8 +567,8 @@ export function WhatWeBuild() {
           </p>
         </div>
 
-        <div ref={containerRef} className="relative w-full py-4 perspective-[1400px] overflow-visible">
-          <div className="flex items-center justify-center min-h-[425px] sm:min-h-[460px] relative w-full">
+        <div ref={containerRef} className="relative w-full py-2 perspective-[1400px] overflow-visible">
+          <div className="flex items-center justify-center min-h-[350px] sm:min-h-[380px] relative w-full">
             {SERVICES.map((service, index) => {
               let offset = index - activeIndex;
               if (offset > 2) offset -= SERVICES.length;
@@ -676,7 +676,7 @@ export function WhatWeBuild() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between max-w-[760px] mx-auto mt-8 sm:mt-12 px-2 font-satoshi">
+        <div className="flex items-center justify-between max-w-[760px] mx-auto mt-4 sm:mt-6 px-2 font-satoshi">
           <div className="flex items-center gap-2 text-[#68666C]">
             <span className="text-[12px] sm:text-[13px] font-[600] text-[#68666C] select-none">
               Drag to explore

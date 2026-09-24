@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { NAV_ITEMS } from "@/lib/nav";
@@ -52,9 +53,14 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
             className="group flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-ring rounded-lg outline-none font-satoshi"
             aria-label="SimpleThink Home"
           >
-            <span className="text-lg sm:text-[21px] font-[800] tracking-[-0.045em] text-[#121114] flex items-center">
-              SIMPLE<span className="text-[#922F55] transition-transform inline-block group-hover:scale-105">THINK.</span>
-            </span>
+            <Image
+              src="/logo.png"
+              alt="SimpleThink Logo"
+              width={180}
+              height={40}
+              className="h-7 sm:h-8 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}

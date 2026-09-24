@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
@@ -51,7 +52,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
       {/* Ambient background glow */}
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-primary/8 blur-[120px] rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-0 relative z-10">
         {/* Top Grid: Studio Brand, Navigation, Services, Direct CTA */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 pb-16 border-b border-border/80">
           {/* Col 1 & 2: Brand Manifesto */}
@@ -59,12 +60,16 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
             <div className="space-y-4">
               <Link
                 href="/"
-                className="inline-flex items-center font-heading text-2xl font-bold tracking-tight text-foreground focus-visible:ring-2 focus-visible:ring-ring outline-none"
+                className="inline-flex items-center focus-visible:ring-2 focus-visible:ring-ring outline-none"
                 aria-label="SimpleThink Home"
               >
-                <span>
-                  SIMPLE<span className="text-primary font-bold inline-block">PRIME</span>
-                </span>
+                <Image
+                  src="/logo.png"
+                  alt="SimpleThink Logo"
+                  width={150}
+                  height={40}
+                  className="h-8 w-auto object-contain"
+                />
               </Link>
               <p className="text-lg font-medium text-foreground/90 max-w-sm leading-snug">
                 Keep It Simple.

@@ -102,7 +102,7 @@ export function DynamicTShirtCharacter({ className }: DynamicTShirtCharacterProp
     async function loadAssets() {
       try {
         const heroImg = new Image();
-        heroImg.src = "/hero.png";
+        heroImg.src = "/assets/simplehero.png";
 
         const maskImg = new Image();
         maskImg.src = "/hero-mask.png";
