@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, MousePointer2 } from "lucide-react";
 import { motion } from "motion/react";
 import { useRef, useState } from "react";
+import { SectionHeader } from "@/components/ui/section-header";
 
 import { MobileAppsMockup, SaaSProductsMockup, WebAppsMockup, WebsitesMockup } from './what-we-build/mockups';
 
@@ -111,51 +112,45 @@ export function WhatWeBuild() {
   return (
     <section
       id="capabilities"
-      className="relative w-full pt-20 pb-10 sm:pt-28 sm:pb-12 overflow-hidden bg-[#FFFDFC]"
+      className="relative w-full pt-20 pb-10 sm:pt-28 sm:pb-12 overflow-hidden bg-background"
     >
       <div className="absolute top-1/4 left-[-10%] w-[500px] h-[500px] bg-[#F3EBF9]/60 rounded-full blur-[100px] pointer-events-none z-0" />
       <div className="absolute top-1/3 right-[-10%] w-[500px] h-[500px] bg-[#FAF0F6]/70 rounded-full blur-[100px] pointer-events-none z-0" />
 
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6">
-        <div className="flex flex-col items-center text-center max-w-[760px] mx-auto mb-8 sm:mb-10 font-satoshi">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_2px_8px_rgba(0,0,0,0.03)] mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#922F55] inline-block" />
-            <span className="text-[11px] sm:text-[12px] font-[800] tracking-[0.08em] text-[#121114]/90 uppercase">
-              WHAT WE BUILD
-            </span>
-          </div>
-
-          <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-[800] tracking-[-0.045em] text-[#121114] leading-[1.05] mb-4">
-            From Ideas to{" "}
-            <span className="relative inline-block brand-gradient-text">
-              Impact.
-              <svg 
-                className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full h-[12px] text-[#922F55] overflow-visible pointer-events-none" 
-                viewBox="0 0 200 20" 
-                fill="none" 
-                preserveAspectRatio="none"
-              >
-                <path 
-                  d="M4 12 C50 4, 130 5, 195 10" 
-                  stroke="currentColor" 
-                  strokeWidth="4" 
-                  strokeLinecap="round" 
-                />
-                <path 
-                  d="M30 15 C90 11, 150 12, 185 14" 
-                  stroke="#D23D78" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeOpacity="0.8"
-                />
-              </svg>
-            </span>
-          </h2>
-
-          <p className="text-[15px] sm:text-[17px] lg:text-[18px] text-[#68666C] leading-[1.5] max-w-[660px]">
-            We engineer custom software, scalable web applications, and mobile platforms — with enterprise-grade reliability and zero unnecessary overhead.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="WHAT WE BUILD"
+          centered
+          title={
+            <>
+              From Ideas to{" "}
+              <span className="relative inline-block brand-gradient-text">
+                Impact.
+                <svg 
+                  className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full h-[12px] text-primary overflow-visible pointer-events-none" 
+                  viewBox="0 0 200 20" 
+                  fill="none" 
+                  preserveAspectRatio="none"
+                >
+                  <path 
+                    d="M4 12 C50 4, 130 5, 195 10" 
+                    stroke="currentColor" 
+                    strokeWidth="4" 
+                    strokeLinecap="round" 
+                  />
+                  <path 
+                    d="M30 15 C90 11, 150 12, 185 14" 
+                    stroke="#D23D78" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeOpacity="0.8"
+                  />
+                </svg>
+              </span>
+            </>
+          }
+          description="We engineer custom software, scalable web applications, and mobile platforms — with enterprise-grade reliability and zero unnecessary overhead."
+        />
 
         <div ref={containerRef} className="relative w-full py-2 perspective-[1400px] overflow-visible">
           <div className="flex items-center justify-center min-h-[350px] sm:min-h-[380px] relative w-full">

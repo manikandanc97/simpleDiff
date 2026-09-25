@@ -2,6 +2,7 @@
 
 import { useLead } from "@/components/leads/lead-provider";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { Button } from "@/components/ui/button";
 import { ChevronDown, Play } from "lucide-react";
 import { motion } from "motion/react";
 import { useRef } from "react";
@@ -31,12 +32,12 @@ export function WorkbenchHero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-[100dvh] pt-28 sm:pt-32 lg:pt-36 pb-12 flex flex-col items-center justify-between overflow-hidden bg-[#FFFDFC]"
+      className="relative min-h-[100dvh] pt-28 sm:pt-32 lg:pt-36 pb-12 flex flex-col items-center justify-between overflow-hidden bg-background"
     >
       {/* Background Elements */}
       <HeroGridAccents />
 
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 flex-1 flex flex-col justify-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex-1 flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full">
           
           {/* LEFT: Text Content */}
@@ -94,7 +95,7 @@ export function WorkbenchHero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="font-satoshi font-[500] text-[18px] sm:text-[20px] leading-[1.5] tracking-[-0.02em] text-[#68666C] max-w-[490px] mb-8"
+              className="type-lead text-muted-foreground max-w-[490px] mb-8"
             >
               We turn complex ideas into simple, high-quality digital experiences that help businesses grow.
             </motion.p>
@@ -106,14 +107,15 @@ export function WorkbenchHero() {
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 mb-12 sm:mb-14 w-full sm:w-auto font-satoshi"
             >
-              <button
+              <Button
                 id="hero-start-project"
                 onClick={() => openLead({ source: "cta" })}
-                className="group inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-[#922F55] text-white text-[16px] font-[700] tracking-[-0.02em] hover:bg-[#7D2748] active:scale-95 transition-all duration-200 shadow-[0_6px_20px_rgba(146,47,85,0.25)]"
+                size="lg"
+                className="group rounded-full shadow-[0_6px_20px_rgba(146,47,85,0.25)]"
               >
                 <span>Start a project</span>
                 <AnimatedArrowRight size={16} className="text-white" />
-              </button>
+              </Button>
               
               <button
                 type="button"

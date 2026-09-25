@@ -45,7 +45,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
       <div className="pointer-events-none absolute -left-28 top-1/2 -translate-y-1/2 w-[440px] h-[440px] bg-primary/8 blur-[100px] rounded-full" />
       <div className="pointer-events-none absolute -right-24 -top-16 w-[440px] h-[360px] bg-primary/5 blur-[110px] rounded-full" />
 
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
         {/* Top Grid: Brand, Explore, Capabilities, Connect Card */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-border/80 items-start">
 

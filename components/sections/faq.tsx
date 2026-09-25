@@ -25,6 +25,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
+import { SectionHeader } from "@/components/ui/section-header";
 
 const FAQS = [
   {
@@ -108,7 +109,7 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative scroll-mt-24 py-28 sm:py-32 px-4 sm:px-6 lg:px-12 bg-background overflow-hidden">
+    <section id="faq" className="relative scroll-mt-24 py-28 sm:py-32 bg-background overflow-hidden">
 
       {/* Ambient background glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -140,30 +141,20 @@ export function FAQ() {
         </div>
       </div>
 
-      <div className="max-w-[1360px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
         
         {/* Left Column (5 Cols) */}
         <div className="lg:col-span-5 flex flex-col justify-start gap-4">
           
           {/* Top Info */}
-          <div>
-            {/* Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-zinc-900 border border-rose-100 dark:border-zinc-800 shadow-[0_2px_10px_rgba(244,63,94,0.06)] w-fit mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#f43f5e]" />
-              <span className="text-[11px] font-bold text-zinc-800 dark:text-zinc-200 tracking-widest uppercase">FAQ</span>
-            </div>
-
-            {/* Heading */}
-            <h2 className="text-4xl sm:text-[46px] lg:text-[50px] font-black tracking-tight text-zinc-900 dark:text-white leading-[1.05] mb-4">
-              Frequently Asked <br />
-              <span className="text-[#f43f5e]">Questions.</span>
-            </h2>
-
-            {/* Subtext */}
-            <p className="text-[14.5px] text-zinc-500 dark:text-zinc-400 max-w-[400px] leading-relaxed">
-              Honest answers to the most common questions founders and engineering teams ask before building with us.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="FAQ"
+            title={<>Frequently Asked <br/></>}
+            highlightedText="Questions."
+            description="Honest answers to the most common questions founders and engineering teams ask before building with us."
+            className="mb-8 items-start text-left mx-0"
+            maxWidth="max-w-[400px]"
+          />
 
           {/* Bottom Composite Card Component (Single Unified Card containing CTA, Character & Stats) */}
           <div className="relative mt-6 sm:mt-8 pt-4">

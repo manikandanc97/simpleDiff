@@ -14,6 +14,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { SectionHeader } from "@/components/ui/section-header";
 
 const FILTER_TABS = ["Websites", "Web Apps", "Mobile Apps"] as const;
 
@@ -130,53 +131,19 @@ export function SelectedWork() {
       <div className="absolute right-0 -bottom-24 w-[500px] h-[500px] bg-[#FCE7F3]/45 rounded-full blur-[120px] pointer-events-none z-0" />
       <div className="absolute left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/40 rounded-full blur-[90px] pointer-events-none z-0" />
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
            
           {/* ── LEFT COLUMN: Heading & Project List ── */}
           <div className="lg:col-span-5 flex flex-col">
-            {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-slate-200/80 shadow-sm w-fit mb-5 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-[#922F55] shadow-[0_0_8px_#922F55]" />
-              <span className="text-[11px] font-[800] tracking-[0.08em] text-[#121114] uppercase">
-                Our Work
-              </span>
-            </div>
-
-            {/* Section Heading */}
-            <h2 className="text-[36px] sm:text-[44px] lg:text-[50px] font-[800] tracking-tight text-[#121114] leading-[1.06] mb-3">
-              Selected{" "}
-              <span className="relative inline-block brand-gradient-text">
-                Work.
-                {/* Brush stroke underline */}
-                <svg 
-                  className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full h-[12px] text-[#922F55] overflow-visible pointer-events-none" 
-                  viewBox="0 0 200 20" 
-                  fill="none" 
-                  preserveAspectRatio="none"
-                >
-                  <path 
-                    d="M4 12 C50 4, 130 5, 195 10" 
-                    stroke="currentColor" 
-                    strokeWidth="4" 
-                    strokeLinecap="round" 
-                  />
-                  <path 
-                    d="M30 15 C90 11, 150 12, 185 14" 
-                    stroke="#D23D78" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeOpacity="0.8"
-                  />
-                </svg>
-              </span>
-            </h2>
-
-            {/* Subtitle */}
-            <p className="text-[15px] sm:text-[16px] text-[#64748B] mb-7 leading-[1.5] max-w-[420px]">
-              Live client systems and digital products engineered for measurable scale.
-            </p>
-
+            <SectionHeader
+              eyebrow="Our Work"
+              title="Selected"
+              highlightedText="Work."
+              description="Live client systems and digital products engineered for measurable scale."
+              className="mb-7 items-start text-left mx-0"
+              maxWidth="max-w-[420px]"
+            />
             {/* Project List: Max 3 Cards on Home Page */}
             <div className="flex flex-col gap-3">
               {displayProjects.map((project) => {

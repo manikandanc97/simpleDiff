@@ -7,6 +7,7 @@ import { Calendar, CheckCircle2, MessageSquare, Zap } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
+import { SectionHeader } from "@/components/ui/section-header";
 
 interface CTAProps {
   onStartProject?: () => void;
@@ -23,7 +24,7 @@ export function CTA({ onStartProject }: CTAProps) {
   };
 
   const handleSchedule = () => {
-    openLead({ source: "cta-schedule", note: "Interested in scheduling a discovery call." });
+    openLead({ source: "cta-schedule", description: "Interested in scheduling a discovery call." });
   };
 
   return (
@@ -41,7 +42,7 @@ export function CTA({ onStartProject }: CTAProps) {
       <div className="hidden lg:block pointer-events-none absolute top-12 left-8 w-28 h-28 hero-dots opacity-40" />
       <div className="hidden lg:block pointer-events-none absolute bottom-12 right-10 w-28 h-28 hero-dots opacity-35" />
 
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* ── Left Column: 3D Illustration ── */}
@@ -92,47 +93,15 @@ export function CTA({ onStartProject }: CTAProps) {
             transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
             className="lg:col-span-7 xl:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left font-satoshi"
           >
-            {/* Top Pill Badge matching SimpleThink standard */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-rose-100 shadow-[0_2px_8px_rgba(244,63,94,0.06)] mb-5">
-              <span className="w-2 h-2 rounded-full bg-[#922F55] animate-pulse" />
-              <span className="text-[11px] sm:text-xs font-black tracking-widest text-[#922F55] uppercase">
-                FROM IDEA TO IMPACT
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h2 className="font-satoshi font-[800] text-3xl sm:text-4xl lg:text-[46px] xl:text-[52px] tracking-[-0.04em] text-[#121114] leading-[1.08] mb-5 max-w-[620px]">
-              Let&apos;s turn your idea into a{" "}
-              <span className="relative inline-block brand-gradient-text">
-                premium digital product.
-                {/* Hand-drawn style SVG underline stroke matching Hero & WhatWeBuild */}
-                <svg
-                  className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full h-[12px] text-[#922F55] overflow-visible pointer-events-none"
-                  viewBox="0 0 200 20"
-                  fill="none"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M4 12 C50 4, 130 5, 195 10"
-                    stroke="currentColor"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M30 15 C90 11, 150 12, 185 14"
-                    stroke="#D23D78"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeOpacity="0.8"
-                  />
-                </svg>
-              </span>
-            </h2>
-
-            {/* Clean Subtitle & 3 Core Value Props */}
-            <p className="text-[15px] sm:text-[17px] text-[#68666C] leading-relaxed mb-6 max-w-[560px]">
-              High craft, sub-second performance, and zero bloat. We partner with ambitious founders to build products people actually love using.
-            </p>
+            {/* Top Info Header */}
+            <SectionHeader
+              eyebrow="FROM IDEA TO IMPACT"
+              title="Let's turn your idea into a"
+              highlightedText="premium digital product."
+              description="High craft, sub-second performance, and zero bloat. We partner with ambitious founders to build products people actually love using."
+              className="mb-6 lg:items-start lg:text-left mx-0"
+              maxWidth="max-w-[620px]"
+            />
 
             {/* 3 Pillars as sleek pills */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-8 sm:mb-10">

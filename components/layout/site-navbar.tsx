@@ -45,7 +45,7 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
       >
         {/* ── Content row (Pill) ── */}
         <motion.div
-          className="w-[92vw] max-w-[1440px] mx-auto px-5 sm:px-8 py-3 flex items-center justify-between bg-[rgba(255,255,255,0.72)] backdrop-blur-[16px] border border-[rgba(30,24,30,0.08)] rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
+          className="w-[92vw] max-w-7xl mx-auto px-5 sm:px-8 py-3 flex items-center justify-between bg-[rgba(255,255,255,0.72)] backdrop-blur-[16px] border border-[rgba(30,24,30,0.08)] rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
         >
           {/* Brand Logo */}
           <Link

@@ -10,6 +10,7 @@ import {
 import { AnimatePresence, motion, useInView } from "motion/react";
 import { useMemo, useRef, useState } from "react";
 import { TechCard } from "./tech-stack-card";
+import { SectionHeader } from "@/components/ui/section-header";
 
 // ─── Categories ───────────────────────────────────────────────────────────────
 
@@ -92,58 +93,19 @@ export function TechStack() {
             </motion.div>
           </div>
 
-          {/* Top Pill Badge: ● OUR TECH STACK */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFE8EC] dark:bg-rose-950/40 border border-[#FECDD3] dark:border-rose-900/40 mb-5"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#E11D48] animate-pulse" />
-            <span className="text-[11px] font-bold tracking-widest text-[#BE123C] dark:text-rose-400 uppercase">
-              OUR TECH STACK
-            </span>
-          </motion.div>
-
-          {/* Main Title: Modern tools. Real results. */}
-          <motion.h2
-            initial={{ opacity: 0, y: 12 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black tracking-tight text-slate-900 dark:text-white"
-          >
-            Modern tools.{" "}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-[#DB2777] via-[#E11D48] to-[#7C3AED] bg-clip-text text-transparent font-black">
-                Real results.
-              </span>
-              {/* Playful Marker/Brush Underline Stroke */}
-              <svg
-                className="absolute -bottom-1.5 left-0 w-full h-3.5 text-[#FB7185] pointer-events-none -z-10"
-                viewBox="0 0 250 16"
-                fill="none"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M 2 11 C 60 5, 150 5, 246 8"
-                  stroke="currentColor"
-                  strokeWidth="7"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
-          </motion.h2>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-sm sm:text-base text-slate-500 dark:text-muted-foreground max-w-2xl mx-auto mt-3 sm:mt-4 leading-relaxed font-normal"
-          >
-            Battle-tested tools chosen for reliability, performance, and long-term maintainability —
-            <br className="hidden sm:inline" /> not just trends.
-          </motion.p>
+          {/* ── Top Header ── */}
+          <SectionHeader
+            eyebrow="OUR TECH STACK"
+            centered
+            title="Modern tools."
+            highlightedText="Real results."
+            description={
+              <>
+                Battle-tested tools chosen for reliability, performance, and long-term maintainability —
+                <br className="hidden sm:inline" /> not just trends.
+              </>
+            }
+          />
         </div>
 
         {/* ── Category Pill Tabs with "Tools we love" Handwritten Annotation ──── */}

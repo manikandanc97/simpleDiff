@@ -10,6 +10,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { StepVisual } from "./how-we-work/step-visuals";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export function HowWeWork() {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
@@ -40,34 +41,23 @@ export function HowWeWork() {
       <div className="hidden lg:block pointer-events-none absolute top-1/2 left-3 w-20 h-28 hero-dots opacity-35" />
       <div className="hidden lg:block pointer-events-none absolute top-28 right-10 w-24 h-24 hero-dots opacity-35" />
 
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* ========================================================================= */}
         {/* SECTION HEADER (Center Aligned, matching reference) */}
         {/* ========================================================================= */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          {/* Top Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFF0F4] border border-[#FECDD3] mb-4 shadow-2xs">
-            <span className="w-2 h-2 rounded-full bg-[#E11D48]" />
-            <span className="text-[11px] sm:text-xs font-black tracking-widest text-[#BE123C] uppercase">
-              OUR PROCESS
-            </span>
-          </div>
-
-          {/* Main Title */}
-          <h2 className="font-satoshi font-black text-4xl sm:text-5xl lg:text-[56px] text-neutral-900 tracking-tight leading-[1.08]">
-            How We {" "}
-            <span className="bg-gradient-to-r from-[#6C2BB8] via-[#9333EA] to-[#DB2777] bg-clip-text text-transparent">
-              Work.
-            </span>
-          </h2>
-
-          {/* Subtitle */}
-          <p className="mt-3.5 text-neutral-500 font-normal text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-            A clear 4-step delivery process to turn your ideas into real, scalable digital products.
-            <br className="hidden sm:inline" /> No confusion. No black boxes. Just results.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="OUR PROCESS"
+          centered
+          title="How We"
+          highlightedText="Work."
+          description={
+            <>
+              A clear 4-step delivery process to turn your ideas into real, scalable digital products.
+              <br className="hidden sm:inline" /> No confusion. No black boxes. Just results.
+            </>
+          }
+        />
 
         {/* ========================================================================= */}
         {/* STEPPER NAVIGATION BAR (Horizontal connected flow) */}

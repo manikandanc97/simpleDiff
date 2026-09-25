@@ -10,6 +10,7 @@ import {
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { FlowDiagram } from "./philosophy/flow-diagram";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export function WhySimpleThink() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -43,46 +44,16 @@ export function WhySimpleThink() {
         </div>
       </div>
 
-      <div ref={containerRef} className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div ref={containerRef} className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        {/* ── Section Top Header (Matching Exact Reference Screenshot) ── */}
-        <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
-          {/* Pill Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-50/90 border border-rose-200/70 shadow-xs mb-4"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#831843]" />
-            <span className="text-[11px] font-bold tracking-widest text-[#831843] uppercase">
-              WHY SIMPLEPRIME
-            </span>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-satoshi text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-black text-neutral-900 tracking-tight leading-[1.15]"
-          >
-            Built simple.{" "}
-            <span className="bg-gradient-to-r from-[#831843] via-[#D23D78] to-[#7C3AED] bg-clip-text text-transparent">
-              Delivered sharp.
-            </span>
-          </motion.h2>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.18 }}
-            className="mt-3 text-sm sm:text-base text-neutral-500 max-w-xl mx-auto font-normal leading-relaxed"
-          >
-            A focused team, a clear process, and production-ready work without unnecessary layers.
-          </motion.p>
-        </div>
+        {/* ── Section Top Header ── */}
+        <SectionHeader
+          eyebrow="WHY SIMPLEPRIME"
+          centered
+          title="Built simple."
+          highlightedText="Delivered sharp."
+          description="A focused team, a clear process, and production-ready work without unnecessary layers."
+        />
 
         {/* ── Main 3-Column Layout ── */}
         <div className="relative grid grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)_240px] xl:grid-cols-[260px_minmax(0,1fr)_260px] gap-6 xl:gap-7 items-start">
