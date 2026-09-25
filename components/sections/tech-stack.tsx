@@ -42,7 +42,7 @@ export function TechStack() {
   return (
     <section
       id="tech-stack"
-      className="relative w-full py-16 sm:py-24"
+      className="relative w-full py-12 sm:py-16"
     >
       {/* ── Background Atmosphere & Ambient Glows ────────────────────────────── */}
 

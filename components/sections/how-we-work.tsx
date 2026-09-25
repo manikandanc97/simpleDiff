@@ -29,7 +29,7 @@ export function HowWeWork() {
   return (
     <section
       id="how-we-work"
-      className="relative py-16 sm:py-20 lg:py-24 select-none"
+      className="relative py-12 sm:py-16 lg:py-20 select-none"
     >
       {/* Soft Pastel Background Ambient Accents */}
 

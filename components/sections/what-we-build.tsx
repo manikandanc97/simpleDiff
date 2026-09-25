@@ -37,7 +37,7 @@ export function WhatWeBuild() {
   return (
     <section
       id="capabilities"
-      className="relative w-full pt-20 pb-10 sm:pt-28 sm:pb-12"
+      className="relative w-full pt-16 pb-8 sm:pt-20 sm:pb-10"
     >
 
 

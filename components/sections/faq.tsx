@@ -17,7 +17,7 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative scroll-mt-24 py-28 sm:py-32">
+    <section id="faq" className="relative scroll-mt-24 py-16 sm:py-24">
 
       {/* Ambient background glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">

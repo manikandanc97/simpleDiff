@@ -31,7 +31,7 @@ export function CTA({ onStartProject }: CTAProps) {
     <section
       id="cta"
       ref={ref}
-      className="relative w-full py-20 sm:py-28 lg:py-32 select-none"
+      className="relative w-full py-16 sm:py-20 lg:py-24 select-none"
     >
       {/* ── Soft Ambient Glows & Dot Patterns Matching SimpleThink Theme ── */}
 

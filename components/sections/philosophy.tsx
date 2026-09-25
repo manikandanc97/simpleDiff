@@ -20,7 +20,7 @@ export function WhySimpleThink() {
   return (
     <section
       id="why-SimpleThink"
-      className="relative w-full pt-24 sm:pt-28 pb-16 sm:pb-24 bg-transparent"
+      className="relative w-full pt-16 sm:pt-20 pb-12 sm:pb-16 bg-transparent"
     >
       {/* ── Atmospheric Ambient Glowing Blobs & Dots ── */}
 

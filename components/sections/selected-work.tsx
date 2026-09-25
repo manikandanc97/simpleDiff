@@ -112,7 +112,7 @@ export function SelectedWork() {
   return (
     <section 
       id="selected-work" 
-      className="relative w-full py-16 sm:py-20 lg:py-24 font-satoshi selection:bg-[#922F55]/20 selection:text-[#922F55]"
+      className="relative w-full py-12 sm:py-16 lg:py-20 font-satoshi selection:bg-[#922F55]/20 selection:text-[#922F55]"
     >
       {/* ── Background Decorative Elements ── */}
       {/* 1. Left Dot Grid Matrix */}
