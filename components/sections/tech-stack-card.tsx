@@ -41,16 +41,11 @@ export function TechCard({ tech, index }: { tech: TechItem; index: number }) {
         {tech.description}
       </p>
 
-      {/* 2 Badges */}
+      {/* Badge */}
       <div className="flex flex-wrap items-center justify-center gap-1.5 mt-auto pt-3">
-        {tech.badges.map((badge: string) => (
-          <span
-            key={badge}
-            className="px-2.5 py-0.5 rounded-md text-xs font-medium bg-slate-100/90 dark:bg-muted/50 text-slate-500 dark:text-muted-foreground border border-slate-200/50 dark:border-border/50"
-          >
-            {badge}
-          </span>
-        ))}
+        <span className="px-2.5 py-0.5 rounded-md text-xs font-medium bg-slate-100/90 dark:bg-muted/50 text-slate-500 dark:text-muted-foreground border border-slate-200/50 dark:border-border/50">
+          {tech.badge}
+        </span>
       </div>
     </motion.div>
   );

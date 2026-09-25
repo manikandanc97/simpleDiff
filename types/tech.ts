@@ -14,7 +14,7 @@ export interface TechItem {
   slug: string;
   category: TechCategory;
   description: string;
-  badges: [string, string];
+  badge: string;
   dotColor: string;
   accentColor: string;
   learnMoreUrl: string;

@@ -10,7 +10,8 @@ import {
   ExternalLink,
   Lock,
   Maximize2,
-  ShoppingCart
+  ShoppingCart,
+  TrendingUp
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
@@ -33,47 +34,47 @@ function GoogleIcon() {
 function getProjectBadge(project: Project) {
   if (project.id === "proj-valparai") {
     return {
-      bg: "bg-[#FCE4EC]",
-      text: "text-[#922F55]",
-      icon: null,
-      label: "+ 3600% Month 1 Bookings",
+      bg: "bg-rose-50 border border-rose-100 shadow-sm",
+      text: "text-rose-700",
+      icon: <TrendingUp size={12} className="text-rose-600" />,
+      label: "3.5x Bookings Growth",
     };
   }
   if (project.id === "proj-grn") {
     return {
-      bg: "bg-[#EEF2FF]",
-      text: "text-[#4F46E5]",
+      bg: "bg-indigo-50 border border-indigo-100 shadow-sm",
+      text: "text-indigo-700",
       icon: <GoogleIcon />,
-      label: "#1 Google SEO Ranking",
+      label: "5x Organic Traffic Growth",
     };
   }
   if (project.id === "proj-viha") {
     return {
-      bg: "bg-[#F5F3FF]",
-      text: "text-[#7C3AED]",
-      icon: <ShoppingCart size={11} className="text-[#7C3AED]" />,
-      label: "Pan-India Orders",
+      bg: "bg-violet-50 border border-violet-100 shadow-sm",
+      text: "text-violet-700",
+      icon: <ShoppingCart size={11} className="text-violet-600" />,
+      label: "10k+ Monthly Orders",
     };
   }
   if (project.id === "proj-clixprocrm") {
     return {
-      bg: "bg-[#EFF6FF]",
-      text: "text-[#2563EB]",
-      icon: <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse" />,
+      bg: "bg-blue-50 border border-blue-100 shadow-sm",
+      text: "text-blue-700",
+      icon: <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />,
       label: "Work In Progress",
     };
   }
   if (project.id === "proj-grn-app") {
     return {
-      bg: "bg-[#FAF5FF]",
-      text: "text-[#9333EA]",
-      icon: <span className="w-1.5 h-1.5 rounded-full bg-[#9333EA] animate-pulse" />,
+      bg: "bg-purple-50 border border-purple-100 shadow-sm",
+      text: "text-purple-700",
+      icon: <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse" />,
       label: "Coming Soon",
     };
   }
   return {
-    bg: "bg-slate-100",
-    text: "text-slate-600",
+    bg: "bg-slate-50 border border-slate-200 shadow-sm",
+    text: "text-slate-700",
     icon: null,
     label: project.result,
   };
@@ -139,7 +140,7 @@ export function SelectedWork() {
               title="Selected"
               highlightedText="Work."
               description="Live client systems and digital products engineered for measurable scale."
-              className="mb-4 items-start text-left mx-0"
+              className="mb-2 items-start text-left mx-0"
               maxWidth="max-w-2xl"
             />
             {/* Project List: Max 3 Cards on Home Page */}
