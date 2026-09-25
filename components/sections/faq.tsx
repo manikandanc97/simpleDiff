@@ -1,349 +1,397 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "motion/react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import {
-  Plus,
-  Minus,
+  ChevronDown,
   CheckCircle2,
-  Sparkles,
-  MessageSquare,
-  Mail,
-  ShieldCheck,
+  FolderOpen,
   Clock,
   Code2,
+  Wrench,
+  Users,
+  Calendar,
+  FileText,
+  Zap,
+  RefreshCw,
+  Activity,
+  ShieldCheck,
+  Unlock,
+  Award,
+  ThumbsUp,
+  Timer,
+  UserCheck,
+  Map
 } from "lucide-react";
-import { AnimatedArrowRight, AnimatedMail } from "@/components/ui/animated-icon";
-import { SectionHeader } from "@/components/ui/section-header";
+import Image from "next/image";
 import { useLead } from "@/components/leads/lead-provider";
-import { SITE } from "@/lib/site";
-
-// ─── 5 Curated FAQs (Essential Client Questions Only) ──────────────────────────
 
 const FAQS = [
   {
     id: "faq-pricing",
     num: "01",
-    category: "Pricing & Scope",
-    icon: ShieldCheck,
+    category: "PROJECT & SCOPE",
+    icon: FolderOpen,
     question: "How do you scope and price a project?",
     answer:
-      "We scope every project individually based on architectural complexity, deliverable milestones, and dedicated team allocation — never unpredictable hourly rates. You receive a clear, transparent, and itemized proposal before any code is written, ensuring zero hidden costs or billing surprises.",
+      "We scope every project individually based on your technical complexity, deliverable milestones, and dedicated team or part-time model. You'll receive a clear, transparent quote and timeline before we begin, along with a detailed proposal.",
     highlights: [
-      "Fixed Milestone Billing",
-      "Itemized Scope Proposal",
-      "Zero Hidden Fees",
+      { text: "Clear Milestones", icon: CheckCircle2 },
+      { text: "Transparent Pricing", icon: Calendar },
+      { text: "Detailed Proposal", icon: FileText },
     ],
   },
   {
     id: "faq-timeline",
     num: "02",
-    category: "Delivery & Speed",
+    category: "DELIVERY & TIMELINE",
     icon: Clock,
     question: "How long does a typical build take from kickoff to launch?",
     answer:
       "A focused, production-ready MVP typically ships in 6–10 weeks. Comprehensive platforms or complex multi-tenant systems take 3–5 months. We set realistic sprint roadmaps during discovery and ship testable preview builds every single week so you see continuous progress.",
     highlights: [
-      "6–10 Week MVP Cycle",
-      "Weekly Testable Builds",
-      "Transparent Sprint Tracking",
+      { text: "6–10 Week MVP", icon: Zap },
+      { text: "Weekly Previews", icon: RefreshCw },
+      { text: "Agile Sprints", icon: Activity },
     ],
   },
   {
     id: "faq-ownership",
     num: "03",
-    category: "Code & IP Ownership",
+    category: "CODE & IP OWNERSHIP",
     icon: Code2,
     question: "Will we own 100% of the code and intellectual property?",
     answer:
       "Absolutely. Every line of clean code, architecture diagram, design system token, cloud infrastructure script, and asset belongs entirely to your company upon milestone completion. We retain zero rights, zero royalties, and zero proprietary lock-in.",
     highlights: [
-      "100% IP Transfer",
-      "Zero Vendor Lock-in",
-      "Clean Git Repository",
+      { text: "100% Ownership", icon: ShieldCheck },
+      { text: "Full Source Code", icon: Code2 },
+      { text: "No Vendor Lock-in", icon: Unlock },
     ],
   },
   {
     id: "faq-support",
     num: "04",
-    category: "Post-Launch & Warranty",
-    icon: Sparkles,
+    category: "SUPPORT & MAINTENANCE",
+    icon: Wrench,
     question: "What happens after launch? Do you provide ongoing maintenance?",
     answer:
       "Every project includes a 30-day post-launch warranty with dedicated bug fixing and telemetry monitoring at zero extra cost. Following that, we offer flexible retainers for continuous feature iterations, DevOps scaling, and guaranteed SLA response times.",
     highlights: [
-      "30-Day Included Warranty",
-      "Active Telemetry Monitoring",
-      "Flexible Growth Retainers",
+      { text: "30-Day Warranty", icon: Award },
+      { text: "Proactive Monitoring", icon: Activity },
+      { text: "Guaranteed SLA", icon: ThumbsUp },
     ],
   },
   {
     id: "faq-kickoff",
     num: "05",
-    category: "Kickoff & Onboarding",
-    icon: MessageSquare,
-    question: "How quickly can we get started, and what does onboarding look like?",
+    category: "TEAM & COLLABORATION",
+    icon: Users,
+    question: "How closely can we get started, and what does onboarding look like?",
     answer:
       "Click 'Start a project' or brief us with your vision. Within 48 hours, our technical architects schedule a discovery call to understand your business goals, evaluate feasibility, and deliver a comprehensive technical roadmap and proposal.",
     highlights: [
-      "48-Hour Response Time",
-      "Architect-Led Discovery",
-      "Fast Technical Roadmap",
+      { text: "48-Hour Kickoff", icon: Timer },
+      { text: "Expert Architects", icon: UserCheck },
+      { text: "Technical Roadmap", icon: Map },
     ],
   },
 ];
 
-const SPRING = { type: "spring" as const, stiffness: 320, damping: 28 };
-
 export function FAQ() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(containerRef, { once: true, margin: "-80px" });
   const [openId, setOpenId] = useState<string | null>("faq-pricing");
   const { openLead } = useLead();
-
 
   const toggle = (id: string) => {
     setOpenId((curr) => (curr === id ? null : id));
   };
 
   return (
-    <section
-      id="faq"
-      className="relative py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-zinc-100/75 dark:bg-zinc-900/45 border-y border-zinc-200/80 dark:border-white/10 overflow-hidden"
-    >
+    <section id="faq" className="relative scroll-mt-24 py-28 sm:py-32 px-4 sm:px-6 lg:px-12 bg-white dark:bg-zinc-950 overflow-hidden">
+      {/* Google font import for handwritten callout */}
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');`}</style>
+
       {/* Ambient background glows */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        {/* Soft pink/purple ambient blobs */}
+        <div className="absolute -top-[15%] -left-[10%] w-[45%] h-[45%] rounded-full bg-rose-200/35 dark:bg-rose-950/20 blur-[130px]" />
+        <div className="absolute -bottom-[15%] -left-[5%] w-[40%] h-[40%] rounded-full bg-pink-100/40 dark:bg-pink-950/15 blur-[120px]" />
+        <div className="absolute -top-[10%] -right-[10%] w-[45%] h-[45%] rounded-full bg-purple-200/30 dark:bg-purple-950/20 blur-[140px]" />
+        <div className="absolute -bottom-[15%] -right-[5%] w-[45%] h-[45%] rounded-full bg-purple-100/40 dark:bg-purple-950/20 blur-[130px]" />
 
-      <div className="pointer-events-none absolute inset-0 mesh-bg opacity-25" />
-      <div className="pointer-events-none absolute top-12 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl opacity-40" />
-      <div className="pointer-events-none absolute bottom-12 right-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl opacity-30" />
+        {/* Top-left dot grid */}
+        <div className="absolute top-12 left-6 sm:left-12 grid grid-cols-4 gap-2.5 opacity-35">
+          {Array.from({ length: 28 }).map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#f43f5e]" />
+          ))}
+        </div>
 
-      <div ref={containerRef} className="max-w-7xl mx-auto relative z-10">
+        {/* Right edge dot grid */}
+        <div className="absolute top-1/3 right-4 sm:right-10 grid grid-cols-4 gap-2.5 opacity-30">
+          {Array.from({ length: 32 }).map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#f43f5e]" />
+          ))}
+        </div>
 
-        {/* Section Layout: Split Bento */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        {/* Top-right diagonal accent lines */}
+        <div className="absolute top-10 right-16 flex gap-1.5 rotate-[35deg] opacity-75">
+          <div className="w-[3px] h-4 bg-[#f43f5e] rounded-full" />
+          <div className="w-[3px] h-5 bg-[#f43f5e] rounded-full -translate-y-1" />
+          <div className="w-[3px] h-4 bg-[#f43f5e] rounded-full" />
+        </div>
+      </div>
 
-          {/* Left Column (Sticky Hub & Direct Consultation Card) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24">
-            <SectionHeader
-              sectionId="faq"
-              dockLabel="Questions · Answers"
-              title={
-                <>
-                  Frequently Asked <span className="text-primary">Questions.</span>
-                </>
-              }
-              description="Honest answers to the critical questions every founder and engineering leader asks before building with us."
-              className="mb-8"
-            />
+      <div className="max-w-[1360px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        
+        {/* Left Column (5 Cols) */}
+        <div className="lg:col-span-5 flex flex-col justify-start gap-4">
+          
+          {/* Top Info */}
+          <div>
+            {/* Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-zinc-900 border border-rose-100 dark:border-zinc-800 shadow-[0_2px_10px_rgba(244,63,94,0.06)] w-fit mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#f43f5e]" />
+              <span className="text-[11px] font-bold text-zinc-800 dark:text-zinc-200 tracking-widest uppercase">FAQ</span>
+            </div>
 
-            {/* Interactive Consultation Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 16, scale: 0.96 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="relative p-6 sm:p-7 rounded-2xl border border-border/70 bg-card/75 backdrop-blur-md overflow-hidden shadow-xl shadow-primary/5 group"
-            >
-              {/* Corner accent glow */}
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-primary/10 blur-2xl pointer-events-none group-hover:bg-primary/20 transition-all duration-500" />
-              <div className="absolute top-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+            {/* Heading */}
+            <h2 className="text-4xl sm:text-[46px] lg:text-[50px] font-black tracking-tight text-zinc-900 dark:text-white leading-[1.05] mb-4">
+              Frequently Asked <br />
+              <span className="text-[#f43f5e]">Questions.</span>
+            </h2>
 
-              {/* Status indicator */}
-              <div className="flex items-center gap-2 mb-4">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                </span>
-                <span className="text-xs font-semibold text-muted-foreground">
-                  Live Response · Replies within 2 hours
-                </span>
-              </div>
-
-              <h3 className="text-lg font-bold text-foreground mb-1.5">
-                Have a unique technical question?
-              </h3>
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-6">
-                Schedule a 15-minute architecture discovery with our lead engineers. We&apos;ll evaluate your scope with zero sales pressure.
-              </p>
-
-              {/* Action Button */}
-              <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-                <button
-                  type="button"
-                  onClick={() => openLead({ description: "FAQ - Technical Consultation" })}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-xs sm:text-sm font-semibold hover:opacity-90 transition-all duration-200 cursor-pointer shadow-md shadow-primary/20 group/btn"
-                >
-
-
-                  <span>Talk to an Architect</span>
-                  <AnimatedArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
-                </button>
-
-                <a
-                  href={`mailto:${SITE.email}`}
-                  className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl border border-border/70 bg-muted/20 hover:bg-muted/40 hover:border-border text-foreground text-xs sm:text-sm font-medium transition-colors group/mail"
-                >
-                  <AnimatedMail className="w-3.5 h-3.5 text-muted-foreground transition-colors group-hover/mail:text-primary" />
-                  <span>{SITE.email}</span>
-                </a>
-              </div>
-
-              {/* Trust Guarantees */}
-              <div className="mt-6 pt-5 border-t border-border/60 grid grid-cols-3 gap-2 text-center">
-                <div>
-                  <div className="text-xs font-bold text-foreground">100%</div>
-                  <div className="text-[10px] text-muted-foreground mt-0.5">Scope Clarity</div>
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-foreground">Weekly</div>
-                  <div className="text-[10px] text-muted-foreground mt-0.5">Testable Demos</div>
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-foreground">Zero</div>
-                  <div className="text-[10px] text-muted-foreground mt-0.5">Vendor Lock-in</div>
-                </div>
-              </div>
-            </motion.div>
+            {/* Subtext */}
+            <p className="text-[14.5px] text-zinc-500 dark:text-zinc-400 max-w-[400px] leading-relaxed">
+              Honest answers to the most common questions founders and engineering teams ask before building with us.
+            </p>
           </div>
 
-          {/* Right Column (Interactive Modern FAQ Bento Stack) */}
-          <div className="lg:col-span-7 flex flex-col gap-2.5 sm:gap-3">
-            {FAQS.map((faq, index) => {
-              const isOpen = openId === faq.id;
-              const Icon = faq.icon;
+          {/* Bottom Composite Card Component (Single Unified Card containing CTA, Character & Stats) */}
+          <div className="relative mt-6 sm:mt-8 pt-4">
+            
+            {/* 1. "Still have a question?" Handwritten note & curved arrow */}
+            <div className="absolute -top-5 left-1 sm:left-2 z-20 flex items-start gap-1 pointer-events-none select-none">
+              <span className="font-['Caveat',cursive] italic text-[22px] sm:text-[24px] text-slate-700 dark:text-zinc-300 font-bold rotate-[-8deg] leading-[1.1] block">
+                Still have a<br />question?
+              </span>
+              <svg 
+                width="44" 
+                height="38" 
+                viewBox="0 0 54 46" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="text-[#db2777] -mt-1 -ml-1"
+              >
+                <path 
+                  d="M6 14C16 3 32 2 40 14C45 22 44 32 41 40" 
+                  stroke="currentColor" 
+                  strokeWidth="2.2" 
+                  strokeLinecap="round" 
+                />
+                <path 
+                  d="M34 33L41 41L48 34" 
+                  stroke="currentColor" 
+                  strokeWidth="2.2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                />
+              </svg>
+            </div>
 
-              return (
-                <motion.div
-                  key={faq.id}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ ...SPRING, delay: index * 0.08 }}
-                  className={`group relative rounded-xl sm:rounded-2xl border transition-all duration-300 backdrop-blur-md overflow-hidden ${
-                    isOpen
-                      ? "border-primary/50 bg-card shadow-xl shadow-primary/5"
-                      : "border-border/60 bg-card/65 hover:border-primary/40 hover:bg-card/90"
-                  }`}
-                >
-                  {/* Active Top Ambient Accent Line */}
-                  <div
-                    className={`absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300 ${
-                      isOpen ? "opacity-100 bg-primary" : "opacity-0"
-                    }`}
-                  />
+            {/* 2. Main Outer White Card */}
+            <div className="relative z-10 w-full max-w-[490px] bg-white dark:bg-zinc-900 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 shadow-[0_20px_50px_rgba(244,63,94,0.06),_0_0_1px_1px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] border border-rose-50/60 dark:border-white/10">
+              
+              {/* Upper Content Area: Left CTA + Right 3D Character */}
+              <div className="relative min-h-[210px] sm:min-h-[215px]">
+                
+                {/* Left: Text & CTA Button */}
+                <div className="relative z-10 max-w-[240px] sm:max-w-[250px]">
+                  {/* Badge */}
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50/80 dark:bg-rose-950/40 border border-rose-100/80 dark:border-rose-900/40 mb-2">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#db2777]">
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                      <circle cx="9" cy="12" r="1" fill="currentColor"/>
+                      <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                      <circle cx="15" cy="12" r="1" fill="currentColor"/>
+                    </svg>
+                    <span className="text-[10.5px] font-bold text-[#db2777]">We&apos;re here to help</span>
+                  </div>
 
-                  {/* Header Button */}
+                  {/* Heading */}
+                  <h3 className="text-lg sm:text-[20px] font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight leading-tight">
+                    Can&apos;t find your answer?
+                  </h3>
+
+                  {/* Subtitle */}
+                  <p className="text-[11px] sm:text-[12px] text-slate-500 dark:text-zinc-400 leading-[1.5] mb-4">
+                    Talk to our team and get a clear, no-fluff answer for your specific requirement.
+                  </p>
+
+                  {/* CTA Button */}
                   <button
-                    id={faq.id}
                     type="button"
-                    onClick={() => toggle(faq.id)}
-                    className="w-full flex items-center justify-between gap-3 sm:gap-4 px-4 py-3 sm:px-5 sm:py-3.5 text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                    aria-expanded={isOpen}
+                    onClick={() => openLead({ description: "FAQ - Technical Consultation" })}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#e11d48] to-[#be123c] text-white text-[13px] font-bold shadow-[0_6px_20px_rgba(225,29,72,0.25)] hover:shadow-[0_8px_25px_rgba(225,29,72,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
                   >
-                    <div className="flex items-center gap-3 sm:gap-3.5 flex-1 min-w-0">
-                      {/* Step Number Pill */}
-                      <span
-                        className={`text-[11px] sm:text-xs font-mono font-bold px-2 py-0.5 rounded-md shrink-0 transition-colors ${
-                          isOpen
-                            ? "bg-primary text-primary-foreground shadow-xs"
-                            : "bg-muted/40 text-muted-foreground group-hover:text-foreground"
-                        }`}
-                      >
-                        {faq.num}
-                      </span>
-
-                      <div className="min-w-0 flex-1">
-                        {/* Domain Tag */}
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <Icon className={`w-3 h-3 ${isOpen ? "text-primary" : "text-muted-foreground/60"}`} />
-                          <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
-                            {faq.category}
-                          </span>
-                        </div>
-
-                        {/* Question */}
-                        <h3
-                          className={`text-sm sm:text-[15px] font-bold transition-colors duration-200 leading-snug ${
-                            isOpen
-                              ? "text-primary"
-                              : "text-foreground group-hover:text-primary"
-                          }`}
-                        >
-                          {faq.question}
-                        </h3>
-                      </div>
-                    </div>
-
-                    {/* Toggle Icon Indicator */}
-                    <div
-                      className={`shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-lg border flex items-center justify-center transition-all duration-300 ${
-                        isOpen
-                          ? "border-primary/50 bg-primary/10 text-primary rotate-180"
-                          : "border-border/70 text-muted-foreground group-hover:border-primary/40 group-hover:text-primary group-hover:bg-primary/5"
-                      }`}
-                    >
-                      {isOpen ? (
-                        <Minus className="h-3.5 w-3.5" />
-                      ) : (
-                        <Plus className="h-3.5 w-3.5" />
-                      )}
-                    </div>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
+                      <line x1="22" y1="2" x2="11" y2="13"/>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                    <span>Talk to our team</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1">
+                      <path d="M5 12h14"/>
+                      <path d="m12 5 7 7-7 7"/>
+                    </svg>
                   </button>
+                </div>
 
-                  {/* Expandable Content */}
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-4 pb-4 sm:px-5 sm:pb-4.5 pt-0">
-                          {/* Answer Body */}
-                          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                            {faq.answer}
-                          </p>
+                {/* Right: 3D Character Sitting with Laptop (Completely visible, zero obstruction!) */}
+                <div className="absolute right-[-10px] sm:right-[-14px] bottom-[2px] sm:bottom-[6px] w-[220px] sm:w-[250px] pointer-events-none select-none z-10">
+                  {/* 3 accent lines radiating from hair */}
+                  <div className="absolute -top-2 right-4 flex gap-1.5 rotate-[35deg]">
+                    <div className="w-[2.5px] h-3 bg-[#f43f5e] rounded-full" />
+                    <div className="w-[2.5px] h-4 bg-[#f43f5e] rounded-full -translate-y-1" />
+                    <div className="w-[2.5px] h-3 bg-[#f43f5e] rounded-full" />
+                  </div>
 
-                          {/* Key Takeaway Badges */}
-                          <div className="mt-3 pt-3 border-t border-border/50 flex flex-wrap gap-1.5 sm:gap-2">
-                            {faq.highlights.map((item) => (
-                              <span
-                                key={item}
-                                className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[10px] sm:text-[11px] font-medium border border-primary/25 bg-primary/[0.04] text-foreground"
-                              >
-                                <CheckCircle2 className="w-3 h-3 text-primary shrink-0" />
-                                <span>{item}</span>
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
+                  <Image
+                    src="/assets/simplefaq.png"
+                    alt="Technical Lead with laptop"
+                    width={500}
+                    height={600}
+                    className="w-full h-auto object-contain drop-shadow-[0_12px_25px_rgba(244,63,94,0.12)]"
+                    priority
+                  />
+                </div>
+
+              </div>
+
+              {/* Bottom: Stats Panel (Full-width rounded card with dividers) */}
+              <div className="relative z-20 mt-3 bg-white/95 dark:bg-zinc-800/80 backdrop-blur-sm rounded-[14px] p-2.5 sm:p-3 border border-zinc-100 dark:border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.02)] grid grid-cols-3 divide-x divide-zinc-100 dark:divide-zinc-700/60 text-center sm:text-left">
+                <div className="px-2">
+                  <div className="text-[15px] sm:text-[16px] font-extrabold text-[#be123c] dark:text-rose-400">100%</div>
+                  <div className="text-[9px] sm:text-[10px] font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
+                    Honest Answers
+                  </div>
+                </div>
+                <div className="px-2">
+                  <div className="text-[15px] sm:text-[16px] font-extrabold text-[#be123c] dark:text-rose-400">Usually</div>
+                  <div className="text-[9px] sm:text-[10px] font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
+                    Within a Few Hours
+                  </div>
+                </div>
+                <div className="px-2">
+                  <div className="text-[15px] sm:text-[16px] font-extrabold text-[#be123c] dark:text-rose-400">Zero</div>
+                  <div className="text-[9px] sm:text-[10px] font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
+                    Sales Pressure
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
           </div>
 
         </div>
 
-        {/* Bottom Editorial Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16 pt-8 border-t border-border/60 text-center"
-        >
-          <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground/60">
-            Have a custom requirement? Brief us at{" "}
-            <a
-              href={`mailto:${SITE.email}`}
-              className="text-primary hover:underline font-semibold"
-            >
-              {SITE.email}
-            </a>
-          </p>
-        </motion.div>
+        {/* Right Column (7 Cols) - FAQ Accordion List */}
+        <div className="lg:col-span-7 flex flex-col gap-4 pt-0 lg:pt-1">
+          {FAQS.map((faq) => {
+            const isOpen = openId === faq.id;
+            const Icon = faq.icon;
+
+            return (
+              <div
+                key={faq.id}
+                className={`group rounded-[24px] transition-all duration-300 overflow-hidden ${
+                  isOpen
+                    ? "bg-white dark:bg-zinc-900 border-[1.5px] border-rose-300/80 dark:border-rose-500/50 shadow-[0_12px_35px_rgba(244,63,94,0.12)]"
+                    : "bg-white dark:bg-zinc-900 border border-transparent dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_6px_25px_rgba(0,0,0,0.06)]"
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={() => toggle(faq.id)}
+                  className="w-full flex items-center justify-between gap-3 p-4 sm:p-[18px] text-left cursor-pointer outline-none"
+                >
+                  <div className="flex items-center gap-3.5 sm:gap-4 flex-1 min-w-0">
+                    {/* Number Box */}
+                    <div
+                      className={`shrink-0 flex items-center justify-center w-[46px] h-[46px] rounded-[14px] font-bold text-[15px] transition-colors duration-300 ${
+                        isOpen
+                          ? "bg-rose-50 dark:bg-rose-950/50 text-[#e11d48] dark:text-rose-400"
+                          : "bg-[#f4f4f6] dark:bg-zinc-800/60 text-[#1e1b4b] dark:text-zinc-300 group-hover:bg-[#f0f0f4]"
+                      }`}
+                    >
+                      {faq.num}
+                    </div>
+
+                    {/* Tag + Question */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <Icon className="w-[13px] h-[13px] text-[#db2777] dark:text-pink-500" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#db2777] dark:text-pink-500">
+                          {faq.category}
+                        </span>
+                      </div>
+                      <h3 className="text-[14.5px] sm:text-[15px] font-bold text-zinc-900 dark:text-white leading-snug">
+                        {faq.question}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Dropdown Chevron */}
+                  <div
+                    className={`shrink-0 flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 shadow-sm ${
+                      isOpen
+                        ? "bg-white dark:bg-zinc-800 border-rose-200 dark:border-rose-900/50 text-[#e11d48] dark:text-rose-400 rotate-180 shadow-rose-100/50"
+                        : "bg-white dark:bg-zinc-800 border-zinc-100 dark:border-zinc-700 text-zinc-700 dark:text-zinc-400 shadow-zinc-100/50"
+                    }`}
+                  >
+                    <ChevronDown className="w-4.5 h-4.5 stroke-[2.5]" />
+                  </div>
+                </button>
+
+                {/* Answer Content */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-4 sm:px-[18px] pb-[18px] pt-0 pl-[68px] sm:pl-[76px]">
+                        <p className="text-[12.5px] sm:text-[13px] text-zinc-500 dark:text-zinc-400 leading-[1.6] max-w-[95%]">
+                          {faq.answer}
+                        </p>
+
+                        {faq.highlights && faq.highlights.length > 0 && (
+                          <div className="mt-3.5 pt-1 flex flex-wrap gap-2">
+                            {faq.highlights.map((hl, i) => {
+                              const HlIcon = hl.icon;
+                              return (
+                                <div
+                                  key={i}
+                                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-100/80 dark:border-rose-900/40 text-rose-950 dark:text-rose-200 text-[11px] font-semibold"
+                                >
+                                  <HlIcon className="w-3.5 h-3.5 text-[#e11d48] dark:text-rose-500" />
+                                  <span>{hl.text}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
 
       </div>
     </section>
