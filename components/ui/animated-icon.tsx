@@ -1,42 +1,42 @@
 "use client";
 
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from "react";
-import { motion, useAnimation } from "motion/react";
 import { cn } from "@/lib/utils";
+import { motion, useAnimation } from "motion/react";
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from "react";
 
 // Official Lucide icons from @animateicons/react (https://animateicons.in/)
-import { ArrowRightIcon } from "@animateicons/react/lucide/arrow-right-icon";
 import { ArrowLeftIcon } from "@animateicons/react/lucide/arrow-left-icon";
-import { ChevronRightIcon } from "@animateicons/react/lucide/chevron-right-icon";
-import { ExternalLinkIcon } from "@animateicons/react/lucide/external-link-icon";
-import { SparklesIcon } from "@animateicons/react/lucide/sparkles-icon";
-import { HouseIcon } from "@animateicons/react/lucide/house-icon";
-import { LayersIcon } from "@animateicons/react/lucide/layers-icon";
-import { LightbulbIcon } from "@animateicons/react/lucide/lightbulb-icon";
-import { InfoIcon } from "@animateicons/react/lucide/info-icon";
-import { SunMediumIcon } from "@animateicons/react/lucide/sun-medium-icon";
-import { MoonIcon } from "@animateicons/react/lucide/moon-icon";
-import { SendIcon } from "@animateicons/react/lucide/send-icon";
+import { ArrowRightIcon } from "@animateicons/react/lucide/arrow-right-icon";
 import { CheckIcon } from "@animateicons/react/lucide/check-icon";
-import { RefreshCwIcon } from "@animateicons/react/lucide/refresh-cw-icon";
-import { MailIcon } from "@animateicons/react/lucide/mail-icon";
-import { MessageSquareIcon } from "@animateicons/react/lucide/message-square-icon";
-import { XIcon } from "@animateicons/react/lucide/x-icon";
-import { MenuIcon } from "@animateicons/react/lucide/menu-icon";
-import { LayoutGridIcon } from "@animateicons/react/lucide/layout-grid-icon";
-import { ZapIcon } from "@animateicons/react/lucide/zap-icon";
-import { PencilIcon } from "@animateicons/react/lucide/pencil-icon";
-import { ListChecksIcon } from "@animateicons/react/lucide/list-checks-icon";
-import { SearchIcon } from "@animateicons/react/lucide/search-icon";
-import { SlidersHorizontalIcon } from "@animateicons/react/lucide/sliders-horizontal-icon";
+import { ChevronRightIcon } from "@animateicons/react/lucide/chevron-right-icon";
 import { CodeIcon } from "@animateicons/react/lucide/code-icon";
-import { TypeIcon } from "@animateicons/react/lucide/type-icon";
-import { GlobeIcon } from "@animateicons/react/lucide/globe-icon";
-import { SmartphoneIcon } from "@animateicons/react/lucide/smartphone-icon";
-import { LaptopIcon } from "@animateicons/react/lucide/laptop-icon";
-import { CpuIcon } from "@animateicons/react/lucide/cpu-icon";
-import { FolderIcon } from "@animateicons/react/lucide/folder-icon";
 import { ContactIcon } from "@animateicons/react/lucide/contact-icon";
+import { CpuIcon } from "@animateicons/react/lucide/cpu-icon";
+import { ExternalLinkIcon } from "@animateicons/react/lucide/external-link-icon";
+import { FolderIcon } from "@animateicons/react/lucide/folder-icon";
+import { GlobeIcon } from "@animateicons/react/lucide/globe-icon";
+import { HouseIcon } from "@animateicons/react/lucide/house-icon";
+import { InfoIcon } from "@animateicons/react/lucide/info-icon";
+import { LaptopIcon } from "@animateicons/react/lucide/laptop-icon";
+import { LayersIcon } from "@animateicons/react/lucide/layers-icon";
+import { LayoutGridIcon } from "@animateicons/react/lucide/layout-grid-icon";
+import { LightbulbIcon } from "@animateicons/react/lucide/lightbulb-icon";
+import { ListChecksIcon } from "@animateicons/react/lucide/list-checks-icon";
+import { MailIcon } from "@animateicons/react/lucide/mail-icon";
+import { MenuIcon } from "@animateicons/react/lucide/menu-icon";
+import { MessageSquareIcon } from "@animateicons/react/lucide/message-square-icon";
+import { MoonIcon } from "@animateicons/react/lucide/moon-icon";
+import { PencilIcon } from "@animateicons/react/lucide/pencil-icon";
+import { RefreshCwIcon } from "@animateicons/react/lucide/refresh-cw-icon";
+import { SearchIcon } from "@animateicons/react/lucide/search-icon";
+import { SendIcon } from "@animateicons/react/lucide/send-icon";
+import { SlidersHorizontalIcon } from "@animateicons/react/lucide/sliders-horizontal-icon";
+import { SmartphoneIcon } from "@animateicons/react/lucide/smartphone-icon";
+import { SparklesIcon } from "@animateicons/react/lucide/sparkles-icon";
+import { SunMediumIcon } from "@animateicons/react/lucide/sun-medium-icon";
+import { TypeIcon } from "@animateicons/react/lucide/type-icon";
+import { XIcon } from "@animateicons/react/lucide/x-icon";
+import { ZapIcon } from "@animateicons/react/lucide/zap-icon";
 
 export type AnimatedIconName =
   | "arrow-right"

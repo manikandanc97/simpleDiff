@@ -1,11 +1,11 @@
+import { SITE } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE } from "@/lib/site";
 
 import {
+  AnimatedArrowRight,
   AnimatedMail,
   AnimatedMessageSquare,
-  AnimatedArrowRight,
 } from "@/components/ui/animated-icon";
 import { PageBanner } from "@/components/ui/page-banner";
 

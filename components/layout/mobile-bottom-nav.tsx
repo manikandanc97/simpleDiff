@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
+import { useMobileMenu } from "@/components/layout/mobile-menu-context";
+import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
-import { useMobileMenu } from "@/components/layout/mobile-menu-context";
 
 import { AnimatedIcon, type AnimatedIconName } from "@/components/ui/animated-icon";
 

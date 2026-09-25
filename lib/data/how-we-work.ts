@@ -1,4 +1,4 @@
-import { Users, Target, FileText, Layers, Pencil, Code2, Rocket, ShieldCheck, Clock, Lightbulb, Sparkles } from 'lucide-react';
+import { Clock, Code2, FileText, Layers, Lightbulb, Pencil, Rocket, ShieldCheck, Sparkles, Target, Users } from 'lucide-react';
 
 interface StepFeature {
   icon: typeof Users;

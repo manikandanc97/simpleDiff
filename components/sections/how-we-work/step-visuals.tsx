@@ -1,14 +1,30 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "motion/react";
 import {
-  Lightbulb, Pencil, Code2, Rocket, Users, Target, FileText, Layers, Play,
-  BarChart2, BarChart3, CheckCircle2, GitFork, ArrowRight, Sparkles,
-  ShieldCheck, Clock, X, Palette, Type, MousePointer2, Smartphone,
-  Database, Server, TerminalSquare, Activity, TrendingUp, Globe,
-  Wifi, MonitorPlay, LayoutTemplate
+  Activity,
+  BarChart2, BarChart3, CheckCircle2,
+  Code2,
+  Database,
+  FileText,
+  GitFork,
+  Globe,
+  Layers,
+  LayoutTemplate,
+  Lightbulb,
+  MonitorPlay,
+  MousePointer2,
+  Palette,
+  Pencil,
+  Rocket,
+  Server,
+  ShieldCheck,
+  Target,
+  TrendingUp,
+  Users,
+  Wifi
 } from "lucide-react";
+import { motion } from "motion/react";
+import Image from "next/image";
 
 export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
   return (

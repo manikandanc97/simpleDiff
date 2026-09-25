@@ -1,45 +1,15 @@
 "use client";
 
-import { useState, useRef } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "motion/react";
-import {
-  Lightbulb,
-  Pencil,
-  Code2,
-  Rocket,
-  Users,
-  Target,
-  FileText,
-  Layers,
-  Play,
-  BarChart2,
-  BarChart3,
-  CheckCircle2,
-  GitFork,
-  ArrowRight,
-  Sparkles,
-  ShieldCheck,
-  Clock,
-  X,
-  Palette,
-  Type,
-  MousePointer2,
-  Smartphone,
-  Database,
-  Server,
-  TerminalSquare,
-  Activity,
-  TrendingUp,
-  Globe,
-  Wifi,
-  MonitorPlay,
-  LayoutTemplate
-} from "lucide-react";
-import { STEPS } from "@/lib/data/how-we-work";
-import { StepVisual } from "./how-we-work/step-visuals";
 import { useLead } from "@/components/leads/lead-provider";
+import { STEPS } from "@/lib/data/how-we-work";
 import { cn } from "@/lib/utils";
+import {
+  ArrowRight,
+  ShieldCheck
+} from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
+import { StepVisual } from "./how-we-work/step-visuals";
 
 export function HowWeWork() {
   const [activeStepIndex, setActiveStepIndex] = useState(0);

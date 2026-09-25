@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "motion/react";
 import { TechItem } from "@/lib/data/tech-stack";
+import { motion } from "motion/react";
+import Image from "next/image";
 
 const SPRING = { type: "spring" as const, stiffness: 340, damping: 28 };
 

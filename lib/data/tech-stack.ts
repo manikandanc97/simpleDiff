@@ -1,4 +1,4 @@
-import { Monitor, Smartphone, Server, Cloud, Sparkles, Wrench } from 'lucide-react';
+import { Cloud, Monitor, Server, Smartphone, Sparkles, Wrench } from 'lucide-react';
 
 export const CATEGORIES = [
   "Frontend & Web",

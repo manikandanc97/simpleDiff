@@ -1,7 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
 import { type LeadInput } from "@/lib/leads/schema";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import { LeadDialog } from "./lead-dialog";
 
 interface LeadContextType {

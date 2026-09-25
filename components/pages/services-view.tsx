@@ -1,18 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Check, Plus, TerminalSquare } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { AnimatedArrowRight, AnimatedRotateCcw } from "@/components/ui/animated-icon";
 import { useLead } from "@/components/leads/lead-provider";
+import { AnimatedArrowRight, AnimatedRotateCcw } from "@/components/ui/animated-icon";
+import { Button } from "@/components/ui/button";
 import { PageBanner } from "@/components/ui/page-banner";
-import { cn } from "@/lib/utils";
 import {
-  SERVICES_LIST,
   CATEGORY_ORDER,
+  SERVICES_LIST,
   type ServiceItem,
 } from "@/lib/data/services";
+import { cn } from "@/lib/utils";
+import { Check, Plus, TerminalSquare } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
 
 function BlueprintNode({ service }: { service: ServiceItem }) {
   const Icon = service.icon;

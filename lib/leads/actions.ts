@@ -1,8 +1,8 @@
 "use server";
 
-import { leadSchema, type LeadState } from "./schema";
-import { createClient } from "@supabase/supabase-js";
 import { SITE } from "@/lib/site";
+import { createClient } from "@supabase/supabase-js";
+import { leadSchema, type LeadState } from "./schema";
 
 export async function submitLead(
   _prevState: LeadState,

@@ -1,6 +1,6 @@
-import { useRef } from "react";
-import { motion, useInView } from "motion/react";
 import { cn } from "@/lib/utils";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
 
 export interface SectionHeaderProps {
   title: React.ReactNode;

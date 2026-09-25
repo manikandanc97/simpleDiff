@@ -1,4 +1,4 @@
-import { Lightbulb, Zap, Layers, Users, TrendingUp, Box, Briefcase, Target, Database } from 'lucide-react';
+import { Box, Briefcase, Database, Layers, Lightbulb, Target, TrendingUp, Users, Zap } from 'lucide-react';
 
 // ─── Left Column: Process Steps ─────────────────────────────────────────────
 export const PROCESS_STEPS = [

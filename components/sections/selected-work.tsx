@@ -1,27 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "motion/react";
-import { 
-  ArrowRight, 
-  ChevronLeft, 
-  ChevronRight, 
-  Lock, 
-  Maximize2, 
-  ShoppingCart, 
-  ExternalLink,
-  Search,
-  Play,
-  Heart,
-  ShieldCheck,
-  CheckCircle2,
-  Star,
-  Sparkles,
-  Hammer
-} from "lucide-react";
-import { PROJECTS, Project, ServiceType } from "@/lib/data/projects";
+import { PROJECTS, Project } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  Lock,
+  Maximize2,
+  ShoppingCart
+} from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const FILTER_TABS = ["Websites", "Web Apps", "Mobile Apps"] as const;
 

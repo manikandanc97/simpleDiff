@@ -7,8 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { LeadForm } from "./lead-form";
 import { type LeadInput } from "@/lib/leads/schema";
+import { LeadForm } from "./lead-form";
 
 interface LeadDialogProps {
   open: boolean;

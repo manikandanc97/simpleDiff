@@ -1,30 +1,30 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useLead } from "@/components/leads/lead-provider";
 import {
-  ChevronDown,
+  Activity,
+  Award,
+  Calendar,
   CheckCircle2,
-  FolderOpen,
+  ChevronDown,
   Clock,
   Code2,
-  Wrench,
-  Users,
-  Calendar,
   FileText,
-  Zap,
+  FolderOpen,
+  Map,
   RefreshCw,
-  Activity,
   ShieldCheck,
-  Unlock,
-  Award,
   ThumbsUp,
   Timer,
+  Unlock,
   UserCheck,
-  Map
+  Users,
+  Wrench,
+  Zap
 } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useLead } from "@/components/leads/lead-provider";
+import { useState } from "react";
 
 const FAQS = [
   {

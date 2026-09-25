@@ -1,7 +1,7 @@
 "use client";
 
+import { animate, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
-import { useInView, animate, useReducedMotion } from "motion/react";
 
 interface AnimatedCounterProps {
   value: number;

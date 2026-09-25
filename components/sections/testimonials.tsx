@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
 
 const TESTIMONIALS = [
   {

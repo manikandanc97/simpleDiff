@@ -1,11 +1,11 @@
 "use client"
 
-import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { cn } from "cn"
+import * as React from "react"
 
-import { Button } from "@/components/ui/button"
 import { AnimatedX } from "@/components/ui/animated-icon"
+import { Button } from "@/components/ui/button"
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
@@ -152,5 +152,5 @@ export {
   DialogOverlay,
   DialogPortal,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 }

@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion } from "motion/react";
-import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ChevronRight } from "lucide-react";
+import { motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 export interface BreadcrumbItem {
   label: string;

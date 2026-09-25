@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import { SITE } from "@/lib/site";
 import { LeadForm } from "@/components/leads/lead-form";
 import {
+  AnimatedCheck,
+  AnimatedContact,
   AnimatedMail,
   AnimatedMessageSquare,
   AnimatedSparkles,
-  AnimatedCheck,
-  AnimatedContact,
 } from "@/components/ui/animated-icon";
 import { PageBanner } from "@/components/ui/page-banner";
+import { SITE } from "@/lib/site";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact",

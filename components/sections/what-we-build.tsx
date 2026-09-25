@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, ChevronRight, MousePointer2, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useLead } from "@/components/leads/lead-provider";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight, MousePointer2 } from "lucide-react";
+import { motion } from "motion/react";
+import { useRef, useState } from "react";
 
-import { WebsitesMockup, WebAppsMockup, MobileAppsMockup, SaaSProductsMockup } from './what-we-build/mockups';
+import { MobileAppsMockup, SaaSProductsMockup, WebAppsMockup, WebsitesMockup } from './what-we-build/mockups';
 
 // ── SERVICES DATA SPECIFICATION ──
 const SERVICES = [
@@ -165,8 +165,6 @@ export function WhatWeBuild() {
               if (offset < -2) offset += SERVICES.length;
 
               const isActive = offset === 0;
-              const isPrev = offset === -1;
-              const isNext = offset === 1;
               const isVisible = Math.abs(offset) <= 1;
 
               const MockupComponent = service.Mockup;

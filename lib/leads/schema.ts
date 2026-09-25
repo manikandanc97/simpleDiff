@@ -11,6 +11,7 @@ export const PROJECT_TYPES = [
 
 export const LEAD_SOURCES = [
   "cta",
+  "cta-schedule",
   "navbar",
   "footer",
   "what-we-build",

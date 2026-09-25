@@ -1,26 +1,15 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
-import { motion, useInView } from "motion/react";
-import {
-  Users,
-  Target,
-  Layers,
-  Zap,
-  Briefcase,
-  Lightbulb,
-  ArrowUpRight,
-  ArrowRight,
-  Activity,
-  TrendingUp,
-  Box,
-  Database,
-} from "lucide-react";
-import { AnimatedCounter } from "@/components/ui/animated-counter";
-import { PROCESS_STEPS, FLOW_NODES, REAL_OUTCOMES } from "@/lib/data/philosophy";
-import { FlowDiagram } from "./philosophy/flow-diagram";
 import { useLead } from "@/components/leads/lead-provider";
+import { AnimatedCounter } from "@/components/ui/animated-counter";
+import { PROCESS_STEPS, REAL_OUTCOMES } from "@/lib/data/philosophy";
+import {
+  ArrowRight,
+  ArrowUpRight
+} from "lucide-react";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
+import { FlowDiagram } from "./philosophy/flow-diagram";
 
 export function WhySimpleThink() {
   const containerRef = useRef<HTMLDivElement>(null);

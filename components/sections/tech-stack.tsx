@@ -1,23 +1,15 @@
 "use client";
 
 import { CATEGORIES, CATEGORY_ICONS, TECH_STACK, type Category } from "@/lib/data/tech-stack";
-import { TechCard } from "./tech-stack-card";
-import { useRef, useState, useMemo } from "react";
-import Image from "next/image";
-import { motion, useInView, AnimatePresence } from "motion/react";
 import {
-  Monitor,
-  Smartphone,
-  Server,
-  Cloud,
-  Sparkles,
-  Wrench,
-  ShieldCheck,
-  Zap,
   BarChart2,
   Infinity as InfinityIcon,
-  ArrowRight,
+  ShieldCheck,
+  Zap
 } from "lucide-react";
+import { AnimatePresence, motion, useInView } from "motion/react";
+import { useMemo, useRef, useState } from "react";
+import { TechCard } from "./tech-stack-card";
 
 // ─── Categories ───────────────────────────────────────────────────────────────
 

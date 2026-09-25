@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
-import { EXPERIMENTS } from "@/lib/data/experiments";
 import { ExperimentCard } from "@/components/sections/lab/experiment-card";
 import { PageBanner } from "@/components/ui/page-banner";
+import { EXPERIMENTS } from "@/lib/data/experiments";
+import { motion } from "motion/react";
 
 export function LabView() {
   const featured = EXPERIMENTS[0];

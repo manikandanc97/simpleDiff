@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { ServicesView } from "@/components/pages/services-view";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Services",

@@ -1,5 +1,5 @@
-import dynamic from "next/dynamic";
 import { WorkbenchHero } from "@/components/workbench/workbench-hero";
+import dynamic from "next/dynamic";
 
 // Lazy-loaded sections to reduce initial JS bundle size
 const WhatWeBuild = dynamic(() => import("@/components/sections/what-we-build").then((mod) => mod.WhatWeBuild));

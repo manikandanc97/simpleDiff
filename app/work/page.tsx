@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { WorkView } from "@/components/pages/work-view";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Work",

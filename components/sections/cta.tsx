@@ -1,17 +1,12 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "motion/react";
-import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
-
-import {
-  AnimatedArrowRight,
-  AnimatedMail,
-  AnimatedMessageSquare,
-} from "@/components/ui/animated-icon";
-import { SITE } from "@/lib/site";
+import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { Button } from "@/components/ui/button";
+import { Calendar, CheckCircle2, MessageSquare, Zap } from "lucide-react";
+import { motion, useInView } from "motion/react";
 import Image from "next/image";
+import { useRef } from "react";
 
 interface CTAProps {
   onStartProject?: () => void;
@@ -20,124 +15,176 @@ interface CTAProps {
 export function CTA({ onStartProject }: CTAProps) {
   const { openLead } = useLead();
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   const handleStart = () => {
     if (onStartProject) onStartProject();
     else openLead({ source: "cta" });
   };
 
+  const handleSchedule = () => {
+    openLead({ source: "cta-schedule", note: "Interested in scheduling a discovery call." });
+  };
+
   return (
     <section
       id="cta"
       ref={ref}
-      className="relative w-full py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden border-t border-border"
+      className="relative w-full py-20 sm:py-28 lg:py-32 bg-[#FCFBF9] border-t border-[#EAE6DF] overflow-hidden select-none"
     >
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute inset-0 mesh-bg opacity-70" />
-      <div className="pointer-events-none absolute top-[40%] left-[10%] w-[500px] h-[500px] bg-[#D81159]/15 rounded-full blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-[10%] right-[10%] w-[600px] h-[600px] bg-[#8C1EFF]/15 rounded-full blur-[140px]" />
+      {/* ── Soft Ambient Glows & Dot Patterns Matching SimpleThink Theme ── */}
+      <div className="pointer-events-none absolute -top-16 -left-16 w-[420px] h-[420px] rounded-full bg-rose-200/35 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -right-20 w-[480px] h-[480px] rounded-full bg-purple-200/30 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 left-1/3 w-[360px] h-[360px] rounded-full bg-pink-100/40 blur-3xl" />
 
-      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
-        {/* Mind Illustration */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 15 }}
-          animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
-          className="w-full max-w-[300px] sm:max-w-[380px] relative z-10 -mb-4"
-        >
-          <Image
-            src="/assets/simplemind.png"
-            alt="From Idea to Product"
-            width={800}
-            height={600}
-            className="w-full h-auto object-contain"
-          />
-        </motion.div>
+      {/* Decorative Dot Matrix on corners */}
+      <div className="hidden lg:block pointer-events-none absolute top-12 left-8 w-28 h-28 hero-dots opacity-40" />
+      <div className="hidden lg:block pointer-events-none absolute bottom-12 right-10 w-28 h-28 hero-dots opacity-35" />
 
-        {/* LET'S BUILD TOGETHER Pill */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-card shadow-sm border border-border/50 text-xs sm:text-sm font-bold tracking-wide text-foreground uppercase mb-6 z-10 relative"
-        >
-          <span className="w-2.5 h-2.5 rounded-full bg-[#FF2D55] animate-pulse"></span>
-          Let&apos;s Build Together
-        </motion.div>
-
-        {/* Scaled Headline (64px H1/Finale Scale) */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tight text-foreground mb-5 leading-[1.08] uppercase select-none z-10 relative"
-        >
-          Got Something
-          <br />
-          In <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D81159] to-[#8C1EFF] transition-colors duration-500">Mind?</span>
-        </motion.h2>
-
-        {/* Subtitle (Lead: 20px) */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="text-lg sm:text-xl font-medium tracking-tight text-muted-foreground mb-8 max-w-xl z-10 relative"
-        >
-          Let&apos;s make it <span className="text-foreground font-semibold">simple</span>.
-          <br />
-          Let&apos;s build it{" "}
-          <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D81159] to-[#8C1EFF]">premium.</span>
-        </motion.div>
-
-        {/* Dedicated Section Theme Dock Slot for Final CTA */}
-        {/* Main Action Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.35 }}
-          className="flex flex-col sm:flex-row items-center gap-4 mb-16 z-10 relative"
-        >
-          <Button
-            size="lg"
-            onClick={handleStart}
-            id="cta-start-project"
-            className="group/button h-14 px-10 rounded-full text-base font-bold tracking-tight shadow-xl shadow-pink-500/20 hover:shadow-pink-500/35 hover:-translate-y-1 active:scale-95 active:translate-y-0 transition-all duration-300 cursor-pointer flex items-center gap-2.5 bg-gradient-to-r from-[#D81159] to-[#8C1EFF] hover:from-[#C01050] hover:to-[#7B1AD9] text-white border-0"
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          
+          {/* ── Left Column: 3D Illustration ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="lg:col-span-5 xl:col-span-5 flex justify-center items-center relative"
           >
-            <span>Start a project</span>
-            <AnimatedArrowRight size={18} />
-          </Button>
-        </motion.div>
+            {/* Subtle glow backdrop for the 3D illustration */}
+            <div className="absolute w-[80%] h-[80%] rounded-full bg-gradient-to-tr from-[#922F55]/12 via-[#6C2BB8]/10 to-transparent blur-2xl pointer-events-none" />
 
-        {/* Direct Channels */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground pt-4 border-t border-border/50 w-full max-w-md"
-        >
-          {SITE.email && (
-            <a
-              href={`mailto:${SITE.email}`}
-              className="group flex items-center gap-2 hover:text-primary active:scale-95 transition-all font-medium"
-            >
-              <AnimatedMail size={16} className="text-primary" />
-              <span>{SITE.email}</span>
-            </a>
-          )}
-          {SITE.whatsapp && (
-            <a
-              href={`https://wa.me/${SITE.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 hover:text-primary active:scale-95 transition-all font-medium"
-            >
-              <AnimatedMessageSquare size={16} className="text-primary" />
-              <span>WhatsApp Direct</span>
-            </a>
-          )}
-        </motion.div>
+            <div className="relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] lg:w-[460px] lg:h-[460px] xl:w-[500px] xl:h-[500px]">
+              {/* Gentle floating motion */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="relative w-full h-full"
+              >
+                <Image
+                  src="/assets/simplemind.png"
+                  alt="Turn your idea into a premium digital product"
+                  fill
+                  className="object-contain drop-shadow-[0_20px_35px_rgba(146,47,85,0.12)]"
+                  priority
+                />
+              </motion.div>
+
+              {/* READY TO BUILD? Floating Pill */}
+              <motion.div
+                initial={{ scale: 0.85, opacity: 0 }}
+                animate={inView ? { scale: 1, opacity: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="absolute right-[4%] bottom-[20%] sm:right-[8%] sm:bottom-[22%] z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 backdrop-blur-md shadow-[0_8px_24px_rgba(30,24,30,0.10)] border border-[rgba(30,24,30,0.08)] hover:scale-105 transition-transform duration-300"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[#922F55] font-extrabold text-[11px] tracking-widest uppercase font-satoshi">
+                  READY TO BUILD?
+                </span>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* ── Right Column: Content & Actions ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+            className="lg:col-span-7 xl:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left font-satoshi"
+          >
+            {/* Top Pill Badge matching SimpleThink standard */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-rose-100 shadow-[0_2px_8px_rgba(244,63,94,0.06)] mb-5">
+              <span className="w-2 h-2 rounded-full bg-[#922F55] animate-pulse" />
+              <span className="text-[11px] sm:text-xs font-black tracking-widest text-[#922F55] uppercase">
+                FROM IDEA TO IMPACT
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h2 className="font-satoshi font-[800] text-3xl sm:text-4xl lg:text-[46px] xl:text-[52px] tracking-[-0.04em] text-[#121114] leading-[1.08] mb-5 max-w-[620px]">
+              Let&apos;s turn your idea into a{" "}
+              <span className="relative inline-block brand-gradient-text">
+                premium digital product.
+                {/* Hand-drawn style SVG underline stroke matching Hero & WhatWeBuild */}
+                <svg
+                  className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full h-[12px] text-[#922F55] overflow-visible pointer-events-none"
+                  viewBox="0 0 200 20"
+                  fill="none"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M4 12 C50 4, 130 5, 195 10"
+                    stroke="currentColor"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M30 15 C90 11, 150 12, 185 14"
+                    stroke="#D23D78"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeOpacity="0.8"
+                  />
+                </svg>
+              </span>
+            </h2>
+
+            {/* Clean Subtitle & 3 Core Value Props */}
+            <p className="text-[15px] sm:text-[17px] text-[#68666C] leading-relaxed mb-6 max-w-[560px]">
+              High craft, sub-second performance, and zero bloat. We partner with ambitious founders to build products people actually love using.
+            </p>
+
+            {/* 3 Pillars as sleek pills */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-8 sm:mb-10">
+              {[
+                { label: "Simple process.", icon: Zap },
+                { label: "Clear communication.", icon: MessageSquare },
+                { label: "Real results.", icon: CheckCircle2 },
+              ].map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={index}
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[rgba(30,24,30,0.08)] shadow-[0_2px_6px_rgba(0,0,0,0.03)] text-[13px] sm:text-[14px] font-[600] text-[#121114]"
+                  >
+                    <Icon size={14} className="text-[#922F55]" />
+                    <span>{item.label}</span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Action Buttons & Fast Response Note */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+              <Button
+                size="lg"
+                onClick={handleStart}
+                className="group h-13 sm:h-14 px-8 rounded-full bg-[#922F55] text-white text-[15px] sm:text-[16px] font-[700] tracking-tight hover:bg-[#7D2748] active:scale-95 transition-all duration-200 shadow-[0_8px_24px_rgba(146,47,85,0.25)] hover:shadow-[0_10px_28px_rgba(146,47,85,0.35)] hover:-translate-y-0.5 cursor-pointer border-0 w-full sm:w-auto flex items-center justify-center gap-2.5"
+              >
+                <span>Start a project</span>
+                <AnimatedArrowRight size={16} className="text-white" />
+              </Button>
+
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={handleSchedule}
+                className="h-13 sm:h-14 px-7 rounded-full bg-white text-[#121114] border border-[rgba(30,24,30,0.12)] hover:border-[rgba(30,24,30,0.25)] hover:bg-[#FAF9F7] text-[15px] sm:text-[16px] font-[700] tracking-tight active:scale-95 transition-all duration-200 shadow-xs hover:-translate-y-0.5 cursor-pointer w-full sm:w-auto flex items-center justify-center gap-2"
+              >
+                <Calendar size={16} className="text-[#68666C]" />
+                <span>Schedule a call</span>
+              </Button>
+            </div>
+
+            {/* Subtle Trust / Response Note */}
+            <div className="flex items-center gap-2 mt-4 text-[12px] sm:text-[13px] font-medium text-[#68666C]">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Response within 2 hours • Free 30-min discovery session</span>
+            </div>
+
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );

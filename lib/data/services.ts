@@ -1,12 +1,12 @@
 import {
+  Cpu,
   Globe,
+  Layers,
   LayoutDashboard,
-  Smartphone,
   Package2,
   Palette,
+  Smartphone,
   Sparkles,
-  Layers,
-  Cpu,
   type LucideIcon,
 } from "lucide-react";
 

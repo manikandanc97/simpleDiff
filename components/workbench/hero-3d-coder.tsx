@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef } from "react";
-import Image from "next/image";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { cn } from "@/lib/utils";
+import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import Image from "next/image";
+import React, { useRef } from "react";
 
 interface Hero3DCoderProps {
   className?: string;

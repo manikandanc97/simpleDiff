@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import { useLead } from "@/components/leads/lead-provider";
-import { SITE } from "@/lib/site";
-import { NAV_ITEMS } from "@/lib/nav";
 import {
   AnimatedIcon,
   type AnimatedIconName,
 } from "@/components/ui/animated-icon";
+import { NAV_ITEMS } from "@/lib/nav";
+import { SITE } from "@/lib/site";
+import Image from "next/image";
+import Link from "next/link";
 
 const FOOTER_NAV_ICONS: Record<string, AnimatedIconName> = {
   "/": "home",

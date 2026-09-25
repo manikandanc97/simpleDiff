@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "motion/react";
-import { Activity, Lightbulb, TrendingUp, Box, Users } from "lucide-react";
 import { FLOW_NODES } from "@/lib/data/philosophy";
+import { Activity, Box, Lightbulb, TrendingUp, Users } from "lucide-react";
+import { motion } from "motion/react";
+import Image from "next/image";
 
 export function FlowDiagram({ inView }: { inView: boolean }) {
   return (

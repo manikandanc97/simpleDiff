@@ -1,18 +1,18 @@
 "use client";
 
-import { useActionState, useState } from "react";
-import { submitLead } from "@/lib/leads/actions";
-import { type LeadInput, type LeadState } from "@/lib/leads/schema";
+import {
+  AnimatedMail,
+  AnimatedMessageSquare,
+  AnimatedSend,
+} from "@/components/ui/animated-icon";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { submitLead } from "@/lib/leads/actions";
+import { type LeadInput, type LeadState } from "@/lib/leads/schema";
 import { SITE } from "@/lib/site";
 import { CheckCircle2 } from "lucide-react";
-import {
-  AnimatedSend,
-  AnimatedMessageSquare,
-  AnimatedMail,
-} from "@/components/ui/animated-icon";
+import { useActionState, useState } from "react";
 
 interface LeadFormProps {
   prefill?: Partial<LeadInput>;

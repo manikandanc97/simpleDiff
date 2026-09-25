@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { LabView } from "@/components/pages/lab-view";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Ideas",

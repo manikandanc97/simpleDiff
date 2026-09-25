@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 /**
  * NavigationProgress

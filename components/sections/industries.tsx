@@ -1,19 +1,19 @@
 "use client";
 
-import { motion } from "motion/react";
+import { SectionHeader } from "@/components/ui/section-header";
 import {
-  Landmark,
-  Heart,
   BookOpen,
+  Heart,
+  Home,
+  Landmark,
+  Package,
+  Scale,
   ShoppingCart,
   Truck,
-  Home,
-  Scale,
-  Package,
   Tv,
   Zap,
 } from "lucide-react";
-import { SectionHeader } from "@/components/ui/section-header";
+import { motion } from "motion/react";
 
 const INDUSTRIES = [
   {

@@ -1,18 +1,18 @@
+import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
+import { MobileMenuProvider } from "@/components/layout/mobile-menu-context";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteNavbar } from "@/components/layout/site-navbar";
+import { LeadProvider } from "@/components/leads/lead-provider";
+import { MotionProvider } from "@/components/providers/motion-provider";
+import { CommandPalette } from "@/components/ui/command-palette";
+import { NavigationProgress } from "@/components/ui/navigation-progress";
+import { SITE } from "@/lib/site";
+import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
-import { SiteNavbar } from "@/components/layout/site-navbar";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { MobileMenuProvider } from "@/components/layout/mobile-menu-context";
-import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
-import { CommandPalette } from "@/components/ui/command-palette";
-import { NavigationProgress } from "@/components/ui/navigation-progress";
-import { MotionProvider } from "@/components/providers/motion-provider";
-import { LeadProvider } from "@/components/leads/lead-provider";
-import { SITE } from "@/lib/site";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 
 const inter = Inter({

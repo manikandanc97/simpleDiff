@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { NAV_ITEMS } from "@/lib/nav";
+import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
-import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
-import { NAV_ITEMS } from "@/lib/nav";
+import { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { Button } from "@/components/ui/button";
 
 interface SiteNavbarProps {
   onStartProject?: () => void;

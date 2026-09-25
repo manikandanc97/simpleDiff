@@ -1,12 +1,12 @@
 "use client";
 
-import { useRef } from "react";
-import { motion } from "motion/react";
 import { useLead } from "@/components/leads/lead-provider";
-import { ChevronDown, Play } from "lucide-react";
 import { AnimatedArrowRight } from "@/components/ui/animated-icon";
-import { HeroGridAccents } from "./hero-grid-accents";
+import { ChevronDown, Play } from "lucide-react";
+import { motion } from "motion/react";
+import { useRef } from "react";
 import { Hero3DCoder } from "./hero-3d-coder";
+import { HeroGridAccents } from "./hero-grid-accents";
 
 export function WorkbenchHero() {
   const { openLead } = useLead();

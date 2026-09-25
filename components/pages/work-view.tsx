@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useMemo, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
-import { motion } from "motion/react";
-import { PROJECTS, type Project } from "@/lib/data/projects";
-import { Globe, LayoutDashboard, Smartphone, Layers, ChevronRight, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { PageBanner } from "@/components/ui/page-banner";
+import { PROJECTS, type Project } from "@/lib/data/projects";
+import { cn } from "@/lib/utils";
+import { ArrowRight, Globe, Layers, LayoutDashboard, Smartphone } from "lucide-react";
+import { motion } from "motion/react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useMemo, useState } from "react";
 
 /* ─── Modern Visual Preview Canvas with Live Iframe ─── */
 function ProjectVisualCanvas({ project }: { project: Project }) {

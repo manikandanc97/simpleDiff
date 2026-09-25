@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "motion/react";
 
 // ── 1. WEBSITES 3D MOCKUP ──

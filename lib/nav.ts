@@ -1,4 +1,4 @@
-import { Home, Briefcase, Layers, Lightbulb, Info, Mail, type LucideIcon } from "lucide-react";
+import { Briefcase, Home, Info, Layers, Mail, type LucideIcon } from "lucide-react";
 
 export interface NavItem {
   label: string;
