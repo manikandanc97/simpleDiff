@@ -127,7 +127,7 @@ function CardLayout() {
           </div>
           <Bar w="w-full" color="bg-white/30" h="h-1.5" />
           <Bar w="w-3/4" color="bg-white/20" h="h-1.5" />
-          <div className="flex gap-1.5 mt-1">
+          <div className="flex gap-1.5">
             <div className="px-2 py-0.5 rounded-md bg-white text-[6px] font-bold text-[#7C3AED]">Primary</div>
             <div className="px-2 py-0.5 rounded-md bg-white/20 text-[6px] font-semibold text-white">Secondary</div>
           </div>
@@ -184,7 +184,7 @@ function SplitLayout() {
         className="flex flex-col gap-1 bg-[#1B1B2F] rounded-xl p-2 flex-shrink-0"
         style={{ width: 56 }}
       >
-        <div className="w-5 h-5 rounded-lg bg-gradient-to-br from-[#7C3AED] to-[#D23D78] mb-1" />
+        <div className="w-5 h-5 rounded-lg bg-gradient-to-br from-[#7C3AED] to-[#D23D78]" />
         {items.map((item, i) => (
           <motion.div
             key={i}

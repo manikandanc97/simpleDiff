@@ -29,7 +29,7 @@ export function HowWeWork() {
   return (
     <section
       id="how-we-work"
-      className="relative py-12 sm:py-16 lg:py-20 select-none"
+      className="relative py-16 sm:py-20 lg:py-24 select-none"
     >
       {/* Soft Pastel Background Ambient Accents */}
 
@@ -39,7 +39,7 @@ export function HowWeWork() {
       <div className="hidden lg:block pointer-events-none absolute top-1/2 left-3 w-20 h-28 hero-dots opacity-35" />
       <div className="hidden lg:block pointer-events-none absolute top-28 right-10 w-24 h-24 hero-dots opacity-35" />
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-8 sm:gap-10">
         
         {/* ========================================================================= */}
         {/* SECTION HEADER (Center Aligned, matching reference) */}
@@ -60,7 +60,7 @@ export function HowWeWork() {
         {/* ========================================================================= */}
         {/* STEPPER NAVIGATION BAR (Horizontal connected flow) */}
         {/* ========================================================================= */}
-        <div className="flex items-center justify-start md:justify-center gap-2 sm:gap-3 md:gap-4 mb-4 overflow-x-auto py-4 -my-4 px-4 -mx-4 scrollbar-none">
+        <div className="flex items-center justify-start md:justify-center gap-2 sm:gap-3 md:gap-4 overflow-x-auto py-4 -my-4 px-4 -mx-4 scrollbar-none">
           {STEPS.map((step, index) => {
             const isActive = activeStepIndex === index;
             const StepIcon = step.icon;
@@ -217,29 +217,31 @@ export function HowWeWork() {
               {/* ------------------------------------------------------------- */}
               {/* LEFT COLUMN: Narrative & 2x2 Features Grid */}
               {/* ------------------------------------------------------------- */}
-              <div className="lg:col-span-6 flex flex-col justify-between z-10">
-                {/* Step Kicker */}
-                <div className="mb-3.5">
-                  <span className="inline-block px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-xs font-black tracking-widest text-[#E11D48] uppercase">
-                    {currentStep.stepKicker}
-                  </span>
+              <div className="lg:col-span-6 flex flex-col gap-6 sm:gap-8 z-10">
+                <div className="flex flex-col gap-3.5">
+                  {/* Step Kicker */}
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-xs font-black tracking-widest text-[#E11D48] uppercase">
+                      {currentStep.stepKicker}
+                    </span>
+                  </div>
+
+                  {/* Big Headline */}
+                  <h3 className="font-satoshi font-black text-3xl sm:text-4xl lg:text-4xl text-neutral-900 tracking-tight leading-[1.12]">
+                    {currentStep.headlineFirst}{" "}
+                    <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                      {currentStep.headlineAccent}
+                    </span>
+                  </h3>
+
+                  {/* Description Paragraph */}
+                  <p className="text-neutral-500 text-sm sm:text-base font-normal leading-relaxed max-w-lg">
+                    {currentStep.summary}
+                  </p>
                 </div>
 
-                {/* Big Headline */}
-                <h3 className="font-satoshi font-black text-3xl sm:text-4xl lg:text-4xl text-neutral-900 tracking-tight leading-[1.12]">
-                  {currentStep.headlineFirst}{" "}
-                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    {currentStep.headlineAccent}
-                  </span>
-                </h3>
-
-                {/* Description Paragraph */}
-                <p className="mt-3.5 text-neutral-500 text-sm sm:text-base font-normal leading-relaxed max-w-lg">
-                  {currentStep.summary}
-                </p>
-
                 {/* 2x2 Feature Cards Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 my-6 sm:my-7">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
                   {currentStep.features.map((feature, idx) => {
                     const FeatIcon = feature.icon;
                     return (
@@ -256,11 +258,11 @@ export function HowWeWork() {
                         >
                           <FeatIcon className="w-4 h-4" />
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col gap-0.5">
                           <span className="font-bold text-xs sm:text-sm text-neutral-900 leading-tight">
                             {feature.title}
                           </span>
-                          <span className="text-xs text-neutral-500 leading-snug mt-0.5">
+                          <span className="text-xs text-neutral-500 leading-snug">
                             {feature.desc}
                           </span>
                         </div>
@@ -270,7 +272,7 @@ export function HowWeWork() {
                 </div>
 
                 {/* Bottom Action Row: Primary Next Step Button + Overview */}
-                <div className="flex items-center gap-4 sm:gap-6 pt-2 flex-wrap">
+                <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
                   {/* Primary Button */}
                   <button
                     type="button"
@@ -297,7 +299,7 @@ export function HowWeWork() {
         </div>
 
         {/* Bottom Trust & Quality Seal */}
-        <div className="mt-8 pt-5 border-t border-neutral-200/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-xs font-mono text-neutral-500">
+        <div className="pt-5 border-t border-neutral-200/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-xs font-mono text-neutral-500">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>Dedicated senior engineers · Direct communication · Production warranty.</span>

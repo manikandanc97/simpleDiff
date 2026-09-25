@@ -1,10 +1,7 @@
 "use client";
 
 import { useLead } from "@/components/leads/lead-provider";
-import {
-  AnimatedIcon,
-  type AnimatedIconName,
-} from "@/components/ui/animated-icon";
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 import { NAV_ITEMS } from "@/config/nav";
 import { SITE } from "@/config/site";
 import Image from "next/image";
@@ -35,8 +32,8 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-border/80 items-start">
 
           {/* Col 1: Brand & Socials (4 cols) */}
-          <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
-            <div className="space-y-5">
+          <div className="lg:col-span-4 flex flex-col justify-between gap-6">
+            <div className="flex flex-col gap-5">
               {/* Brand Logo */}
               <Link
                 href="/"
@@ -138,11 +135,11 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
           </div>
 
           {/* Col 2: Navigation / Explore (2 cols) */}
-          <div className="lg:col-span-2 space-y-5">
+          <div className="lg:col-span-2 flex flex-col gap-5">
             <h4 className="text-xs font-bold uppercase tracking-widest text-foreground">
               EXPLORE
             </h4>
-            <ul className="space-y-3.5">
+            <ul className="flex flex-col gap-3.5">
               {NAV_ITEMS.map((item) => {
                 const iconName = FOOTER_DATA.navIcons[item.route] || "sparkles";
                 return (
@@ -167,11 +164,11 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
           </div>
 
           {/* Col 3: Capabilities (3 cols) */}
-          <div className="lg:col-span-3 space-y-5">
+          <div className="lg:col-span-3 flex flex-col gap-5">
             <h4 className="text-xs font-bold uppercase tracking-widest text-foreground">
               CAPABILITIES
             </h4>
-            <ul className="space-y-3.5 text-sm text-muted-foreground">
+            <ul className="flex flex-col gap-3.5 text-sm text-muted-foreground">
               {FOOTER_DATA.capabilities.map((cap) => (
                 <li key={cap.label} className="group flex items-center gap-3 cursor-default">
                   <span className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -200,8 +197,8 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
               </svg>
             </div>
 
-            <div className="bg-card rounded-3xl p-7 shadow-sm border border-border relative z-10 flex flex-col justify-between">
-              <div className="flex justify-between items-start mb-5">
+            <div className="bg-card rounded-3xl p-7 shadow-sm border border-border relative z-10 flex flex-col justify-between gap-5">
+              <div className="flex justify-between items-start">
                 {/* Send icon */}
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="-ml-0.5 mt-0.5" aria-hidden="true">
@@ -217,13 +214,15 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                 </div>
               </div>
 
-              <div>
-                <h4 className="text-xl font-bold text-foreground mb-2 tracking-tight">
-                  Have a project in mind?
-                </h4>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  Let&apos;s discuss your idea and turn it into a premium digital product.
-                </p>
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-2">
+                  <h4 className="text-xl font-bold text-foreground tracking-tight">
+                    Have a project in mind?
+                  </h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Let&apos;s discuss your idea and turn it into a premium digital product.
+                  </p>
+                </div>
 
                 <button
                   onClick={handleStart}

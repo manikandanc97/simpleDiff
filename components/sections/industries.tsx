@@ -9,16 +9,16 @@ export function Industries() {
   return (
     <section
       id="industries"
-      className="relative py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-background border-t border-border overflow-hidden"
+      className="relative py-16 sm:py-20 lg:py-24 bg-background border-t border-border overflow-hidden"
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-25" />
       <div className="pointer-events-none absolute -bottom-8 right-1/4 w-72 h-72 rounded-full bg-primary/10 blur-3xl" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-12 sm:gap-16">
 
         {/* Editorial Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 sm:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <SectionHeader
             title={
               <>
@@ -56,8 +56,8 @@ export function Industries() {
                 </div>
 
                 {/* Label */}
-                <div className="text-center">
-                  <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight mb-1">
+                <div className="text-center flex flex-col gap-1">
+                  <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">
                     {industry.label}
                   </div>
                   <div className="text-xs text-muted-foreground leading-tight hidden sm:block">
@@ -75,7 +75,7 @@ export function Industries() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, delay: 0.65 }}
-          className="mt-12 pt-8 border-t border-border/60 text-center"
+          className="pt-8 border-t border-border/60 text-center"
         >
           <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground/60">
             Don&apos;t see your industry? We adapt. Brief us and we&apos;ll tell you if we&apos;re the right fit.

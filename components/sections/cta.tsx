@@ -89,20 +89,21 @@ export function CTA({ onStartProject }: CTAProps) {
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-            className="lg:col-span-7 xl:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left font-satoshi"
+            className="lg:col-span-7 xl:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left font-satoshi gap-8 sm:gap-10 w-full"
           >
-            {/* Top Info Header */}
-            <SectionHeader
-              eyebrow="FROM IDEA TO IMPACT"
-              title="Let's turn your idea into a"
-              highlightedText="premium digital product."
-              description="High craft, sub-second performance, and zero bloat. We partner with ambitious founders to build products people actually love using."
-              className="mb-6 lg:items-start lg:text-left mx-0"
-              maxWidth="max-w-md"
-            />
+            <div className="flex flex-col items-center lg:items-start gap-6 w-full">
+              {/* Top Info Header */}
+              <SectionHeader
+                eyebrow="FROM IDEA TO IMPACT"
+                title="Let's turn your idea into a"
+                highlightedText="premium digital product."
+                description="High craft, sub-second performance, and zero bloat. We partner with ambitious founders to build products people actually love using."
+                className="lg:items-start lg:text-left mx-0"
+                maxWidth="max-w-md"
+              />
 
-            {/* 3 Pillars as sleek pills */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-8 sm:mb-10">
+              {/* 3 Pillars as sleek pills */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3">
               {[
                 { label: "Simple process.", icon: Zap },
                 { label: "Clear communication.", icon: MessageSquare },
@@ -119,34 +120,37 @@ export function CTA({ onStartProject }: CTAProps) {
                   </div>
                 );
               })}
+              </div>
             </div>
 
-            {/* Action Buttons & Fast Response Note */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
-              <Button
-                size="lg"
-                onClick={handleStart}
-                className="group h-13 sm:h-14 px-8 rounded-full bg-[#922F55] text-white text-base sm:text-base font-bold tracking-tight hover:bg-[#7D2748] active:scale-95 transition-all duration-200 shadow-[0_8px_24px_rgba(146,47,85,0.25)] hover:shadow-[0_10px_28px_rgba(146,47,85,0.35)] hover:-translate-y-0.5 cursor-pointer border-0 w-full sm:w-auto flex items-center justify-center gap-2.5"
-              >
-                <span>Start a project</span>
-                <AnimatedArrowRight size={16} className="text-white" />
-              </Button>
+            <div className="flex flex-col items-center lg:items-start gap-4 w-full sm:w-auto">
+              {/* Action Buttons & Fast Response Note */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  onClick={handleStart}
+                  className="group h-12 sm:h-14 px-8 rounded-full bg-[#922F55] text-white text-base sm:text-base font-bold tracking-tight hover:bg-[#7D2748] active:scale-95 transition-all duration-200 shadow-[0_8px_24px_rgba(146,47,85,0.25)] hover:shadow-[0_10px_28px_rgba(146,47,85,0.35)] hover:-translate-y-0.5 cursor-pointer border-0 w-full sm:w-auto flex items-center justify-center gap-2.5"
+                >
+                  <span>Start a project</span>
+                  <AnimatedArrowRight size={16} className="text-white" />
+                </Button>
 
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={handleSchedule}
-                className="h-13 sm:h-14 px-7 rounded-full bg-white text-[#121114] border border-[rgba(30,24,30,0.12)] hover:border-[rgba(30,24,30,0.25)] hover:bg-[#FAF9F7] text-base sm:text-base font-bold tracking-tight active:scale-95 transition-all duration-200 shadow-xs hover:-translate-y-0.5 cursor-pointer w-full sm:w-auto flex items-center justify-center gap-2"
-              >
-                <Calendar size={16} className="text-[#68666C]" />
-                <span>Schedule a call</span>
-              </Button>
-            </div>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={handleSchedule}
+                  className="h-12 sm:h-14 px-7 rounded-full bg-white text-[#121114] border border-[rgba(30,24,30,0.12)] hover:border-[rgba(30,24,30,0.25)] hover:bg-[#FAF9F7] text-base sm:text-base font-bold tracking-tight active:scale-95 transition-all duration-200 shadow-xs hover:-translate-y-0.5 cursor-pointer w-full sm:w-auto flex items-center justify-center gap-2"
+                >
+                  <Calendar size={16} className="text-[#68666C]" />
+                  <span>Schedule a call</span>
+                </Button>
+              </div>
 
-            {/* Subtle Trust / Response Note */}
-            <div className="flex items-center gap-2 mt-4 text-xs sm:text-sm font-medium text-[#68666C]">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Response within 2 hours • Free 30-min discovery session</span>
+              {/* Subtle Trust / Response Note */}
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-[#68666C]">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Response within 2 hours • Free 30-min discovery session</span>
+              </div>
             </div>
 
           </motion.div>

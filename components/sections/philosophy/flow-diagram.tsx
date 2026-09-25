@@ -15,10 +15,10 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative rounded-[24px] bg-white border border-neutral-100 shadow-[0_12px_44px_rgba(0,0,0,0.04)] p-6 sm:p-8 flex flex-col justify-between min-h-[460px] overflow-visible z-10"
+            className="relative rounded-[24px] bg-white border border-neutral-100 shadow-[0_12px_44px_rgba(0,0,0,0.04)] p-6 sm:p-8 flex flex-col justify-between gap-6 min-h-[460px] overflow-visible z-10"
           >
             {/* Top Bar inside Center Card */}
-            <div className="flex items-center justify-between w-full mb-6 z-10">
+            <div className="flex items-center justify-between w-full z-10">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-50 border border-rose-100/60 shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D23D78]" />
                 <span className="text-[11px] font-bold tracking-[0.2em] text-[#D23D78] uppercase">
@@ -34,7 +34,7 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
             </div>
 
             {/* Main Interactive Diagram Canvas Area */}
-            <div className="relative w-full flex-1 flex flex-col justify-between my-2 py-4">
+            <div className="relative w-full flex-1 flex flex-col justify-between py-6">
 
               {/* ── Background SVG connector lines & concentric rings ── */}
               <svg
@@ -140,15 +140,15 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                       <LayoutGrid className="w-3 h-3" strokeWidth={2.5} /> {FLOW_NODES.topLeft.badge}
                     </span>
                   </div>
-                  <div className="flex items-start gap-3 mt-1">
+                  <div className="flex items-start gap-3 pt-1">
                     <div className="w-8 h-8 flex items-center justify-center shrink-0 text-[#D23D78] bg-rose-50/50 rounded-full">
                       <Lightbulb className="w-[18px] h-[18px]" strokeWidth={2.5} />
                     </div>
-                    <div>
+                    <div className="flex flex-col gap-1.5">
                       <p className="font-bold text-sm text-neutral-900 leading-tight">
                         {FLOW_NODES.topLeft.title}
                       </p>
-                      <p className="text-[11px] text-neutral-500 leading-snug mt-1.5">
+                      <p className="text-[11px] text-neutral-500 leading-snug">
                         {FLOW_NODES.topLeft.desc}
                       </p>
                     </div>
@@ -167,15 +167,15 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                       <LayoutGrid className="w-3 h-3" strokeWidth={2.5} /> {FLOW_NODES.topRight.badge}
                     </span>
                   </div>
-                  <div className="flex items-start gap-3 mt-1">
+                  <div className="flex items-start gap-3 pt-1">
                     <div className="w-8 h-8 flex items-center justify-center shrink-0 text-[#7C3AED] bg-purple-50/50 rounded-full">
                       <TrendingUp className="w-[18px] h-[18px]" strokeWidth={2.5} />
                     </div>
-                    <div>
+                    <div className="flex flex-col gap-1.5">
                       <p className="font-bold text-sm text-neutral-900 leading-tight">
                         {FLOW_NODES.topRight.title}
                       </p>
-                      <p className="text-[11px] text-neutral-500 leading-snug mt-1.5">
+                      <p className="text-[11px] text-neutral-500 leading-snug">
                         {FLOW_NODES.topRight.desc}
                       </p>
                     </div>
@@ -203,7 +203,7 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
               </motion.div>
 
               {/* ── Bottom Row of Feature Cards ── */}
-              <div className="relative z-10 flex items-end justify-between w-full px-1 mt-20 sm:mt-24">
+              <div className="relative z-10 flex items-end justify-between w-full px-1 pt-20 sm:pt-24">
                 {/* Bottom-Left: Production quality */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.94 }}
@@ -216,15 +216,15 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                       <LayoutGrid className="w-3 h-3" strokeWidth={2.5} /> {FLOW_NODES.bottomLeft.badge}
                     </span>
                   </div>
-                  <div className="flex items-start gap-3 mt-1">
+                  <div className="flex items-start gap-3 pt-1">
                     <div className="w-8 h-8 flex items-center justify-center shrink-0 text-[#D23D78] bg-rose-50/50 rounded-full">
                       <Box className="w-[18px] h-[18px]" strokeWidth={2.5} />
                     </div>
-                    <div>
+                    <div className="flex flex-col gap-1.5">
                       <p className="font-bold text-sm text-neutral-900 leading-tight">
                         {FLOW_NODES.bottomLeft.title}
                       </p>
-                      <p className="text-[11px] text-neutral-500 leading-snug mt-1.5">
+                      <p className="text-[11px] text-neutral-500 leading-snug">
                         {FLOW_NODES.bottomLeft.desc}
                       </p>
                     </div>
@@ -243,15 +243,15 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                       <LayoutGrid className="w-3 h-3" strokeWidth={2.5} /> {FLOW_NODES.bottomRight.badge}
                     </span>
                   </div>
-                  <div className="flex items-start gap-3 mt-1">
+                  <div className="flex items-start gap-3 pt-1">
                     <div className="w-8 h-8 flex items-center justify-center shrink-0 text-[#7C3AED] bg-purple-50/50 rounded-full">
                       <Users className="w-[18px] h-[18px]" strokeWidth={2.5} />
                     </div>
-                    <div>
+                    <div className="flex flex-col gap-1.5">
                       <p className="font-bold text-sm text-neutral-900 leading-tight">
                         {FLOW_NODES.bottomRight.title}
                       </p>
-                      <p className="text-[11px] text-neutral-500 leading-snug mt-1.5">
+                      <p className="text-[11px] text-neutral-500 leading-snug">
                         {FLOW_NODES.bottomRight.desc}
                       </p>
                     </div>
@@ -261,7 +261,7 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
             </div>
 
             {/* Bottom Bar: YOUR IDEA ↔ REAL IMPACT */}
-            <div className="flex items-center justify-between w-full max-w-xl mx-auto px-4 mt-6 z-10">
+            <div className="flex items-center justify-between w-full max-w-xl mx-auto px-4 z-10">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D23D78]" />
                 <span className="text-[11px] font-mono font-bold text-neutral-400 uppercase tracking-[0.2em]">

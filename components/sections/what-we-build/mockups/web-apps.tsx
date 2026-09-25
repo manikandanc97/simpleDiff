@@ -38,7 +38,7 @@ export function WebAppsMockup({ isActive }: { isActive?: boolean }) {
           </motion.div>
 
           <div className="col-span-4 bg-[#1B1B1D] rounded-xl p-2 flex flex-col gap-1.5 shadow-inner relative z-10">
-            <div className="w-full h-2 rounded bg-white/20 mb-1" />
+            <div className="w-full h-2 rounded bg-white/20" />
             <motion.div
               animate={isActive ? { backgroundColor: ["rgba(146,47,85,1)", "rgba(146,47,85,1)", "rgba(255,255,255,0.1)", "rgba(255,255,255,0.1)", "rgba(146,47,85,1)"] } : { backgroundColor: "rgba(146,47,85,1)" }}
               transition={{ duration: 8, repeat: isActive ? Infinity : 0, ease: "easeInOut" }}

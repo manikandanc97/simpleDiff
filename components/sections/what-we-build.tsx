@@ -65,10 +65,10 @@ export function WhatWeBuild() {
   return (
     <section
       id="capabilities"
-      className="relative w-full pt-16 pb-8 sm:pt-20 sm:pb-10"
+      className="relative w-full py-16 sm:py-20 lg:py-24"
     >
 
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-6 sm:gap-8">
         <SectionHeader
           eyebrow="WHAT WE BUILD"
           centered
@@ -197,10 +197,10 @@ export function WhatWeBuild() {
                         {isActive && (
                           <motion.div
                             key={`content-${service.id}`}
-                            className="flex flex-col items-start w-full"
+                            className="flex flex-col items-start w-full gap-5"
                           >
                             {/* Number + Icon */}
-                            <FadeUp delay={0} className="flex items-center gap-3 mb-4">
+                            <FadeUp delay={0} className="flex items-center gap-3">
                               <span
                                 className="text-2xl sm:text-3xl font-black tracking-tight leading-none font-mono"
                                 style={{ color: service.brandColor }}
@@ -219,20 +219,20 @@ export function WhatWeBuild() {
 
                             {/* Title */}
                             <FadeUp delay={0.07}>
-                              <h3 className="text-2xl sm:text-3xl lg:text-3xl font-extrabold tracking-tighter text-[#121114] leading-tight mb-2.5">
+                              <h3 className="text-2xl sm:text-3xl lg:text-3xl font-extrabold tracking-tighter text-[#121114] leading-tight">
                                 {service.name}
                               </h3>
                             </FadeUp>
 
                             {/* Description */}
                             <FadeUp delay={0.14}>
-                              <p className="text-sm sm:text-base text-[#68666C] leading-relaxed mb-5 font-medium">
+                              <p className="text-sm sm:text-base text-[#68666C] leading-relaxed font-medium">
                                 {service.shortTagline}
                               </p>
                             </FadeUp>
 
                             {/* Tags */}
-                            <FadeUp delay={0.21} className="flex flex-wrap gap-2 mb-6">
+                            <FadeUp delay={0.21} className="flex flex-wrap gap-2">
                               {service.deliverables?.map((item, i) => (
                                 <motion.span
                                   key={i}
@@ -270,12 +270,12 @@ export function WhatWeBuild() {
                         {!isActive && (
                           <motion.div
                             key={`inactive-${service.id}`}
-                            className="flex flex-col items-start w-full"
+                            className="flex flex-col items-start w-full gap-4"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                           >
-                            <div className="flex items-center gap-3 mb-4">
+                            <div className="flex items-center gap-3">
                               <span
                                 className="text-2xl sm:text-3xl font-black tracking-tight leading-none font-mono"
                                 style={{ color: service.brandColor }}
@@ -289,7 +289,7 @@ export function WhatWeBuild() {
                                 <IconComponent className="w-4 h-4 stroke-[2.2]" />
                               </div>
                             </div>
-                            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tighter text-[#121114] leading-tight mb-2.5">
+                            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tighter text-[#121114] leading-tight">
                               {service.name}
                             </h3>
                             <p className="text-sm text-[#68666C] leading-relaxed font-medium line-clamp-2">
@@ -318,7 +318,7 @@ export function WhatWeBuild() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between max-w-4xl mx-auto mt-4 sm:mt-6 px-2 font-satoshi">
+        <div className="flex items-center justify-between max-w-4xl mx-auto px-2 font-satoshi w-full">
           <div className="flex items-center gap-2 text-[#68666C]">
             <span className="text-xs sm:text-sm font-semibold text-[#68666C] select-none">
               Drag to explore

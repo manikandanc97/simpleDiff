@@ -113,7 +113,7 @@ export function SelectedWork() {
   return (
     <section 
       id="selected-work" 
-      className="relative w-full py-12 sm:py-16 lg:py-20 font-satoshi selection:bg-[#922F55]/20 selection:text-[#922F55]"
+      className="relative w-full py-16 sm:py-20 lg:py-24 font-satoshi selection:bg-[#922F55]/20 selection:text-[#922F55]"
     >
       {/* ── Background Decorative Elements ── */}
       {/* 1. Left Dot Grid Matrix */}
@@ -134,13 +134,13 @@ export function SelectedWork() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
            
           {/* ── LEFT COLUMN: Heading & Project List ── */}
-          <div className="lg:col-span-5 flex flex-col">
+          <div className="lg:col-span-5 flex flex-col gap-6">
             <SectionHeader
               eyebrow="Our Work"
               title="Selected"
               highlightedText="Work."
               description="Live client systems and digital products engineered for measurable scale."
-              className="mb-2 items-start text-left mx-0"
+              className="items-start text-left mx-0"
               maxWidth="max-w-2xl"
             />
             {/* Project List: Max 3 Cards on Home Page */}
@@ -207,7 +207,7 @@ export function SelectedWork() {
                       {/* Line 2: Tech Stack (Visible only when Active) */}
                       <div className={cn(
                         "flex flex-col gap-1 overflow-hidden transition-all duration-300 ease-in-out",
-                        isActive ? "max-h-24 opacity-100 mt-1" : "max-h-0 opacity-0"
+                        isActive ? "max-h-24 opacity-100 pt-1" : "max-h-0 opacity-0"
                       )}>
                         <div className="flex items-center gap-1.5 overflow-hidden pt-0.5">
                           {project.stack.slice(0, 3).map((tag) => (
@@ -239,7 +239,7 @@ export function SelectedWork() {
             </div>
 
             {/* List Footer */}
-            <div className="mt-7 flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <Link 
                 href="/portfolio" 
                 className="inline-flex items-center gap-2 text-sm font-bold text-[#121114] hover:text-[#922F55] transition-colors group"
@@ -254,10 +254,10 @@ export function SelectedWork() {
           </div>
 
           {/* ── RIGHT COLUMN: Browser Mockup & Live Hero View ── */}
-          <div className="lg:col-span-7 flex flex-col relative pt-2 lg:pt-0">
+          <div className="lg:col-span-7 flex flex-col gap-4 relative pt-2 lg:pt-0">
             
             {/* Top Header: Filter Tabs & Live Client Site Badge + Prev/Next Arrows */}
-            <div className="flex items-center justify-between gap-4 mb-4 relative z-10 min-h-10">
+            <div className="flex items-center justify-between gap-4 relative z-10 min-h-10">
               
               {/* Left: Filter Tabs */}
               <div className="flex items-center gap-2 overflow-x-auto pb-1 hide-scrollbar -mx-2 px-2 sm:mx-0 sm:px-0">
@@ -293,11 +293,11 @@ export function SelectedWork() {
               {/* Right: Live Client Site Badge & Nav Buttons */}
               <div className="flex items-center gap-6 shrink-0">
                 {/* Handwritten "Live Client Site" badge positioned left of arrows */}
-                <div className="hidden sm:flex pointer-events-none items-center gap-2 z-30 select-none mt-1">
+                <div className="hidden sm:flex pointer-events-none items-center gap-2 z-30 select-none">
                   <span className="font-handwriting text-lg text-[#922F55] font-bold -rotate-2 tracking-wide drop-shadow-sm">
                     Live Client Site
                   </span>
-                  <svg width="42" height="34" viewBox="0 0 42 34" fill="none" className="text-[#922F55] mt-1 -ml-1 drop-shadow-sm">
+                  <svg width="42" height="34" viewBox="0 0 42 34" fill="none" className="text-[#922F55] -ml-1 drop-shadow-sm">
                     {/* Arrow pointing downwards towards the browser window */}
                     <path d="M4 4 C 14 10, 24 18, 30 26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
                     <path d="M22 28 L 30 26 L 32 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
@@ -386,17 +386,19 @@ export function SelectedWork() {
                         />
                       </div>
                     ) : (
-                      <div className="absolute inset-0 w-full h-full bg-slate-50 flex flex-col items-center justify-center p-6 text-center">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-slate-100 flex items-center justify-center mb-5 shadow-sm">
+                      <div className="absolute inset-0 w-full h-full bg-slate-50 flex flex-col items-center justify-center p-6 text-center gap-5">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-slate-100 flex items-center justify-center shadow-sm">
                           <Lock className="w-8 h-8 sm:w-10 sm:h-10 text-slate-300" strokeWidth={1.5} />
                         </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight mb-2">
-                          Building in Stealth
-                        </h3>
-                        <p className="text-sm sm:text-sm text-slate-500 max-w-72 sm:max-w-xs leading-relaxed">
-                          This {activeProject.serviceType.toLowerCase().replace('s', '')} is currently under active development in our lab.
-                        </p>
-                        <span className="mt-6 px-4 py-1.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 text-xs font-bold tracking-wide uppercase shadow-sm">
+                        <div className="flex flex-col items-center gap-2">
+                          <h3 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
+                            Building in Stealth
+                          </h3>
+                          <p className="text-sm sm:text-sm text-slate-500 max-w-72 sm:max-w-xs leading-relaxed">
+                            This {activeProject.serviceType.toLowerCase().replace('s', '')} is currently under active development in our lab.
+                          </p>
+                        </div>
+                        <span className="px-4 py-1.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 text-xs font-bold tracking-wide uppercase shadow-sm">
                           Preview Coming Soon
                         </span>
                       </div>

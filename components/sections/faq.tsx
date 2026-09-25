@@ -48,7 +48,7 @@ export function FAQ() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
         
         {/* Left Column (5 Cols) */}
-        <div className="lg:col-span-5 flex flex-col justify-start gap-4">
+        <div className="lg:col-span-5 flex flex-col justify-start gap-8">
           
           {/* Top Info */}
           <SectionHeader
@@ -56,7 +56,7 @@ export function FAQ() {
             title={<>Frequently Asked <br/></>}
             highlightedText="Questions."
             description="Honest answers to the most common questions founders and engineering teams ask before building with us."
-            className="mb-8 items-start text-left mx-0"
+            className="items-start text-left mx-0"
             maxWidth="max-w-md"
           />
 
@@ -99,27 +99,31 @@ export function FAQ() {
               <div className="relative min-h-52 sm:min-h-52">
                 
                 {/* Left: Text & CTA Button */}
-                <div className="relative z-10 max-w-60 sm:max-w-64">
-                  {/* Badge */}
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50/80 dark:bg-rose-950/40 border border-rose-100/80 dark:border-rose-900/40 mb-2">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#db2777]">
-                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                      <circle cx="9" cy="12" r="1" fill="currentColor"/>
-                      <circle cx="12" cy="12" r="1" fill="currentColor"/>
-                      <circle cx="15" cy="12" r="1" fill="currentColor"/>
-                    </svg>
-                    <span className="text-xs font-bold text-[#db2777]">We&apos;re here to help</span>
+                <div className="relative z-10 max-w-60 sm:max-w-64 flex flex-col items-start gap-4">
+                  <div className="flex flex-col items-start gap-2">
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50/80 dark:bg-rose-950/40 border border-rose-100/80 dark:border-rose-900/40">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#db2777]">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        <circle cx="9" cy="12" r="1" fill="currentColor"/>
+                        <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                        <circle cx="15" cy="12" r="1" fill="currentColor"/>
+                      </svg>
+                      <span className="text-xs font-bold text-[#db2777]">We&apos;re here to help</span>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      {/* Heading */}
+                      <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+                        Can&apos;t find your answer?
+                      </h3>
+
+                      {/* Subtitle */}
+                      <p className="text-xs sm:text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
+                        Talk to our team and get a clear, no-fluff answer for your specific requirement.
+                      </p>
+                    </div>
                   </div>
-
-                  {/* Heading */}
-                  <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight leading-tight">
-                    Can&apos;t find your answer?
-                  </h3>
-
-                  {/* Subtitle */}
-                  <p className="text-xs sm:text-xs text-slate-500 dark:text-zinc-400 leading-relaxed mb-4">
-                    Talk to our team and get a clear, no-fluff answer for your specific requirement.
-                  </p>
 
                   {/* CTA Button */}
                   <button
@@ -140,7 +144,7 @@ export function FAQ() {
                 </div>
 
                 {/* Right: 3D Character Sitting with Laptop (Completely visible, zero obstruction!) */}
-                <div className="absolute right-[-10px] sm:right-[-14px] bottom-0.5 sm:bottom-1.5 w-56 sm:w-64 pointer-events-none select-none z-10">
+                <div className="absolute -right-2.5 sm:-right-3.5 bottom-0.5 sm:bottom-1.5 w-56 sm:w-64 pointer-events-none select-none z-10">
                   {/* 3 accent lines radiating from hair */}
                   <div className="absolute -top-2 right-4 flex gap-1.5 rotate-[35deg]">
                     <div className="w-0.5 h-3 bg-[#f43f5e] rounded-full" />
@@ -221,8 +225,8 @@ export function FAQ() {
                     </div>
 
                     {/* Tag + Question */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-1.5 mb-1">
+                    <div className="flex flex-col gap-1 flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5">
                         <Icon className="w-3 h-3 text-[#db2777] dark:text-pink-500" />
                         <span className="text-xs font-bold uppercase tracking-widest text-[#db2777] dark:text-pink-500">
                           {faq.category}
@@ -256,13 +260,13 @@ export function FAQ() {
                       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-4 sm:px-4 pb-4 pt-0 pl-16 sm:pl-20">
+                      <div className="flex flex-col gap-3.5 px-4 sm:px-4 pb-4 pt-0 pl-16 sm:pl-20">
                         <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-[1.6] max-w-[95%]">
                           {faq.answer}
                         </p>
 
                         {faq.highlights && faq.highlights.length > 0 && (
-                          <div className="mt-3.5 pt-1 flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-2">
                             {faq.highlights.map((hl, i) => {
                               const HlIcon = hl.icon;
                               return (

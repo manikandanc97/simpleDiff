@@ -31,7 +31,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
   if (state.ok) {
     onSuccess?.();
     return (
-      <div className="py-8 flex flex-col items-center text-center space-y-4">
+      <div className="py-8 flex flex-col items-center text-center gap-4">
         <CheckCircle2 className="w-12 h-12 text-emerald-500" />
         <h3 className="text-2xl font-bold tracking-tight">Thanks — we&apos;ve got it.</h3>
         <p className="text-muted-foreground max-w-sm">
@@ -50,7 +50,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
   );
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form action={formAction} className="flex flex-col gap-4">
       {/* Hidden honeypot and anti-spam fields */}
       <div aria-hidden="true" style={{ display: "none" }}>
         <input
@@ -103,7 +103,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
       )}
 
       {/* Name */}
-      <div className="space-y-1.5 text-left">
+      <div className="flex flex-col gap-1.5 text-left">
         <label htmlFor="lead-name" className="text-sm font-medium">
           Name <span className="text-destructive">*</span>
         </label>
@@ -125,7 +125,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
       </div>
 
       {/* Email */}
-      <div className="space-y-1.5 text-left">
+      <div className="flex flex-col gap-1.5 text-left">
         <label htmlFor="lead-email" className="text-sm font-medium">
           Email <span className="text-destructive">*</span>
         </label>
@@ -149,7 +149,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
 
       {/* Phone / WhatsApp & Company (2-col grid) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-        <div className="space-y-1.5">
+        <div className="flex flex-col gap-1.5">
           <label htmlFor="lead-phone" className="text-sm font-medium">
             WhatsApp / Phone (optional)
           </label>
@@ -169,7 +169,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
           )}
         </div>
 
-        <div className="space-y-1.5">
+        <div className="flex flex-col gap-1.5">
           <label htmlFor="lead-company" className="text-sm font-medium">
             Company (optional)
           </label>
@@ -190,7 +190,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
       </div>
 
       {/* Description */}
-      <div className="space-y-1.5 text-left">
+      <div className="flex flex-col gap-1.5 text-left">
         <label htmlFor="lead-description" className="text-sm font-medium">
           Project description <span className="text-destructive">*</span>
         </label>
@@ -213,7 +213,7 @@ export function LeadForm({ prefill, onSuccess }: LeadFormProps) {
         )}
       </div>
 
-      <div className="pt-2 text-left space-y-3">
+      <div className="pt-2 text-left flex flex-col gap-3">
         <Button
           type="submit"
           disabled={isPending}

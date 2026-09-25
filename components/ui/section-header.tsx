@@ -27,14 +27,19 @@ export function SectionHeader({
   return (
     <div
       ref={headerRef}
-      className={cn(maxWidth, centered && "mx-auto text-center flex flex-col items-center", "mb-10 sm:mb-12 font-satoshi", className)}
+      className={cn(
+        maxWidth, 
+        "flex flex-col gap-4 font-satoshi",
+        centered ? "mx-auto text-center items-center" : "items-start", 
+        className
+      )}
     >
       {eyebrow && (
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-border shadow-sm mb-4"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-border shadow-sm"
         >
           <span className="w-2 h-2 rounded-full bg-primary inline-block" />
           <span className="type-label font-extrabold tracking-wide text-foreground/90 uppercase">
@@ -47,7 +52,7 @@ export function SectionHeader({
         initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="type-h2 text-foreground mb-4"
+        className="type-h2 text-foreground"
       >
         {title}
         {highlightedText && (

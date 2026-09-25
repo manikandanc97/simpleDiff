@@ -1,25 +1,23 @@
 "use client";
 
-import { useLead } from "@/components/leads/lead-provider";
+
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { PROCESS_STEPS, REAL_OUTCOMES } from "@/lib/data/philosophy";
-import {
-  ArrowRight,
-  ArrowUpRight
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { FlowDiagram } from "./philosophy/flow-diagram";
+import { SectionHeader } from "@/components/ui/section-header";
 
 export function WhySimpleThink() {
   const containerRef = useRef<HTMLDivElement>(null);
   const inView = useInView(containerRef, { once: true, margin: "-60px" });
-  const { openLead } = useLead();
+
 
   return (
     <section
       id="why-SimpleThink"
-      className="relative w-full py-16 sm:py-24 bg-[#FCFAFA] overflow-hidden font-satoshi"
+      className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#FCFAFA] overflow-hidden font-satoshi"
     >
       {/* ── Atmospheric Ambient Glowing Blobs & Dots ── */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0">
@@ -27,7 +25,14 @@ export function WhySimpleThink() {
         <div className="absolute bottom-1/4 -right-32 w-full max-w-lg aspect-square bg-purple-100/40 rounded-full blur-3xl opacity-50" />
       </div>
 
-      <div ref={containerRef} className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div ref={containerRef} className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-12 sm:gap-16">
+        <SectionHeader
+          eyebrow="WHY SIMPLEPRIME"
+          centered
+          title="Built simple. Delivered"
+          highlightedText="sharp."
+          description="A focused team, a clear process, and production-ready work without unnecessary layers."
+        />
 
         {/* ── Main 3-Column Layout ── */}
         <div className="relative grid grid-cols-1 lg:grid-cols-[240px_minmax(0,1fr)_240px] xl:grid-cols-[250px_minmax(0,1fr)_250px] gap-6 xl:gap-8 items-center">
@@ -37,7 +42,7 @@ export function WhySimpleThink() {
           ──────────────────────────────────────────────────────────── */}
           <div className="flex flex-col gap-4 relative z-20">
             {/* Header */}
-            <div className="flex items-center gap-2 px-1 mb-1.5">
+            <div className="flex items-center gap-2 px-1">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D23D78]" />
               <span className="text-[11px] font-bold tracking-[0.2em] text-[#D23D78] uppercase">
                 PROCESS / 04
@@ -81,11 +86,11 @@ export function WhySimpleThink() {
                     </div>
 
                     {/* Content */}
-                    <div className="flex flex-col min-w-0">
+                    <div className="flex flex-col gap-0.5 min-w-0">
                       <span className="text-sm font-bold text-neutral-900 leading-tight">
                         {step.title}
                       </span>
-                      <span className="text-[11px] text-neutral-500 leading-snug mt-0.5">
+                      <span className="text-[11px] text-neutral-500 leading-snug">
                         {step.desc} {step.subDesc}
                       </span>
                     </div>
@@ -128,7 +133,7 @@ export function WhySimpleThink() {
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-              className="relative mt-2 pl-4 select-none pointer-events-none"
+              className="relative pt-2 pl-4 select-none pointer-events-none"
             >
               <span className="font-handwriting text-sm sm:text-base text-[#831843] block -rotate-3 leading-tight drop-shadow-sm">
                 Simple Process
@@ -213,10 +218,10 @@ export function WhySimpleThink() {
               initial={{ opacity: 0, x: 16 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="rounded-3xl bg-white border border-neutral-100 shadow-[0_12px_44px_rgba(0,0,0,0.04)] p-5 flex flex-col gap-4 relative z-20"
+              className="rounded-3xl bg-white border border-neutral-100 shadow-[0_12px_44px_rgba(0,0,0,0.04)] p-5 flex flex-col gap-5 relative z-20"
             >
               {/* Header */}
-              <div className="flex items-center gap-2.5 mb-1 px-1">
+              <div className="flex items-center gap-2.5 px-1">
                 <div className="flex items-end gap-0.5 text-[#831843]">
                   <span className="w-1.5 h-2.5 bg-[#831843] rounded-[1px]" />
                   <span className="w-1.5 h-4 bg-[#831843] rounded-[1px]" />
@@ -243,7 +248,7 @@ export function WhySimpleThink() {
                         <div className="w-11 h-11 rounded-full bg-rose-50 border border-rose-100/50 flex items-center justify-center text-[#D23D78] shrink-0">
                           <StatIcon className="w-[18px] h-[18px]" strokeWidth={2.5} />
                         </div>
-                        <div className="flex flex-col min-w-0">
+                        <div className="flex flex-col gap-1 min-w-0">
                           <span className="text-[20px] font-black text-neutral-900 tracking-tight leading-none font-satoshi flex items-baseline gap-[1px]">
                             {stat.prefix && <span className="text-lg">{stat.prefix}</span>}
                             <AnimatedCounter
@@ -253,7 +258,7 @@ export function WhySimpleThink() {
                             />
                             {stat.suffix && <span className="text-lg">{stat.suffix}</span>}
                           </span>
-                          <span className="text-[11px] text-neutral-500 font-medium mt-1 leading-tight truncate">
+                          <span className="text-[11px] text-neutral-500 font-medium leading-tight truncate">
                             {stat.label}
                           </span>
                         </div>

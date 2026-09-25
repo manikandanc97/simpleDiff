@@ -42,7 +42,7 @@ export function TechStack() {
   return (
     <section
       id="tech-stack"
-      className="relative w-full py-12 sm:py-16"
+      className="relative w-full py-16 sm:py-20 lg:py-24"
     >
       {/* ── Background Atmosphere & Ambient Glows ────────────────────────────── */}
 
@@ -52,10 +52,10 @@ export function TechStack() {
       <div className="pointer-events-none absolute bottom-8 left-8 w-36 h-36 hero-dots opacity-40 dark:opacity-20" />
       <div className="pointer-events-none absolute bottom-8 right-8 w-36 h-36 hero-dots opacity-40 dark:opacity-20" />
 
-      <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-12 sm:gap-16">
 
         {/* ── Top Header with Floating Performance Pill ──────────────────────── */}
-        <div className="relative mb-14 text-center">
+        <div className="relative text-center">
 
           {/* Floating "Fast Performant" Pill (Top Right, aligned near subtitle) */}
           <div className="hidden lg:flex absolute top-10 right-2 xl:right-8 z-20 items-center">
@@ -106,8 +106,10 @@ export function TechStack() {
           />
         </div>
 
-        {/* ── Category Pill Tabs with "Tools we love" Handwritten Annotation ──── */}
-        <div className="relative mb-10 pt-10 sm:pt-12">
+        {/* ── Categories + Cards wrapper ────────────────────────────────────── */}
+        <div className="flex flex-col gap-10 sm:gap-12">
+          {/* ── Category Pill Tabs with "Tools we love" Handwritten Annotation ──── */}
+          <div className="relative">
 
           {/* Playful Handwritten Annotation: "Tools we love" + Curved Arrow pointing right to the tab */}
           <div className="absolute top-0 sm:top-1 left-2 sm:left-4 md:left-8 lg:left-14 z-20 pointer-events-none select-none flex items-end gap-3">
@@ -117,7 +119,7 @@ export function TechStack() {
             >
               Tools<br />we love
             </span>
-            <div className="mb-1 ml-1 text-[#9F1239] dark:text-rose-400">
+            <div className="ml-1 text-[#9F1239] dark:text-rose-400">
               <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
                 <path
                   d="M 4 4 C 15 4, 28 12, 24 28"
@@ -229,12 +231,14 @@ export function TechStack() {
           </AnimatePresence>
         </div>
 
+        </div>
+
         {/* ── Bottom Value Proposition Strip (White Floating Island) ──────────── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.35 }}
-          className="mt-8 sm:mt-10 max-w-5xl mx-auto bg-white/95 dark:bg-card/90 backdrop-blur-md border border-slate-200/80 dark:border-border/70 rounded-2xl sm:rounded-full py-4 px-6 sm:px-10 shadow-[0_8px_30px_rgb(0,0,0,0.03)]"
+          className="max-w-5xl mx-auto bg-white/95 dark:bg-card/90 backdrop-blur-md border border-slate-200/80 dark:border-border/70 rounded-2xl sm:rounded-full py-4 px-6 sm:px-10 shadow-[0_8px_30px_rgb(0,0,0,0.03)] w-full"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {/* 1. Reliable */}
@@ -304,7 +308,7 @@ export function TechStack() {
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12 flex items-center justify-center gap-4 max-w-4xl mx-auto"
+          className="flex items-center justify-center gap-4 max-w-4xl mx-auto w-full"
         >
           <div className="h-px bg-slate-200/80 dark:bg-border/60 flex-1" />
           <p className="text-xs sm:text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-muted-foreground/60 whitespace-nowrap">

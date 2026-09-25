@@ -38,11 +38,12 @@ export function WorkbenchHero() {
       {/* Background Elements */}
       <HeroGridAccents />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex-1 flex flex-col justify-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full">
           
           {/* LEFT: Text Content */}
-          <div className="lg:col-span-5 xl:col-span-6 flex flex-col items-start text-left max-w-xl z-10">
+          <div className="lg:col-span-5 xl:col-span-6 flex flex-col items-start text-left max-w-xl z-10 gap-8 sm:gap-12">
+            <div className="flex flex-col gap-5 sm:gap-6">
 
             {/* Pill Tag */}
             
@@ -52,9 +53,9 @@ export function WorkbenchHero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="font-satoshi font-extrabold tracking-tighter text-[#121114] leading-none mb-5 text-5xl sm:text-7xl lg:text-8xl"
+              className="font-satoshi font-extrabold tracking-tighter text-[#121114] leading-none text-5xl sm:text-7xl lg:text-8xl flex flex-col gap-2"
             >
-              <span className="block mb-2">{HERO_CONTENT.headlineLine1}</span>
+              <span className="block">{HERO_CONTENT.headlineLine1}</span>
               <span className="block relative inline-block whitespace-nowrap">
                 {HERO_CONTENT.headlineLine2Prefix}
                 <span className="relative inline-block brand-gradient-text">
@@ -96,17 +97,19 @@ export function WorkbenchHero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="type-lead text-muted-foreground max-w-lg mb-8"
+              className="type-lead text-muted-foreground max-w-lg"
             >
               {HERO_CONTENT.description}
             </motion.p>
+            </div>
 
+            <div className="flex flex-col gap-10 sm:gap-14 w-full">
             {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 mb-12 sm:mb-14 w-full sm:w-auto font-satoshi"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full sm:w-auto font-satoshi"
             >
               <Button
                 id="hero-start-project"
@@ -178,6 +181,7 @@ export function WorkbenchHero() {
                 </div>
               </div>
             </motion.div>
+            </div>
           </div>
 
           {/* RIGHT: 3D Character & Floating UI Cards */}

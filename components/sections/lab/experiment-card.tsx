@@ -83,12 +83,13 @@ export function ExperimentCard({ experiment, isFeatured = false }: ExperimentCar
       </div>
 
       {/* Content Area */}
-      <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 bg-card">
-        <div>
-          <span className="text-xs font-mono font-bold tracking-widest uppercase text-primary block mb-2">
-            {experiment.category}
-          </span>
-          <h2 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-foreground mb-3">
+      <div className="p-6 sm:p-8 flex flex-col justify-between gap-6 flex-1 bg-card">
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
+            <span className="text-xs font-mono font-bold tracking-widest uppercase text-primary block">
+              {experiment.category}
+            </span>
+            <h2 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-foreground">
             {(() => {
               const words = experiment.title.split(" ");
               if (words.length === 1) {
@@ -102,12 +103,13 @@ export function ExperimentCard({ experiment, isFeatured = false }: ExperimentCar
               );
             })()}
           </h2>
+          </div>
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
             {experiment.description}
           </p>
         </div>
 
-        <div className="pt-6 mt-6 border-t border-border/40 flex items-center justify-between text-xs text-muted-foreground">
+        <div className="pt-6 border-t border-border/40 flex items-center justify-between text-xs text-muted-foreground">
           <span className="font-mono">Software Prototype</span>
           <span className="group-hover:text-primary transition-colors font-medium inline-flex items-center gap-1.5">
             <span>Explore concept</span>

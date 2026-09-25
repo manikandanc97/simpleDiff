@@ -103,7 +103,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
             {/* Right Code Editor Mockup */}
             <div className="w-28 sm:w-32 bg-[#1B1B1D] rounded-xl p-2.5 flex flex-col gap-1.5 relative overflow-hidden shadow-inner">
               {/* Window control dots */}
-              <div className="flex gap-1 mb-1 items-center">
+              <div className="flex gap-1 items-center">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#FF5F56]" />
                 <div className="w-1.5 h-1.5 rounded-full bg-[#FFBD2E]" />
                 <div className="w-1.5 h-1.5 rounded-full bg-[#27C93F]" />

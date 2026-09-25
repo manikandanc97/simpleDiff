@@ -41,10 +41,10 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-3, 3, -3], rotate: [-1, -1, -1] }}
                       transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute top-10 w-fit sm:top-30 bottom-10 sm:bottom-6 left-1 sm:left-4 right-6 sm:right-16 bg-white/90 backdrop-blur-2xl rounded-3xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-6 z-0 overflow-hidden select-none flex flex-col items-center"
+                      className="absolute top-10 w-fit sm:top-30 bottom-10 sm:bottom-6 left-1 sm:left-4 right-6 sm:right-16 bg-white/90 backdrop-blur-2xl rounded-3xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-6 z-0 overflow-hidden select-none flex flex-col items-center gap-3 sm:gap-4"
                     >
                       {/* Window Header */}
-                      <div className="w-full flex items-center gap-2 mb-3 sm:mb-4 ml-4 sm:ml-8">
+                      <div className="w-full flex items-center gap-2 ml-4 sm:ml-8">
                         <GitFork className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#475569]" />
                         <span className="font-bold text-sm sm:text-base text-[#1E293B] tracking-tight">
                           Project Blueprint
@@ -93,15 +93,15 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-4, 4, -4], rotate: [-8, -4, -8] }}
                       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                      className="absolute top-8 sm:top-8 -left-4 sm:-left-6 bg-[#FFF9C4]/95 border border-[#FFF176] rounded-xl p-2 sm:p-2.5 shadow-md shadow-amber-900/10 z-10 w-28 sm:w-36 pointer-events-none select-none"
+                      className="absolute top-8 sm:top-8 -left-4 sm:-left-6 bg-[#FFF9C4]/95 border border-[#FFF176] rounded-xl p-2 sm:p-2.5 shadow-md shadow-amber-900/10 z-10 w-28 sm:w-36 pointer-events-none select-none flex flex-col gap-1"
                     >
-                      <div className="flex items-center gap-1 mb-1">
+                      <div className="flex items-center gap-1">
                         <Lightbulb className="w-3.5 h-3.5 text-amber-600" />
                         <span className="font-handwriting font-bold text-xs sm:text-sm text-neutral-800">
                           Ideas
                         </span>
                       </div>
-                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight space-y-0.5">
+                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight flex flex-col gap-0.5">
                         <div>• Business Goals</div>
                         <div>• Target Audience</div>
                       </div>
@@ -163,10 +163,10 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-5, 5, -5], rotate: [0, 2, 0] }}
                       transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                      className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100 shadow-xl shadow-neutral-900/5 p-3 sm:p-4 z-10 w-40 sm:w-48 pointer-events-none select-none"
+                      className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100 shadow-xl shadow-neutral-900/5 p-3 sm:p-4 z-10 w-40 sm:w-48 pointer-events-none select-none flex flex-col gap-1.5"
                     >
                       {/* Header */}
-                      <div className="flex items-center justify-between mb-1.5">
+                      <div className="flex items-center justify-between">
                         <span className="font-bold text-xs sm:text-xs text-neutral-800">
                           Market Research
                         </span>
@@ -174,13 +174,13 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       </div>
 
                       {/* Skeletal bars */}
-                      <div className="space-y-1 mb-2.5">
+                      <div className="flex flex-col gap-1 mb-1">
                         <div className="w-14 h-1.5 bg-neutral-200/80 rounded-full" />
                         <div className="w-8 h-1.5 bg-neutral-100 rounded-full" />
                       </div>
 
                       {/* Checklist items */}
-                      <div className="space-y-1.5">
+                      <div className="flex flex-col gap-1.5">
                         <div className="flex items-center gap-1.5">
                           <CheckCircle2 className="w-3 h-3 text-purple-600 shrink-0" />
                           <span className="text-xs sm:text-xs font-semibold text-neutral-700">
@@ -255,10 +255,10 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-3, 3, -3], rotate: [-1, -1, -1] }}
                       transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute top-10 w-fit sm:top-30 bottom-10 sm:bottom-6 left-1 sm:left-4 right-6 sm:right-16 bg-white/90 backdrop-blur-2xl rounded-3xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-6 z-0 overflow-hidden select-none flex flex-col items-center"
+                      className="absolute top-10 w-fit sm:top-30 bottom-10 sm:bottom-6 left-1 sm:left-4 right-6 sm:right-16 bg-white/90 backdrop-blur-2xl rounded-3xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-6 z-0 overflow-hidden select-none flex flex-col items-center gap-3 sm:gap-4"
                     >
                       {/* Window Header */}
-                      <div className="w-full flex items-center gap-2 mb-3 sm:mb-4 ml-4 sm:ml-8">
+                      <div className="w-full flex items-center gap-2 ml-4 sm:ml-8">
                         <Palette className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#475569]" />
                         <span className="font-bold text-sm sm:text-base text-[#1E293B] tracking-tight">
                           Design System
@@ -291,15 +291,15 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-4, 4, -4], rotate: [-8, -4, -8] }}
                       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                      className="absolute top-8 sm:top-8 -left-4 sm:-left-6 bg-[#FFF9C4]/95 border border-[#FFF176] rounded-xl p-2 sm:p-2.5 shadow-md shadow-amber-900/10 z-10 w-28 sm:w-36 pointer-events-none select-none"
+                      className="absolute top-8 sm:top-8 -left-4 sm:-left-6 bg-[#FFF9C4]/95 border border-[#FFF176] rounded-xl p-2 sm:p-2.5 shadow-md shadow-amber-900/10 z-10 w-28 sm:w-36 pointer-events-none select-none flex flex-col gap-1"
                     >
-                      <div className="flex items-center gap-1 mb-1">
+                      <div className="flex items-center gap-1">
                         <Pencil className="w-3.5 h-3.5 text-amber-600" />
                         <span className="font-handwriting font-bold text-xs sm:text-sm text-neutral-800">
                           UI / UX
                         </span>
                       </div>
-                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight space-y-0.5">
+                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight flex flex-col gap-0.5">
                         <div>• Pixel Perfect</div>
                         <div>• User First</div>
                       </div>
@@ -328,16 +328,16 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-5, 5, -5], rotate: [0, 2, 0] }}
                       transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                      className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100 shadow-xl shadow-neutral-900/5 p-3 sm:p-4 z-10 w-40 sm:w-48 pointer-events-none select-none"
+                      className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100 shadow-xl shadow-neutral-900/5 p-3 sm:p-4 z-10 w-40 sm:w-48 pointer-events-none select-none flex flex-col gap-2.5"
                     >
-                      <div className="flex items-center justify-between mb-2.5">
+                      <div className="flex items-center justify-between">
                         <span className="font-bold text-xs sm:text-xs text-neutral-800">
                           Components
                         </span>
                         <LayoutTemplate className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-500" />
                       </div>
                       
-                      <div className="space-y-2">
+                      <div className="flex flex-col gap-2">
                         {/* Fake button */}
                         <div className="w-full h-6 bg-[#E11D48] rounded-md flex items-center justify-center">
                           <div className="w-8 h-1 bg-white/50 rounded-full" />
@@ -393,10 +393,10 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-3, 3, -3], rotate: [-1, -1, -1] }}
                       transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute top-10 w-fit sm:top-30 bottom-10 sm:bottom-6 left-1 sm:left-4 right-6 sm:right-16 bg-white/90 backdrop-blur-2xl rounded-3xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-6 z-0 overflow-hidden select-none flex flex-col items-center"
+                      className="absolute top-10 w-fit sm:top-30 bottom-10 sm:bottom-6 left-1 sm:left-4 right-6 sm:right-16 bg-white/90 backdrop-blur-2xl rounded-3xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-6 z-0 overflow-hidden select-none flex flex-col items-center gap-2 sm:gap-4"
                     >
                       {/* Window Header */}
-                      <div className="w-full flex items-center gap-2 mb-3 sm:mb-4 ml-4 sm:ml-8">
+                      <div className="w-full flex items-center gap-2 ml-4 sm:ml-8">
                         <Database className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#475569]" />
                         <span className="font-bold text-sm sm:text-base text-[#1E293B] tracking-tight">
                           Architecture
@@ -404,7 +404,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       </div>
 
                       {/* Content Flow */}
-                      <div className="flex items-center justify-center gap-2 sm:gap-4 mt-2">
+                      <div className="flex items-center justify-center gap-2 sm:gap-4">
                          <div className="bg-white border border-neutral-100 rounded-xl p-2 sm:p-3 shadow-sm flex flex-col items-center gap-1">
                            <Database className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                            <span className="text-xs sm:text-xs font-bold text-neutral-600">DB</span>
@@ -430,15 +430,15 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-4, 4, -4], rotate: [-8, -4, -8] }}
                       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                      className="absolute top-8 sm:top-8 -left-4 sm:-left-6 bg-[#FFF9C4]/95 border border-[#FFF176] rounded-xl p-2 sm:p-2.5 shadow-md shadow-amber-900/10 z-10 w-28 sm:w-36 pointer-events-none select-none"
+                      className="absolute top-8 sm:top-8 -left-4 sm:-left-6 bg-[#FFF9C4]/95 border border-[#FFF176] rounded-xl p-2 sm:p-2.5 shadow-md shadow-amber-900/10 z-10 w-28 sm:w-36 pointer-events-none select-none flex flex-col gap-1"
                     >
-                      <div className="flex items-center gap-1 mb-1">
+                      <div className="flex items-center gap-1">
                         <Code2 className="w-3.5 h-3.5 text-amber-600" />
                         <span className="font-handwriting font-bold text-xs sm:text-sm text-neutral-800">
                           Tech Stack
                         </span>
                       </div>
-                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight space-y-0.5">
+                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight flex flex-col gap-0.5">
                         <div>• Next.js 15</div>
                         <div>• TypeScript</div>
                       </div>
@@ -467,16 +467,16 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-5, 5, -5], rotate: [0, 2, 0] }}
                       transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                      className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-[#1E1E1E]/95 backdrop-blur-md rounded-2xl border border-neutral-700 shadow-xl shadow-neutral-900/10 p-3 sm:p-4 z-10 w-44 sm:w-52 pointer-events-none select-none"
+                      className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-[#1E1E1E]/95 backdrop-blur-md rounded-2xl border border-neutral-700 shadow-xl shadow-neutral-900/10 p-3 sm:p-4 z-10 w-44 sm:w-52 pointer-events-none select-none flex flex-col gap-2.5"
                     >
-                      <div className="flex items-center gap-1.5 mb-2.5">
+                      <div className="flex items-center gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
                         <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
                         <span className="font-mono text-xs text-neutral-400 ml-2">bash</span>
                       </div>
                       
-                      <div className="font-mono text-xs sm:text-xs space-y-1">
+                      <div className="font-mono text-xs sm:text-xs flex flex-col gap-1">
                         <div className="text-white"><span className="text-pink-500">$</span> npm run build</div>
                         <div className="text-neutral-400">Compiling...</div>
                         <div className="text-emerald-400">✓ Compiled successfully in 2.1s</div>
@@ -520,10 +520,10 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-3, 3, -3], rotate: [-1, -1, -1] }}
                       transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute top-10 w-fit sm:top-30 bottom-10 sm:bottom-6 left-1 sm:left-4 right-6 sm:right-16 bg-white/90 backdrop-blur-2xl rounded-3xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-6 z-0 overflow-hidden select-none flex flex-col items-center"
+                      className="absolute top-10 w-fit sm:top-30 bottom-10 sm:bottom-6 left-1 sm:left-4 right-6 sm:right-16 bg-white/90 backdrop-blur-2xl rounded-3xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-4 sm:p-6 z-0 overflow-hidden select-none flex flex-col items-center gap-3 sm:gap-4"
                     >
                       {/* Window Header */}
-                      <div className="w-full flex items-center gap-2 mb-3 sm:mb-4 ml-4 sm:ml-8">
+                      <div className="w-full flex items-center gap-2 ml-4 sm:ml-8">
                         <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#10B981]" />
                         <span className="font-bold text-sm sm:text-base text-[#1E293B] tracking-tight">
                           Live & Growing
@@ -531,8 +531,8 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       </div>
 
                       {/* Content Flow */}
-                      <div className="flex flex-col items-center w-full max-w-48 sm:max-w-60">
-                        <div className="flex items-center justify-between w-full mb-2">
+                      <div className="flex flex-col items-center w-full max-w-48 sm:max-w-60 gap-2">
+                        <div className="flex items-center justify-between w-full">
                            <div className="flex flex-col">
                               <span className="text-xs text-neutral-500 font-semibold uppercase">Active Users</span>
                               <span className="text-xl sm:text-2xl font-black text-neutral-900">10.4k</span>
@@ -558,15 +558,15 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-4, 4, -4], rotate: [-8, -4, -8] }}
                       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                      className="absolute top-8 sm:top-8 -left-4 sm:-left-6 bg-[#FFF9C4]/95 border border-[#FFF176] rounded-xl p-2 sm:p-2.5 shadow-md shadow-amber-900/10 z-10 w-28 sm:w-36 pointer-events-none select-none"
+                      className="absolute top-8 sm:top-8 -left-4 sm:-left-6 bg-[#FFF9C4]/95 border border-[#FFF176] rounded-xl p-2 sm:p-2.5 shadow-md shadow-amber-900/10 z-10 w-28 sm:w-36 pointer-events-none select-none flex flex-col gap-1"
                     >
-                      <div className="flex items-center gap-1 mb-1">
+                      <div className="flex items-center gap-1">
                         <Rocket className="w-3.5 h-3.5 text-amber-600" />
                         <span className="font-handwriting font-bold text-xs sm:text-sm text-neutral-800">
                           Go Live
                         </span>
                       </div>
-                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight space-y-0.5">
+                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight flex flex-col gap-0.5">
                         <div>• SEO Ready</div>
                         <div>• Fast Load</div>
                       </div>
@@ -595,16 +595,16 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     <motion.div 
                       animate={{ y: [-5, 5, -5], rotate: [0, 2, 0] }}
                       transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                      className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100 shadow-xl shadow-neutral-900/5 p-3 sm:p-4 z-10 w-44 sm:w-52 pointer-events-none select-none"
+                      className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100 shadow-xl shadow-neutral-900/5 p-3 sm:p-4 z-10 w-44 sm:w-52 pointer-events-none select-none flex flex-col gap-2.5"
                     >
-                      <div className="flex items-center justify-between mb-2.5">
+                      <div className="flex items-center justify-between">
                         <span className="font-bold text-xs sm:text-xs text-neutral-800">
                           Server Status
                         </span>
                         <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-500" />
                       </div>
                       
-                      <div className="space-y-1.5">
+                      <div className="flex flex-col gap-1.5">
                         <div className="flex items-center justify-between">
                           <span className="text-xs sm:text-xs font-semibold text-neutral-600">SSL</span>
                           <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /><span className="text-xs font-bold text-neutral-800">Active</span></div>

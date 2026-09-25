@@ -231,7 +231,7 @@ export function PageBanner({
       </div>
 
       {/* ─── Centered Content ────────────────────────────────── */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center gap-4 sm:gap-5">
 
         {/* ── Breadcrumb — white glass pill on primary ── */}
         <motion.nav
@@ -239,7 +239,7 @@ export function PageBanner({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           aria-label="Breadcrumb"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-xs font-medium text-white/70 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/25 mb-5 sm:mb-6 hover:bg-white/15 hover:border-white/40 transition-colors cursor-default"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-xs font-medium text-white/70 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/25 hover:bg-white/15 hover:border-white/40 transition-colors cursor-default"
         >
           {parentBreadcrumbs.map((crumb, i) => (
             <React.Fragment key={crumb.label}>
@@ -273,7 +273,7 @@ export function PageBanner({
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.35, delay: 0.06 }}
-            className="mb-4"
+            className="flex items-center justify-center"
           >
             <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full border border-white/30 bg-white/15 text-white text-xs font-bold uppercase tracking-widest">
               {badgeIcon ?? <span className="w-1.5 h-1.5 rounded-full bg-white" />}
@@ -304,7 +304,7 @@ export function PageBanner({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className={cn(
-              "text-white/60 leading-relaxed mt-3 sm:mt-4 font-normal max-w-lg",
+              "text-white/60 leading-relaxed font-normal max-w-lg",
               "text-[clamp(0.8125rem,1.4vw,0.9375rem)]"
             )}
           >
@@ -317,7 +317,7 @@ export function PageBanner({
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-5 sm:mt-6 origin-center h-0.5 w-10 sm:w-14 rounded-full"
+          className="origin-center h-0.5 w-10 sm:w-14 rounded-full"
           style={{
             background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent)",
           }}
