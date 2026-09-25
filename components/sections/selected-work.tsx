@@ -139,7 +139,7 @@ export function SelectedWork() {
               title="Selected"
               highlightedText="Work."
               description="Live client systems and digital products engineered for measurable scale."
-              className="mb-7 items-start text-left mx-0"
+              className="mb-4 items-start text-left mx-0"
               maxWidth="max-w-2xl"
             />
             {/* Project List: Max 3 Cards on Home Page */}
@@ -203,14 +203,11 @@ export function SelectedWork() {
                         </span>
                       </div>
 
-                      {/* Line 2 & 3: Description and Tech Stack (Visible only when Active) */}
+                      {/* Line 2: Tech Stack (Visible only when Active) */}
                       <div className={cn(
                         "flex flex-col gap-1 overflow-hidden transition-all duration-300 ease-in-out",
                         isActive ? "max-h-24 opacity-100 mt-1" : "max-h-0 opacity-0"
                       )}>
-                        <p className="text-xs sm:text-sm text-slate-500 truncate leading-snug">
-                          {project.description}
-                        </p>
                         <div className="flex items-center gap-1.5 overflow-hidden pt-0.5">
                           {project.stack.slice(0, 3).map((tag) => (
                             <span 

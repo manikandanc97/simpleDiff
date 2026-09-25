@@ -7,6 +7,7 @@ import {
   Palette,
   Smartphone,
   Sparkles,
+  ShoppingBag,
 } from "lucide-react";
 import { ServiceCategory, ServiceItem } from "@/types/service";
 
@@ -54,8 +55,29 @@ export const SERVICES_LIST: ServiceItem[] = [
     brandColor: "#6C2BB8",
   },
   {
-    id: "mobile-apps",
+    id: "ecommerce",
     number: "03",
+    name: "E-commerce",
+    icon: ShoppingBag,
+    category: "Client Interface",
+    outcome: "High-converting online stores that turn browsers into loyal buyers.",
+    pillars: ["Catalog", "Payments", "Performance", "Conversions"],
+    includes: [
+      "Custom storefront design with mobile-first UX & checkout optimization",
+      "Stripe, Razorpay & multi-gateway payment integration",
+      "Inventory management, order tracking & analytics dashboard",
+    ],
+    shortTagline: "High-converting online stores built for speed, growth and seamless buying experiences.",
+    deliverables: [
+      "Custom Storefront Design",
+      "Payment Gateway Integration",
+      "Inventory & Order System",
+    ],
+    brandColor: "#0891B2",
+  },
+  {
+    id: "mobile-apps",
+    number: "04",
     name: "Mobile apps",
     category: "Client Interface",
     icon: Smartphone,
@@ -76,7 +98,7 @@ export const SERVICES_LIST: ServiceItem[] = [
   },
   {
     id: "saas",
-    number: "04",
+    number: "05",
     name: "SaaS products",
     category: "Core Systems",
     icon: Package2,
@@ -97,7 +119,7 @@ export const SERVICES_LIST: ServiceItem[] = [
   },
   {
     id: "branding",
-    number: "05",
+    number: "06",
     name: "Branding & identity",
     category: "Foundation",
     icon: Palette,
@@ -108,10 +130,17 @@ export const SERVICES_LIST: ServiceItem[] = [
       "Curated color palettes & typography standards",
       "Comprehensive digital asset kit & brand guidelines",
     ],
+    shortTagline: "A distinct visual identity that makes your brand instantly recognizable and memorable.",
+    deliverables: [
+      "Logo System & Guidelines",
+      "Color & Typography",
+      "Digital Asset Kit",
+    ],
+    brandColor: "#F97316",
   },
   {
     id: "ui-ux",
-    number: "06",
+    number: "07",
     name: "UI/UX design",
     category: "Foundation",
     icon: Layers,
@@ -122,10 +151,17 @@ export const SERVICES_LIST: ServiceItem[] = [
       "High-fidelity interactive prototypes in Figma",
       "Production-ready design component tokens",
     ],
+    shortTagline: "Intuitive, research-led product design that eliminates friction and converts users.",
+    deliverables: [
+      "Figma Prototypes",
+      "User Journey Maps",
+      "Design Token Systems",
+    ],
+    brandColor: "#7C3AED",
   },
   {
     id: "automation",
-    number: "07",
+    number: "08",
     name: "AI automation",
     category: "Core Systems",
     icon: Sparkles,
@@ -136,6 +172,13 @@ export const SERVICES_LIST: ServiceItem[] = [
       "Automated document processing, categorization & triage",
       "Deep integrations with everyday tools (Slack, CRMs, APIs)",
     ],
+    shortTagline: "Practical AI workflows and automations that eliminate repetitive work and scale your operations.",
+    deliverables: [
+      "LLM Agents & Assistants",
+      "Document Automation",
+      "Tool Integrations",
+    ],
+    brandColor: "#059669",
   },
   {
     id: "custom-software",
