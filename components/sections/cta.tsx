@@ -52,7 +52,6 @@ export function CTA({ onStartProject }: CTAProps) {
             width={800}
             height={600}
             className="w-full h-auto object-contain"
-            priority
           />
         </motion.div>
 
@@ -61,7 +60,7 @@ export function CTA({ onStartProject }: CTAProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white dark:bg-zinc-900 shadow-sm border border-border/50 text-xs sm:text-sm font-bold tracking-wide text-foreground uppercase mb-6 z-10 relative"
+          className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-card shadow-sm border border-border/50 text-xs sm:text-sm font-bold tracking-wide text-foreground uppercase mb-6 z-10 relative"
         >
           <span className="w-2.5 h-2.5 rounded-full bg-[#FF2D55] animate-pulse"></span>
           Let&apos;s Build Together

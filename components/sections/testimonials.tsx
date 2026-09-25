@@ -86,8 +86,6 @@ export function Testimonials() {
         {/* Editorial Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 sm:mb-16">
           <SectionHeader
-            sectionId="testimonials"
-            dockLabel="Client Voices · Reviews"
             title={
               <>
                 What Clients <span className="text-primary">Say.</span>

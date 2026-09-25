@@ -108,9 +108,7 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative scroll-mt-24 py-28 sm:py-32 px-4 sm:px-6 lg:px-12 bg-white dark:bg-zinc-950 overflow-hidden">
-      {/* Google font import for handwritten callout */}
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');`}</style>
+    <section id="faq" className="relative scroll-mt-24 py-28 sm:py-32 px-4 sm:px-6 lg:px-12 bg-background overflow-hidden">
 
       {/* Ambient background glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">

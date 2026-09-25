@@ -149,7 +149,7 @@ export default function AboutPage() {
       </section>
 
       {/* Section 3: Connect With Our Engineering Team */}
-      <section className="py-16 sm:py-24 border-t border-border bg-card/40 rounded-3xl p-8 sm:p-14 border border-border/80">
+      <section className="py-16 sm:py-24 border-t border-border bg-card/40 rounded-3xl p-8 sm:p-14">
         <div className="max-w-3xl space-y-6">
           <span className="text-xs font-mono font-bold uppercase tracking-widest text-primary">
             Direct Engineering Line

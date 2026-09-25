@@ -1,13 +1,8 @@
-"use client";
-
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
-
 import { cn } from "@/lib/utils";
 
 export interface SectionHeaderProps {
-  sectionId: string;
-  dockLabel: string;
   title: React.ReactNode;
   description?: React.ReactNode;
   className?: string;
@@ -16,8 +11,6 @@ export interface SectionHeaderProps {
 }
 
 export function SectionHeader({
-  sectionId,
-  dockLabel,
   title,
   description,
   className,
@@ -32,8 +25,6 @@ export function SectionHeader({
       ref={headerRef}
       className={cn(maxWidth, centered && "mx-auto text-center", className)}
     >
-
-
       <motion.h2
         initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}

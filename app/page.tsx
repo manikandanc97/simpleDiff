@@ -1,4 +1,4 @@
-﻿import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import { WorkbenchHero } from "@/components/workbench/workbench-hero";
 
 // Lazy-loaded sections to reduce initial JS bundle size
@@ -6,9 +6,7 @@ const WhatWeBuild = dynamic(() => import("@/components/sections/what-we-build").
 const SelectedWork = dynamic(() => import("@/components/sections/selected-work").then((mod) => mod.SelectedWork));
 const HowWeWork = dynamic(() => import("@/components/sections/how-we-work").then((mod) => mod.HowWeWork));
 const WhySimpleThink = dynamic(() => import("@/components/sections/philosophy").then((mod) => mod.WhySimpleThink));
-const Industries = dynamic(() => import("@/components/sections/industries").then((mod) => mod.Industries));
 const TechStack = dynamic(() => import("@/components/sections/tech-stack").then((mod) => mod.TechStack));
-// const Testimonials = dynamic(() => import("@/components/sections/testimonials").then((mod) => mod.Testimonials));
 const FAQ = dynamic(() => import("@/components/sections/faq").then((mod) => mod.FAQ));
 const CTA = dynamic(() => import("@/components/sections/cta").then((mod) => mod.CTA));
 

@@ -94,8 +94,6 @@ export function Industries() {
         {/* Editorial Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 sm:mb-16">
           <SectionHeader
-            sectionId="industries"
-            dockLabel="Verticals · Domains"
             title={
               <>
                 Industries We <span className="text-primary">Serve.</span>

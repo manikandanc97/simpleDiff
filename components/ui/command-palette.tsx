@@ -68,7 +68,7 @@ export function CommandPalette({ onStartProject }: CommandPaletteProps) {
       iconName: "sparkles",
       action: () => {
         if (onStartProject) onStartProject();
-        else openLead({ source: "topbar" });
+        else openLead({ source: "navbar" });
       },
     },
   ];

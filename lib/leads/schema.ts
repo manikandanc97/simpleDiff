@@ -10,15 +10,10 @@ export const PROJECT_TYPES = [
 ] as const;
 
 export const LEAD_SOURCES = [
-  "quick",
-  "guided",
-  "services",
   "cta",
-  "topbar",
   "navbar",
   "footer",
   "what-we-build",
-  "mobile-app-menu",
   "services-configurator",
   "how-we-work",
 ] as const;
