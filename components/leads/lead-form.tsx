@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitLead } from "@/lib/leads/actions";
 import { type LeadInput, type LeadState } from "@/lib/leads/schema";
-import { SITE } from "@/lib/site";
+import { SITE } from "@/config/site";
 import { CheckCircle2 } from "lucide-react";
 import { useActionState, useState } from "react";
 

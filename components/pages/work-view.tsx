@@ -1,7 +1,8 @@
 "use client";
 
 import { PageBanner } from "@/components/ui/page-banner";
-import { PROJECTS, type Project } from "@/lib/data/projects";
+import { PROJECTS } from "@/lib/data/projects";
+import { type Project } from "@/types/project";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Globe, Layers, LayoutDashboard, Smartphone } from "lucide-react";
 import { motion } from "motion/react";
@@ -128,7 +129,7 @@ function ProjectVisualCanvas({ project }: { project: Project }) {
                {project.name}
              </h4>
              <div className="flex flex-wrap gap-1.5 sm:gap-2">
-               {project.tags.slice(0, 3).map((tag) => (
+               {project.tags.slice(0, 3).map((tag: string) => (
                  <span key={tag} className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-black/40 backdrop-blur-md text-[9px] sm:text-[10px] font-mono text-white/90 border border-white/20">
                    {tag}
                  </span>

@@ -5,27 +5,12 @@ import {
   AnimatedIcon,
   type AnimatedIconName,
 } from "@/components/ui/animated-icon";
-import { NAV_ITEMS } from "@/lib/nav";
-import { SITE } from "@/lib/site";
+import { NAV_ITEMS } from "@/config/nav";
+import { SITE } from "@/config/site";
 import Image from "next/image";
 import Link from "next/link";
 
-const FOOTER_NAV_ICONS: Record<string, AnimatedIconName> = {
-  "/": "home",
-  "/work": "briefcase",
-  "/services": "layers",
-  "/about": "info",
-  "/contact": "mail",
-};
-
-const CAPABILITY_ITEMS: { label: string; icon: AnimatedIconName }[] = [
-  { label: "Websites & Landing Pages", icon: "globe" },
-  { label: "Web Applications", icon: "laptop" },
-  { label: "Mobile Apps (iOS & Android)", icon: "smartphone" },
-  { label: "SaaS Platforms", icon: "layers" },
-  { label: "Branding & Identity", icon: "palette" },
-  { label: "AI Automation & Agents", icon: "cpu" },
-];
+import { FOOTER_DATA } from "@/lib/data/footer";
 
 interface SiteFooterProps {
   onStartProject?: () => void;
@@ -159,7 +144,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
             </h4>
             <ul className="space-y-3.5">
               {NAV_ITEMS.map((item) => {
-                const iconName = FOOTER_NAV_ICONS[item.route] || "sparkles";
+                const iconName = FOOTER_DATA.navIcons[item.route] || "sparkles";
                 return (
                   <li key={item.route}>
                     <Link
@@ -187,7 +172,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
               CAPABILITIES
             </h4>
             <ul className="space-y-3.5 text-sm text-muted-foreground">
-              {CAPABILITY_ITEMS.map((cap) => (
+              {FOOTER_DATA.capabilities.map((cap) => (
                 <li key={cap.label} className="group flex items-center gap-3 cursor-default">
                   <span className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                     <AnimatedIcon

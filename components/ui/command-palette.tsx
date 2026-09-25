@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 
 import { useLead } from "@/components/leads/lead-provider";
-import { NAV_ITEMS } from "@/lib/nav";
+import { NAV_ITEMS } from "@/config/nav";
 import { cn } from "@/lib/utils";
 
 import { AnimatedIcon, type AnimatedIconName } from "@/components/ui/animated-icon";

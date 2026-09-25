@@ -1,6 +1,7 @@
 "use client";
 
-import { PROJECTS, Project } from "@/lib/data/projects";
+import { PROJECTS } from "@/lib/data/projects";
+import { type Project } from "@/types/project";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,

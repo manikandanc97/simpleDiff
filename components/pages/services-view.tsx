@@ -7,8 +7,8 @@ import { PageBanner } from "@/components/ui/page-banner";
 import {
   CATEGORY_ORDER,
   SERVICES_LIST,
-  type ServiceItem,
 } from "@/lib/data/services";
+import { type ServiceItem } from "@/types/service";
 import { cn } from "@/lib/utils";
 import { Check, Plus, TerminalSquare } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -78,7 +78,7 @@ function BlueprintCanvas({ selectedServices }: { selectedServices: ServiceItem[]
             {/* Nodes */}
             <div className="flex flex-wrap justify-center gap-4 w-full">
               <AnimatePresence mode="popLayout">
-                {servicesInCategory.map((service) => (
+                {servicesInCategory.map((service: ServiceItem) => (
                   <BlueprintNode key={service.id} service={service} />
                 ))}
               </AnimatePresence>

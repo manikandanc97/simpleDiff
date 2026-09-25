@@ -22,39 +22,7 @@ export interface PageBannerProps {
   className?: string;
 }
 
-const TECH_META: Record<string, { label: string; invertInDark?: boolean }> = {
-  react: { label: "React" },
-  nextjs: { label: "Next.js", invertInDark: true },
-  typescript: { label: "TypeScript" },
-  tailwindcss: { label: "Tailwind CSS" },
-  python: { label: "Python" },
-  supabase: { label: "Supabase" },
-  docker: { label: "Docker" },
-  aws: { label: "AWS" },
-  flutter: { label: "Flutter" },
-  swift: { label: "Swift" },
-  kotlin: { label: "Kotlin" },
-  nodejs: { label: "Node.js" },
-  postgresql: { label: "PostgreSQL" },
-  mongodb: { label: "MongoDB" },
-  figma: { label: "Figma" },
-  openai: { label: "OpenAI", invertInDark: true },
-  anthropic: { label: "Anthropic" },
-  fastapi: { label: "FastAPI", invertInDark: true },
-  graphql: { label: "GraphQL" },
-  huggingface: { label: "Hugging Face" },
-  langchain: { label: "LangChain" },
-  pytorch: { label: "PyTorch" },
-  redis: { label: "Redis" },
-  stripe: { label: "Stripe" },
-  vite: { label: "Vite" },
-  git: { label: "Git" },
-  postman: { label: "Postman" },
-  reactnative: { label: "React Native" },
-  cloudflare: { label: "Cloudflare" },
-  githubactions: { label: "GitHub Actions", invertInDark: true },
-  expo: { label: "Expo" },
-};
+import { TECH_STACK } from "@/lib/data/tech-stack";
 
 const DEFAULT_TECH_SLUGS = [
   "react",
@@ -190,7 +158,11 @@ export function PageBanner({
       >
         {techStack.slice(0, 6).map((slug, idx) => {
           const config = TECH_POSITIONS[idx] || TECH_POSITIONS[0];
-          const meta = TECH_META[slug] || { label: slug };
+          const techItem = TECH_STACK.find((t) => t.slug === slug);
+          const meta = {
+            label: techItem?.name || slug,
+            invertInDark: techItem?.invertInDark,
+          };
 
           return (
             <motion.div

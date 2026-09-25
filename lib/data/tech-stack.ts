@@ -1,15 +1,8 @@
 import { Cloud, Monitor, Server, Smartphone, Sparkles, Wrench } from 'lucide-react';
+import { TechCategory, TechItem, TECH_CATEGORIES } from '@/types/tech';
 
-export const CATEGORIES = [
-  "Frontend & Web",
-  "Mobile",
-  "Backend & APIs",
-  "Database & Cloud",
-  "AI & Automation",
-  "Design & Tools",
-] as const;
-
-export type Category = (typeof CATEGORIES)[number];
+export const CATEGORIES = TECH_CATEGORIES;
+export type Category = TechCategory;
 
 export const CATEGORY_ICONS: Record<Category, React.ComponentType<{ className?: string }>> = {
   "Frontend & Web": Monitor,
@@ -19,18 +12,6 @@ export const CATEGORY_ICONS: Record<Category, React.ComponentType<{ className?: 
   "AI & Automation": Sparkles,
   "Design & Tools": Wrench,
 };
-
-export interface TechItem {
-  name: string;
-  slug: string;
-  category: Category;
-  description: string;
-  badges: [string, string];
-  dotColor: string;
-  accentColor: string;
-  learnMoreUrl: string;
-  invertInDark?: boolean;
-}
 
 // ─── Curated Tech Stack (Zero Redundancy — Exactly 1 Category Each) ───────────
 

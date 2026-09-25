@@ -10,103 +10,28 @@ import { SectionHeader } from "@/components/ui/section-header";
 
 import { MobileAppsMockup, SaaSProductsMockup, WebAppsMockup, WebsitesMockup } from './what-we-build/mockups';
 
-// ── SERVICES DATA SPECIFICATION ──
-const SERVICES = [
-  {
-    id: "01",
-    numColor: "text-[#922F55]",
-    badgeBg: "bg-[#922F55]/10 text-[#922F55]",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-    ),
-    title: "Websites",
-    tagline: "Digital experiences that make your business clear, credible and memorable.",
-    deliverables: [
-      "Custom Design Systems",
-      "High Conversion UX",
-      "SEO & Sub-second Speed",
-    ],
-    ctaText: "Explore Websites",
-    Mockup: WebsitesMockup,
-  },
-  {
-    id: "02",
-    numColor: "text-[#6C2BB8]",
-    badgeBg: "bg-[#6C2BB8]/10 text-[#6C2BB8]",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
-    title: "Web Applications",
-    tagline: "Scalable, secure and high-performance web apps tailored to your business needs.",
-    deliverables: [
-      "Next.js & React Fullstack",
-      "Real-time Workflows",
-      "Secure Role-based Auth",
-    ],
-    ctaText: "Explore Web Apps",
-    Mockup: WebAppsMockup,
-  },
-  {
-    id: "03",
-    numColor: "text-[#D23D78]",
-    badgeBg: "bg-[#D23D78]/10 text-[#D23D78]",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-        <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="2.5" />
-      </svg>
-    ),
-    title: "Mobile Apps",
-    tagline: "Native-like mobile experiences that engage users and drive growth.",
-    deliverables: [
-      "React Native Cross-Platform",
-      "Offline Functionality",
-      "App Store & Play Store",
-    ],
-    ctaText: "Explore Mobile Apps",
-    Mockup: MobileAppsMockup,
-  },
-  {
-    id: "04",
-    numColor: "text-[#5B21B6]",
-    badgeBg: "bg-[#5B21B6]/10 text-[#5B21B6]",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="12 2 2 7 12 12 22 7 12 2" />
-        <polyline points="2 17 12 22 22 17" />
-        <polyline points="2 12 12 17 22 12" />
-      </svg>
-    ),
-    title: "SaaS Products",
-    tagline: "End-to-end SaaS platforms with modern architecture and business-ready features.",
-    deliverables: [
-      "Stripe Billing & Subscriptions",
-      "Multi-tenant Architecture",
-      "Product Telemetry & Analytics",
-    ],
-    ctaText: "Explore SaaS Products",
-    Mockup: SaaSProductsMockup,
-  },
-];
+import { SERVICES_LIST } from "@/lib/data/services";
+
+const MOCKUPS: Record<string, React.ElementType> = {
+  "websites": WebsitesMockup,
+  "web-apps": WebAppsMockup,
+  "mobile-apps": MobileAppsMockup,
+  "saas": SaaSProductsMockup,
+};
 
 export function WhatWeBuild() {
   const { openLead } = useLead();
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const displayServices = SERVICES_LIST.slice(0, 4);
+
   const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % SERVICES.length);
+    setActiveIndex((prev) => (prev + 1) % displayServices.length);
   };
 
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + SERVICES.length) % SERVICES.length);
+    setActiveIndex((prev) => (prev - 1 + displayServices.length) % displayServices.length);
   };
 
   return (
@@ -154,15 +79,16 @@ export function WhatWeBuild() {
 
         <div ref={containerRef} className="relative w-full py-2 perspective-[1400px] overflow-visible">
           <div className="flex items-center justify-center min-h-[350px] sm:min-h-[380px] relative w-full">
-            {SERVICES.map((service, index) => {
+            {displayServices.map((service, index) => {
               let offset = index - activeIndex;
-              if (offset > 2) offset -= SERVICES.length;
-              if (offset < -2) offset += SERVICES.length;
+              if (offset > 2) offset -= displayServices.length;
+              if (offset < -2) offset += displayServices.length;
 
               const isActive = offset === 0;
               const isVisible = Math.abs(offset) <= 1;
 
-              const MockupComponent = service.Mockup;
+              const MockupComponent = MOCKUPS[service.id];
+              const IconComponent = service.icon;
 
               return (
                 <motion.div
@@ -206,24 +132,24 @@ export function WhatWeBuild() {
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center w-full">
                     <div className="md:col-span-7 flex flex-col items-start text-left">
                       <div className="flex items-center gap-3 mb-4">
-                        <span className={cn("text-[26px] sm:text-[30px] font-[900] tracking-tight leading-none font-mono", service.numColor)}>
-                          {service.id}
+                        <span className="text-[26px] sm:text-[30px] font-[900] tracking-tight leading-none font-mono" style={{ color: service.brandColor }}>
+                          {service.number}
                         </span>
-                        <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center shadow-xs", service.badgeBg)}>
-                          {service.icon}
+                        <div className="w-9 h-9 rounded-xl flex items-center justify-center shadow-xs" style={{ backgroundColor: `${service.brandColor}1A`, color: service.brandColor }}>
+                          <IconComponent className="w-[18px] h-[18px] stroke-[2.2]" />
                         </div>
                       </div>
 
                       <h3 className="text-[24px] sm:text-[30px] lg:text-[34px] font-[800] tracking-[-0.03em] text-[#121114] leading-tight mb-2.5">
-                        {service.title}
+                        {service.name}
                       </h3>
 
                       <p className="text-[14px] sm:text-[15px] text-[#68666C] leading-[1.5] mb-5 font-[500]">
-                        {service.tagline}
+                        {service.shortTagline}
                       </p>
 
                       <div className="flex flex-wrap gap-2 mb-6">
-                        {service.deliverables.map((item, i) => (
+                        {service.deliverables?.map((item, i) => (
                           <span
                             key={i}
                             className="inline-flex items-center px-3 py-1 rounded-full bg-slate-50 border border-[rgba(30,24,30,0.06)] text-[12px] font-[600] text-[#121114]/85 tracking-[-0.01em]"
@@ -239,12 +165,12 @@ export function WhatWeBuild() {
                           e.stopPropagation();
                           openLead({
                             source: "what-we-build",
-                            description: `Interested in: ${service.title}.`,
+                            description: `Interested in: ${service.name}.`,
                           });
                         }}
                         className="inline-flex items-center gap-2 h-11 px-6 rounded-full bg-[#922F55] text-white text-[14px] font-[700] hover:bg-[#7D2748] active:scale-95 transition-all shadow-[0_4px_16px_rgba(146,47,85,0.25)]"
                       >
-                        <span>{service.ctaText}</span>
+                        <span>Explore {service.name}</span>
                         <AnimatedArrowRight size={15} className="text-white" />
                       </button>
                     </div>
@@ -287,7 +213,7 @@ export function WhatWeBuild() {
           </div>
 
           <div className="flex items-center gap-2">
-            {SERVICES.map((_, i) => (
+            {displayServices.map((_, i) => (
               <button
                 key={i}
                 type="button"

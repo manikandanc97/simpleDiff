@@ -7,7 +7,7 @@ import {
   AnimatedSparkles,
 } from "@/components/ui/animated-icon";
 import { PageBanner } from "@/components/ui/page-banner";
-import { SITE } from "@/lib/site";
+import { SITE } from "@/config/site";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

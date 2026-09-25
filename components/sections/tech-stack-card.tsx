@@ -1,6 +1,7 @@
 "use client";
 
-import { TechItem } from "@/lib/data/tech-stack";
+import { TECH_STACK } from "@/lib/data/tech-stack";
+import { type TechItem } from "@/types/tech";
 import { motion } from "motion/react";
 import Image from "next/image";
 
@@ -42,7 +43,7 @@ export function TechCard({ tech, index }: { tech: TechItem; index: number }) {
 
       {/* 2 Badges */}
       <div className="flex flex-wrap items-center justify-center gap-1.5 mt-auto pt-3">
-        {tech.badges.map((badge) => (
+        {tech.badges.map((badge: string) => (
           <span
             key={badge}
             className="px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-slate-100/90 dark:bg-muted/50 text-slate-500 dark:text-muted-foreground border border-slate-200/50 dark:border-border/50"

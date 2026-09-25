@@ -7,21 +7,8 @@ import {
   Palette,
   Smartphone,
   Sparkles,
-  type LucideIcon,
 } from "lucide-react";
-
-export type ServiceCategory = "Client Interface" | "Core Systems" | "Foundation";
-
-export interface ServiceItem {
-  id: string;
-  number: string;
-  name: string;
-  icon: LucideIcon;
-  outcome: string;
-  category: ServiceCategory;
-  pillars: [string, string, string, string];
-  includes: [string, string, string];
-}
+import { ServiceCategory, ServiceItem } from "@/types/service";
 
 export const SERVICES_LIST: ServiceItem[] = [
   {
@@ -37,6 +24,13 @@ export const SERVICES_LIST: ServiceItem[] = [
       "Conversion-optimized content architecture",
       "SEO, Core Web Vitals & accessibility tuning",
     ],
+    shortTagline: "Digital experiences that make your business clear, credible and memorable.",
+    deliverables: [
+      "Custom Design Systems",
+      "High Conversion UX",
+      "SEO & Sub-second Speed",
+    ],
+    brandColor: "#922F55",
   },
   {
     id: "web-apps",
@@ -51,6 +45,13 @@ export const SERVICES_LIST: ServiceItem[] = [
       "Secure authentication & database integration",
       "Interactive dashboards & business automations",
     ],
+    shortTagline: "Scalable, secure and high-performance web apps tailored to your business needs.",
+    deliverables: [
+      "Next.js & React Fullstack",
+      "Real-time Workflows",
+      "Secure Role-based Auth",
+    ],
+    brandColor: "#6C2BB8",
   },
   {
     id: "mobile-apps",
@@ -65,6 +66,13 @@ export const SERVICES_LIST: ServiceItem[] = [
       "Offline-ready data synchronization & push notifications",
       "App Store & Google Play submission and launch",
     ],
+    shortTagline: "Native-like mobile experiences that engage users and drive growth.",
+    deliverables: [
+      "React Native Cross-Platform",
+      "Offline Functionality",
+      "App Store & Play Store",
+    ],
+    brandColor: "#D23D78",
   },
   {
     id: "saas",
@@ -79,6 +87,13 @@ export const SERVICES_LIST: ServiceItem[] = [
       "Stripe subscriptions, metered billing & customer portals",
       "Workspaces, role-based access control & audits",
     ],
+    shortTagline: "End-to-end SaaS platforms with modern architecture and business-ready features.",
+    deliverables: [
+      "Stripe Billing & Subscriptions",
+      "Multi-tenant Architecture",
+      "Product Telemetry & Analytics",
+    ],
+    brandColor: "#5B21B6",
   },
   {
     id: "branding",
