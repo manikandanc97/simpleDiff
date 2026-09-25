@@ -53,7 +53,7 @@ export function WorkbenchHero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="font-satoshi font-extrabold tracking-tighter text-[#121114] leading-none text-5xl sm:text-7xl lg:text-8xl flex flex-col gap-2"
+              className="font-satoshi font-extrabold tracking-tighter text-[#121114] leading-none text-5xl sm:text-6xl lg:text-7xl flex flex-col gap-2"
             >
               <span className="block">{HERO_CONTENT.headlineLine1}</span>
               <span className="block relative inline-block whitespace-nowrap">

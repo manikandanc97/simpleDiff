@@ -25,7 +25,7 @@ export function WhySimpleThink() {
         <div className="absolute bottom-1/4 -right-32 w-full max-w-lg aspect-square bg-purple-100/40 rounded-full blur-3xl opacity-50" />
       </div>
 
-      <div ref={containerRef} className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-12 sm:gap-16">
+      <div ref={containerRef} className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-8 sm:gap-12">
         <SectionHeader
           eyebrow="WHY SIMPLEPRIME"
           centered
