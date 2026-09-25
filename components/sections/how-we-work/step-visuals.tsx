@@ -35,7 +35,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                 <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-tr from-pink-300/25 via-purple-200/20 to-rose-300/25 rounded-full blur-3xl" />
 
                 {activeStepIndex === 0 && (
-                  <div className="relative w-full h-[360px] sm:h-[420px] lg:h-[440px] flex items-end justify-center overflow-visible">
+                  <div className="relative w-full h-96 sm:h-96 lg:h-96 flex items-end justify-center overflow-visible">
                     
                     {/* Layer 1: Floating "Project Blueprint" Window Card */}
                     <motion.div 
@@ -46,7 +46,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       {/* Window Header */}
                       <div className="w-full flex items-center gap-2 mb-3 sm:mb-4 ml-4 sm:ml-8">
                         <GitFork className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#475569]" />
-                        <span className="font-bold text-[13px] sm:text-[15px] text-[#1E293B] tracking-tight">
+                        <span className="font-bold text-sm sm:text-base text-[#1E293B] tracking-tight">
                           Project Blueprint
                         </span>
                       </div>
@@ -54,7 +54,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       {/* Blueprint Flowchart Diagram */}
                       <div className="flex flex-col items-center">
                         {/* Root Node */}
-                        <div className="bg-white border border-neutral-100 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-neutral-800 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
+                        <div className="bg-white border border-neutral-100 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 flex items-center gap-1.5 text-xs sm:text-xs font-semibold text-neutral-800 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
                           <Users className="w-3 h-3 text-purple-600" />
                           <span>Business Goals</span>
                         </div>
@@ -65,12 +65,12 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                         </svg>
 
                         {/* Child Nodes Row */}
-                        <div className="flex items-center justify-between w-full max-w-[220px] sm:max-w-[260px] gap-2">
-                          <div className="bg-white border border-neutral-100 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-neutral-800 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
+                        <div className="flex items-center justify-between w-full max-w-56 sm:max-w-64 gap-2">
+                          <div className="bg-white border border-neutral-100 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 flex items-center gap-1.5 text-xs sm:text-xs font-semibold text-neutral-800 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
                             <Target className="w-3 h-3 text-rose-500" />
                             <span>User Research</span>
                           </div>
-                          <div className="bg-white border border-neutral-100 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-neutral-800 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
+                          <div className="bg-white border border-neutral-100 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 flex items-center gap-1.5 text-xs sm:text-xs font-semibold text-neutral-800 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
                             <FileText className="w-3 h-3 text-purple-600" />
                             <span>Feature Scope</span>
                           </div>
@@ -82,7 +82,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                         </svg>
 
                         {/* Bottom Node */}
-                        <div className="bg-white border border-neutral-100 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-neutral-800 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
+                        <div className="bg-white border border-neutral-100 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 flex items-center gap-1.5 text-xs sm:text-xs font-semibold text-neutral-800 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
                           <Layers className="w-3 h-3 text-blue-600" />
                           <span>Technical Plan</span>
                         </div>
@@ -101,7 +101,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                           Ideas
                         </span>
                       </div>
-                      <div className="font-handwriting text-[10px] sm:text-xs text-neutral-700 leading-tight space-y-0.5">
+                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight space-y-0.5">
                         <div>• Business Goals</div>
                         <div>• Target Audience</div>
                       </div>
@@ -167,7 +167,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                     >
                       {/* Header */}
                       <div className="flex items-center justify-between mb-1.5">
-                        <span className="font-bold text-[11px] sm:text-xs text-neutral-800">
+                        <span className="font-bold text-xs sm:text-xs text-neutral-800">
                           Market Research
                         </span>
                         <BarChart3 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E11D48]" />
@@ -183,19 +183,19 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-1.5">
                           <CheckCircle2 className="w-3 h-3 text-purple-600 shrink-0" />
-                          <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-700">
+                          <span className="text-xs sm:text-xs font-semibold text-neutral-700">
                             Competitor Analysis
                           </span>
                         </div>
                         <div className="flex items-center gap-1.5">
                           <CheckCircle2 className="w-3 h-3 text-purple-600 shrink-0" />
-                          <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-700">
+                          <span className="text-xs sm:text-xs font-semibold text-neutral-700">
                             User Insights
                           </span>
                         </div>
                         <div className="flex items-center gap-1.5">
                           <CheckCircle2 className="w-3 h-3 text-purple-600 shrink-0" />
-                          <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-700">
+                          <span className="text-xs sm:text-xs font-semibold text-neutral-700">
                             Feature Prioritization
                           </span>
                         </div>
@@ -243,13 +243,13 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                         width={1774}
                         height={887}
                         priority
-                        className="w-full max-w-[540px] sm:max-w-[580px] lg:max-w-[620px] object-contain drop-shadow-xl select-none"
+                        className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl object-contain drop-shadow-xl select-none"
                       />
                     </div>
                   </div>
                 )}
                 {activeStepIndex === 1 && (
-                  <div className="relative w-full h-[360px] sm:h-[420px] lg:h-[440px] flex items-end justify-center overflow-visible">
+                  <div className="relative w-full h-96 sm:h-96 lg:h-96 flex items-end justify-center overflow-visible">
                     
                     {/* Layer 1: Floating "Design System" Window Card */}
                     <motion.div 
@@ -260,7 +260,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       {/* Window Header */}
                       <div className="w-full flex items-center gap-2 mb-3 sm:mb-4 ml-4 sm:ml-8">
                         <Palette className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#475569]" />
-                        <span className="font-bold text-[13px] sm:text-[15px] text-[#1E293B] tracking-tight">
+                        <span className="font-bold text-sm sm:text-base text-[#1E293B] tracking-tight">
                           Design System
                         </span>
                       </div>
@@ -282,7 +282,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                         {/* Typography */}
                         <div className="bg-white border border-neutral-100 rounded-2xl px-5 py-3 shadow-sm flex flex-col items-center">
                            <span className="font-satoshi font-black text-2xl text-neutral-900">Aa</span>
-                           <span className="text-[10px] text-neutral-500 font-medium">Satoshi / Inter</span>
+                           <span className="text-xs text-neutral-500 font-medium">Satoshi / Inter</span>
                         </div>
                       </div>
                     </motion.div>
@@ -299,7 +299,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                           UI / UX
                         </span>
                       </div>
-                      <div className="font-handwriting text-[10px] sm:text-xs text-neutral-700 leading-tight space-y-0.5">
+                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight space-y-0.5">
                         <div>• Pixel Perfect</div>
                         <div>• User First</div>
                       </div>
@@ -331,7 +331,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100 shadow-xl shadow-neutral-900/5 p-3 sm:p-4 z-10 w-40 sm:w-48 pointer-events-none select-none"
                     >
                       <div className="flex items-center justify-between mb-2.5">
-                        <span className="font-bold text-[11px] sm:text-xs text-neutral-800">
+                        <span className="font-bold text-xs sm:text-xs text-neutral-800">
                           Components
                         </span>
                         <LayoutTemplate className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-500" />
@@ -381,13 +381,13 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                         width={1774}
                         height={887}
                         priority
-                        className="w-full max-w-[540px] sm:max-w-[580px] lg:max-w-[620px] object-contain drop-shadow-xl select-none"
+                        className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl object-contain drop-shadow-xl select-none"
                       />
                     </div>
                   </div>
                 )}
                 {activeStepIndex === 2 && (
-                  <div className="relative w-full h-[360px] sm:h-[420px] lg:h-[440px] flex items-end justify-center overflow-visible">
+                  <div className="relative w-full h-96 sm:h-96 lg:h-96 flex items-end justify-center overflow-visible">
                     
                     {/* Layer 1: Floating "Architecture" Window Card */}
                     <motion.div 
@@ -398,7 +398,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       {/* Window Header */}
                       <div className="w-full flex items-center gap-2 mb-3 sm:mb-4 ml-4 sm:ml-8">
                         <Database className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#475569]" />
-                        <span className="font-bold text-[13px] sm:text-[15px] text-[#1E293B] tracking-tight">
+                        <span className="font-bold text-sm sm:text-base text-[#1E293B] tracking-tight">
                           Architecture
                         </span>
                       </div>
@@ -407,21 +407,21 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       <div className="flex items-center justify-center gap-2 sm:gap-4 mt-2">
                          <div className="bg-white border border-neutral-100 rounded-xl p-2 sm:p-3 shadow-sm flex flex-col items-center gap-1">
                            <Database className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-                           <span className="text-[9px] sm:text-[10px] font-bold text-neutral-600">DB</span>
+                           <span className="text-xs sm:text-xs font-bold text-neutral-600">DB</span>
                          </div>
                          <svg className="w-6 sm:w-10 h-4 text-neutral-300" viewBox="0 0 40 16" fill="none">
                            <path d="M 0 8 L 40 8" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" />
                          </svg>
                          <div className="bg-white border border-neutral-100 rounded-xl p-2 sm:p-3 shadow-sm flex flex-col items-center gap-1">
                            <Server className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600" />
-                           <span className="text-[9px] sm:text-[10px] font-bold text-neutral-600">API</span>
+                           <span className="text-xs sm:text-xs font-bold text-neutral-600">API</span>
                          </div>
                          <svg className="w-6 sm:w-10 h-4 text-neutral-300" viewBox="0 0 40 16" fill="none">
                            <path d="M 0 8 L 40 8" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" />
                          </svg>
                          <div className="bg-white border border-neutral-100 rounded-xl p-2 sm:p-3 shadow-sm flex flex-col items-center gap-1">
                            <MonitorPlay className="w-4 h-4 sm:w-5 sm:h-5 text-rose-500" />
-                           <span className="text-[9px] sm:text-[10px] font-bold text-neutral-600">CLIENT</span>
+                           <span className="text-xs sm:text-xs font-bold text-neutral-600">CLIENT</span>
                          </div>
                       </div>
                     </motion.div>
@@ -438,7 +438,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                           Tech Stack
                         </span>
                       </div>
-                      <div className="font-handwriting text-[10px] sm:text-xs text-neutral-700 leading-tight space-y-0.5">
+                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight space-y-0.5">
                         <div>• Next.js 15</div>
                         <div>• TypeScript</div>
                       </div>
@@ -473,10 +473,10 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                         <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
                         <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                        <span className="font-mono text-[10px] text-neutral-400 ml-2">bash</span>
+                        <span className="font-mono text-xs text-neutral-400 ml-2">bash</span>
                       </div>
                       
-                      <div className="font-mono text-[10px] sm:text-[11px] space-y-1">
+                      <div className="font-mono text-xs sm:text-xs space-y-1">
                         <div className="text-white"><span className="text-pink-500">$</span> npm run build</div>
                         <div className="text-neutral-400">Compiling...</div>
                         <div className="text-emerald-400">✓ Compiled successfully in 2.1s</div>
@@ -508,13 +508,13 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                         width={1774}
                         height={887}
                         priority
-                        className="w-full max-w-[540px] sm:max-w-[580px] lg:max-w-[620px] object-contain drop-shadow-xl select-none"
+                        className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl object-contain drop-shadow-xl select-none"
                       />
                     </div>
                   </div>
                 )}
                 {activeStepIndex === 3 && (
-                  <div className="relative w-full h-[360px] sm:h-[420px] lg:h-[440px] flex items-end justify-center overflow-visible">
+                  <div className="relative w-full h-96 sm:h-96 lg:h-96 flex items-end justify-center overflow-visible">
                     
                     {/* Layer 1: Floating "Dashboard" Window Card (Live & Growing) */}
                     <motion.div 
@@ -525,19 +525,19 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       {/* Window Header */}
                       <div className="w-full flex items-center gap-2 mb-3 sm:mb-4 ml-4 sm:ml-8">
                         <Activity className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#10B981]" />
-                        <span className="font-bold text-[13px] sm:text-[15px] text-[#1E293B] tracking-tight">
+                        <span className="font-bold text-sm sm:text-base text-[#1E293B] tracking-tight">
                           Live & Growing
                         </span>
                       </div>
 
                       {/* Content Flow */}
-                      <div className="flex flex-col items-center w-full max-w-[200px] sm:max-w-[240px]">
+                      <div className="flex flex-col items-center w-full max-w-48 sm:max-w-60">
                         <div className="flex items-center justify-between w-full mb-2">
                            <div className="flex flex-col">
-                              <span className="text-[10px] text-neutral-500 font-semibold uppercase">Active Users</span>
+                              <span className="text-xs text-neutral-500 font-semibold uppercase">Active Users</span>
                               <span className="text-xl sm:text-2xl font-black text-neutral-900">10.4k</span>
                            </div>
-                           <div className="px-2 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-bold flex items-center gap-1">
+                           <div className="px-2 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold flex items-center gap-1">
                               <TrendingUp className="w-3 h-3" /> +42%
                            </div>
                         </div>
@@ -566,7 +566,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                           Go Live
                         </span>
                       </div>
-                      <div className="font-handwriting text-[10px] sm:text-xs text-neutral-700 leading-tight space-y-0.5">
+                      <div className="font-handwriting text-xs sm:text-xs text-neutral-700 leading-tight space-y-0.5">
                         <div>• SEO Ready</div>
                         <div>• Fast Load</div>
                       </div>
@@ -598,7 +598,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       className="absolute top-18 -right-4 sm:-right-6 lg:-right-2 bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100 shadow-xl shadow-neutral-900/5 p-3 sm:p-4 z-10 w-44 sm:w-52 pointer-events-none select-none"
                     >
                       <div className="flex items-center justify-between mb-2.5">
-                        <span className="font-bold text-[11px] sm:text-xs text-neutral-800">
+                        <span className="font-bold text-xs sm:text-xs text-neutral-800">
                           Server Status
                         </span>
                         <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-500" />
@@ -606,16 +606,16 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                       
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
-                          <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-600">SSL</span>
-                          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /><span className="text-[10px] font-bold text-neutral-800">Active</span></div>
+                          <span className="text-xs sm:text-xs font-semibold text-neutral-600">SSL</span>
+                          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /><span className="text-xs font-bold text-neutral-800">Active</span></div>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-600">CDN</span>
-                          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /><span className="text-[10px] font-bold text-neutral-800">Global</span></div>
+                          <span className="text-xs sm:text-xs font-semibold text-neutral-600">CDN</span>
+                          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /><span className="text-xs font-bold text-neutral-800">Global</span></div>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-600">Uptime</span>
-                          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /><span className="text-[10px] font-bold text-neutral-800">99.9%</span></div>
+                          <span className="text-xs sm:text-xs font-semibold text-neutral-600">Uptime</span>
+                          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500" /><span className="text-xs font-bold text-neutral-800">99.9%</span></div>
                         </div>
                       </div>
 
@@ -645,7 +645,7 @@ export function StepVisual({ activeStepIndex }: { activeStepIndex: number }) {
                         width={1774}
                         height={887}
                         priority
-                        className="w-full max-w-[540px] sm:max-w-[580px] lg:max-w-[620px] object-contain drop-shadow-xl select-none"
+                        className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl object-contain drop-shadow-xl select-none"
                       />
                     </div>
                   </div>

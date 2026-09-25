@@ -15,18 +15,18 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative rounded-[28px] sm:rounded-[36px] bg-white/80 backdrop-blur-md border border-neutral-200/80 shadow-[0_12px_44px_rgba(0,0,0,0.03)] p-5 sm:p-7 flex flex-col justify-between min-h-[490px] sm:min-h-[510px] overflow-hidden"
+            className="relative rounded-3xl sm:rounded-3xl bg-white/80 backdrop-blur-md border border-neutral-200/80 shadow-[0_12px_44px_rgba(0,0,0,0.03)] p-5 sm:p-7 flex flex-col justify-between min-h-96 sm:min-h-96 overflow-hidden"
           >
             {/* Top Bar inside Center Card */}
             <div className="flex items-center justify-between w-full mb-4 z-10">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50/90 border border-rose-200/60 shadow-xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D23D78]" />
-                <span className="text-[10px] font-bold tracking-widest text-neutral-700 uppercase">
+                <span className="text-xs font-bold tracking-widest text-neutral-700 uppercase">
                   SIGNAL / 01
                 </span>
               </div>
               <div className="flex items-center gap-1.5 text-neutral-400">
-                <span className="text-[9px] font-mono tracking-wider uppercase">
+                <span className="text-xs font-mono tracking-wider uppercase">
                   SIMPLE SYSTEM
                 </span>
                 <Activity className="w-3.5 h-3.5 text-[#D23D78]" />
@@ -133,10 +133,10 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.25 }}
-                  className="relative bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-3.5 sm:p-4 hover:shadow-md hover:border-rose-100 transition-all duration-300 w-[190px] sm:w-[220px]"
+                  className="relative bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-3.5 sm:p-4 hover:shadow-md hover:border-rose-100 transition-all duration-300 w-48 sm:w-56"
                 >
                   <div className="absolute -top-2.5 right-4 z-20">
-                    <span className="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border shadow-xs bg-rose-50 text-[#D23D78] border-rose-200/60">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full border shadow-xs bg-rose-50 text-[#D23D78] border-rose-200/60">
                       ⊞ {FLOW_NODES.topLeft.badge}
                     </span>
                   </div>
@@ -145,10 +145,10 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                       <Lightbulb className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="font-bold text-xs sm:text-[13px] text-neutral-900 leading-tight">
+                      <p className="font-bold text-xs sm:text-sm text-neutral-900 leading-tight">
                         {FLOW_NODES.topLeft.title}
                       </p>
-                      <p className="text-[10px] sm:text-[11px] text-neutral-500 leading-snug mt-1">
+                      <p className="text-xs sm:text-xs text-neutral-500 leading-snug mt-1">
                         {FLOW_NODES.topLeft.desc}
                       </p>
                     </div>
@@ -160,10 +160,10 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.3 }}
-                  className="relative bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-3.5 sm:p-4 hover:shadow-md hover:border-purple-100 transition-all duration-300 w-[190px] sm:w-[220px]"
+                  className="relative bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-3.5 sm:p-4 hover:shadow-md hover:border-purple-100 transition-all duration-300 w-48 sm:w-56"
                 >
                   <div className="absolute -top-2.5 right-4 z-20">
-                    <span className="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border shadow-xs bg-purple-50 text-[#7C3AED] border-purple-200/60">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full border shadow-xs bg-purple-50 text-[#7C3AED] border-purple-200/60">
                       ⊞ {FLOW_NODES.topRight.badge}
                     </span>
                   </div>
@@ -172,10 +172,10 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                       <TrendingUp className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="font-bold text-xs sm:text-[13px] text-neutral-900 leading-tight">
+                      <p className="font-bold text-xs sm:text-sm text-neutral-900 leading-tight">
                         {FLOW_NODES.topRight.title}
                       </p>
-                      <p className="text-[10px] sm:text-[11px] text-neutral-500 leading-snug mt-1">
+                      <p className="text-xs sm:text-xs text-neutral-500 leading-snug mt-1">
                         {FLOW_NODES.topRight.desc}
                       </p>
                     </div>
@@ -199,7 +199,7 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                     className="w-10 h-10 sm:w-11 sm:h-11 object-contain drop-shadow-xs select-none"
                     priority
                   />
-                  <span className="text-[9px] sm:text-[10px] font-black tracking-[0.16em] text-neutral-900 uppercase mt-1 select-none">
+                  <span className="text-xs sm:text-xs font-black tracking-[0.16em] text-neutral-900 uppercase mt-1 select-none">
                     SIMPLE<span className="text-[#D23D78]">PRIME</span>
                   </span>
                 </div>
@@ -212,10 +212,10 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.35 }}
-                  className="relative bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-3.5 sm:p-4 hover:shadow-md hover:border-rose-100 transition-all duration-300 w-[190px] sm:w-[220px]"
+                  className="relative bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-3.5 sm:p-4 hover:shadow-md hover:border-rose-100 transition-all duration-300 w-48 sm:w-56"
                 >
                   <div className="absolute -top-2.5 right-4 z-20">
-                    <span className="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border shadow-xs bg-rose-50 text-[#D23D78] border-rose-200/60">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full border shadow-xs bg-rose-50 text-[#D23D78] border-rose-200/60">
                       ⊞ {FLOW_NODES.bottomLeft.badge}
                     </span>
                   </div>
@@ -224,10 +224,10 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                       <Box className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="font-bold text-xs sm:text-[13px] text-neutral-900 leading-tight">
+                      <p className="font-bold text-xs sm:text-sm text-neutral-900 leading-tight">
                         {FLOW_NODES.bottomLeft.title}
                       </p>
-                      <p className="text-[10px] sm:text-[11px] text-neutral-500 leading-snug mt-1">
+                      <p className="text-xs sm:text-xs text-neutral-500 leading-snug mt-1">
                         {FLOW_NODES.bottomLeft.desc}
                       </p>
                     </div>
@@ -239,10 +239,10 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.4 }}
-                  className="relative bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-3.5 sm:p-4 hover:shadow-md hover:border-purple-100 transition-all duration-300 w-[190px] sm:w-[220px]"
+                  className="relative bg-white/95 backdrop-blur-md rounded-2xl border border-neutral-100/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] p-3.5 sm:p-4 hover:shadow-md hover:border-purple-100 transition-all duration-300 w-48 sm:w-56"
                 >
                   <div className="absolute -top-2.5 right-4 z-20">
-                    <span className="inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full border shadow-xs bg-purple-50 text-[#7C3AED] border-purple-200/60">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full border shadow-xs bg-purple-50 text-[#7C3AED] border-purple-200/60">
                       ⊞ {FLOW_NODES.bottomRight.badge}
                     </span>
                   </div>
@@ -251,10 +251,10 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
                       <Users className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="font-bold text-xs sm:text-[13px] text-neutral-900 leading-tight">
+                      <p className="font-bold text-xs sm:text-sm text-neutral-900 leading-tight">
                         {FLOW_NODES.bottomRight.title}
                       </p>
-                      <p className="text-[10px] sm:text-[11px] text-neutral-500 leading-snug mt-1">
+                      <p className="text-xs sm:text-xs text-neutral-500 leading-snug mt-1">
                         {FLOW_NODES.bottomRight.desc}
                       </p>
                     </div>
@@ -264,16 +264,16 @@ export function FlowDiagram({ inView }: { inView: boolean }) {
             </div>
 
             {/* Bottom Bar: YOUR IDEA ↔ REAL IMPACT */}
-            <div className="flex items-center justify-between w-full max-w-[500px] mx-auto px-2 mt-4 z-10">
+            <div className="flex items-center justify-between w-full max-w-lg mx-auto px-2 mt-4 z-10">
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D23D78]" />
-                <span className="text-[10px] font-mono font-bold text-neutral-400 uppercase tracking-wider">
+                <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
                   YOUR IDEA
                 </span>
               </div>
               <div className="flex-1 mx-3 border-b border-dotted border-rose-200/80" />
               <div className="flex items-center gap-1.5">
-                <span className="text-[10px] font-mono font-bold text-neutral-400 uppercase tracking-wider">
+                <span className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider">
                   REAL IMPACT
                 </span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#7C3AED]" />

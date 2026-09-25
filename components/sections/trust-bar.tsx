@@ -21,7 +21,7 @@ export function TrustBar() {
           {doubledTrust.map((item, i) => (
             <span
               key={i}
-              className="text-[11px] font-mono font-semibold uppercase tracking-widest text-foreground/70 flex items-center gap-2"
+              className="text-xs font-mono font-semibold uppercase tracking-widest text-foreground/70 flex items-center gap-2"
             >
               <span className="w-1 h-1 rounded-full bg-primary inline-block shrink-0" />
               {item.text}
@@ -43,7 +43,7 @@ export function TrustBar() {
           {doubledTech.map((item, i) => (
             <span
               key={i}
-              className="text-[11px] font-mono font-semibold uppercase tracking-widest text-muted-foreground flex items-center gap-2"
+              className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground flex items-center gap-2"
             >
               <span className="w-1 h-1 rounded-full bg-primary/40 inline-block shrink-0" />
               {item.text}

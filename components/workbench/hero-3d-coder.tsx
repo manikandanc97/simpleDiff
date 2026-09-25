@@ -45,13 +45,13 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative w-full h-[320px] xs:h-[350px] sm:h-[420px] md:h-[480px] lg:h-[540px] flex items-center justify-center select-none perspective-[1200px] max-w-[620px] mx-auto",
+        "relative w-full h-[400px] xs:h-[420px] sm:h-[480px] md:h-[520px] lg:h-[600px] flex items-center justify-center select-none perspective-[1200px] max-w-4xl mx-auto",
         className
       )}
     >
       {/* ── AMBIENT PURPLE & PINK GLOWS ── */}
-      <div className="absolute top-4 left-4 w-[220px] sm:w-[320px] md:w-[400px] h-[220px] sm:h-[320px] md:h-[400px] bg-[#E8D9FE]/60 rounded-full blur-[70px] pointer-events-none -translate-x-1/4 -translate-y-1/4 z-0" />
-      <div className="absolute bottom-4 right-4 w-[180px] sm:w-[280px] md:w-[360px] h-[180px] sm:h-[280px] md:h-[360px] bg-[#F5D0E8]/50 rounded-full blur-[70px] pointer-events-none translate-x-1/4 translate-y-1/4 z-0" />
+      <div className="absolute top-4 left-4 w-56 sm:w-80 md:w-96 h-56 sm:h-80 md:h-96 bg-[#E8D9FE]/60 rounded-full blur-[70px] pointer-events-none -translate-x-1/4 -translate-y-1/4 z-0" />
+      <div className="absolute bottom-4 right-4 w-44 sm:w-72 md:w-96 h-44 sm:h-72 md:h-96 bg-[#F5D0E8]/50 rounded-full blur-[70px] pointer-events-none translate-x-1/4 translate-y-1/4 z-0" />
 
       {/* 3D Parallax Canvas */}
       <motion.div
@@ -64,19 +64,19 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
             animate={{ y: [3, -3, 3] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
             style={{ transform: "translateZ(-10px) rotateY(6deg) rotateZ(-6deg)" }}
-            className="bg-white/85 backdrop-blur-xl border border-[rgba(30,24,30,0.08)] shadow-[0_16px_36px_-10px_rgba(0,0,0,0.07),0_2px_8px_rgba(0,0,0,0.02)] rounded-[22px] p-3 sm:p-3.5 flex gap-2.5 sm:gap-3.5 font-satoshi relative"
+            className="bg-white/85 backdrop-blur-xl border border-[rgba(30,24,30,0.08)] shadow-[0_16px_36px_-10px_rgba(0,0,0,0.07),0_2px_8px_rgba(0,0,0,0.02)] rounded-3xl p-3 sm:p-3.5 flex gap-2.5 sm:gap-3.5 font-satoshi relative"
           >
             {/* Menu Column */}
-            <div className="flex flex-col gap-1.5 w-[85px] sm:w-[95px] justify-center">
+            <div className="flex flex-col gap-1.5 w-20 sm:w-24 justify-center">
               {/* Ideas */}
-              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-[600] text-[#68666C]">
+              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#68666C]">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#68666C]">
                   <path d="M12 2L2 12l10 10 10-10L12 2z" />
                 </svg>
                 <span>Ideas</span>
               </div>
               {/* Design */}
-              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-[600] text-[#68666C]">
+              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#68666C]">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#68666C]">
                   <circle cx="12" cy="12" r="10" />
                   <circle cx="12" cy="12" r="4" />
@@ -84,14 +84,14 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
                 <span>Design</span>
               </div>
               {/* Develop (Active State) */}
-              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#922F55] text-[12px] font-[600] text-white shadow-sm">
+              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#922F55] text-xs font-semibold text-white shadow-sm">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
                 </svg>
                 <span>Develop</span>
               </div>
               {/* Launch */}
-              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-[600] text-[#68666C]">
+              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-[#68666C]">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#68666C]">
                   <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
                   <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-2.05 9.05A22 22 0 0 1 15 12z"/>
@@ -101,7 +101,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
             </div>
 
             {/* Right Code Editor Mockup */}
-            <div className="w-[105px] sm:w-[125px] bg-[#1B1B1D] rounded-xl p-2.5 flex flex-col gap-1.5 relative overflow-hidden shadow-inner">
+            <div className="w-28 sm:w-32 bg-[#1B1B1D] rounded-xl p-2.5 flex flex-col gap-1.5 relative overflow-hidden shadow-inner">
               {/* Window control dots */}
               <div className="flex gap-1 mb-1 items-center">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#FF5F56]" />
@@ -121,7 +121,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
               ].map((line) => (
                 <div key={line.num} className="flex items-center gap-1.5">
                   <span className="text-[7.5px] text-white/30 font-mono w-2.5 text-right select-none">{line.num}</span>
-                  <div className={`h-[3px] rounded-full ${line.c}`} style={{ width: line.w }} />
+                  <div className={`h-0.5 rounded-full ${line.c}`} style={{ width: line.w }} />
                 </div>
               ))}
             </div>
@@ -131,7 +131,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
               className="absolute -top-11 sm:-top-12 left-2 sm:left-4 flex items-end gap-1 pointer-events-none"
               style={{ transform: "translateZ(15px)" }}
             >
-              <span className="font-handwriting text-[17px] sm:text-[20px] font-bold text-[#4A3E4E] -rotate-6 leading-none whitespace-nowrap">
+              <span className="font-handwriting text-lg sm:text-xl font-bold text-[#4A3E4E] -rotate-6 leading-none whitespace-nowrap">
                 From Idea<br />to Launch
               </span>
               <svg
@@ -191,7 +191,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
             <motion.div
               animate={{ y: [2, -2, 2] }}
               transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
-              className="bg-white/90 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.02)] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2.5 sm:gap-3 min-w-[155px] sm:min-w-[175px]"
+              className="bg-white/90 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.02)] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2.5 sm:gap-3 min-w-40 sm:min-w-44"
             >
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#922F55]/10 flex items-center justify-center text-[#922F55]">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -202,28 +202,28 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
                   <circle cx="16" cy="10" r="1.5" fill="currentColor" />
                 </svg>
               </div>
-              <span className="text-[13px] font-[700] text-[#121114] tracking-[-0.01em]">Modern Design</span>
+              <span className="text-sm font-bold text-[#121114] tracking-tight">Modern Design</span>
             </motion.div>
 
             {/* Card 2: Clean Code */}
             <motion.div
               animate={{ y: [3, -3, 3] }}
               transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-              className="bg-white/90 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.02)] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2.5 sm:gap-3 min-w-[155px] sm:min-w-[175px]"
+              className="bg-white/90 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.02)] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2.5 sm:gap-3 min-w-40 sm:min-w-44"
             >
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#922F55]/10 flex items-center justify-center text-[#922F55]">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
                 </svg>
               </div>
-              <span className="text-[13px] font-[700] text-[#121114] tracking-[-0.01em]">Clean Code</span>
+              <span className="text-sm font-bold text-[#121114] tracking-tight">Clean Code</span>
             </motion.div>
 
             {/* Card 3: Scalable Solutions */}
             <motion.div
               animate={{ y: [2, -2, 2] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-              className="bg-white/90 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.02)] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2.5 sm:gap-3 min-w-[155px] sm:min-w-[175px]"
+              className="bg-white/90 backdrop-blur-md border border-[rgba(30,24,30,0.08)] shadow-[0_10px_24px_-8px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.02)] rounded-2xl px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2.5 sm:gap-3 min-w-40 sm:min-w-44"
             >
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#922F55]/10 flex items-center justify-center text-[#922F55]">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -231,7 +231,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
                   <path d="m19 9-5 5-4-4-3 3" />
                 </svg>
               </div>
-              <span className="text-[13px] font-[700] text-[#121114] tracking-[-0.01em]">Scalable Solutions</span>
+              <span className="text-sm font-bold text-[#121114] tracking-tight">Scalable Solutions</span>
             </motion.div>
 
             {/* Handwritten Annotation: Ideas into Impact */}
@@ -263,7 +263,7 @@ export function Hero3DCoder({ className }: Hero3DCoderProps) {
                   fill="none"
                 />
               </svg>
-              <span className="font-handwriting text-[17px] sm:text-[20px] font-bold text-[#4A3E4E] -rotate-3 leading-none text-center whitespace-nowrap">
+              <span className="font-handwriting text-lg sm:text-xl font-bold text-[#4A3E4E] -rotate-3 leading-none text-center whitespace-nowrap">
                 Ideas<br />into Impact
               </span>
             </div>

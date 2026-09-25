@@ -76,7 +76,7 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
                   href={item.route}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative text-[15px] font-[600] tracking-[-0.015em] transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring flex flex-col items-center",
+                    "relative text-base font-semibold tracking-tight transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring flex flex-col items-center",
                     isActive
                       ? "text-[#922F55]"
                       : "text-[#121114] hover:text-[#922F55]"
@@ -101,7 +101,7 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#08B875] opacity-60" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#08B875]" />
               </span>
-              <span className="text-[13px] font-[500] text-[#121114]/90 tracking-[-0.01em]">Available for projects</span>
+              <span className="text-sm font-medium text-[#121114]/90 tracking-tight">Available for projects</span>
             </div>
             
             {/* Start a project CTA Button */}
@@ -109,7 +109,7 @@ export function SiteNavbar({ onStartProject }: SiteNavbarProps) {
               size="sm"
               onClick={handleStart}
               id="navbar-start-project"
-              className="flex group font-[700] text-[14px] sm:text-[16px] tracking-[-0.02em] h-9 sm:h-11 px-4 sm:px-6 rounded-full bg-[#922F55] text-white hover:bg-[#7D2748] active:scale-95 cursor-pointer transition-all duration-200 items-center gap-1.5 shadow-[0_4px_14px_rgba(146,47,85,0.25)] border-0"
+              className="flex group font-bold text-sm sm:text-base tracking-tight h-9 sm:h-11 px-4 sm:px-6 rounded-full bg-[#922F55] text-white hover:bg-[#7D2748] active:scale-95 cursor-pointer transition-all duration-200 items-center gap-1.5 shadow-[0_4px_14px_rgba(146,47,85,0.25)] border-0"
             >
               <span>Start a project</span>
               <AnimatedArrowRight size={15} className="ml-0.5 text-white" />

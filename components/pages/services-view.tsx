@@ -22,7 +22,7 @@ function BlueprintNode({ service }: { service: ServiceItem }) {
       initial={{ opacity: 0, scale: 0.8, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.8, y: -20 }}
-      className="relative flex-1 min-w-[140px] p-4 rounded-xl border border-primary/30 bg-background/80 backdrop-blur-md shadow-lg shadow-primary/5 flex flex-col items-center text-center gap-3 overflow-hidden group"
+      className="relative flex-1 min-w-36 p-4 rounded-xl border border-primary/30 bg-background/80 backdrop-blur-md shadow-lg shadow-primary/5 flex flex-col items-center text-center gap-3 overflow-hidden group"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary relative z-10">
@@ -30,7 +30,7 @@ function BlueprintNode({ service }: { service: ServiceItem }) {
       </div>
       <div className="relative z-10">
         <h4 className="text-sm font-bold text-foreground leading-tight mb-1">{service.name}</h4>
-        <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
+        <div className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
           Module Active
         </div>
       </div>
@@ -69,7 +69,7 @@ function BlueprintCanvas({ selectedServices }: { selectedServices: ServiceItem[]
         return (
           <div key={category} className="w-full max-w-md flex flex-col items-center">
             {/* Category Label */}
-            <div className="text-[10px] font-mono text-primary/70 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+            <div className="text-xs font-mono text-primary/70 uppercase tracking-widest mb-4 flex items-center gap-2">
               <span className="w-8 h-px bg-primary/20" />
               {category} Layer
               <span className="w-8 h-px bg-primary/20" />
@@ -228,7 +228,7 @@ export function ServicesView() {
                             {service.pillars.map((pillar) => (
                               <span
                                 key={pillar}
-                                className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-primary/10 text-primary border border-primary/20"
+                                className="px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-primary/10 text-primary border border-primary/20"
                               >
                                 {pillar}
                               </span>
@@ -286,7 +286,7 @@ export function ServicesView() {
                <div className="absolute inset-0 bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] pointer-events-none" />
                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-50" />
                
-               <div className="relative z-10 w-full h-full min-h-[400px]">
+               <div className="relative z-10 w-full h-full min-h-96">
                   <BlueprintCanvas selectedServices={selectedServices} />
                </div>
             </div>

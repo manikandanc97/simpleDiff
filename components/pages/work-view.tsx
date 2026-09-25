@@ -18,7 +18,7 @@ function ProjectVisualCanvas({ project }: { project: Project }) {
   return (
     <div 
       className={cn(
-        "relative w-full h-[50vh] lg:h-[calc(100vh-16rem)] min-h-[400px] max-h-[800px] rounded-2xl overflow-hidden bg-muted/10 border shadow-xl transition-all duration-500 group/canvas flex flex-col",
+        "relative w-full h-[50vh] lg:h-[calc(100vh-16rem)] min-h-96 max-h-96 rounded-2xl overflow-hidden bg-muted/10 border shadow-xl transition-all duration-500 group/canvas flex flex-col",
         isInteractive ? "border-primary shadow-2xl shadow-primary/20 ring-1 ring-primary/50" : "border-border/50 group-hover:shadow-2xl group-hover:border-primary/50"
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -36,8 +36,8 @@ function ProjectVisualCanvas({ project }: { project: Project }) {
           <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500/80" />
         </div>
         <div className="flex-1 flex justify-center px-2">
-          <div className="max-w-[150px] sm:max-w-[200px] w-full h-5 sm:h-6 bg-muted rounded-md border border-border/50 flex items-center justify-center px-2">
-            <span className="text-[9px] sm:text-[10px] text-muted-foreground truncate font-mono">
+          <div className="max-w-36 sm:max-w-48 w-full h-5 sm:h-6 bg-muted rounded-md border border-border/50 flex items-center justify-center px-2">
+            <span className="text-xs sm:text-xs text-muted-foreground truncate font-mono">
               {project.domain || project.url}
             </span>
           </div>
@@ -49,7 +49,7 @@ function ProjectVisualCanvas({ project }: { project: Project }) {
                  setIsInteractive(false);
                  setIsHovered(false);
                }}
-               className="text-[9px] sm:text-[10px] font-bold text-red-500 bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded-md hover:bg-red-500/20 transition-colors cursor-pointer"
+               className="text-xs sm:text-xs font-bold text-red-500 bg-red-500/10 border border-red-500/20 px-2 py-0.5 rounded-md hover:bg-red-500/20 transition-colors cursor-pointer"
              >
                Close
              </button>
@@ -60,7 +60,7 @@ function ProjectVisualCanvas({ project }: { project: Project }) {
                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-primary"></span>
                </span>
-               <span className="text-[8px] sm:text-[9px] font-bold text-primary uppercase tracking-widest hidden sm:block">Live</span>
+               <span className="text-xs sm:text-xs font-bold text-primary uppercase tracking-widest hidden sm:block">Live</span>
              </div>
            )}
         </div>
@@ -87,7 +87,7 @@ function ProjectVisualCanvas({ project }: { project: Project }) {
               {!iframeLoaded && (
                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-background/80 backdrop-blur-sm gap-3">
                   <div className="w-5 h-5 sm:w-6 sm:h-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                  <span className="text-[10px] sm:text-xs font-mono text-muted-foreground animate-pulse">Connecting to live preview...</span>
+                  <span className="text-xs sm:text-xs font-mono text-muted-foreground animate-pulse">Connecting to live preview...</span>
                 </div>
               )}
               <iframe
@@ -130,7 +130,7 @@ function ProjectVisualCanvas({ project }: { project: Project }) {
              </h4>
              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                {project.tags.slice(0, 3).map((tag: string) => (
-                 <span key={tag} className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-black/40 backdrop-blur-md text-[9px] sm:text-[10px] font-mono text-white/90 border border-white/20">
+                 <span key={tag} className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-black/40 backdrop-blur-md text-xs sm:text-xs font-mono text-white/90 border border-white/20">
                    {tag}
                  </span>
                ))}
@@ -138,7 +138,7 @@ function ProjectVisualCanvas({ project }: { project: Project }) {
            </div>
            {project.result && project.result !== "Work in Progress" && project.result !== "Coming Soon" && (
              <div className="text-left sm:text-right">
-               <span className="block text-[9px] sm:text-[10px] font-mono text-white/70 mb-0.5 sm:mb-1 uppercase tracking-wider">Key Result</span>
+               <span className="block text-xs sm:text-xs font-mono text-white/70 mb-0.5 sm:mb-1 uppercase tracking-wider">Key Result</span>
                <span className="block text-xs sm:text-sm font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 inline-block">{project.result}</span>
              </div>
            )}
@@ -182,7 +182,7 @@ function ProjectListItem({
         isActive ? "bg-white border-white/20" : "bg-background border-border/60 group-hover:border-primary/30"
       )}>
          {project.url ? (
-           // eslint-disable-next-line @next/next/no-img-element
+           // The external favicon URL must use an img tag
            <img 
              src={`https://www.google.com/s2/favicons?domain=${project.domain}&sz=64`} 
              alt={`${project.name} logo`}
@@ -211,13 +211,13 @@ function ProjectListItem({
       <div className="relative z-10 flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
           <span className={cn(
-            "text-[9px] sm:text-[10px] font-mono font-bold tracking-widest",
+            "text-xs sm:text-xs font-mono font-bold tracking-widest",
             isActive ? "text-primary-foreground/80" : "text-muted-foreground"
           )}>
             {project.number}
           </span>
           <span className={cn(
-            "text-[9px] sm:text-[10px] font-mono px-1.5 py-0.5 rounded-full border",
+            "text-xs sm:text-xs font-mono px-1.5 py-0.5 rounded-full border",
             isActive ? "bg-primary-foreground/20 border-primary-foreground/30 text-primary-foreground" : "bg-muted border-border/50 text-muted-foreground"
           )}>
             {project.year}
@@ -346,7 +346,7 @@ function WorkViewContent() {
               <span>{tab.label}</span>
               <span
                 className={cn(
-                  "ml-0.5 sm:ml-1 text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full transition-colors",
+                  "ml-0.5 sm:ml-1 text-xs sm:text-xs font-mono px-1.5 sm:px-2 py-0.5 rounded-full transition-colors",
                   isActive ? "bg-primary-foreground/20 text-primary-foreground" : "bg-muted text-muted-foreground group-hover:bg-background"
                 )}
               >
@@ -397,7 +397,7 @@ function WorkViewContent() {
                    <div className="flex flex-wrap items-center gap-2 mt-2">
                      <span className="text-xs font-mono text-foreground/50 mr-2">Tech Stack:</span>
                      {activeProject.stack.map((tech) => (
-                       <span key={tech} className="px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono bg-muted/50 border border-border/50 text-foreground/80 hover:bg-muted transition-colors cursor-default">
+                       <span key={tech} className="px-3 py-1 rounded-full text-xs sm:text-xs font-mono bg-muted/50 border border-border/50 text-foreground/80 hover:bg-muted transition-colors cursor-default">
                          {tech}
                        </span>
                      ))}
@@ -433,7 +433,7 @@ function WorkViewContent() {
 
 export function WorkView() {
   return (
-    <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center"><div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-96 flex items-center justify-center"><div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" /></div>}>
       <WorkViewContent />
     </Suspense>
   );

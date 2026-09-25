@@ -39,9 +39,9 @@ export function FAQ() {
 
         {/* Top-right diagonal accent lines */}
         <div className="absolute top-10 right-16 flex gap-1.5 rotate-[35deg] opacity-75">
-          <div className="w-[3px] h-4 bg-[#f43f5e] rounded-full" />
-          <div className="w-[3px] h-5 bg-[#f43f5e] rounded-full -translate-y-1" />
-          <div className="w-[3px] h-4 bg-[#f43f5e] rounded-full" />
+          <div className="w-0.5 h-4 bg-[#f43f5e] rounded-full" />
+          <div className="w-0.5 h-5 bg-[#f43f5e] rounded-full -translate-y-1" />
+          <div className="w-0.5 h-4 bg-[#f43f5e] rounded-full" />
         </div>
       </div>
 
@@ -57,7 +57,7 @@ export function FAQ() {
             highlightedText="Questions."
             description="Honest answers to the most common questions founders and engineering teams ask before building with us."
             className="mb-8 items-start text-left mx-0"
-            maxWidth="max-w-[400px]"
+            maxWidth="max-w-md"
           />
 
           {/* Bottom Composite Card Component (Single Unified Card containing CTA, Character & Stats) */}
@@ -65,7 +65,7 @@ export function FAQ() {
             
             {/* 1. "Still have a question?" Handwritten note & curved arrow */}
             <div className="absolute -top-5 left-1 sm:left-2 z-20 flex items-start gap-1 pointer-events-none select-none">
-              <span className="font-['Caveat',cursive] italic text-[22px] sm:text-[24px] text-slate-700 dark:text-zinc-300 font-bold rotate-[-8deg] leading-[1.1] block">
+              <span className="font-['Caveat',cursive] italic text-xl sm:text-2xl text-slate-700 dark:text-zinc-300 font-bold rotate-[-8deg] leading-tight block">
                 Still have a<br />question?
               </span>
               <svg 
@@ -93,13 +93,13 @@ export function FAQ() {
             </div>
 
             {/* 2. Main Outer White Card */}
-            <div className="relative z-10 w-full max-w-[490px] bg-white dark:bg-zinc-900 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 shadow-[0_20px_50px_rgba(244,63,94,0.06),_0_0_1px_1px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] border border-rose-50/60 dark:border-white/10">
+            <div className="relative z-10 w-full max-w-lg bg-white dark:bg-zinc-900 rounded-3xl sm:rounded-3xl p-5 sm:p-6 shadow-[0_20px_50px_rgba(244,63,94,0.06),_0_0_1px_1px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] border border-rose-50/60 dark:border-white/10">
               
               {/* Upper Content Area: Left CTA + Right 3D Character */}
-              <div className="relative min-h-[210px] sm:min-h-[215px]">
+              <div className="relative min-h-52 sm:min-h-52">
                 
                 {/* Left: Text & CTA Button */}
-                <div className="relative z-10 max-w-[240px] sm:max-w-[250px]">
+                <div className="relative z-10 max-w-60 sm:max-w-64">
                   {/* Badge */}
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50/80 dark:bg-rose-950/40 border border-rose-100/80 dark:border-rose-900/40 mb-2">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#db2777]">
@@ -108,16 +108,16 @@ export function FAQ() {
                       <circle cx="12" cy="12" r="1" fill="currentColor"/>
                       <circle cx="15" cy="12" r="1" fill="currentColor"/>
                     </svg>
-                    <span className="text-[10.5px] font-bold text-[#db2777]">We&apos;re here to help</span>
+                    <span className="text-xs font-bold text-[#db2777]">We&apos;re here to help</span>
                   </div>
 
                   {/* Heading */}
-                  <h3 className="text-lg sm:text-[20px] font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight leading-tight">
+                  <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight leading-tight">
                     Can&apos;t find your answer?
                   </h3>
 
                   {/* Subtitle */}
-                  <p className="text-[11px] sm:text-[12px] text-slate-500 dark:text-zinc-400 leading-[1.5] mb-4">
+                  <p className="text-xs sm:text-xs text-slate-500 dark:text-zinc-400 leading-relaxed mb-4">
                     Talk to our team and get a clear, no-fluff answer for your specific requirement.
                   </p>
 
@@ -125,7 +125,7 @@ export function FAQ() {
                   <button
                     type="button"
                     onClick={() => openLead({ description: "FAQ - Technical Consultation" })}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#e11d48] to-[#be123c] text-white text-[13px] font-bold shadow-[0_6px_20px_rgba(225,29,72,0.25)] hover:shadow-[0_8px_25px_rgba(225,29,72,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#e11d48] to-[#be123c] text-white text-sm font-bold shadow-[0_6px_20px_rgba(225,29,72,0.25)] hover:shadow-[0_8px_25px_rgba(225,29,72,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
                       <line x1="22" y1="2" x2="11" y2="13"/>
@@ -140,12 +140,12 @@ export function FAQ() {
                 </div>
 
                 {/* Right: 3D Character Sitting with Laptop (Completely visible, zero obstruction!) */}
-                <div className="absolute right-[-10px] sm:right-[-14px] bottom-[2px] sm:bottom-[6px] w-[220px] sm:w-[250px] pointer-events-none select-none z-10">
+                <div className="absolute right-[-10px] sm:right-[-14px] bottom-0.5 sm:bottom-1.5 w-56 sm:w-64 pointer-events-none select-none z-10">
                   {/* 3 accent lines radiating from hair */}
                   <div className="absolute -top-2 right-4 flex gap-1.5 rotate-[35deg]">
-                    <div className="w-[2.5px] h-3 bg-[#f43f5e] rounded-full" />
-                    <div className="w-[2.5px] h-4 bg-[#f43f5e] rounded-full -translate-y-1" />
-                    <div className="w-[2.5px] h-3 bg-[#f43f5e] rounded-full" />
+                    <div className="w-0.5 h-3 bg-[#f43f5e] rounded-full" />
+                    <div className="w-0.5 h-4 bg-[#f43f5e] rounded-full -translate-y-1" />
+                    <div className="w-0.5 h-3 bg-[#f43f5e] rounded-full" />
                   </div>
 
                   <Image
@@ -161,22 +161,22 @@ export function FAQ() {
               </div>
 
               {/* Bottom: Stats Panel (Full-width rounded card with dividers) */}
-              <div className="relative z-20 mt-3 bg-white/95 dark:bg-zinc-800/80 backdrop-blur-sm rounded-[14px] p-2.5 sm:p-3 border border-zinc-100 dark:border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.02)] grid grid-cols-3 divide-x divide-zinc-100 dark:divide-zinc-700/60 text-center sm:text-left">
+              <div className="relative z-20 mt-3 bg-white/95 dark:bg-zinc-800/80 backdrop-blur-sm rounded-xl p-2.5 sm:p-3 border border-zinc-100 dark:border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.02)] grid grid-cols-3 divide-x divide-zinc-100 dark:divide-zinc-700/60 text-center sm:text-left">
                 <div className="px-2">
-                  <div className="text-[15px] sm:text-[16px] font-extrabold text-[#be123c] dark:text-rose-400">100%</div>
-                  <div className="text-[9px] sm:text-[10px] font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
+                  <div className="text-base sm:text-base font-extrabold text-[#be123c] dark:text-rose-400">100%</div>
+                  <div className="text-xs sm:text-xs font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
                     Honest Answers
                   </div>
                 </div>
                 <div className="px-2">
-                  <div className="text-[15px] sm:text-[16px] font-extrabold text-[#be123c] dark:text-rose-400">Usually</div>
-                  <div className="text-[9px] sm:text-[10px] font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
+                  <div className="text-base sm:text-base font-extrabold text-[#be123c] dark:text-rose-400">Usually</div>
+                  <div className="text-xs sm:text-xs font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
                     Within a Few Hours
                   </div>
                 </div>
                 <div className="px-2">
-                  <div className="text-[15px] sm:text-[16px] font-extrabold text-[#be123c] dark:text-rose-400">Zero</div>
-                  <div className="text-[9px] sm:text-[10px] font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
+                  <div className="text-base sm:text-base font-extrabold text-[#be123c] dark:text-rose-400">Zero</div>
+                  <div className="text-xs sm:text-xs font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
                     Sales Pressure
                   </div>
                 </div>
@@ -197,7 +197,7 @@ export function FAQ() {
             return (
               <div
                 key={faq.id}
-                className={`group rounded-[24px] transition-all duration-300 overflow-hidden ${
+                className={`group rounded-3xl transition-all duration-300 overflow-hidden ${
                   isOpen
                     ? "bg-white dark:bg-zinc-900 border-[1.5px] border-rose-300/80 dark:border-rose-500/50 shadow-[0_12px_35px_rgba(244,63,94,0.12)]"
                     : "bg-white dark:bg-zinc-900 border border-transparent dark:border-white/5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_6px_25px_rgba(0,0,0,0.06)]"
@@ -206,12 +206,12 @@ export function FAQ() {
                 <button
                   type="button"
                   onClick={() => toggle(faq.id)}
-                  className="w-full flex items-center justify-between gap-3 p-4 sm:p-[18px] text-left cursor-pointer outline-none"
+                  className="w-full flex items-center justify-between gap-3 p-4 sm:p-4 text-left cursor-pointer outline-none"
                 >
                   <div className="flex items-center gap-3.5 sm:gap-4 flex-1 min-w-0">
                     {/* Number Box */}
                     <div
-                      className={`shrink-0 flex items-center justify-center w-[46px] h-[46px] rounded-[14px] font-bold text-[15px] transition-colors duration-300 ${
+                      className={`shrink-0 flex items-center justify-center w-11 h-11 rounded-xl font-bold text-base transition-colors duration-300 ${
                         isOpen
                           ? "bg-rose-50 dark:bg-rose-950/50 text-[#e11d48] dark:text-rose-400"
                           : "bg-[#f4f4f6] dark:bg-zinc-800/60 text-[#1e1b4b] dark:text-zinc-300 group-hover:bg-[#f0f0f4]"
@@ -223,12 +223,12 @@ export function FAQ() {
                     {/* Tag + Question */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5 mb-1">
-                        <Icon className="w-[13px] h-[13px] text-[#db2777] dark:text-pink-500" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#db2777] dark:text-pink-500">
+                        <Icon className="w-3 h-3 text-[#db2777] dark:text-pink-500" />
+                        <span className="text-xs font-bold uppercase tracking-widest text-[#db2777] dark:text-pink-500">
                           {faq.category}
                         </span>
                       </div>
-                      <h3 className="text-[14.5px] sm:text-[15px] font-bold text-zinc-900 dark:text-white leading-snug">
+                      <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-snug">
                         {faq.question}
                       </h3>
                     </div>
@@ -256,8 +256,8 @@ export function FAQ() {
                       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="px-4 sm:px-[18px] pb-[18px] pt-0 pl-[68px] sm:pl-[76px]">
-                        <p className="text-[12.5px] sm:text-[13px] text-zinc-500 dark:text-zinc-400 leading-[1.6] max-w-[95%]">
+                      <div className="px-4 sm:px-4 pb-4 pt-0 pl-16 sm:pl-20">
+                        <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-[1.6] max-w-[95%]">
                           {faq.answer}
                         </p>
 
@@ -268,7 +268,7 @@ export function FAQ() {
                               return (
                                 <div
                                   key={i}
-                                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-100/80 dark:border-rose-900/40 text-rose-950 dark:text-rose-200 text-[11px] font-semibold"
+                                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-100/80 dark:border-rose-900/40 text-rose-950 dark:text-rose-200 text-xs font-semibold"
                                 >
                                   <HlIcon className="w-3.5 h-3.5 text-[#e11d48] dark:text-rose-500" />
                                   <span>{hl.text}</span>

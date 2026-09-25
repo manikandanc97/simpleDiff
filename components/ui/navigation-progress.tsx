@@ -115,11 +115,11 @@ export function NavigationProgress() {
           transition={{ duration: 0.15 }}
         >
           {/* subtle track */}
-          <div className="h-[3px] w-full" style={{ background: "color-mix(in oklch, var(--primary) 12%, transparent)" }} />
+          <div className="h-0.5 w-full" style={{ background: "color-mix(in oklch, var(--primary) 12%, transparent)" }} />
 
           {/* fill bar */}
           <div
-            className="absolute top-0 left-0 h-[3px] rounded-r-full"
+            className="absolute top-0 left-0 h-0.5 rounded-r-full"
             style={{
               width: `${width}%`,
               transition: completing
@@ -141,7 +141,7 @@ export function NavigationProgress() {
           {/* leading comet dot */}
           {!completing && (
             <div
-              className="absolute top-0 h-[11px] w-[11px] rounded-full -translate-y-[4px] -translate-x-1/2"
+              className="absolute top-0 h-2.5 w-2.5 rounded-full -translate-y-[4px] -translate-x-1/2"
               style={{
                 left: `${width}%`,
                 background: "var(--primary)",

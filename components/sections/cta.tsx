@@ -53,7 +53,7 @@ export function CTA({ onStartProject }: CTAProps) {
             {/* Subtle glow backdrop for the 3D illustration */}
             <div className="absolute w-[80%] h-[80%] rounded-full bg-gradient-to-tr from-[#922F55]/12 via-[#6C2BB8]/10 to-transparent blur-2xl pointer-events-none" />
 
-            <div className="relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] lg:w-[460px] lg:h-[460px] xl:w-[500px] xl:h-[500px]">
+            <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-96 lg:h-96 xl:w-96 xl:h-96">
               {/* Gentle floating motion */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
@@ -77,7 +77,7 @@ export function CTA({ onStartProject }: CTAProps) {
                 className="absolute right-[4%] bottom-[20%] sm:right-[8%] sm:bottom-[22%] z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 backdrop-blur-md shadow-[0_8px_24px_rgba(30,24,30,0.10)] border border-[rgba(30,24,30,0.08)] hover:scale-105 transition-transform duration-300"
               >
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[#922F55] font-extrabold text-[11px] tracking-widest uppercase font-satoshi">
+                <span className="text-[#922F55] font-extrabold text-xs tracking-widest uppercase font-satoshi">
                   READY TO BUILD?
                 </span>
               </motion.div>
@@ -98,7 +98,7 @@ export function CTA({ onStartProject }: CTAProps) {
               highlightedText="premium digital product."
               description="High craft, sub-second performance, and zero bloat. We partner with ambitious founders to build products people actually love using."
               className="mb-6 lg:items-start lg:text-left mx-0"
-              maxWidth="max-w-[620px]"
+              maxWidth="max-w-md"
             />
 
             {/* 3 Pillars as sleek pills */}
@@ -112,7 +112,7 @@ export function CTA({ onStartProject }: CTAProps) {
                 return (
                   <div
                     key={index}
-                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[rgba(30,24,30,0.08)] shadow-[0_2px_6px_rgba(0,0,0,0.03)] text-[13px] sm:text-[14px] font-[600] text-[#121114]"
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[rgba(30,24,30,0.08)] shadow-[0_2px_6px_rgba(0,0,0,0.03)] text-sm sm:text-sm font-semibold text-[#121114]"
                   >
                     <Icon size={14} className="text-[#922F55]" />
                     <span>{item.label}</span>
@@ -126,7 +126,7 @@ export function CTA({ onStartProject }: CTAProps) {
               <Button
                 size="lg"
                 onClick={handleStart}
-                className="group h-13 sm:h-14 px-8 rounded-full bg-[#922F55] text-white text-[15px] sm:text-[16px] font-[700] tracking-tight hover:bg-[#7D2748] active:scale-95 transition-all duration-200 shadow-[0_8px_24px_rgba(146,47,85,0.25)] hover:shadow-[0_10px_28px_rgba(146,47,85,0.35)] hover:-translate-y-0.5 cursor-pointer border-0 w-full sm:w-auto flex items-center justify-center gap-2.5"
+                className="group h-13 sm:h-14 px-8 rounded-full bg-[#922F55] text-white text-base sm:text-base font-bold tracking-tight hover:bg-[#7D2748] active:scale-95 transition-all duration-200 shadow-[0_8px_24px_rgba(146,47,85,0.25)] hover:shadow-[0_10px_28px_rgba(146,47,85,0.35)] hover:-translate-y-0.5 cursor-pointer border-0 w-full sm:w-auto flex items-center justify-center gap-2.5"
               >
                 <span>Start a project</span>
                 <AnimatedArrowRight size={16} className="text-white" />
@@ -136,7 +136,7 @@ export function CTA({ onStartProject }: CTAProps) {
                 size="lg"
                 variant="outline"
                 onClick={handleSchedule}
-                className="h-13 sm:h-14 px-7 rounded-full bg-white text-[#121114] border border-[rgba(30,24,30,0.12)] hover:border-[rgba(30,24,30,0.25)] hover:bg-[#FAF9F7] text-[15px] sm:text-[16px] font-[700] tracking-tight active:scale-95 transition-all duration-200 shadow-xs hover:-translate-y-0.5 cursor-pointer w-full sm:w-auto flex items-center justify-center gap-2"
+                className="h-13 sm:h-14 px-7 rounded-full bg-white text-[#121114] border border-[rgba(30,24,30,0.12)] hover:border-[rgba(30,24,30,0.25)] hover:bg-[#FAF9F7] text-base sm:text-base font-bold tracking-tight active:scale-95 transition-all duration-200 shadow-xs hover:-translate-y-0.5 cursor-pointer w-full sm:w-auto flex items-center justify-center gap-2"
               >
                 <Calendar size={16} className="text-[#68666C]" />
                 <span>Schedule a call</span>
@@ -144,7 +144,7 @@ export function CTA({ onStartProject }: CTAProps) {
             </div>
 
             {/* Subtle Trust / Response Note */}
-            <div className="flex items-center gap-2 mt-4 text-[12px] sm:text-[13px] font-medium text-[#68666C]">
+            <div className="flex items-center gap-2 mt-4 text-xs sm:text-sm font-medium text-[#68666C]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span>Response within 2 hours • Free 30-min discovery session</span>
             </div>

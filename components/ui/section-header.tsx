@@ -37,7 +37,7 @@ export function SectionHeader({
           className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-border shadow-sm mb-4"
         >
           <span className="w-2 h-2 rounded-full bg-primary inline-block" />
-          <span className="type-label font-[800] tracking-[0.08em] text-foreground/90 uppercase">
+          <span className="type-label font-extrabold tracking-wide text-foreground/90 uppercase">
             {eyebrow}
           </span>
         </motion.div>
@@ -56,7 +56,7 @@ export function SectionHeader({
             <span className="relative inline-block brand-gradient-text pb-1">
               {highlightedText}
               <svg 
-                className="absolute -bottom-1 sm:-bottom-1.5 left-0 w-full h-[12px] text-primary overflow-visible pointer-events-none" 
+                className="absolute -bottom-1 sm:-bottom-1.5 left-0 w-full h-3 text-primary overflow-visible pointer-events-none" 
                 viewBox="0 0 200 20" 
                 fill="none" 
                 preserveAspectRatio="none"

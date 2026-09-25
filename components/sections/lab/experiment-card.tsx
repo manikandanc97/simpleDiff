@@ -85,7 +85,7 @@ export function ExperimentCard({ experiment, isFeatured = false }: ExperimentCar
       {/* Content Area */}
       <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 bg-card">
         <div>
-          <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-primary block mb-2">
+          <span className="text-xs font-mono font-bold tracking-widest uppercase text-primary block mb-2">
             {experiment.category}
           </span>
           <h2 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-foreground mb-3">

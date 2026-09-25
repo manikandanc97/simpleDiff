@@ -15,7 +15,7 @@ export function TechCard({ tech, index }: { tech: TechItem; index: number }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -12, scale: 0.94 }}
       transition={{ ...SPRING, delay: Math.min(index * 0.03, 0.25) }}
-      className="group relative flex flex-col items-center text-center p-5 rounded-[24px] border border-slate-200/70 dark:border-border/60 bg-white/95 dark:bg-card/90 shadow-[0_8px_30px_rgb(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
+      className="group relative flex flex-col items-center text-center p-5 rounded-3xl border border-slate-200/70 dark:border-border/60 bg-white/95 dark:bg-card/90 shadow-[0_8px_30px_rgb(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
     >
 
       {/* Official Brand Logo Squircle Container */}
@@ -37,7 +37,7 @@ export function TechCard({ tech, index }: { tech: TechItem; index: number }) {
       </h3>
 
       {/* 2-line Description */}
-      <p className="text-[11.5px] text-slate-500 dark:text-muted-foreground mt-1.5 leading-relaxed text-center min-h-[36px] flex items-center justify-center">
+      <p className="text-xs text-slate-500 dark:text-muted-foreground mt-1.5 leading-relaxed text-center min-h-9 flex items-center justify-center">
         {tech.description}
       </p>
 
@@ -46,7 +46,7 @@ export function TechCard({ tech, index }: { tech: TechItem; index: number }) {
         {tech.badges.map((badge: string) => (
           <span
             key={badge}
-            className="px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-slate-100/90 dark:bg-muted/50 text-slate-500 dark:text-muted-foreground border border-slate-200/50 dark:border-border/50"
+            className="px-2.5 py-0.5 rounded-md text-xs font-medium bg-slate-100/90 dark:bg-muted/50 text-slate-500 dark:text-muted-foreground border border-slate-200/50 dark:border-border/50"
           >
             {badge}
           </span>

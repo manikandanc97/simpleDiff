@@ -85,7 +85,7 @@ export default function Loading() {
 
       {/* ── Live Diff Card ──────────────────────────────────────── */}
       <motion.div
-        className="relative z-10 w-[260px] rounded-xl border border-border/70 bg-card/90 backdrop-blur-md shadow-sm overflow-hidden flex flex-col mb-7"
+        className="relative z-10 w-64 rounded-xl border border-border/70 bg-card/90 backdrop-blur-md shadow-sm overflow-hidden flex flex-col mb-7"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -97,13 +97,13 @@ export default function Loading() {
             <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
           </div>
-          <div className="text-[10px] text-muted-foreground font-mono ml-1 select-none">
+          <div className="text-xs text-muted-foreground font-mono ml-1 select-none">
             app.tsx
           </div>
         </div>
 
         {/* Body */}
-        <div className="relative h-[78px] w-full p-3 font-mono text-xs">
+        <div className="relative h-20 w-full p-3 font-mono text-xs">
           {DIFF_PAIRS.map((pair, i) => {
             const cycle = 3.2;
             const total = DIFF_PAIRS.length;
@@ -135,7 +135,7 @@ export default function Loading() {
                     <span>{pair.before}</span>
                     {/* Live strike-through animation */}
                     <motion.div
-                      className="absolute top-1/2 left-0 h-[1.5px] bg-current"
+                      className="absolute top-1/2 left-0 h-0.5 bg-current"
                       initial={{ width: "0%" }}
                       animate={{ width: ["0%", "0%", "100%", "100%"] }}
                       transition={{ ...transition, times: [0, 0.15, 0.2, 1] }}
@@ -180,7 +180,7 @@ export default function Loading() {
                   </motion.div>
                   {/* Blinking typing cursor */}
                   <motion.span
-                    className="inline-block w-[2px] h-[12px] bg-[var(--primary)] ml-[1px]"
+                    className="inline-block w-0.5 h-3 bg-[var(--primary)] ml-0"
                     animate={{ opacity: [1, 0] }}
                     transition={{
                       duration: 0.4,
@@ -203,7 +203,7 @@ export default function Loading() {
       >
         {/* "Simple" — foreground */}
         <motion.span
-          className="text-[1.35rem] font-bold tracking-tight text-foreground"
+          className="text-xl font-bold tracking-tight text-foreground"
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -213,7 +213,7 @@ export default function Loading() {
 
         {/* "+" diff glyph accent — matches topbar.tsx pattern */}
         <motion.span
-          className="font-mono text-[0.6rem] font-bold select-none leading-none"
+          className="font-mono text-xs font-bold select-none leading-none"
           style={{ color: "var(--primary)", opacity: 0.75, margin: "0 1px" }}
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 0.75, scale: 1 }}
@@ -224,7 +224,7 @@ export default function Loading() {
 
         {/* "Diff" — primary */}
         <motion.span
-          className="text-[1.35rem] font-bold tracking-tight"
+          className="text-xl font-bold tracking-tight"
           style={{ color: "var(--primary)" }}
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
@@ -237,7 +237,7 @@ export default function Loading() {
       {/* ── Thinking dots ─────────────────────────────────────────── */}
       <motion.div
         role="presentation"
-        className="relative z-10 flex items-center gap-[7px]"
+        className="relative z-10 flex items-center gap-1.5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, delay: 1.1 }}

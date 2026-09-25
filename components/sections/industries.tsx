@@ -60,7 +60,7 @@ export function Industries() {
                   <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight mb-1">
                     {industry.label}
                   </div>
-                  <div className="text-[11px] text-muted-foreground leading-tight hidden sm:block">
+                  <div className="text-xs text-muted-foreground leading-tight hidden sm:block">
                     {industry.description}
                   </div>
                 </div>

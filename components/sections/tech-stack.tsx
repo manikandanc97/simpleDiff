@@ -84,7 +84,7 @@ export function TechStack() {
                 <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-foreground">
                   Fast
                 </span>
-                <span className="text-[11px] font-medium text-slate-400 dark:text-muted-foreground">
+                <span className="text-xs font-medium text-slate-400 dark:text-muted-foreground">
                   Performant
                 </span>
               </div>
@@ -112,7 +112,7 @@ export function TechStack() {
           {/* Playful Handwritten Annotation: "Tools we love" + Curved Arrow pointing right to the tab */}
           <div className="absolute top-0 sm:top-1 left-2 sm:left-4 md:left-8 lg:left-14 z-20 pointer-events-none select-none flex items-end gap-3">
             <span
-              className="font-handwriting text-lg sm:text-[21px] font-bold text-slate-800 dark:text-slate-200 -rotate-10 leading-[1.1] tracking-wide"
+              className="font-handwriting text-lg sm:text-xl font-bold text-slate-800 dark:text-slate-200 -rotate-10 leading-tight tracking-wide"
               style={{ fontFamily: "'Caveat', cursive, sans-serif" }}
             >
               Tools<br />we love
@@ -187,7 +187,7 @@ export function TechStack() {
 
                   {/* Count Pill */}
                   <span
-                    className={`relative z-10 text-[11px] font-medium px-2 py-0.5 rounded-full ${
+                    className={`relative z-10 text-xs font-medium px-2 py-0.5 rounded-full ${
                       isActive
                         ? "bg-white/20 text-white"
                         : "bg-slate-100 dark:bg-muted/60 text-slate-500 dark:text-muted-foreground"
@@ -205,7 +205,7 @@ export function TechStack() {
         <div
           role="tabpanel"
           aria-label={`${activeCategory} technologies`}
-          className="relative min-h-[320px]"
+          className="relative min-h-80"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -246,7 +246,7 @@ export function TechStack() {
                 <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-foreground">
                   Reliable
                 </span>
-                <span className="text-[11px] text-slate-500 dark:text-muted-foreground leading-tight">
+                <span className="text-xs text-slate-500 dark:text-muted-foreground leading-tight">
                   Battle-tested in real projects
                 </span>
               </div>
@@ -261,7 +261,7 @@ export function TechStack() {
                 <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-foreground">
                   Performant
                 </span>
-                <span className="text-[11px] text-slate-500 dark:text-muted-foreground leading-tight">
+                <span className="text-xs text-slate-500 dark:text-muted-foreground leading-tight">
                   Optimized for speed
                 </span>
               </div>
@@ -276,7 +276,7 @@ export function TechStack() {
                 <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-foreground">
                   Scalable
                 </span>
-                <span className="text-[11px] text-slate-500 dark:text-muted-foreground leading-tight">
+                <span className="text-xs text-slate-500 dark:text-muted-foreground leading-tight">
                   Grows with your business
                 </span>
               </div>
@@ -291,7 +291,7 @@ export function TechStack() {
                 <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-foreground">
                   Future-ready
                 </span>
-                <span className="text-[11px] text-slate-500 dark:text-muted-foreground leading-tight">
+                <span className="text-xs text-slate-500 dark:text-muted-foreground leading-tight">
                   Always evolving with the best tools
                 </span>
               </div>
@@ -307,7 +307,7 @@ export function TechStack() {
           className="mt-12 flex items-center justify-center gap-4 max-w-4xl mx-auto"
         >
           <div className="h-px bg-slate-200/80 dark:bg-border/60 flex-1" />
-          <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-slate-400 dark:text-muted-foreground/60 whitespace-nowrap">
+          <p className="text-xs sm:text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-muted-foreground/60 whitespace-nowrap">
             We choose tools that fit your project — not the other way around.
           </p>
           <div className="h-px bg-slate-200/80 dark:bg-border/60 flex-1" />

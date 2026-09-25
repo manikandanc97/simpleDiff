@@ -112,7 +112,7 @@ export function HowWeWork() {
                     >
                       {step.title}
                     </span>
-                    <span className="text-[10px] sm:text-[11px] text-neutral-400 font-medium leading-tight whitespace-nowrap mt-0.5">
+                    <span className="text-xs sm:text-xs text-neutral-400 font-medium leading-tight whitespace-nowrap mt-0.5">
                       {step.subtitle}
                     </span>
                   </div>
@@ -203,7 +203,7 @@ export function HowWeWork() {
         {/* ========================================================================= */}
         {/* MAIN BENTO CARD (Left Narrative + Right 3D Visual Scene) */}
         {/* ========================================================================= */}
-        <div className="w-full bg-white rounded-[28px] sm:rounded-[36px] border border-neutral-200/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] p-6 sm:p-8 lg:p-8 relative overflow-hidden">
+        <div className="w-full bg-white rounded-3xl sm:rounded-3xl border border-neutral-200/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] p-6 sm:p-8 lg:p-8 relative overflow-hidden">
           
           <AnimatePresence mode="wait">
             <motion.div
@@ -220,13 +220,13 @@ export function HowWeWork() {
               <div className="lg:col-span-6 flex flex-col justify-between z-10">
                 {/* Step Kicker */}
                 <div className="mb-3.5">
-                  <span className="inline-block px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-[11px] font-black tracking-widest text-[#E11D48] uppercase">
+                  <span className="inline-block px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-xs font-black tracking-widest text-[#E11D48] uppercase">
                     {currentStep.stepKicker}
                   </span>
                 </div>
 
                 {/* Big Headline */}
-                <h3 className="font-satoshi font-black text-3xl sm:text-4xl lg:text-[44px] text-neutral-900 tracking-tight leading-[1.12]">
+                <h3 className="font-satoshi font-black text-3xl sm:text-4xl lg:text-4xl text-neutral-900 tracking-tight leading-[1.12]">
                   {currentStep.headlineFirst}{" "}
                   <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                     {currentStep.headlineAccent}
@@ -234,7 +234,7 @@ export function HowWeWork() {
                 </h3>
 
                 {/* Description Paragraph */}
-                <p className="mt-3.5 text-neutral-500 text-sm sm:text-[15px] font-normal leading-relaxed max-w-lg">
+                <p className="mt-3.5 text-neutral-500 text-sm sm:text-base font-normal leading-relaxed max-w-lg">
                   {currentStep.summary}
                 </p>
 
@@ -260,7 +260,7 @@ export function HowWeWork() {
                           <span className="font-bold text-xs sm:text-sm text-neutral-900 leading-tight">
                             {feature.title}
                           </span>
-                          <span className="text-[11px] text-neutral-500 leading-snug mt-0.5">
+                          <span className="text-xs text-neutral-500 leading-snug mt-0.5">
                             {feature.desc}
                           </span>
                         </div>
@@ -303,7 +303,7 @@ export function HowWeWork() {
             <span>Dedicated senior engineers · Direct communication · Production warranty.</span>
           </div>
 
-          <span className="text-[11px] text-neutral-400 tracking-wider uppercase">
+          <span className="text-xs text-neutral-400 tracking-wider uppercase">
             SimpleThink · Engineering Framework
           </span>
         </div>

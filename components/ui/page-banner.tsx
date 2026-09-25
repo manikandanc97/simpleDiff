@@ -143,7 +143,7 @@ export function PageBanner({
 
       {/* ─── Bottom separator line ────────────────────────────── */}
       <div
-        className="pointer-events-none absolute bottom-0 left-0 right-0 h-[1px]"
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-0"
         style={{
           background:
             "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 35%, rgba(255,255,255,0.25) 65%, transparent 100%)",
@@ -222,7 +222,7 @@ export function PageBanner({
                 />
               </div>
               {/* Tooltip */}
-              <span className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md bg-black/75 text-white text-[10px] font-semibold whitespace-nowrap shadow-lg opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 z-30">
+              <span className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md bg-black/75 text-white text-xs font-semibold whitespace-nowrap shadow-lg opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 z-30">
                 {meta.label}
               </span>
             </motion.div>
@@ -239,7 +239,7 @@ export function PageBanner({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           aria-label="Breadcrumb"
-          className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-white/70 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/25 mb-5 sm:mb-6 hover:bg-white/15 hover:border-white/40 transition-colors cursor-default"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-xs font-medium text-white/70 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/25 mb-5 sm:mb-6 hover:bg-white/15 hover:border-white/40 transition-colors cursor-default"
         >
           {parentBreadcrumbs.map((crumb, i) => (
             <React.Fragment key={crumb.label}>
@@ -275,7 +275,7 @@ export function PageBanner({
             transition={{ duration: 0.35, delay: 0.06 }}
             className="mb-4"
           >
-            <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full border border-white/30 bg-white/15 text-white text-[11px] font-bold uppercase tracking-widest">
+            <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full border border-white/30 bg-white/15 text-white text-xs font-bold uppercase tracking-widest">
               {badgeIcon ?? <span className="w-1.5 h-1.5 rounded-full bg-white" />}
               {badge}
             </span>
@@ -317,7 +317,7 @@ export function PageBanner({
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-5 sm:mt-6 origin-center h-[2px] w-10 sm:w-14 rounded-full"
+          className="mt-5 sm:mt-6 origin-center h-0.5 w-10 sm:w-14 rounded-full"
           style={{
             background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent)",
           }}

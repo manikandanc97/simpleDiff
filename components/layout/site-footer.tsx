@@ -27,8 +27,8 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
   return (
     <footer className="w-full bg-background border-t border-border mt-auto relative overflow-hidden">
       {/* Soft ambient background glows */}
-      <div className="pointer-events-none absolute -left-28 top-1/2 -translate-y-1/2 w-[440px] h-[440px] bg-primary/8 blur-[100px] rounded-full" />
-      <div className="pointer-events-none absolute -right-24 -top-16 w-[440px] h-[360px] bg-primary/5 blur-[110px] rounded-full" />
+      <div className="pointer-events-none absolute -left-28 top-1/2 -translate-y-1/2 w-96 h-96 bg-primary/8 blur-[100px] rounded-full" />
+      <div className="pointer-events-none absolute -right-24 -top-16 w-96 h-96 bg-primary/5 blur-[110px] rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
         {/* Top Grid: Brand, Explore, Capabilities, Connect Card */}
@@ -52,7 +52,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                 />
               </Link>
 
-              <h3 className="text-xl sm:text-2xl font-extrabold text-foreground leading-[1.2] tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-extrabold text-foreground leading-tight tracking-tight">
                 Keep It Simple.
                 <br />
                 Make It{" "}
@@ -61,7 +61,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
                 </span>
               </h3>
 
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-[360px]">
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
                 A premier software development company engineering custom software,
                 scalable web applications, mobile apps, SaaS platforms, and enterprise
                 solutions for ambitious businesses and founders.
@@ -200,7 +200,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
               </svg>
             </div>
 
-            <div className="bg-card rounded-[28px] p-7 shadow-sm border border-border relative z-10 flex flex-col justify-between">
+            <div className="bg-card rounded-3xl p-7 shadow-sm border border-border relative z-10 flex flex-col justify-between">
               <div className="flex justify-between items-start mb-5">
                 {/* Send icon */}
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
@@ -257,7 +257,7 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
               Sitemap
             </Link>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/8 text-primary text-[11px] font-semibold tracking-wide ml-2 border border-primary/15">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/8 text-primary text-xs font-semibold tracking-wide ml-2 border border-primary/15">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
               </svg>

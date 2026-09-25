@@ -117,7 +117,7 @@ export function SelectedWork() {
       {/* ── Background Decorative Elements ── */}
       {/* 1. Left Dot Grid Matrix */}
       <div 
-        className="absolute left-0 top-0 bottom-0 w-[420px] pointer-events-none opacity-40 z-0"
+        className="absolute left-0 top-0 bottom-0 w-96 pointer-events-none opacity-40 z-0"
         style={{
           backgroundImage: "radial-gradient(#94A3B8 1.4px, transparent 1.4px)",
           backgroundSize: "20px 20px",
@@ -140,7 +140,7 @@ export function SelectedWork() {
               highlightedText="Work."
               description="Live client systems and digital products engineered for measurable scale."
               className="mb-7 items-start text-left mx-0"
-              maxWidth="max-w-[420px]"
+              maxWidth="max-w-2xl"
             />
             {/* Project List: Max 3 Cards on Home Page */}
             <div className="flex flex-col gap-3">
@@ -162,7 +162,7 @@ export function SelectedWork() {
                     {/* Project Number */}
                     <span 
                       className={cn(
-                        "text-[15px] sm:text-[16px] font-bold w-6 shrink-0 transition-colors",
+                        "text-base sm:text-base font-bold w-6 shrink-0 transition-colors",
                         isActive ? "text-[#922F55]" : "text-slate-400"
                       )}
                     >
@@ -184,7 +184,7 @@ export function SelectedWork() {
                       <div className="flex flex-wrap items-center gap-2">
                         <h4 
                           className={cn(
-                            "font-bold text-[14px] sm:text-[15px] truncate tracking-tight transition-colors",
+                            "font-bold text-sm sm:text-base truncate tracking-tight transition-colors",
                             isActive ? "text-[#121114]" : "text-slate-800 group-hover:text-[#121114]"
                           )}
                         >
@@ -193,7 +193,7 @@ export function SelectedWork() {
                         
                         <span 
                           className={cn(
-                            "text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-1 whitespace-nowrap",
+                            "text-xs sm:text-xs font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-1 whitespace-nowrap",
                             badge.bg,
                             badge.text
                           )}
@@ -208,14 +208,14 @@ export function SelectedWork() {
                         "flex flex-col gap-1 overflow-hidden transition-all duration-300 ease-in-out",
                         isActive ? "max-h-24 opacity-100 mt-1" : "max-h-0 opacity-0"
                       )}>
-                        <p className="text-[12px] sm:text-[13px] text-slate-500 truncate leading-snug">
+                        <p className="text-xs sm:text-sm text-slate-500 truncate leading-snug">
                           {project.description}
                         </p>
                         <div className="flex items-center gap-1.5 overflow-hidden pt-0.5">
                           {project.stack.slice(0, 3).map((tag) => (
                             <span 
                               key={tag} 
-                              className="text-[9px] sm:text-[10px] bg-[#F1F5F9]/80 text-[#64748B] px-1.5 py-0.5 rounded font-medium whitespace-nowrap"
+                              className="text-xs sm:text-xs bg-[#F1F5F9]/80 text-[#64748B] px-1.5 py-0.5 rounded font-medium whitespace-nowrap"
                             >
                               {tag}
                             </span>
@@ -244,12 +244,12 @@ export function SelectedWork() {
             <div className="mt-7 flex items-center justify-between">
               <Link 
                 href="/portfolio" 
-                className="inline-flex items-center gap-2 text-[14px] font-bold text-[#121114] hover:text-[#922F55] transition-colors group"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#121114] hover:text-[#922F55] transition-colors group"
               >
                 View complete portfolio archive 
                 <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <span className="text-[13px] font-medium text-slate-400">
+              <span className="text-sm font-medium text-slate-400">
                 {filteredProjects.length} of {PROJECTS.length} builds
               </span>
             </div>
@@ -259,7 +259,7 @@ export function SelectedWork() {
           <div className="lg:col-span-7 flex flex-col relative pt-2 lg:pt-0">
             
             {/* Top Header: Filter Tabs & Live Client Site Badge + Prev/Next Arrows */}
-            <div className="flex items-center justify-between gap-4 mb-4 relative z-10 min-h-[40px]">
+            <div className="flex items-center justify-between gap-4 mb-4 relative z-10 min-h-10">
               
               {/* Left: Filter Tabs */}
               <div className="flex items-center gap-2 overflow-x-auto pb-1 hide-scrollbar -mx-2 px-2 sm:mx-0 sm:px-0">
@@ -272,7 +272,7 @@ export function SelectedWork() {
                       key={tab}
                       onClick={() => setActiveFilter(tab)}
                       className={cn(
-                        "px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-[12px] sm:text-[13px] font-bold flex items-center gap-2 whitespace-nowrap transition-all duration-150 cursor-pointer",
+                        "px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 whitespace-nowrap transition-all duration-150 cursor-pointer",
                         isActive 
                           ? "bg-[#591730] text-white shadow-sm" 
                           : "bg-white text-slate-600 border border-slate-200/80 hover:bg-slate-50 hover:text-slate-800 shadow-sm"
@@ -281,7 +281,7 @@ export function SelectedWork() {
                       {tab} 
                       <span 
                         className={cn(
-                          "px-1.5 py-0.2 rounded-full text-[10px] font-bold",
+                          "px-1.5 py-0.2 rounded-full text-xs font-bold",
                           isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-400"
                         )}
                       >
@@ -296,7 +296,7 @@ export function SelectedWork() {
               <div className="flex items-center gap-6 shrink-0">
                 {/* Handwritten "Live Client Site" badge positioned left of arrows */}
                 <div className="hidden sm:flex pointer-events-none items-center gap-2 z-30 select-none mt-1">
-                  <span className="font-handwriting text-[18px] text-[#922F55] font-bold -rotate-2 tracking-wide drop-shadow-sm">
+                  <span className="font-handwriting text-lg text-[#922F55] font-bold -rotate-2 tracking-wide drop-shadow-sm">
                     Live Client Site
                   </span>
                   <svg width="42" height="34" viewBox="0 0 42 34" fill="none" className="text-[#922F55] mt-1 -ml-1 drop-shadow-sm">
@@ -344,7 +344,7 @@ export function SelectedWork() {
                     href={activeProject.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-1.5 bg-white border border-slate-200 shadow-xs rounded-md px-3.5 py-1 text-[11px] sm:text-[12px] font-medium text-slate-600 min-w-[190px] max-w-sm truncate hover:border-slate-300 hover:text-slate-900 transition-colors cursor-pointer group"
+                    className="flex items-center justify-center gap-1.5 bg-white border border-slate-200 shadow-xs rounded-md px-3.5 py-1 text-xs sm:text-xs font-medium text-slate-600 min-w-48 max-w-sm truncate hover:border-slate-300 hover:text-slate-900 transition-colors cursor-pointer group"
                     title={`Visit ${activeProject.domain}`}
                   >
                     <Lock size={12} className="text-emerald-500 shrink-0" />
@@ -354,7 +354,7 @@ export function SelectedWork() {
                 </div>
                 
                 {/* Right Maximize Icon */}
-                <div className="w-[42px] flex justify-end">
+                <div className="w-10 flex justify-end">
                   <a 
                     href={activeProject.url} 
                     target="_blank" 
@@ -392,13 +392,13 @@ export function SelectedWork() {
                         <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white border border-slate-100 flex items-center justify-center mb-5 shadow-sm">
                           <Lock className="w-8 h-8 sm:w-10 sm:h-10 text-slate-300" strokeWidth={1.5} />
                         </div>
-                        <h3 className="text-[18px] sm:text-[22px] font-bold text-slate-800 tracking-tight mb-2">
+                        <h3 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight mb-2">
                           Building in Stealth
                         </h3>
-                        <p className="text-[13px] sm:text-[14px] text-slate-500 max-w-[280px] sm:max-w-xs leading-relaxed">
+                        <p className="text-sm sm:text-sm text-slate-500 max-w-72 sm:max-w-xs leading-relaxed">
                           This {activeProject.serviceType.toLowerCase().replace('s', '')} is currently under active development in our lab.
                         </p>
-                        <span className="mt-6 px-4 py-1.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 text-[11px] font-bold tracking-wide uppercase shadow-sm">
+                        <span className="mt-6 px-4 py-1.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 text-xs font-bold tracking-wide uppercase shadow-sm">
                           Preview Coming Soon
                         </span>
                       </div>

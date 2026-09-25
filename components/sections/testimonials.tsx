@@ -34,7 +34,7 @@ export function Testimonials() {
     >
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 mesh-bg opacity-30" />
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-primary/8 blur-[100px]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-72 rounded-full bg-primary/8 blur-[100px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -67,7 +67,7 @@ export function Testimonials() {
               {/* Stars + industry */}
               <div className="flex items-center justify-between">
                 <StarRating count={t.stars} />
-                <span className="text-[10px] font-mono font-semibold uppercase tracking-widest text-muted-foreground/60 border border-border/50 px-2 py-0.5 rounded-full">
+                <span className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground/60 border border-border/50 px-2 py-0.5 rounded-full">
                   {t.industry}
                 </span>
               </div>
@@ -113,7 +113,7 @@ export function Testimonials() {
                     <>
                       <div className="flex items-center justify-between">
                         <StarRating count={t.stars} />
-                        <span className="text-[10px] font-mono font-semibold uppercase tracking-widest text-muted-foreground/60 border border-border/50 px-2 py-0.5 rounded-full">
+                        <span className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground/60 border border-border/50 px-2 py-0.5 rounded-full">
                           {t.industry}
                         </span>
                       </div>

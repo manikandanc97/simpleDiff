@@ -64,7 +64,7 @@ export function MobileBottomNav() {
       className="fixed bottom-[calc(env(safe-area-inset-bottom,0px)+12px)] inset-x-0 z-40 md:hidden pointer-events-none flex justify-center px-4"
     >
       <div
-        className="relative w-full max-w-[320px] h-[52px]"
+        className="relative w-full max-w-80 h-12"
         style={{
           filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.18))",
         }}
@@ -91,7 +91,7 @@ export function MobileBottomNav() {
         {/* Cradle outline to seamlessly complete the cutout border */}
         <div
           aria-hidden="true"
-          className="absolute left-1/2 -translate-x-1/2 -top-[18px] w-[54px] h-[54px] rounded-full border border-border/60 pointer-events-none"
+          className="absolute left-1/2 -translate-x-1/2 -top-4 w-14 h-14 rounded-full border border-border/60 pointer-events-none"
           style={{
             clipPath: "polygon(0 33%, 100% 33%, 100% 100%, 0 100%)",
           }}
@@ -105,7 +105,7 @@ export function MobileBottomNav() {
             aria-expanded={isOpen}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             className={cn(
-              "relative flex items-center justify-center w-[46px] h-[46px] rounded-full shadow-[0_4px_16px_rgba(var(--primary),0.35)] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-primary ring-offset-2 ring-offset-background active:scale-90",
+              "relative flex items-center justify-center w-11 h-11 rounded-full shadow-[0_4px_16px_rgba(var(--primary),0.35)] transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-primary ring-offset-2 ring-offset-background active:scale-90",
               isOpen
                 ? "bg-muted text-foreground rotate-90"
                 : "bg-primary text-primary-foreground hover:scale-105"

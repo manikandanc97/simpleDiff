@@ -51,7 +51,7 @@ export function WhatWeBuild() {
               <span className="relative inline-block brand-gradient-text">
                 Impact.
                 <svg 
-                  className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full h-[12px] text-primary overflow-visible pointer-events-none" 
+                  className="absolute -bottom-2 sm:-bottom-2.5 left-0 w-full h-3 text-primary overflow-visible pointer-events-none" 
                   viewBox="0 0 200 20" 
                   fill="none" 
                   preserveAspectRatio="none"
@@ -77,7 +77,7 @@ export function WhatWeBuild() {
         />
 
         <div ref={containerRef} className="relative w-full py-2 perspective-[1400px] overflow-visible">
-          <div className="flex items-center justify-center min-h-[350px] sm:min-h-[380px] relative w-full">
+          <div className="flex items-center justify-center min-h-80 sm:min-h-96 relative w-full">
             {displayServices.map((service, index) => {
               let offset = index - activeIndex;
               if (offset > 2) offset -= displayServices.length;
@@ -107,7 +107,7 @@ export function WhatWeBuild() {
                     damping: 28,
                   }}
                   className={cn(
-                    "absolute top-0 w-full max-w-[700px] lg:max-w-[760px] rounded-[28px] sm:rounded-[34px] p-6 sm:p-8 lg:p-10 font-satoshi cursor-pointer transition-shadow",
+                    "absolute top-0 w-full max-w-3xl lg:max-w-4xl rounded-3xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 font-satoshi cursor-pointer transition-shadow",
                     "bg-white/85 backdrop-blur-2xl border border-[rgba(30,24,30,0.08)]",
                     isActive
                       ? "shadow-[0_24px_60px_-15px_rgba(0,0,0,0.09),0_2px_12px_rgba(0,0,0,0.03)] z-30 pointer-events-auto"
@@ -131,19 +131,19 @@ export function WhatWeBuild() {
                   <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-center w-full">
                     <div className="md:col-span-7 flex flex-col items-start text-left">
                       <div className="flex items-center gap-3 mb-4">
-                        <span className="text-[26px] sm:text-[30px] font-[900] tracking-tight leading-none font-mono" style={{ color: service.brandColor }}>
+                        <span className="text-2xl sm:text-3xl font-black tracking-tight leading-none font-mono" style={{ color: service.brandColor }}>
                           {service.number}
                         </span>
                         <div className="w-9 h-9 rounded-xl flex items-center justify-center shadow-xs" style={{ backgroundColor: `${service.brandColor}1A`, color: service.brandColor }}>
-                          <IconComponent className="w-[18px] h-[18px] stroke-[2.2]" />
+                          <IconComponent className="w-4 h-4 stroke-[2.2]" />
                         </div>
                       </div>
 
-                      <h3 className="text-[24px] sm:text-[30px] lg:text-[34px] font-[800] tracking-[-0.03em] text-[#121114] leading-tight mb-2.5">
+                      <h3 className="text-2xl sm:text-3xl lg:text-3xl font-extrabold tracking-tighter text-[#121114] leading-tight mb-2.5">
                         {service.name}
                       </h3>
 
-                      <p className="text-[14px] sm:text-[15px] text-[#68666C] leading-[1.5] mb-5 font-[500]">
+                      <p className="text-sm sm:text-base text-[#68666C] leading-relaxed mb-5 font-medium">
                         {service.shortTagline}
                       </p>
 
@@ -151,7 +151,7 @@ export function WhatWeBuild() {
                         {service.deliverables?.map((item, i) => (
                           <span
                             key={i}
-                            className="inline-flex items-center px-3 py-1 rounded-full bg-slate-50 border border-[rgba(30,24,30,0.06)] text-[12px] font-[600] text-[#121114]/85 tracking-[-0.01em]"
+                            className="inline-flex items-center px-3 py-1 rounded-full bg-slate-50 border border-[rgba(30,24,30,0.06)] text-xs font-semibold text-[#121114]/85 tracking-tight"
                           >
                             {item}
                           </span>
@@ -167,7 +167,7 @@ export function WhatWeBuild() {
                             description: `Interested in: ${service.name}.`,
                           });
                         }}
-                        className="inline-flex items-center gap-2 h-11 px-6 rounded-full bg-[#922F55] text-white text-[14px] font-[700] hover:bg-[#7D2748] active:scale-95 transition-all shadow-[0_4px_16px_rgba(146,47,85,0.25)]"
+                        className="inline-flex items-center gap-2 h-11 px-6 rounded-full bg-[#922F55] text-white text-sm font-bold hover:bg-[#7D2748] active:scale-95 transition-all shadow-[0_4px_16px_rgba(146,47,85,0.25)]"
                       >
                         <span>Explore {service.name}</span>
                         <AnimatedArrowRight size={15} className="text-white" />
@@ -184,9 +184,9 @@ export function WhatWeBuild() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between max-w-[760px] mx-auto mt-4 sm:mt-6 px-2 font-satoshi">
+        <div className="flex items-center justify-between max-w-4xl mx-auto mt-4 sm:mt-6 px-2 font-satoshi">
           <div className="flex items-center gap-2 text-[#68666C]">
-            <span className="text-[12px] sm:text-[13px] font-[600] text-[#68666C] select-none">
+            <span className="text-xs sm:text-sm font-semibold text-[#68666C] select-none">
               Drag to explore
             </span>
             <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-[#121114]">

@@ -110,7 +110,7 @@ export function HeroGridAccents() {
 
       {/* ── Dotted Pattern Grid on Upper Right ── */}
       <div
-        className="hero-dots absolute top-12 right-0 w-[550px] lg:w-[700px] h-[480px] pointer-events-none"
+        className="hero-dots absolute top-12 right-0 w-96 lg:w-96 h-96 pointer-events-none"
         style={{
           maskImage: "radial-gradient(ellipse 75% 75% at 75% 35%, black 25%, transparent 75%)",
           WebkitMaskImage: "radial-gradient(ellipse 75% 75% at 75% 35%, black 25%, transparent 75%)",

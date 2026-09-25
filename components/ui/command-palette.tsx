@@ -104,7 +104,7 @@ export function CommandPalette({ onStartProject }: CommandPaletteProps) {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent showCloseButton={false} className="sm:max-w-[500px] p-0 overflow-hidden gap-0">
+      <DialogContent showCloseButton={false} className="sm:max-w-lg p-0 overflow-hidden gap-0">
         <DialogTitle className="sr-only">Command menu</DialogTitle>
         <div className="flex items-center border-b border-border px-3">
           <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" aria-hidden="true" />
@@ -130,7 +130,7 @@ export function CommandPalette({ onStartProject }: CommandPaletteProps) {
           id={listboxId}
           role="listbox"
           aria-label="Commands"
-          className="max-h-[300px] overflow-y-auto p-2 flex flex-col gap-1"
+          className="max-h-72 overflow-y-auto p-2 flex flex-col gap-1"
         >
           {filtered.length === 0 ? (
             <p className="p-4 text-sm text-muted-foreground text-center">No results found.</p>

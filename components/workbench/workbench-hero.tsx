@@ -33,7 +33,7 @@ export function WorkbenchHero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-[100dvh] pt-28 sm:pt-32 lg:pt-36 pb-12 flex flex-col items-center justify-between"
+      className="relative min-h-screen pt-28 sm:pt-32 lg:pt-36 pb-12 flex flex-col items-center justify-between"
     >
       {/* Background Elements */}
       <HeroGridAccents />
@@ -42,7 +42,7 @@ export function WorkbenchHero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center w-full">
           
           {/* LEFT: Text Content */}
-          <div className="lg:col-span-5 xl:col-span-6 flex flex-col items-start text-left max-w-[580px] z-10">
+          <div className="lg:col-span-5 xl:col-span-6 flex flex-col items-start text-left max-w-xl z-10">
 
             {/* Pill Tag */}
             
@@ -52,7 +52,7 @@ export function WorkbenchHero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="font-satoshi font-[800] tracking-[-0.065em] text-[#121114] leading-[0.94] mb-5 text-[clamp(52px,5.5vw,104px)]"
+              className="font-satoshi font-extrabold tracking-tighter text-[#121114] leading-none mb-5 text-5xl sm:text-7xl lg:text-8xl"
             >
               <span className="block mb-2">{HERO_CONTENT.headlineLine1}</span>
               <span className="block relative inline-block whitespace-nowrap">
@@ -61,7 +61,7 @@ export function WorkbenchHero() {
                   {HERO_CONTENT.headlineHighlight}
                   {/* Hand-drawn style SVG underline stroke */}
                   <svg 
-                    className="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-[14px] text-[#922F55] overflow-visible pointer-events-none" 
+                    className="absolute -bottom-2 sm:-bottom-3 left-0 w-full h-3.5 text-[#922F55] overflow-visible pointer-events-none" 
                     viewBox="0 0 240 24" 
                     fill="none" 
                     preserveAspectRatio="none"
@@ -96,7 +96,7 @@ export function WorkbenchHero() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="type-lead text-muted-foreground max-w-[490px] mb-8"
+              className="type-lead text-muted-foreground max-w-lg mb-8"
             >
               {HERO_CONTENT.description}
             </motion.p>
@@ -126,8 +126,8 @@ export function WorkbenchHero() {
                   <Play size={13} fill="currentColor" />
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="text-[15px] font-[700] text-[#121114] leading-tight tracking-[-0.01em]">See our work</span>
-                  <span className="text-[12px] font-[500] text-[#68666C] mt-0.5">2 min overview</span>
+                  <span className="text-base font-bold text-[#121114] leading-tight tracking-tight">See our work</span>
+                  <span className="text-xs font-medium text-[#68666C] mt-0.5">2 min overview</span>
                 </div>
               </button>
             </motion.div>
@@ -141,40 +141,40 @@ export function WorkbenchHero() {
             >
               {/* Stat 1 */}
               <div className="flex items-center gap-3">
-                <div className="w-[42px] h-[42px] rounded-[12px] bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
+                <div className="w-10 h-10 rounded-xl bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="text-[22px] sm:text-[24px] font-[800] tracking-[-0.03em] text-[#121114] leading-tight">{HERO_CONTENT.stats[0].value}</span>
-                  <span className="text-[12px] font-[500] text-[#68666C] leading-none mt-0.5">{HERO_CONTENT.stats[0].label}</span>
+                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#121114] leading-tight">{HERO_CONTENT.stats[0].value}</span>
+                  <span className="text-xs font-medium text-[#68666C] leading-none mt-0.5">{HERO_CONTENT.stats[0].label}</span>
                 </div>
               </div>
               
               {/* Vertical divider */}
-              <div className="w-[1px] h-8 bg-[rgba(30,24,30,0.08)] hidden sm:block" />
+              <div className="w-0 h-8 bg-[rgba(30,24,30,0.08)] hidden sm:block" />
 
               {/* Stat 2 */}
               <div className="flex items-center gap-3">
-                <div className="w-[42px] h-[42px] rounded-[12px] bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
+                <div className="w-10 h-10 rounded-xl bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="text-[22px] sm:text-[24px] font-[800] tracking-[-0.03em] text-[#121114] leading-tight">{HERO_CONTENT.stats[1].value}</span>
-                  <span className="text-[12px] font-[500] text-[#68666C] leading-none mt-0.5">{HERO_CONTENT.stats[1].label}</span>
+                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#121114] leading-tight">{HERO_CONTENT.stats[1].value}</span>
+                  <span className="text-xs font-medium text-[#68666C] leading-none mt-0.5">{HERO_CONTENT.stats[1].label}</span>
                 </div>
               </div>
 
               {/* Vertical divider */}
-              <div className="w-[1px] h-8 bg-[rgba(30,24,30,0.08)] hidden sm:block" />
+              <div className="w-0 h-8 bg-[rgba(30,24,30,0.08)] hidden sm:block" />
 
               {/* Stat 3 */}
               <div className="flex items-center gap-3">
-                <div className="w-[42px] h-[42px] rounded-[12px] bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
+                <div className="w-10 h-10 rounded-xl bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="text-[22px] sm:text-[24px] font-[800] tracking-[-0.03em] text-[#121114] leading-tight">{HERO_CONTENT.stats[2].value}</span>
-                  <span className="text-[12px] font-[500] text-[#68666C] leading-none mt-0.5">{HERO_CONTENT.stats[2].label}</span>
+                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#121114] leading-tight">{HERO_CONTENT.stats[2].value}</span>
+                  <span className="text-xs font-medium text-[#68666C] leading-none mt-0.5">{HERO_CONTENT.stats[2].label}</span>
                 </div>
               </div>
             </motion.div>
@@ -185,7 +185,7 @@ export function WorkbenchHero() {
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="lg:col-span-7 xl:col-span-6 flex justify-center items-center w-full relative min-h-[460px] lg:min-h-[580px]"
+            className="lg:col-span-7 xl:col-span-6 flex justify-center items-center w-full relative min-h-96 lg:min-h-96"
           >
             <Hero3DCoder />
           </motion.div>
@@ -204,7 +204,7 @@ export function WorkbenchHero() {
         transition={{ delay: 1.0, duration: 0.6 }}
         className="group absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 text-slate-400 hover:text-foreground cursor-pointer focus:outline-none transition-all select-none"
       >
-        <span className="text-[8px] font-bold uppercase tracking-[0.2em] group-hover:text-primary transition-colors duration-300">
+        <span className="text-xs font-bold uppercase tracking-widest group-hover:text-primary transition-colors duration-300">
           scroll
         </span>
         <motion.div

@@ -62,7 +62,7 @@ export function WhySimpleThink() {
             {/* Header */}
             <div className="flex items-center gap-1.5 px-1 mb-0.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D23D78]" />
-              <span className="text-[10px] font-bold tracking-widest text-[#D23D78] uppercase">
+              <span className="text-xs font-bold tracking-widest text-[#D23D78] uppercase">
                 PROCESS / 04
               </span>
             </div>
@@ -77,7 +77,7 @@ export function WhySimpleThink() {
                     initial={{ opacity: 0, x: -16 }}
                     animate={inView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.4, delay: 0.15 + idx * 0.08 }}
-                    className="relative rounded-r-2xl rounded-l-[32px] p-2 sm:p-2.5 pr-4 flex items-center gap-3 bg-white/80 backdrop-blur-md border border-neutral-100/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-rose-200/80 hover:shadow-md transition-all duration-300"
+                    className="relative rounded-r-2xl rounded-l-3xl p-2 sm:p-2.5 pr-4 flex items-center gap-3 bg-white/80 backdrop-blur-md border border-neutral-100/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-rose-200/80 hover:shadow-md transition-all duration-300"
                   >
                     {/* Number pill */}
                     <div
@@ -103,10 +103,10 @@ export function WhySimpleThink() {
 
                     {/* Content */}
                     <div className="flex flex-col min-w-0">
-                      <span className="text-xs sm:text-[13px] font-bold text-neutral-900 leading-tight">
+                      <span className="text-xs sm:text-sm font-bold text-neutral-900 leading-tight">
                         {step.title}
                       </span>
-                      <span className="text-[10px] sm:text-[11px] text-neutral-500 leading-snug mt-0.5">
+                      <span className="text-xs sm:text-xs text-neutral-500 leading-snug mt-0.5">
                         {step.desc} {step.subDesc}
                       </span>
                     </div>
@@ -234,7 +234,7 @@ export function WhySimpleThink() {
               initial={{ opacity: 0, x: 16 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="rounded-[28px] lg:mt-14 sm:rounded-[36px] bg-white/80 backdrop-blur-md border border-neutral-200/80 shadow-[0_12px_44px_rgba(0,0,0,0.03)] p-5 sm:p-6 flex flex-col gap-3.5"
+              className="rounded-3xl sm:rounded-3xl bg-white/80 backdrop-blur-md border border-neutral-200/80 shadow-[0_12px_44px_rgba(0,0,0,0.03)] p-5 sm:p-6 flex flex-col gap-3.5"
             >
               {/* Header */}
               <div className="flex items-center gap-2 mb-1 px-1">
@@ -243,7 +243,7 @@ export function WhySimpleThink() {
                   <span className="w-1 h-3.5 bg-[#831843] rounded-xs" />
                   <span className="w-1 h-2.5 bg-[#831843] rounded-xs" />
                 </div>
-                <span className="text-[11px] font-bold tracking-widest text-[#831843] uppercase">
+                <span className="text-xs font-bold tracking-widest text-[#831843] uppercase">
                   REAL OUTCOMES
                 </span>
               </div>
@@ -265,7 +265,7 @@ export function WhySimpleThink() {
                           <StatIcon className="w-4 h-4" />
                         </div>
                         <div className="flex flex-col min-w-0">
-                          <span className="text-lg sm:text-[22px] font-black text-neutral-900 tracking-tighter leading-none font-mono">
+                          <span className="text-lg sm:text-xl font-black text-neutral-900 tracking-tighter leading-none font-mono">
                             <AnimatedCounter
                               value={stat.value}
                               prefix={stat.prefix}
@@ -274,7 +274,7 @@ export function WhySimpleThink() {
                               delay={i * 0.1}
                             />
                           </span>
-                          <span className="text-[10px] sm:text-[11px] text-neutral-500 font-medium mt-1 leading-tight truncate">
+                          <span className="text-xs sm:text-xs text-neutral-500 font-medium mt-1 leading-tight truncate">
                             {stat.label}
                           </span>
                         </div>
@@ -300,7 +300,7 @@ export function WhySimpleThink() {
           className="mt-12 sm:mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 relative"
         >
           {/* Subtle horizontal separator line */}
-          <div className="hidden sm:block absolute inset-x-0 top-1/2 -translate-y-1/2 h-[1px] bg-gradient-to-r from-transparent via-neutral-200/80 to-transparent pointer-events-none" />
+          <div className="hidden sm:block absolute inset-x-0 top-1/2 -translate-y-1/2 h-0 bg-gradient-to-r from-transparent via-neutral-200/80 to-transparent pointer-events-none" />
 
           {/* Masked content container */}
           <div className="relative z-10 px-4 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">

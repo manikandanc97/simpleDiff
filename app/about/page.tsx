@@ -117,7 +117,7 @@ export default function AboutPage() {
                 <span className="text-4xl sm:text-5xl font-extrabold font-mono text-muted-foreground/30 group-hover:text-primary transition-colors select-none">
                   {principle.number}
                 </span>
-                <span className="text-xs font-mono font-bold tracking-[0.2em] text-primary uppercase">
+                <span className="text-xs font-mono font-bold tracking-widest text-primary uppercase">
                   {principle.tag}
                 </span>
               </div>
