@@ -17,15 +17,11 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative scroll-mt-24 py-28 sm:py-32 bg-background overflow-hidden">
+    <section id="faq" className="relative scroll-mt-24 py-28 sm:py-32">
 
       {/* Ambient background glows */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Soft pink/purple ambient blobs */}
-        <div className="absolute -top-[15%] -left-[10%] w-[45%] h-[45%] rounded-full bg-rose-200/35 dark:bg-rose-950/20 blur-[130px]" />
-        <div className="absolute -bottom-[15%] -left-[5%] w-[40%] h-[40%] rounded-full bg-pink-100/40 dark:bg-pink-950/15 blur-[120px]" />
-        <div className="absolute -top-[10%] -right-[10%] w-[45%] h-[45%] rounded-full bg-purple-200/30 dark:bg-purple-950/20 blur-[140px]" />
-        <div className="absolute -bottom-[15%] -right-[5%] w-[45%] h-[45%] rounded-full bg-purple-100/40 dark:bg-purple-950/20 blur-[130px]" />
+
 
         {/* Top-left dot grid */}
         <div className="absolute top-12 left-6 sm:left-12 grid grid-cols-4 gap-2.5 opacity-35">

@@ -33,7 +33,7 @@ export function WorkbenchHero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-[100dvh] pt-28 sm:pt-32 lg:pt-36 pb-12 flex flex-col items-center justify-between overflow-hidden bg-background"
+      className="relative min-h-[100dvh] pt-28 sm:pt-32 lg:pt-36 pb-12 flex flex-col items-center justify-between"
     >
       {/* Background Elements */}
       <HeroGridAccents />

@@ -1,5 +1,6 @@
 import { WorkbenchHero } from "@/components/workbench/workbench-hero";
 import dynamic from "next/dynamic";
+import { AmbientBackground } from "@/components/ui/ambient-background";
 
 // Lazy-loaded sections to reduce initial JS bundle size
 const WhatWeBuild = dynamic(() => import("@/components/sections/what-we-build").then((mod) => mod.WhatWeBuild));
@@ -12,38 +13,41 @@ const CTA = dynamic(() => import("@/components/sections/cta").then((mod) => mod.
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 w-full">
-      {/* 02 — HERO */}
-      <WorkbenchHero />
+    <div className="flex flex-col flex-1 w-full relative">
+      <AmbientBackground />
+      <div className="relative z-10 w-full flex flex-col">
+        {/* 02 — HERO */}
+        <WorkbenchHero />
 
-      {/* 03 — WHAT WE BUILD */}
-      <WhatWeBuild />
+        {/* 03 — WHAT WE BUILD */}
+        <WhatWeBuild />
 
-      {/* 05 — SELECTED WORK */}
-      <SelectedWork />
+        {/* 05 — SELECTED WORK */}
+        <SelectedWork />
 
-      {/* 06 — HOW WE WORK */}
-      <HowWeWork />
+        {/* 06 — HOW WE WORK */}
+        <HowWeWork />
 
-      {/* 07 — Why SimpleThink */}
-      <WhySimpleThink />
+        {/* 07 — Why SimpleThink */}
+        <WhySimpleThink />
 
-      {/* 08 — INDUSTRIES */}
-      {/* <Industries /> */}
+        {/* 08 — INDUSTRIES */}
+        {/* <Industries /> */}
 
-      {/* 09 — TECHNOLOGY */}
-      <TechStack />
+        {/* 09 — TECHNOLOGY */}
+        <TechStack />
 
-      {/* 10 — TESTIMONIALS */}
-      {/* <Testimonials /> */}
+        {/* 10 — TESTIMONIALS */}
+        {/* <Testimonials /> */}
 
-      {/* 11 — FAQ */}
-      <FAQ />
+        {/* 11 — FAQ */}
+        <FAQ />
 
-      {/* 12 — FINAL CTA */}
-      <CTA />
+        {/* 12 — FINAL CTA */}
+        <CTA />
 
-      {/* 01 Navbar + 13 Footer are in layout.tsx */}
+        {/* 01 Navbar + 13 Footer are in layout.tsx */}
+      </div>
     </div>
   );
 }

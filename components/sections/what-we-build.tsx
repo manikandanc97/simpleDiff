@@ -37,10 +37,9 @@ export function WhatWeBuild() {
   return (
     <section
       id="capabilities"
-      className="relative w-full pt-20 pb-10 sm:pt-28 sm:pb-12 overflow-hidden bg-background"
+      className="relative w-full pt-20 pb-10 sm:pt-28 sm:pb-12"
     >
-      <div className="absolute top-1/4 left-[-10%] w-[500px] h-[500px] bg-[#F3EBF9]/60 rounded-full blur-[100px] pointer-events-none z-0" />
-      <div className="absolute top-1/3 right-[-10%] w-[500px] h-[500px] bg-[#FAF0F6]/70 rounded-full blur-[100px] pointer-events-none z-0" />
+
 
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6">
         <SectionHeader

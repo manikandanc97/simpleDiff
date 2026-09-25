@@ -112,7 +112,7 @@ export function SelectedWork() {
   return (
     <section 
       id="selected-work" 
-      className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#FAF9F8] overflow-hidden font-satoshi selection:bg-[#922F55]/20 selection:text-[#922F55]"
+      className="relative w-full py-16 sm:py-20 lg:py-24 font-satoshi selection:bg-[#922F55]/20 selection:text-[#922F55]"
     >
       {/* ── Background Decorative Elements ── */}
       {/* 1. Left Dot Grid Matrix */}
@@ -127,10 +127,7 @@ export function SelectedWork() {
       />
 
       {/* 2. Soft Ambient Blurred Orbs */}
-      <div className="absolute -left-28 top-1/4 w-[520px] h-[520px] bg-[#FCE4EC]/55 rounded-full blur-[130px] pointer-events-none z-0" />
-      <div className="absolute -right-24 -top-20 w-[580px] h-[580px] bg-[#F3E8FF]/60 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute right-0 -bottom-24 w-[500px] h-[500px] bg-[#FCE7F3]/45 rounded-full blur-[120px] pointer-events-none z-0" />
-      <div className="absolute left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/40 rounded-full blur-[90px] pointer-events-none z-0" />
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">

@@ -42,12 +42,10 @@ export function TechStack() {
   return (
     <section
       id="tech-stack"
-      className="relative w-full py-16 sm:py-24 bg-[#FAF9F7] dark:bg-background border-t border-slate-200/60 dark:border-border overflow-hidden"
+      className="relative w-full py-16 sm:py-24"
     >
       {/* ── Background Atmosphere & Ambient Glows ────────────────────────────── */}
-      <div className="pointer-events-none absolute -top-12 -right-12 w-[460px] h-[460px] rounded-full bg-gradient-to-br from-pink-200/50 via-rose-200/40 to-purple-200/30 dark:bg-pink-900/10 blur-3xl opacity-70" />
-      <div className="pointer-events-none absolute top-12 -left-12 w-[380px] h-[380px] rounded-full bg-purple-200/40 dark:bg-purple-900/10 blur-3xl opacity-60" />
-      <div className="pointer-events-none absolute bottom-12 -right-12 w-[420px] h-[420px] rounded-full bg-fuchsia-200/35 dark:bg-fuchsia-900/10 blur-3xl opacity-60" />
+
 
       {/* Decorative dot matrix in corners */}
       <div className="pointer-events-none absolute top-8 left-8 w-32 h-32 hero-dots opacity-40 dark:opacity-20" />

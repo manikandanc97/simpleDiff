@@ -20,13 +20,10 @@ export function WhySimpleThink() {
   return (
     <section
       id="why-SimpleThink"
-      className="relative w-full pt-24 sm:pt-28 pb-16 sm:pb-24 bg-transparent overflow-hidden"
+      className="relative w-full pt-24 sm:pt-28 pb-16 sm:pb-24 bg-transparent"
     >
       {/* ── Atmospheric Ambient Glowing Blobs & Dots ── */}
-      <div className="pointer-events-none absolute -top-24 -left-20 w-[420px] h-[420px] rounded-full bg-rose-200/35 blur-3xl" />
-      <div className="pointer-events-none absolute top-1/4 -right-20 w-[460px] h-[460px] rounded-full bg-purple-200/25 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-20 right-1/4 w-[380px] h-[380px] rounded-full bg-pink-200/30 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-10 -left-12 w-[300px] h-[300px] rounded-full bg-rose-100/40 blur-2xl" />
+
 
       {/* Decorative Dot Matrix on left & right edges matching screenshot */}
       <div className="pointer-events-none hidden xl:block absolute left-6 top-1/3 opacity-30 select-none">

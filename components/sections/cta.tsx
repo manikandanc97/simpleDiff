@@ -31,12 +31,10 @@ export function CTA({ onStartProject }: CTAProps) {
     <section
       id="cta"
       ref={ref}
-      className="relative w-full py-20 sm:py-28 lg:py-32 bg-[#FCFBF9] border-t border-[#EAE6DF] overflow-hidden select-none"
+      className="relative w-full py-20 sm:py-28 lg:py-32 select-none"
     >
       {/* ── Soft Ambient Glows & Dot Patterns Matching SimpleThink Theme ── */}
-      <div className="pointer-events-none absolute -top-16 -left-16 w-[420px] h-[420px] rounded-full bg-rose-200/35 blur-3xl" />
-      <div className="pointer-events-none absolute top-1/2 -right-20 w-[480px] h-[480px] rounded-full bg-purple-200/30 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-1/3 w-[360px] h-[360px] rounded-full bg-pink-100/40 blur-3xl" />
+
 
       {/* Decorative Dot Matrix on corners */}
       <div className="hidden lg:block pointer-events-none absolute top-12 left-8 w-28 h-28 hero-dots opacity-40" />

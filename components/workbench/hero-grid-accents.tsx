@@ -3,7 +3,7 @@
 
 export function HeroGridAccents() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none bg-[#FFFDFC]">
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
       {/* ── Main SVG Background with Radial Glows & Translucent Glass Waves ── */}
       <svg
         className="absolute inset-0 h-full w-full"
@@ -40,9 +40,6 @@ export function HeroGridAccents() {
             <feGaussianBlur stdDeviation="65" />
           </filter>
         </defs>
-
-        {/* Base warm white canvas */}
-        <rect width="1920" height="900" fill="#fffdfc" />
 
         {/* Top-left soft lavender bloom */}
         <ellipse
