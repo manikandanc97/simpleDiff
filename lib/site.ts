@@ -8,5 +8,10 @@ export const SITE = {
   location: "", // TODO(owner): e.g. "Based in Tamil Nadu, India · working worldwide"
   responseTime: "", // TODO(owner): e.g. "within one business day"
   availability: "Taking on new projects", // TODO(owner): confirm this is true
+  twitter: "https://x.com",
+  linkedin: "https://linkedin.com",
+  instagram: "https://instagram.com",
+  youtube: "https://youtube.com",
+  github: "https://github.com",
 } as const;
 

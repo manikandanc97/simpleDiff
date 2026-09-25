@@ -1,19 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useLead } from "@/components/leads/lead-provider";
 import { SITE } from "@/lib/site";
 import { NAV_ITEMS } from "@/lib/nav";
-import { FooterRevealWordmark } from "./footer-reveal-wordmark";
-
 import {
   AnimatedIcon,
-  AnimatedArrowRight,
-  AnimatedMail,
-  AnimatedMessageSquare,
   type AnimatedIconName,
 } from "@/components/ui/animated-icon";
 
@@ -21,7 +13,6 @@ const FOOTER_NAV_ICONS: Record<string, AnimatedIconName> = {
   "/": "home",
   "/work": "briefcase",
   "/services": "layers",
-  "/lab": "lightbulb",
   "/about": "info",
   "/contact": "mail",
 };
@@ -48,75 +39,137 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
   };
 
   return (
-    <footer className="w-full bg-background border-t border-border mt-auto relative overflow-hidden">
-      {/* Ambient background glow */}
-      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-primary/8 blur-[120px] rounded-full" />
+    <footer className="w-full bg-[#FCFCFD] dark:bg-background border-t border-slate-100 dark:border-border mt-auto relative overflow-hidden">
+      {/* Soft ambient luxury background glows matching design */}
+      <div className="pointer-events-none absolute -left-28 top-1/2 -translate-y-1/2 w-[440px] h-[440px] bg-pink-200/35 dark:bg-pink-900/10 blur-[100px] rounded-full" />
+      <div className="pointer-events-none absolute -right-24 -top-16 w-[440px] h-[360px] bg-purple-200/25 dark:bg-purple-900/10 blur-[110px] rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-0 relative z-10">
-        {/* Top Grid: Studio Brand, Navigation, Services, Direct CTA */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 pb-16 border-b border-border/80">
-          {/* Col 1 & 2: Brand Manifesto */}
-          <div className="lg:col-span-2 flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 relative z-10">
+        {/* Top Grid: Brand Manifesto, Explore, Capabilities, Connect Card */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-slate-200/70 dark:border-border/80 items-start">
+          
+          {/* Col 1: Brand Manifesto & Socials (4 cols) */}
+          <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
+            <div className="space-y-5">
+              {/* Brand Logo: SIMPLUXE */}
               <Link
                 href="/"
-                className="inline-flex items-center focus-visible:ring-2 focus-visible:ring-ring outline-none"
+                className="inline-flex items-center text-2xl font-black tracking-tight select-none focus-visible:ring-2 focus-visible:ring-ring outline-none"
                 aria-label="SimpleThink Home"
               >
-                <Image
-                  src="/logo.png"
-                  alt="SimpleThink Logo"
-                  width={150}
-                  height={40}
-                  className="h-8 w-auto object-contain"
-                />
+                <span className="text-[#0F172A] dark:text-white">SIMP</span>
+                <span className="bg-gradient-to-r from-[#8C1EFF] via-[#D81159] to-[#FF5400] bg-clip-text text-transparent">
+                  LUXE
+                </span>
               </Link>
-              <p className="text-lg font-medium text-foreground/90 max-w-sm leading-snug">
+
+              <h3 className="text-2xl sm:text-[26px] font-extrabold text-[#0F172A] dark:text-white leading-[1.2] tracking-tight">
                 Keep It Simple.
                 <br />
-                Make It Luxury.
-              </p>
-              <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                A premier software development company engineering custom software, scalable web applications, mobile apps, SaaS platforms, and enterprise solutions for ambitious businesses and founders.
-              </p>
-            </div>
+                Make It{" "}
+                <span className="bg-gradient-to-r from-[#D81159] to-[#8C1EFF] bg-clip-text text-transparent">
+                  Luxury.
+                </span>
+              </h3>
 
-            {/* Live availability indicator */}
-            <div className="flex items-center gap-2.5 text-xs text-muted-foreground font-medium pt-2">
-              <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="animate-ping motion-reduce:animate-none absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span>{SITE.availability}</span>
-              {SITE.location && (
-                <>
-                  <span className="text-border">&bull;</span>
-                  <span>{SITE.location}</span>
-                </>
-              )}
+              <p className="text-[13.5px] text-slate-500 dark:text-zinc-400 leading-relaxed max-w-[360px]">
+                A premier software development company engineering custom software,
+                scalable web applications, mobile apps, SaaS platforms, and enterprise
+                solutions for ambitious businesses and founders.
+              </p>
+
+              {/* Social Icons with brand colors exactly matching reference */}
+              <div className="flex items-center gap-2.5 pt-1">
+                {/* X (Twitter) */}
+                <a
+                  href={SITE.twitter || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="X (Twitter)"
+                  className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-zinc-700 hover:scale-110 active:scale-95 transition-all shadow-sm"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+
+                {/* LinkedIn: Brand Sky Blue */}
+                <a
+                  href={SITE.linkedin || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="w-9 h-9 rounded-full bg-[#E8F4FD] dark:bg-sky-950/50 text-[#0A66C2] flex items-center justify-center hover:bg-[#D5EBFB] dark:hover:bg-sky-900/60 hover:scale-110 active:scale-95 transition-all shadow-sm"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+
+                {/* Instagram: Blush Pink Tint */}
+                <a
+                  href={SITE.instagram || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="w-9 h-9 rounded-full bg-[#FDF2F8] dark:bg-pink-950/50 text-[#E1306C] flex items-center justify-center hover:bg-[#FCE7F3] dark:hover:bg-pink-900/60 hover:scale-110 active:scale-95 transition-all shadow-sm"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                  </svg>
+                </a>
+
+                {/* YouTube: Solid Red Fill with White Play Icon */}
+                <a
+                  href={SITE.youtube || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                  className="w-9 h-9 rounded-full bg-[#FF0033] text-white flex items-center justify-center hover:bg-[#E6002E] hover:scale-110 active:scale-95 transition-all shadow-sm"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.547 12 3.547 12 3.547s-7.505 0-9.377.503a3.015 3.015 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.501 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.503 9.377.503 9.377.503s7.505 0 9.377-.503a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </a>
+
+                {/* GitHub */}
+                <a
+                  href={SITE.github || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="w-9 h-9 rounded-full bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-200 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-zinc-700 hover:scale-110 active:scale-95 transition-all shadow-sm"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Col 3: Navigation */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-bold">
-              Explore
+          {/* Col 2: Navigation / Explore (2 cols) */}
+          <div className="lg:col-span-2 space-y-5">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#0F172A] dark:text-white font-sans">
+              EXPLORE
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {NAV_ITEMS.map((item) => {
                 const iconName = FOOTER_NAV_ICONS[item.route] || "sparkles";
                 return (
                   <li key={item.route}>
                     <Link
                       href={item.route}
-                      className="group text-sm text-muted-foreground hover:text-foreground hover:translate-x-0.5 active:scale-95 transition-all inline-flex items-center gap-2"
+                      className="group text-[13.5px] text-slate-600 dark:text-zinc-400 hover:text-[#0F172A] dark:hover:text-white transition-colors inline-flex items-center gap-3"
                     >
-                      <AnimatedIcon
-                        name={iconName}
-                        size={14}
-                        className="text-primary/70 group-hover:text-primary transition-colors"
-                      />
-                      <span>{item.label}</span>
+                      <span className="w-7 h-7 rounded-full bg-[#FDF2F8] dark:bg-pink-950/40 flex items-center justify-center shrink-0">
+                        <AnimatedIcon
+                          name={iconName}
+                          size={13}
+                          className="text-[#D81159]"
+                        />
+                      </span>
+                      <span className="font-medium">{item.label}</span>
                     </Link>
                   </li>
                 );
@@ -124,98 +177,106 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
             </ul>
           </div>
 
-          {/* Col 4: Services */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-bold">
-              Capabilities
+          {/* Col 3: Capabilities (3 cols to avoid any awkward wrapping) */}
+          <div className="lg:col-span-3 space-y-5">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#0F172A] dark:text-white font-sans">
+              CAPABILITIES
             </h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
+            <ul className="space-y-3.5 text-[13.5px] text-slate-600 dark:text-zinc-400">
               {CAPABILITY_ITEMS.map((cap) => (
-                <li key={cap.label} className="group flex items-center gap-2">
-                  <AnimatedIcon
-                    name={cap.icon}
-                    size={14}
-                    className="text-primary/70 group-hover:text-primary transition-colors"
-                  />
-                  <span className="group-hover:text-foreground transition-colors">{cap.label}</span>
+                <li key={cap.label} className="group flex items-center gap-3 cursor-default whitespace-nowrap">
+                  <span className="w-7 h-7 rounded-full bg-[#FDF2F8] dark:bg-pink-950/40 flex items-center justify-center shrink-0">
+                    <AnimatedIcon
+                      name={cap.icon}
+                      size={13}
+                      className="text-[#D81159]"
+                    />
+                  </span>
+                  <span className="font-medium group-hover:text-[#0F172A] dark:group-hover:text-white transition-colors">
+                    {cap.label}
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Col 5: Connect & CTA */}
-          <div className="space-y-5 flex flex-col">
-            <div className="space-y-4">
-              <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-bold">
-                Direct Contact
-              </h4>
-              <ul className="space-y-2.5 text-sm">
-                {SITE.email && (
-                  <li>
-                    <a
-                      href={`mailto:${SITE.email}`}
-                      className="group text-muted-foreground hover:text-primary active:scale-95 transition-all flex items-center gap-2"
-                    >
-                      <AnimatedMail size={14} className="text-primary" />
-                      <span>{SITE.email}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ml-auto" />
-                    </a>
-                  </li>
-                )}
-                {SITE.phone && (
-                  <li>
-                    <a
-                      href={`tel:${SITE.phone.replace(/\s+/g, '')}`}
-                      className="group text-muted-foreground hover:text-primary active:scale-95 transition-all flex items-center gap-2"
-                    >
-                      <AnimatedIcon name="smartphone" size={14} className="text-primary" />
-                      <span>{SITE.phone}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ml-auto" />
-                    </a>
-                  </li>
-                )}
-                {SITE.whatsapp && (
-                  <li>
-                    <a
-                      href={`https://wa.me/${SITE.whatsapp}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group text-muted-foreground hover:text-primary active:scale-95 transition-all flex items-center gap-2"
-                    >
-                      <AnimatedMessageSquare size={14} className="text-primary" />
-                      <span>WhatsApp Direct</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform ml-auto" />
-                    </a>
-                  </li>
-                )}
-              </ul>
+          {/* Col 4: Connect & CTA Card (3 cols) */}
+          <div className="lg:col-span-3 flex flex-col relative">
+            {/* Decorative 3-line celebration burst on top right outside the card */}
+            <div className="absolute -top-3.5 -right-2 text-[#D81159] pointer-events-none select-none z-20">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D81159" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="8" y1="12" x2="12" y2="4" />
+                <line x1="10" y1="14" x2="18" y2="8" />
+                <line x1="10" y1="16" x2="20" y2="16" />
+              </svg>
             </div>
 
-            <div>
-              <Button
-                onClick={handleStart}
-                className="group/button w-full rounded-full text-xs h-10 font-semibold cursor-pointer shadow-sm hover:shadow-primary/25 active:scale-95 transition-all flex items-center justify-center gap-2"
-              >
-                <span>Start a project</span>
-                <AnimatedArrowRight size={14} />
-              </Button>
+            <div className="bg-white dark:bg-zinc-900 rounded-[28px] p-7 shadow-[0_16px_40px_rgba(0,0,0,0.06)] border border-slate-100 dark:border-zinc-800 relative z-10 flex flex-col justify-between">
+              <div className="flex justify-between items-start mb-5">
+                {/* Send / Paperplane Pink Circle */}
+                <div className="w-12 h-12 rounded-full bg-[#FDF2F8] dark:bg-pink-950/40 flex items-center justify-center text-[#D81159]">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="-ml-0.5 mt-0.5">
+                    <path d="m22 2-7 20-4-9-9-4Z" />
+                    <path d="M22 2 11 13" />
+                  </svg>
+                </div>
+
+                {/* Let's Build pill with live dot */}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-zinc-800 border border-slate-200/80 dark:border-zinc-700 text-xs font-semibold text-slate-800 dark:text-zinc-200 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.7)]" />
+                  Let&apos;s Build
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-xl font-bold text-[#0F172A] dark:text-white mb-2 tracking-tight">
+                  Have a project in mind?
+                </h4>
+                <p className="text-[13px] text-slate-500 dark:text-zinc-400 leading-relaxed mb-6">
+                  Let&apos;s discuss your idea and turn it into a premium digital product.
+                </p>
+
+                <button
+                  onClick={handleStart}
+                  className="w-full h-12 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#D81159] via-[#C026D3] to-[#8C1EFF] hover:from-[#C01050] hover:to-[#7B1AD9] flex items-center justify-center gap-2 shadow-[0_10px_25px_rgba(216,17,89,0.35)] hover:shadow-[0_12px_28px_rgba(216,17,89,0.45)] transition-all active:scale-[0.98] cursor-pointer"
+                >
+                  <span>Start a project</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Copyright & Bottom Bar */}
-        <div className="pt-8 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+        <div className="pt-8 border-t border-slate-200/70 dark:border-zinc-800 flex flex-col lg:flex-row items-center justify-between gap-6 text-xs text-slate-500 font-normal">
           <p>
             &copy; {new Date().getFullYear()} SimpleThink Digital Studio. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <span>Keep It Simple. Make It Luxury.</span>
+
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            <Link href="/privacy" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/sitemap" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+              Sitemap
+            </Link>
+
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF2F8] dark:bg-pink-950/30 text-[#D81159] text-[11px] font-semibold tracking-wide ml-2 border border-pink-100/60 dark:border-pink-900/30">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="#D81159">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              <span>Keep It Simple. Make It Luxury.</span>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Standalone Edge-to-Edge Wordmark that reveals on scroll to the very bottom (Adobe style) */}
-      <FooterRevealWordmark />
     </footer>
   );
 }
