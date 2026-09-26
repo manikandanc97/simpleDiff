@@ -48,20 +48,20 @@ export function FAQ() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
         
         {/* Left Column (5 Cols) */}
-        <div className="lg:col-span-5 flex flex-col justify-start gap-8">
+        <div className="lg:col-span-5 flex flex-col justify-start gap-6 lg:sticky lg:top-32">
           
           {/* Top Info */}
           <SectionHeader
             eyebrow="FAQ"
             title={<>Frequently Asked <br/></>}
             highlightedText="Questions."
-            description="Honest answers to the most common questions founders and engineering teams ask before building with us."
+            description="Honest answers to common questions founders and teams ask before building with us."
             className="items-start text-left mx-0"
             maxWidth="max-w-md"
           />
 
           {/* Bottom Composite Card Component (Single Unified Card containing CTA, Character & Stats) */}
-          <div className="relative mt-6 sm:mt-8 pt-4">
+          <div className="relative mt-4 sm:mt-6 pt-4">
             
             {/* 1. "Still have a question?" Handwritten note & curved arrow */}
             <div className="absolute -top-5 left-1 sm:left-2 z-20 flex items-start gap-1 pointer-events-none select-none">
@@ -93,34 +93,34 @@ export function FAQ() {
             </div>
 
             {/* 2. Main Outer White Card */}
-            <div className="relative z-10 w-full max-w-lg bg-white dark:bg-zinc-900 rounded-3xl sm:rounded-3xl p-5 sm:p-6 shadow-[0_20px_50px_rgba(244,63,94,0.06),_0_0_1px_1px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] border border-rose-50/60 dark:border-white/10">
+            <div className="relative z-10 w-full max-w-[22rem] sm:max-w-md bg-white dark:bg-zinc-900 rounded-[1.5rem] sm:rounded-3xl p-5 shadow-[0_20px_50px_rgba(244,63,94,0.06),_0_0_1px_1px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] border border-rose-50/60 dark:border-white/10">
               
               {/* Upper Content Area: Left CTA + Right 3D Character */}
-              <div className="relative min-h-52 sm:min-h-52">
+              <div className="relative min-h-48 sm:min-h-[12.5rem]">
                 
                 {/* Left: Text & CTA Button */}
-                <div className="relative z-10 max-w-60 sm:max-w-64 flex flex-col items-start gap-4">
+                <div className="relative z-10 max-w-44 sm:max-w-56 flex flex-col items-start gap-3">
                   <div className="flex flex-col items-start gap-2">
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50/80 dark:bg-rose-950/40 border border-rose-100/80 dark:border-rose-900/40">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#db2777]">
+                    <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-rose-50/80 dark:bg-rose-950/40 border border-rose-100/80 dark:border-rose-900/40">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#db2777]">
                         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                         <circle cx="9" cy="12" r="1" fill="currentColor"/>
                         <circle cx="12" cy="12" r="1" fill="currentColor"/>
                         <circle cx="15" cy="12" r="1" fill="currentColor"/>
                       </svg>
-                      <span className="text-xs font-bold text-[#db2777]">We&apos;re here to help</span>
+                      <span className="text-[11px] font-bold text-[#db2777]">We&apos;re here to help</span>
                     </div>
 
                     <div className="flex flex-col gap-1">
                       {/* Heading */}
-                      <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+                      <h3 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
                         Can&apos;t find your answer?
                       </h3>
 
                       {/* Subtitle */}
-                      <p className="text-xs sm:text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-                        Talk to our team and get a clear, no-fluff answer for your specific requirement.
+                      <p className="text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400 leading-relaxed pr-2">
+                        Talk to our team and get a clear answer for your requirement.
                       </p>
                     </div>
                   </div>
@@ -129,14 +129,14 @@ export function FAQ() {
                   <button
                     type="button"
                     onClick={() => openLead({ description: "FAQ - Technical Consultation" })}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#e11d48] to-[#be123c] text-white text-sm font-bold shadow-[0_6px_20px_rgba(225,29,72,0.25)] hover:shadow-[0_8px_25px_rgba(225,29,72,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
+                    className="inline-flex mt-1 items-center gap-1.5 px-3.5 py-2 rounded-full bg-gradient-to-r from-[#e11d48] to-[#be123c] text-white text-xs sm:text-sm font-bold shadow-[0_6px_20px_rgba(225,29,72,0.25)] hover:shadow-[0_8px_25px_rgba(225,29,72,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
                   >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
                       <line x1="22" y1="2" x2="11" y2="13"/>
                       <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                     </svg>
                     <span>Talk to our team</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1">
                       <path d="M5 12h14"/>
                       <path d="m12 5 7 7-7 7"/>
                     </svg>
@@ -144,19 +144,19 @@ export function FAQ() {
                 </div>
 
                 {/* Right: 3D Character Sitting with Laptop (Completely visible, zero obstruction!) */}
-                <div className="absolute -right-2.5 sm:-right-3.5 bottom-0.5 sm:bottom-1.5 w-56 sm:w-64 pointer-events-none select-none z-10">
+                <div className="absolute -right-5 sm:-right-6 bottom-0 sm:bottom-0.5 w-44 sm:w-[13.5rem] pointer-events-none select-none z-10">
                   {/* 3 accent lines radiating from hair */}
-                  <div className="absolute -top-2 right-4 flex gap-1.5 rotate-[35deg]">
-                    <div className="w-0.5 h-3 bg-[#f43f5e] rounded-full" />
-                    <div className="w-0.5 h-4 bg-[#f43f5e] rounded-full -translate-y-1" />
-                    <div className="w-0.5 h-3 bg-[#f43f5e] rounded-full" />
+                  <div className="absolute -top-1 sm:-top-2 right-4 flex gap-1.5 rotate-[35deg]">
+                    <div className="w-0.5 h-2.5 sm:h-3 bg-[#f43f5e] rounded-full" />
+                    <div className="w-0.5 h-3 sm:h-4 bg-[#f43f5e] rounded-full -translate-y-1" />
+                    <div className="w-0.5 h-2.5 sm:h-3 bg-[#f43f5e] rounded-full" />
                   </div>
 
                   <Image
                     src="/assets/simplefaq.png"
                     alt="Technical Lead with laptop"
-                    width={500}
-                    height={600}
+                    width={400}
+                    height={480}
                     className="w-full h-auto object-contain drop-shadow-[0_12px_25px_rgba(244,63,94,0.12)]"
                     priority
                   />
@@ -165,22 +165,22 @@ export function FAQ() {
               </div>
 
               {/* Bottom: Stats Panel (Full-width rounded card with dividers) */}
-              <div className="relative z-20 mt-3 bg-white/95 dark:bg-zinc-800/80 backdrop-blur-sm rounded-xl p-2.5 sm:p-3 border border-zinc-100 dark:border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.02)] grid grid-cols-3 divide-x divide-zinc-100 dark:divide-zinc-700/60 text-center sm:text-left">
-                <div className="px-2">
-                  <div className="text-base sm:text-base font-extrabold text-[#be123c] dark:text-rose-400">100%</div>
-                  <div className="text-xs sm:text-xs font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
+              <div className="relative z-20 mt-3 sm:mt-4 bg-white/95 dark:bg-zinc-800/80 backdrop-blur-sm rounded-[0.8rem] p-2 border border-zinc-100 dark:border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.02)] grid grid-cols-3 divide-x divide-zinc-100 dark:divide-zinc-700/60 text-center sm:text-left">
+                <div className="px-1.5 sm:px-2">
+                  <div className="text-sm sm:text-sm font-extrabold text-[#be123c] dark:text-rose-400">100%</div>
+                  <div className="text-[10px] sm:text-[10px] font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
                     Honest Answers
                   </div>
                 </div>
-                <div className="px-2">
-                  <div className="text-base sm:text-base font-extrabold text-[#be123c] dark:text-rose-400">Usually</div>
-                  <div className="text-xs sm:text-xs font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
+                <div className="px-1.5 sm:px-2">
+                  <div className="text-sm sm:text-sm font-extrabold text-[#be123c] dark:text-rose-400">Usually</div>
+                  <div className="text-[10px] sm:text-[10px] font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
                     Within a Few Hours
                   </div>
                 </div>
-                <div className="px-2">
-                  <div className="text-base sm:text-base font-extrabold text-[#be123c] dark:text-rose-400">Zero</div>
-                  <div className="text-xs sm:text-xs font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
+                <div className="px-1.5 sm:px-2">
+                  <div className="text-sm sm:text-sm font-extrabold text-[#be123c] dark:text-rose-400">Zero</div>
+                  <div className="text-[10px] sm:text-[10px] font-medium text-slate-500 dark:text-zinc-400 mt-0.5">
                     Sales Pressure
                   </div>
                 </div>

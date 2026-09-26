@@ -1,4 +1,4 @@
-import { WorkbenchHero } from "@/components/workbench/workbench-hero";
+﻿import { WorkbenchHero } from "@/components/workbench/workbench-hero";
 import dynamic from "next/dynamic";
 import { AmbientBackground } from "@/components/ui/ambient-background";
 
