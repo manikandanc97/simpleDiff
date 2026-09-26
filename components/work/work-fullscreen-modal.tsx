@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, X } from "lucide-react";
+import { AnimatedX, AnimatedIcon } from "@/components/ui/animated-icon";
 import { type Project } from "@/types/project";
 
 interface WorkFullscreenModalProps {
@@ -35,14 +35,14 @@ export function WorkFullscreenModal({ isOpen, onClose, project }: WorkFullscreen
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F4F0F4] hover:bg-[#EAE4E8] text-xs font-medium text-[#2E2934] transition-colors"
               >
                 <span>Open in New Tab</span>
-                <ExternalLink size={12} />
+                <AnimatedIcon name="external-link" size={12} />
               </a>
             )}
             <button
               onClick={onClose}
               className="w-8 h-8 rounded-full bg-[#F4F0F4] hover:bg-[#EAE4E8] flex items-center justify-center text-[#55505C] transition-colors cursor-pointer"
             >
-              <X size={16} />
+              <AnimatedX size={16} />
             </button>
           </div>
         </div>

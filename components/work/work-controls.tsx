@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Search, X } from "lucide-react";
+import { Search } from "lucide-react";
+import { ChevronDownIcon } from "@animateicons/react/lucide/chevron-down-icon";
+import { AnimatedIcon, AnimatedX } from "@/components/ui/animated-icon";
 import { cn } from "@/lib/utils";
 import { FILTER_SERVICES } from "./work-data";
 import { type Project } from "@/types/project";
@@ -51,7 +53,8 @@ export function WorkControls({
               )}
             >
               {Icon && (
-                <Icon
+                <AnimatedIcon
+                  name={Icon as any}
                   size={15}
                   className={cn(
                     "transition-transform",
@@ -79,7 +82,8 @@ export function WorkControls({
       <div className="flex items-center gap-3">
         {/* Search Pill */}
         <div className="relative flex-1 sm:flex-initial">
-          <Search
+          <AnimatedIcon
+            name="search"
             size={15}
             className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9A95A0] pointer-events-none"
           />
@@ -95,7 +99,7 @@ export function WorkControls({
               onClick={() => onSearchChange("")}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9A95A0] hover:text-[#121114]"
             >
-              <X size={14} />
+              <AnimatedX size={14} />
             </button>
           )}
         </div>
@@ -105,7 +109,7 @@ export function WorkControls({
           <button
             type="button"
             onClick={() => setIsSortOpen((prev) => !prev)}
-            className="bg-white border border-[#EAE3E9] rounded-full px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-medium text-[#121114] flex items-center gap-2 hover:bg-[#FAF7F9] cursor-pointer shadow-sm transition-all"
+            className="bg-white border border-[#EAE3E9] rounded-full px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-medium text-[#121114] flex items-center gap-2 hover:bg-[#FAF7F9] cursor-pointer shadow-sm transition-all group"
           >
             <span>
               {sortOption === "latest"
@@ -114,7 +118,8 @@ export function WorkControls({
                 ? "Oldest First"
                 : "Alphabetical"}
             </span>
-            <ChevronDown
+            <AnimatedIcon 
+              icon={ChevronDownIcon}
               size={14}
               className={cn(
                 "text-[#8C8894] transition-transform duration-200",

@@ -11,6 +11,7 @@ import { AnimatePresence, motion, useInView } from "motion/react";
 import { useMemo, useRef, useState } from "react";
 import { TechCard } from "./tech-stack-card";
 import { SectionHeader } from "@/components/ui/section-header";
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 
 // ─── Categories ───────────────────────────────────────────────────────────────
 
@@ -178,8 +179,10 @@ export function TechStack() {
                   )}
 
                   {/* Category Icon */}
-                  <Icon
-                    className={`w-4 h-4 relative z-10 ${
+                  <AnimatedIcon
+                    name={Icon as any}
+                    size={16}
+                    className={`relative z-10 ${
                       isActive ? "text-white" : "text-slate-500 dark:text-muted-foreground"
                     }`}
                   />

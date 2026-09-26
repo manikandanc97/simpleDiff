@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, BarChart3, ShieldCheck, Star, Users } from "lucide-react";
+import { BarChart3, ShieldCheck, Star, Users } from "lucide-react";
+import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { type Project } from "@/types/project";
 import { type EnhancedProjectDetails } from "./work-data";
 
@@ -79,7 +80,7 @@ export function WorkProjectDetails({ project, enhancement }: WorkProjectDetailsP
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#922F55] hover:bg-[#7D2748] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#922F55]/25 transition-all hover:scale-105 active:scale-95 cursor-pointer"
           >
             <span>Visit Live Website</span>
-            <ArrowRight size={15} />
+            <AnimatedArrowRight size={15} />
           </a>
           <span className="text-xs text-[#706B78] font-mono">
             {project.domain}

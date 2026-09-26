@@ -1,12 +1,10 @@
 "use client";
 
 import { useLead } from "@/components/leads/lead-provider";
+import { AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { STEPS } from "@/lib/data/how-we-work";
 import { cn } from "@/lib/utils";
-import {
-  ArrowRight,
-  ShieldCheck
-} from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { StepVisual } from "./how-we-work/step-visuals";
@@ -284,7 +282,7 @@ export function HowWeWork() {
                         ? "Start Your Project"
                         : `Next Step: ${currentStep.nextStepName}`}
                     </span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    <AnimatedArrowRight size={16} className="text-white" />
                   </button>
                 </div>
               </div>

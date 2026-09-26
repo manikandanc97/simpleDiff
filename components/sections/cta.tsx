@@ -1,9 +1,10 @@
 "use client";
 
 import { useLead } from "@/components/leads/lead-provider";
-import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { AnimatedIcon, AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { Button } from "@/components/ui/button";
 import { Calendar, CheckCircle2, MessageSquare, Zap } from "lucide-react";
+import { CalendarIcon } from "@animateicons/react/lucide/calendar-icon";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -64,6 +65,7 @@ export function CTA({ onStartProject }: CTAProps) {
                   src="/assets/simplemind.png"
                   alt="Turn your idea into a premium digital product"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-contain drop-shadow-[0_20px_35px_rgba(146,47,85,0.12)]"
                   priority
                 />
@@ -141,7 +143,7 @@ export function CTA({ onStartProject }: CTAProps) {
                   onClick={handleSchedule}
                   className="h-12 sm:h-14 px-7 rounded-full bg-white text-[#121114] border border-[rgba(30,24,30,0.12)] hover:border-[rgba(30,24,30,0.25)] hover:bg-[#FAF9F7] text-base sm:text-base font-bold tracking-tight active:scale-95 transition-all duration-200 shadow-xs hover:-translate-y-0.5 cursor-pointer w-full sm:w-auto flex items-center justify-center gap-2"
                 >
-                  <Calendar size={16} className="text-[#68666C]" />
+                  <AnimatedIcon icon={CalendarIcon} size={16} className="text-[#68666C]" />
                   <span>Schedule a call</span>
                 </Button>
               </div>

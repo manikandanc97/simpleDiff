@@ -1,7 +1,9 @@
 "use client";
 
 import { SectionHeader } from "@/components/ui/section-header";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ChevronLeftIcon } from "@animateicons/react/lucide/chevron-left-icon";
+import { AnimatedIcon, AnimatedChevronRight } from "@/components/ui/animated-icon";
+import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
@@ -156,15 +158,15 @@ export function Testimonials() {
             <div className="flex items-center gap-2">
               <button
                 onClick={prev}
-                className="w-8 h-8 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all cursor-pointer"
+                className="w-8 h-8 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all cursor-pointer group"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <AnimatedIcon icon={ChevronLeftIcon} size={16} />
               </button>
               <button
                 onClick={next}
-                className="w-8 h-8 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all cursor-pointer"
+                className="w-8 h-8 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all cursor-pointer group"
               >
-                <ChevronRight className="h-4 w-4" />
+                <AnimatedChevronRight size={16} />
               </button>
             </div>
           </div>

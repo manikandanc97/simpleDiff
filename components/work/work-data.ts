@@ -1,5 +1,5 @@
 import React from "react";
-import { Globe, LayoutGrid, Smartphone } from "lucide-react";
+// Removed lucide-react import
 import {
   NextJsIcon,
   TypeScriptIcon,
@@ -165,7 +165,7 @@ export const PROJECT_ENHANCEMENTS: Record<string, EnhancedProjectDetails> = {
 
 export const FILTER_SERVICES = [
   { id: "all", label: "All Works", icon: null, serviceType: null },
-  { id: "websites", label: "Websites", icon: Globe, serviceType: "Websites" },
-  { id: "web-apps", label: "Web Apps", icon: LayoutGrid, serviceType: "Web Apps" },
-  { id: "mobile-apps", label: "Mobile Apps", icon: Smartphone, serviceType: "Mobile Apps" },
+  { id: "websites", label: "Websites", icon: "globe", serviceType: "Websites" },
+  { id: "web-apps", label: "Web Apps", icon: "grid", serviceType: "Web Apps" },
+  { id: "mobile-apps", label: "Mobile Apps", icon: "smartphone", serviceType: "Mobile Apps" },
 ] as const;

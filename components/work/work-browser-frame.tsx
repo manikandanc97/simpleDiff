@@ -1,6 +1,9 @@
 "use client";
 
-import { ExternalLink, Lock, Maximize2 } from "lucide-react";
+import { ExternalLinkIcon } from "@animateicons/react/lucide/external-link-icon";
+import { LockIcon } from "@animateicons/react/lucide/lock-icon";
+import { Maximize2, Lock } from "lucide-react";
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 import { AnimatePresence, motion } from "motion/react";
 import { type Project } from "@/types/project";
 
@@ -32,9 +35,9 @@ export function WorkBrowserFrame({ project, onOpenFullscreen }: WorkBrowserFrame
             className="flex items-center justify-center gap-1.5 bg-white border border-[#EAE3E9] shadow-xs rounded-md px-3.5 py-1 text-xs font-medium text-[#504C56] min-w-44 max-w-sm truncate hover:border-[#922F55]/40 hover:text-[#121114] transition-colors cursor-pointer group"
             title={`Visit ${project.domain}`}
           >
-            <Lock size={12} className="text-emerald-500 shrink-0" />
+            <AnimatedIcon icon={LockIcon} size={12} className="text-emerald-500 shrink-0" />
             <span className="truncate">{project.domain || project.url?.replace("https://", "")}</span>
-            <ExternalLink size={10} className="text-[#8C8894] opacity-0 group-hover:opacity-100 transition-opacity ml-0.5 shrink-0" />
+            <AnimatedIcon icon={ExternalLinkIcon} size={10} className="text-[#8C8894] opacity-0 group-hover:opacity-100 transition-opacity ml-0.5 shrink-0" />
           </a>
         </div>
 
@@ -53,7 +56,7 @@ export function WorkBrowserFrame({ project, onOpenFullscreen }: WorkBrowserFrame
             type="button"
             onClick={onOpenFullscreen}
             aria-label="Expand Preview"
-            className="text-[#6B6673] hover:text-[#121114] transition-colors p-1 rounded-md hover:bg-[#EAE4E8] cursor-pointer"
+            className="text-[#6B6673] hover:text-[#121114] transition-colors p-1 rounded-md hover:bg-[#EAE4E8] cursor-pointer group"
           >
             <Maximize2 size={14} />
           </button>

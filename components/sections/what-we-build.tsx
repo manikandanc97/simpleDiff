@@ -1,9 +1,11 @@
 "use client";
 
 import { useLead } from "@/components/leads/lead-provider";
-import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { AnimatedIcon, AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight, MousePointer2 } from "lucide-react";
+import { ChevronLeftIcon } from "@animateicons/react/lucide/chevron-left-icon";
+import { ChevronRightIcon } from "@animateicons/react/lucide/chevron-right-icon";
+import { MousePointer2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
 import { SectionHeader } from "@/components/ui/section-header";
@@ -371,9 +373,9 @@ export function WhatWeBuild() {
               aria-label="Previous service"
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
-              className="w-10 h-10 rounded-full bg-white border border-[rgba(30,24,30,0.08)] shadow-sm text-[#121114] flex items-center justify-center cursor-pointer"
+              className="w-10 h-10 rounded-full bg-white border border-[rgba(30,24,30,0.08)] shadow-sm text-[#121114] flex items-center justify-center cursor-pointer group"
             >
-              <ChevronLeft size={18} />
+              <AnimatedIcon icon={ChevronLeftIcon} size={18} />
             </motion.button>
             <motion.button
               type="button"
@@ -381,9 +383,9 @@ export function WhatWeBuild() {
               aria-label="Next service"
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
-              className="w-10 h-10 rounded-full bg-white border border-[rgba(30,24,30,0.08)] shadow-sm text-[#121114] flex items-center justify-center cursor-pointer"
+              className="w-10 h-10 rounded-full bg-white border border-[rgba(30,24,30,0.08)] shadow-sm text-[#121114] flex items-center justify-center cursor-pointer group"
             >
-              <ChevronRight size={18} />
+              <AnimatedIcon icon={ChevronRightIcon} size={18} />
             </motion.button>
           </div>
         </div>

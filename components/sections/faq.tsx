@@ -1,7 +1,8 @@
 "use client";
 
 import { useLead } from "@/components/leads/lead-provider";
-import { ChevronDown } from "lucide-react";
+import { ChevronDownIcon } from "@animateicons/react/lucide/chevron-down-icon";
+import { AnimatedIcon, AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -129,17 +130,10 @@ export function FAQ() {
                   <button
                     type="button"
                     onClick={() => openLead({ description: "FAQ - Technical Consultation" })}
-                    className="inline-flex mt-1 items-center gap-1.5 px-3.5 py-2 rounded-full bg-gradient-to-r from-[#e11d48] to-[#be123c] text-white text-xs sm:text-sm font-bold shadow-[0_6px_20px_rgba(225,29,72,0.25)] hover:shadow-[0_8px_25px_rgba(225,29,72,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
+                    className="inline-flex mt-1 items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#922F55] hover:bg-[#7D2748] text-white text-xs sm:text-sm font-bold shadow-[0_4px_14px_rgba(146,47,85,0.25)] hover:shadow-[0_6px_20px_rgba(146,47,85,0.35)] active:scale-95 transition-all duration-200 cursor-pointer group"
                   >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-0.5">
-                      <line x1="22" y1="2" x2="11" y2="13"/>
-                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                    </svg>
                     <span>Talk to our team</span>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1">
-                      <path d="M5 12h14"/>
-                      <path d="m12 5 7 7-7 7"/>
-                    </svg>
+                    <AnimatedArrowRight size={14} className="ml-0.5 text-white" />
                   </button>
                 </div>
 
@@ -246,7 +240,7 @@ export function FAQ() {
                         : "bg-white dark:bg-zinc-800 border-zinc-100 dark:border-zinc-700 text-zinc-700 dark:text-zinc-400 shadow-zinc-100/50"
                     }`}
                   >
-                    <ChevronDown className="w-4.5 h-4.5 stroke-[2.5]" />
+                    <AnimatedIcon icon={ChevronDownIcon} size={18} className="w-4.5 h-4.5 stroke-[2.5]" />
                   </div>
                 </button>
 

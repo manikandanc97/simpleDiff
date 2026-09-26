@@ -3,7 +3,8 @@
 
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { PROCESS_STEPS, REAL_OUTCOMES } from "@/lib/data/philosophy";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRightIcon } from "@animateicons/react/lucide/arrow-up-right-icon";
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { FlowDiagram } from "./philosophy/flow-diagram";
@@ -266,7 +267,7 @@ export function WhySimpleThink() {
 
                       {/* Small Circular Arrow Button */}
                       <div className="w-7 h-7 rounded-full bg-white border border-neutral-100/80 shadow-xs flex items-center justify-center text-neutral-400 group-hover:text-neutral-600 group-hover:border-neutral-200 transition-colors shrink-0 ml-1">
-                        <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2} />
+                        <AnimatedIcon icon={ArrowUpRightIcon} size={14} className="w-3.5 h-3.5" />
                       </div>
                     </motion.div>
                   );

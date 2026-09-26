@@ -87,7 +87,7 @@ function GridLayout() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: i * 0.07, type: "spring", stiffness: 400, damping: 24 }}
-          className={`rounded-xl bg-gradient-to-br ${cell.bg} border border-white/60 p-2 flex flex-col gap-1.5 aspect-square`}
+          className={`rounded-xl bg-gradient-to-br ${cell.bg} border border-white/60 p-2 flex flex-col gap-1.5 aspect-[4/3]`}
         >
           <div className="w-5 h-5 rounded-lg" style={{ backgroundColor: `${cell.accent}40` }} />
           <Bar w="w-full" color="bg-white/60" />
@@ -274,7 +274,7 @@ export function UIUXMockup({ isActive }: { isActive?: boolean }) {
     <MockupWrapper
       isActive={isActive}
       gradientClass="bg-gradient-to-tr from-[#EDE9FE]/60 via-[#F5F3FF]/50 to-[#FDF2F8]/60"
-      innerClassName="max-w-72 p-3.5 gap-3"
+      innerClassName="max-w-72 p-3.5 gap-3 overflow-hidden"
       floatDuration={4.5}
     >
         {/* Toolbar */}
@@ -291,8 +291,8 @@ export function UIUXMockup({ isActive }: { isActive?: boolean }) {
               <motion.div
                 key={l}
                 animate={{
-                  backgroundColor: l === layout ? meta.color : "transparent",
-                  color: l === layout ? "white" : "#68666C",
+                  backgroundColor: l === layout ? meta.color : "rgba(0, 0, 0, 0)",
+                  color: l === layout ? "#ffffff" : "#68666C",
                 }}
                 transition={{ duration: 0.25 }}
                 className="w-6 h-5 rounded-md flex items-center justify-center text-[9px] font-bold cursor-pointer"

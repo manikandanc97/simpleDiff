@@ -1,12 +1,11 @@
 "use client";
 
 import { useLead } from "@/components/leads/lead-provider";
-import { AnimatedIcon } from "@/components/ui/animated-icon";
+import { AnimatedIcon, AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { NAV_ITEMS } from "@/config/nav";
 import { SITE } from "@/config/site";
 import Image from "next/image";
 import Link from "next/link";
-
 import { FOOTER_DATA } from "@/lib/data/footer";
 
 interface SiteFooterProps {
@@ -226,13 +225,10 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
 
                 <button
                   onClick={handleStart}
-                  className="w-full h-12 rounded-full text-sm font-bold text-primary-foreground bg-primary hover:bg-primary-hover flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(146,47,85,0.25)] hover:shadow-[0_8px_25px_rgba(146,47,85,0.35)] transition-all active:scale-[0.98] cursor-pointer"
+                  className="w-full h-12 rounded-full text-sm font-bold text-primary-foreground bg-primary hover:bg-primary-hover flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(146,47,85,0.25)] hover:shadow-[0_8px_25px_rgba(146,47,85,0.35)] transition-all active:scale-[0.98] cursor-pointer group"
                 >
                   <span>Start a project</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
+                  <AnimatedArrowRight size={16} className="text-primary-foreground group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </div>

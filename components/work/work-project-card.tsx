@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
+import { AnimatedChevronRight } from "@/components/ui/animated-icon";
 import { cn } from "@/lib/utils";
 import { type Project } from "@/types/project";
 
@@ -74,7 +74,7 @@ export function WorkProjectCard({ project, isActive, onClick }: WorkProjectCardP
             : "bg-white border-[#E9E2E8] text-[#6B6673] group-hover:border-[#922F55] group-hover:text-[#922F55] group-hover:translate-x-0.5"
         )}
       >
-        <ChevronRight size={16} />
+        <AnimatedChevronRight size={16} />
       </div>
     </button>
   );

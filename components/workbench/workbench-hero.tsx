@@ -1,9 +1,10 @@
 "use client";
 
 import { useLead } from "@/components/leads/lead-provider";
-import { AnimatedArrowRight } from "@/components/ui/animated-icon";
+import { ChevronDownIcon } from "@animateicons/react/lucide/chevron-down-icon";
+import { PlayIcon } from "@animateicons/react/lucide/play-icon";
+import { AnimatedIcon, AnimatedArrowRight } from "@/components/ui/animated-icon";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Play } from "lucide-react";
 import { motion } from "motion/react";
 import { useRef } from "react";
 import { HERO_CONTENT } from "@/lib/data/hero";
@@ -126,7 +127,7 @@ export function WorkbenchHero() {
                 className="group flex items-center gap-3.5 hover:opacity-85 transition-opacity py-1"
               >
                 <div className="flex items-center justify-center w-11 h-11 rounded-full bg-white shadow-sm border border-[rgba(30,24,30,0.08)] text-[#121114] group-hover:scale-105 transition-transform pl-0.5">
-                  <Play size={13} fill="currentColor" />
+                  <AnimatedIcon icon={PlayIcon} size={13} className="fill-current" />
                 </div>
                 <div className="flex flex-col text-left">
                   <span className="text-base font-bold text-[#121114] leading-tight tracking-tight">See our work</span>
@@ -135,52 +136,6 @@ export function WorkbenchHero() {
               </button>
             </motion.div>
 
-            {/* Stats Row */}
-            <motion.div 
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-              className="flex items-center gap-5 sm:gap-8 w-full pt-2 font-satoshi"
-            >
-              {/* Stat 1 */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <div className="flex flex-col text-left">
-                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#121114] leading-tight">{HERO_CONTENT.stats[0].value}</span>
-                  <span className="text-xs font-medium text-[#68666C] leading-none mt-0.5">{HERO_CONTENT.stats[0].label}</span>
-                </div>
-              </div>
-              
-              {/* Vertical divider */}
-              <div className="w-0 h-8 bg-[rgba(30,24,30,0.08)] hidden sm:block" />
-
-              {/* Stat 2 */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                </div>
-                <div className="flex flex-col text-left">
-                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#121114] leading-tight">{HERO_CONTENT.stats[1].value}</span>
-                  <span className="text-xs font-medium text-[#68666C] leading-none mt-0.5">{HERO_CONTENT.stats[1].label}</span>
-                </div>
-              </div>
-
-              {/* Vertical divider */}
-              <div className="w-0 h-8 bg-[rgba(30,24,30,0.08)] hidden sm:block" />
-
-              {/* Stat 3 */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white border border-[rgba(30,24,30,0.08)] shadow-sm flex items-center justify-center text-[#922F55]">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                </div>
-                <div className="flex flex-col text-left">
-                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#121114] leading-tight">{HERO_CONTENT.stats[2].value}</span>
-                  <span className="text-xs font-medium text-[#68666C] leading-none mt-0.5">{HERO_CONTENT.stats[2].label}</span>
-                </div>
-              </div>
-            </motion.div>
             </div>
           </div>
 
@@ -216,7 +171,7 @@ export function WorkbenchHero() {
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
           className="w-4 h-4 rounded-full border-[1.5px] border-slate-300 group-hover:border-primary/50 flex items-center justify-center transition-colors"
         >
-          <ChevronDown className="h-2.5 w-2.5 text-slate-400 group-hover:text-primary transition-colors" />
+          <AnimatedIcon icon={ChevronDownIcon} size={12} className="h-2.5 w-2.5 text-slate-400 group-hover:text-primary transition-colors" />
         </motion.div>
       </motion.button>
     </section>

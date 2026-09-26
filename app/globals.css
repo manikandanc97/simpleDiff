@@ -188,6 +188,11 @@
     font-weight: 900;
   }
 
+  /* Global cursor pointer for interactive elements */
+  a, button, [role="button"], [role="tab"], [role="link"], input[type="submit"], input[type="button"], input[type="reset"], select, summary {
+    cursor: pointer;
+  }
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 6px;

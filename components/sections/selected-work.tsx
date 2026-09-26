@@ -4,15 +4,17 @@ import { PROJECTS } from "@/lib/data/projects";
 import { type Project } from "@/types/project";
 import { cn } from "@/lib/utils";
 import {
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-  Lock,
-  Maximize2,
   ShoppingCart,
-  TrendingUp
+  TrendingUp,
+  Lock
 } from "lucide-react";
+import { ChevronRightIcon } from "@animateicons/react/lucide/chevron-right-icon";
+import { ChevronLeftIcon } from "@animateicons/react/lucide/chevron-left-icon";
+import { ArrowRightIcon } from "@animateicons/react/lucide/arrow-right-icon";
+import { LockIcon } from "@animateicons/react/lucide/lock-icon";
+import { ExternalLinkIcon } from "@animateicons/react/lucide/external-link-icon";
+import { Maximize2 } from "lucide-react";
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -231,7 +233,7 @@ export function SelectedWork() {
                           : "bg-white/80 border-slate-100 text-slate-400 group-hover:text-slate-700 shadow-sm group-hover:translate-x-1"
                       )}
                     >
-                      <ChevronRight size={15} />
+                      <AnimatedIcon icon={ChevronRightIcon} size={15} />
                     </div>
                   </div>
                 );
@@ -245,7 +247,7 @@ export function SelectedWork() {
                 className="inline-flex items-center gap-2 text-sm font-bold text-[#121114] hover:text-[#922F55] transition-colors group"
               >
                 View complete portfolio archive 
-                <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+                <AnimatedIcon icon={ArrowRightIcon} size={15} className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <span className="text-sm font-medium text-slate-400">
                 {filteredProjects.length} of {PROJECTS.length} builds
@@ -311,14 +313,14 @@ export function SelectedWork() {
                     aria-label="Previous Project"
                     className="w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-200 text-[#121114] hover:bg-slate-50 transition-colors cursor-pointer active:scale-95"
                   >
-                    <ChevronLeft size={16} />
+                    <AnimatedIcon icon={ChevronLeftIcon} size={16} />
                   </button>
                   <button 
                     onClick={handleNext} 
                     aria-label="Next Project"
                     className="w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-sm border border-slate-200 text-[#121114] hover:bg-slate-50 transition-colors cursor-pointer active:scale-95"
                   >
-                    <ChevronRight size={16} />
+                    <AnimatedIcon icon={ChevronRightIcon} size={16} />
                   </button>
                 </div>
               </div>
@@ -345,9 +347,9 @@ export function SelectedWork() {
                     className="flex items-center justify-center gap-1.5 bg-white border border-slate-200 shadow-xs rounded-md px-3.5 py-1 text-xs sm:text-xs font-medium text-slate-600 min-w-48 max-w-sm truncate hover:border-slate-300 hover:text-slate-900 transition-colors cursor-pointer group"
                     title={`Visit ${activeProject.domain}`}
                   >
-                    <Lock size={12} className="text-emerald-500 shrink-0" />
+                    <AnimatedIcon icon={LockIcon} size={12} className="text-emerald-500 shrink-0" />
                     <span className="truncate">{activeProject.domain}</span>
-                    <ExternalLink size={10} className="text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity ml-0.5 shrink-0" />
+                    <AnimatedIcon icon={ExternalLinkIcon} size={10} className="text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity ml-0.5 shrink-0" />
                   </a>
                 </div>
                 
@@ -357,7 +359,6 @@ export function SelectedWork() {
                     href={activeProject.url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    title="Open live site in new tab"
                     className="text-slate-400 hover:text-slate-700 transition-colors p-1"
                   >
                     <Maximize2 size={13} />

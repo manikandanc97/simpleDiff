@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
+import { ChevronRightIcon } from "@animateicons/react/lucide/chevron-right-icon";
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -256,7 +257,7 @@ export function PageBanner({
               ) : (
                 <span>{crumb.label}</span>
               )}
-              <ChevronRight size={11} className="opacity-40" />
+              <AnimatedIcon icon={ChevronRightIcon} size={11} className="opacity-40" />
             </React.Fragment>
           ))}
           {activeBreadcrumb && (

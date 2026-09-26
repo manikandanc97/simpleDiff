@@ -10,7 +10,10 @@ import {
 } from "@/lib/data/services";
 import { type ServiceItem } from "@/types/service";
 import { cn } from "@/lib/utils";
-import { Check, Plus, TerminalSquare } from "lucide-react";
+import { TerminalSquare } from "lucide-react";
+import { CheckIcon } from "@animateicons/react/lucide/check-icon";
+import { PlusIcon } from "@animateicons/react/lucide/plus-icon";
+import { AnimatedIcon } from "@/components/ui/animated-icon";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
@@ -203,13 +206,13 @@ export function ServicesView() {
                     {/* Toggle Button/Indicator */}
                     <div
                       className={cn(
-                        "w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all",
+                        "w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all group",
                         isSelected
                           ? "bg-primary border-primary text-primary-foreground"
                           : "border-border bg-background text-muted-foreground group-hover:border-primary/50"
                       )}
                     >
-                      {isSelected ? <Check size={14} strokeWidth={3} /> : <Plus size={16} />}
+                      {isSelected ? <AnimatedIcon icon={CheckIcon} size={14} className="stroke-[3]" /> : <AnimatedIcon icon={PlusIcon} size={16} />}
                     </div>
                   </div>
 
