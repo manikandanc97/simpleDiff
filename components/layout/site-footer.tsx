@@ -261,6 +261,20 @@ export function SiteFooter({ onStartProject }: SiteFooterProps) {
           </div>
         </div>
       </div>
+
+      {/* Giant Brand Logo (Adobe Style) */}
+      <div className="w-full flex items-end justify-center pointer-events-none select-none relative z-0 overflow-hidden">
+        <div className="relative w-full flex justify-center items-center -my-[6%] md:-my-[8%] lg:-my-[10%]">
+          <Image
+            src="/logo.png"
+            alt="SimpleThink Logo"
+            width={1920}
+            height={400}
+            className="w-full max-w-none  h-auto object-contain  opacity-100 dark:opacity-100"
+            priority
+          />
+        </div>
+      </div>
     </footer>
   );
 }
