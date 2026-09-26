@@ -23,7 +23,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     url: "https://valparaiwanderertours.com",
     badge: "Live Client Site",
-    image: "/images/projects/valparai_live.jpg",
+    image: "/images/projects/valparai_scenic_hero.jpg",
     result: "+ 3600% Month 1 Bookings",
     description:
       "An experiential travel & tour booking platform for Valparai tour packages, misty Western Ghats jungle safaris, and tea estate explorations. Features live WhatsApp-first booking and interactive route showcases.",
@@ -75,7 +75,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     url: "https://grnconstruction.in",
     badge: "Live Client Site",
-    image: "/images/projects/grn_live.webp",
+    image: "/images/projects/grn_villa_thumb.jpg",
     result: "#1 Google SEO Ranking",
     description:
       "Construction company site with project showcase and lead generation.",
@@ -126,7 +126,7 @@ export const PROJECTS: Project[] = [
     year: "2025",
     url: "https://vihahandicrafts.com",
     badge: "Live Client Site",
-    image: "/images/projects/viha_live.png",
+    image: "/images/projects/viha_pot_thumb.jpg",
     result: "Pan-India Orders",
     description:
       "Handicrafts e-commerce with direct orders and catalog management.",
