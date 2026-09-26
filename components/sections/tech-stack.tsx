@@ -53,7 +53,7 @@ export function TechStack() {
       <div className="pointer-events-none absolute bottom-8 left-8 w-36 h-36 hero-dots opacity-40 dark:opacity-20" />
       <div className="pointer-events-none absolute bottom-8 right-8 w-36 h-36 hero-dots opacity-40 dark:opacity-20" />
 
-      <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-12 sm:gap-16">
+      <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-8 sm:gap-12">
 
         {/* ── Top Header with Floating Performance Pill ──────────────────────── */}
         <div className="relative text-center">
@@ -210,7 +210,7 @@ export function TechStack() {
         <div
           role="tabpanel"
           aria-label={`${activeCategory} technologies`}
-          className="relative min-h-80"
+          className="relative min-h-[220px]"
         >
           <AnimatePresence mode="wait">
             <motion.div
