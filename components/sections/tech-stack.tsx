@@ -112,7 +112,7 @@ export function TechStack() {
           <div className="relative">
 
           {/* Playful Handwritten Annotation: "Tools we love" + Curved Arrow pointing right to the tab */}
-          <div className="absolute top-0 sm:top-1 left-2 sm:left-4 md:left-8 lg:left-14 z-20 pointer-events-none select-none flex items-end gap-3">
+          <div className="absolute -top-14 sm:-top-16 left-2 sm:left-4 md:left-8 lg:left-14 z-20 pointer-events-none select-none flex items-end gap-3">
             <span
               className="font-handwriting text-lg sm:text-xl font-bold text-slate-800 dark:text-slate-200 -rotate-10 leading-tight tracking-wide"
               style={{ fontFamily: "'Caveat', cursive, sans-serif" }}
